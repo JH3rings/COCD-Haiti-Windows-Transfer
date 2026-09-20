@@ -1,0 +1,379 @@
+{
+  "name": "haiti_windows_main",
+  "revision": "v4",
+  "frozen": "2026-09-19",
+  "role": "the ACTIVE formal protocol for the Windows continuation; every arm reported in the paper's main table is trained with this file",
+  "supersedes": {
+    "protocol_v2.json": "legacy revision, kept unchanged as history. It documents where the macOS results came from and is not overwritten.",
+    "split_val_period": "the pre-v3 revision trained on 1233 locations and selected on a 137-location validation set. v3 abolished validation: train is the merged 1370 locations and there is no held-out partition on this machine.",
+    "external_baseline_exemption": "the pre-v3 revision let the external single-orbit baselines skip the unified protocol. That exemption is withdrawn: every method, internal and external, is trained with the settings below.",
+    "v3_no_early_stop": "v3 capped every method at 20 epochs with the epoch-20 checkpoint as the model, and forbade any earlier checkpoint. v4 removes that cap and replaces it with patience-2 early stopping on test AUPRC: the best monitored epoch IS the model, with max_epochs 100 as the hard ceiling. Nothing else changed: same lr, same loss, same threshold, same split. All v3 results are superseded by a full retrain under v4 and are kept on disk as history only.",
+    "v4_200_epoch_ceiling": "the v4 retrain was executed with max_epochs = 200 and completed before the ceiling was lowered to 100. The change is a paperwork change, not a retrain: no arm is retrained, and the reported numbers for the four affected arms (SO, DIS2, N2, N2noorbit) are recomputed from the per-epoch monitored scores those runs already saved. The other eight arms stopped by patience below 100 and are unaffected. See results/v4_seed42_cap100_table.csv for the full mapping."
+  },
+  "historical": {
+    "mac_results": "results/ and legacy_checkpoints/v1_protocol/ are history. Windows runs are a separate, self-consistent result system and are never mixed with the macOS tables."
+  },
+  "task": "unified single-orbit landslide detector; one model serves both target orbits, evaluated conditioned on view-dependent geometric distortion",
+  "input": {
+    "size": 128,
+    "channels": 5,
+    "layout": "[VV_pre, VH_pre, VV_post, VH_post, OrbitID]",
+    "polarizations": [
+      "VV",
+      "VH"
+    ],
+    "orbit_channel": "spatially constant plane, 0.0 for ASC and 1.0 for DESC"
+  },
+  "orbits": [
+    "asc",
+    "desc"
+  ],
+  "temporal_modes": [
+    "pre_post",
+    "pre_pre",
+    "post_post"
+  ],
+  "training_samples_per_location": 6,
+  "split": {
+    "unit": "spatial location",
+    "pinned_ids": [
+      "data/splits_v3/train_ids.csv",
+      "data/splits_v3/test_ids.csv"
+    ],
+    "counts": {
+      "train": 1370,
+      "validation": 0,
+      "test": 343
+    },
+    "train_is_merged": "1370 = 1233 original train + 137 original validation locations. There is no validation partition any more.",
+    "views": {
+      "train": 8220,
+      "test": 686,
+      "arithmetic": "1370 locations x 3 modes x 2 orbits = 8220; 343 locations x 2 orbits = 686. 'locations x modes' is len(ds.spec) = 4110; the orbit factor is applied by the training loop's concat of the asc and desc views."
+    },
+    "redraw": false,
+    "same_location_never_crosses_splits": true
+  },
+  "validation_and_test": {
+    "validation_abolished": true,
+    "synthetic_pairs": false,
+    "cases_per_location": 2,
+    "single_orbit_cases": {
+      "validation": 0,
+      "test": 686
+    },
+    "partitions": [
+      "overall",
+      "asc",
+      "desc"
+    ],
+    "regions": [
+      "G00",
+      "G01",
+      "G10",
+      "G11"
+    ]
+  },
+  "optimizer": {
+    "name": "adam",
+    "lr": 5e-05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0
+  },
+  "scheduler": null,
+  "batch": {
+    "physical": 16,
+    "effective": 16,
+    "accumulate": 1,
+    "note": "physical x accumulate must equal 16; a smaller GPU uses --batch 8 --accum 2 and the script refuses any other product"
+  },
+  "loss": {
+    "seg": "bce",
+    "dice": false,
+    "focal": false,
+    "pos_weight": false,
+    "note": "plain BCE, no class reweighting, for every internal ConvNeXt-FPN method. Positive prevalence is about 6.5 per cent, so a run whose AUPRC sits at the prevalence has collapsed.",
+    "method_specific_exception": "a method's own loss is kept only where it is inseparable from the published method. Boehm / CDNetE / MFEWF use cross-entropy, FC-Siam uses NLL on the log-probability its official head emits, and the distillation baselines keep their own already-defined distillation losses. Nothing else may differ."
+  },
+  "init": {
+    "backbone": "imagenet",
+    "same_init_for_all_internal_arms": true,
+    "teacher": "imagenet",
+    "legacy_teacher_z_weights": [
+      0.25,
+      0.25,
+      0.5
+    ],
+    "omega_operator": "teacher",
+    "external_architectures": {
+      "rule": "official ImageNet initialisation when the official backbone has one, otherwise the official initialisation; recorded explicitly. Architectures are not required to have the same parameter count.",
+      "boehm": "resnet34 ImageNet (official code uses resnet50; the trunk is reduced to resnet34 so every encoder-based seat sits at one capacity — a disclosed deviation)",
+      "cdnette": "resnet34 ImageNet (no official code; adapted early-fusion U-Net)",
+      "fc_siam": "official initialisation (no ImageNet weights exist for SiamUnet_diff)",
+      "mfewf": "resnet34 ImageNet (no official code; adapted DRN/AMM/CAASP/MFFRM)"
+    },
+    "note": "every internal arm is the same ConvNeXt-Tiny with the identical ImageNet initialisation, so no arm is warm-started from another. The single exception is the correction operator Omega of the legacy R2/R3 student, whose inheritance from the trained legacy Teacher IS the definition of that method; it is written as its own field and reported separately from the backbone init.",
+    "legacy_teacher_z_weights_note": "the supervision allocation for the legacy (z0,z4,z34) teacher, fixed for the Windows run. The allocation the macOS teacher_v2.pt was trained with could not be established from the shipped artefacts, so it is not investigated further: the legacy teacher is retrained here from ImageNet under this allocation and the macOS checkpoint stays on disk as history."
+  },
+  "schedule": {
+    "max_epochs": 100,
+    "validate_every": 1,
+    "early_stop_patience": 2,
+    "early_stop": true,
+    "monitor": "test_auprc",
+    "monitor_partition": "test",
+    "monitor_metric": "auprc",
+    "monitor_direction": "maximise",
+    "checkpoint": "best_monitored_epoch",
+    "min_epochs": 1,
+    "note": "every method trains until it stops improving: after each epoch the monitored score is compared with the best score seen so far, and if it fails to exceed that best in early_stop_patience = 2 consecutive epochs training stops. The best-monitored-epoch weights, not the last-epoch weights, ARE the model. max_epochs = 100 is a hard ceiling on top of that rule. The v4 retrain ran with a 200-epoch ceiling and every internal arm stopped by patience, not by the ceiling, so the two ceilings disagree only for the four arms whose best monitored epoch fell after 100. The 100-epoch reading of those runs is a re-reading of the saved per-epoch monitored scores, not a second training run: see results/v4_seed42_cap100_table.csv. No learning rate, loss, threshold or architecture changed with this revision: only the ceiling and the stopping rule."
+  },
+  "monitor_risk": {
+    "requires_acknowledgement": true,
+    "acknowledged_by_user": true,
+    "user_decision_date": "2026-09-19",
+    "user_decision": "仍然用 test 监控，但标注风险",
+    "statement": "the monitored score is computed on the TEST partition. This is a departure from the v3 rule that test never changes a model. Early stopping reads test AUPRC and the selected epoch is therefore chosen using test data.",
+    "consequence": "test is no longer a strictly held-out set for the internal arms: the reported test AUPRC is the maximum over the epochs visited, so it carries an optimistic bias of unknown size. Comparisons between methods remain comparable only because every method is selected under the identical rule.",
+    "what_is_still_protected": "the threshold stays fixed at 0.5 and is never re-searched on test; no architecture, loss or lambda is chosen from the test score; only the stopping epoch is.",
+    "recommended_alternative_offered_and_declined": "restore data/splits/ 137-location validation partition (data/splits_v3/train_ids.csv minus data/splits/train_ids.csv) and monitor there; verified cost-free (v3 train == v2 train union v2 val, v3 test == v2 test, zero overlap). Declined by the user.",
+    "must_appear_in": [
+      "every run log header",
+      "every progress json",
+      "the paper's table caption"
+    ]
+  },
+  "threshold": {
+    "source": "fixed",
+    "value": 0.5,
+    "criterion": "sigmoid(logits) >= 0.5",
+    "frozen_before_test": true,
+    "reselect_on_test": false,
+    "per_arm": false,
+    "also_report": [
+      "auprc"
+    ],
+    "note": "one permanently fixed threshold for every method and every partition. There is no validation set to search on and searching on test is not allowed. AUPRC is the threshold-free primary metric.",
+    "note_under_early_stopping": "the early-stopping rule reads AUPRC only, which is threshold-free, so the fixed 0.5 threshold is untouched by it and remains frozen before test. The 0.5 threshold is never used to choose a stopping epoch."
+  },
+  "mask_protocol": {
+    "train": "raw_no_mask",
+    "eval": "raw_no_mask",
+    "geometry_masks": "evaluation_only",
+    "regions": [
+      "G00",
+      "G01",
+      "G10",
+      "G11"
+    ],
+    "geometry_weighted_kd": false
+  },
+  "new_cocd": {
+    "teacher": {
+      "backbone": "ConvNeXt-Tiny + FPN, five-channel stem, shared for target and counter",
+      "fused_feature": "F_t = p2, F_c = p2_counter",
+      "fused_feature_note": "p2 is the finest FPN level: 128 channels at 1/4 resolution, 32x32 for a 128 input, computed as l2(c2) + upsample(p3). The prediction head is backbone.head followed by bilinear upsampling to 128x128, which is bitwise the head N0 uses.",
+      "only_new_module": "DCA(F_t, F_c)",
+      "dca": {
+        "kind": "deformable cross-orbit attention",
+        "mechanism": "for every position of F_t, sample n_points learned offsets from F_c and weight the sampled values by a softmax over query-key similarity",
+        "n_points": 4,
+        "offset_bound_pixels": 3.0
+      },
+      "phi": "plain convolutional projection of the concatenation (F_t, H_tc)",
+      "complement": "C_T = Phi(F_t, DCA(F_t, F_c)) - Phi(F_t, DCA(F_t, 0))",
+      "complement_note": "the second term is the same expression with the counter feature set to zero, so C_T(F_c = 0) == 0 exactly. The zero reference is an algebraic identity of the difference, not a constraint placed on DCA.",
+      "injection": "F_dual = F_t + C_T, once, at the fused feature only",
+      "outputs": [
+        "z_self = Head(F_t)",
+        "z_dual = Head(F_dual)"
+      ],
+      "loss": "L_teacher = mean(BCE(z_self, y), BCE(z_dual, y))",
+      "loss_note": "0.5 is not a tunable knob, it is what the mean of two terms is. There is no separate supervision on C_T: its only route to a gradient is F_t + C_T -> landslide prediction.",
+      "absent_by_design": [
+        "gate",
+        "task relevance loss",
+        "P3/P4 progressive correction",
+        "gain x protect",
+        "L_delta",
+        "logit-level KD",
+        "multi-level injection",
+        "extra regulariser",
+        "dynamic experts",
+        "Transformer backbone",
+        "Mamba"
+      ]
+    },
+    "student": {
+      "backbone": "ConvNeXt-Tiny + FPN, shared with N0",
+      "fused_feature": "F_t = p2",
+      "orbit_conditioning": "OrbitID -> learnable embedding -> two-layer MLP -> (gamma, beta); F_mod = (1 + gamma) * F_t + beta",
+      "orbit_conditioning_note": "the modulation touches the complement branch only. The segmentation path stays the unmodulated F_t, so the backbone remains a clean single-orbit baseline and the orbit condition answers one question.",
+      "complement_predictor": "three lightweight conv blocks (3x3 -> GELU -> 3x3 -> GELU -> 1x1), last layer zero-initialised so a fresh student is exactly its N0 counterpart",
+      "injection": "F_S = F_t + C_S, once, at the same feature as the teacher",
+      "output": "z_S = Head(F_S), sharing the head with N0"
+    }
+  },
+  "complement_distillation": {
+    "distance": "smooth_l1",
+    "beta": 1.0,
+    "aggregation": "spatial_mean",
+    "teacher_stopgrad": true,
+    "pairs": "real_pre_post_only",
+    "lambda_symbol": "lam",
+    "lambda": null,
+    "lambda_rule": "measured once at the shared ImageNet initialisation on a fixed train real pre->post subset, no parameter update. If L_seg and L_dist are already the same order of magnitude, lam = 1. Otherwise choose from {0.1, 1, 10} the single value that brings the two back to the same order of magnitude. The choice reads train-loss scale only, never validation performance. Frozen permanently afterwards; no sweep.",
+    "lambda_calibration_subset": "see calibration record written next to the run artefacts",
+    "note": "L_dist is computed on the real pre->post pairs only. The synthetic pre->pre and post->post pairs have their labels forced to zero and contribute to the segmentation loss only. This is a protocol rule, not a loss weight.",
+    "measured_share_of_seg_at_init": 0.3185,
+    "diagnostic_note": "lam = 1.0 was chosen once, without validation, by the order-of-magnitude rule above. The rule matched the two losses at initialisation, but matching magnitudes at the ImageNet init does not mean the two terms carry comparable weight: L_seg is already a small BCE value while L_dist is an unnormalised SmoothL1 feature distance, so equal magnitude is not equal influence. Measured from the 131 per-epoch terms lines of the N2 run, the auxiliary term lam*dist sat at 2.87x the segmentation term in epoch 1 and stayed above 1.3x for all 131 epochs (mean 1.79x, min 1.32x, max 3.98x). The auxiliary term was therefore never weak: it exceeded the primary term for the entire run. An earlier note in this file quoted 0.3185 at init and 0.40-0.52 when trained; those figures used a normalised dist/(seg+dist) reading and understate the imbalance. The user has confirmed the position that the auxiliary loss is too large, with lam = 1.0 identified as the cause. N2 at lam = 1.0 scored below N1 (0.5583 vs 0.6504), so exactly one diagnostic run at lam = 0.1 was run to separate 'the auxiliary term is too loud' from 'raw C_T is the wrong knowledge object'. That run reached 0.6314: the over-large weight explains about 0.073 of the 0.092 gap to N1, and the remaining ~0.019 is not a weight effect and points at raw C_T being a poor matching target. This is a correction of an over-large calibration, not a sweep: no other value is tried, no validation-driven selection is involved, and lam = 1.0 remains the frozen protocol value. The diagnostic run is stored under its own tag and never replaces the protocol arm.",
+    "measured_share_of_seg_at_init_note": "0.3185 is the legacy normalised reading dist/(seg+dist) recorded when lam was calibrated. It is kept for history only and is superseded by the lam*dist/seg measurements in diagnostic_note. Do not quote 0.3185 as the auxiliary-to-primary ratio."
+  },
+  "active_plan": [
+    "N0",
+    "Boehm",
+    "CDNetE",
+    "MFEWF",
+    "VKD",
+    "DIS2",
+    "R3",
+    "LegacyTeacher",
+    "NewTeacher",
+    "N1",
+    "N2",
+    "N2noorbit"
+  ],
+  "plan_labels": {
+    "N0": "Single-Orbit",
+    "Boehm": "Boehm SAR U-Net++",
+    "CDNetE": "CDNetE Early Fusion",
+    "FC-Siam": "FC-Siam-diff",
+    "MFEWF": "MFEWF adapted",
+    "VKD": "Vanilla KD",
+    "DIS2": "DIS2-port",
+    "R3": "Legacy R3",
+    "LegacyTeacher": "Legacy Dual-Orbit Teacher",
+    "NewTeacher": "New COCD Teacher",
+    "N1": "Complement Predictor",
+    "N2": "Full COCD",
+    "N2noorbit": "N2 w/o Orbit Embedding"
+  },
+  "external_seats": {
+    "note": "the single-orbit external baselines are trained by scripts/23_train_external_baselines.py under exactly the settings above: same data, same optimizer, same early-stopping rule (patience 2 on test AUPRC, ceiling 200), best-monitored-epoch checkpoint, threshold 0.5.",
+    "absent_by_design": "DIS2 has no training seat of its own here — it is the DIS2-port knowledge-distillation baseline in the internal plan.",
+    "seats": {
+      "boehm": "Boehm SAR U-Net++",
+      "cdnette": "CDNetE Early Fusion",
+      "mfewf": "MFEWF adapted"
+    },
+    "excluded_seats": {
+      "fc_siam": "FC-Siam-diff. EXCLUDED FROM THE v4 RUN by user decision on 2026-09-19 ('除了 fc siam 不跑'). The seat is excluded from the reported table, not merely not-yet-run: no v4 number will exist for it. Under the earlier revision the same seat was also never launched, so this exclusion makes an existing gap explicit rather than creating a new one."
+    },
+    "architecture_disclosure": "each seat keeps the encoder stated in init.external_architectures. Boehm's official code uses a resnet50 trunk and is reduced here to resnet34 so every encoder-based seat sits at one capacity. This is a disclosed deviation and is noted in the table, not a defect to repair."
+  },
+  "excluded_from_active_plan": {
+    "R3D": "R3 + L_delta. L_delta is withdrawn from the method; the arm is not launched.",
+    "L_delta": "withdrawn. The complement object replaces it.",
+    "R3g": "geometry-weighted distillation. Deprecated: the geometry masks never enter training in any form.",
+    "geometry_kd": "never enters training, including as a distillation weight.",
+    "L_corr": "never implemented and not reintroduced.",
+    "note": "these stay in scripts/23 and losses/ as history so the macOS numbers stay traceable, but they are outside the active plan and are not launched by the Windows runner."
+  },
+  "corrective_distillation": {},
+  "seeds": {
+    "main": 42,
+    "extension": [
+      42,
+      123,
+      2026
+    ],
+    "first_full_pipeline": "seed 42 confirms every method stops under the patience-2 rule (or reaches the 200-epoch ceiling) before the extension seeds are launched",
+    "current_state": "only seed 42 has been launched so far, and only under v3. Seeds 123 and 2026 have never been started. The v4 retrain re-runs seed 42 for every arm and then launches the extension seeds.",
+    "extension_arms": [
+      "N0",
+      "DIS2",
+      "R3",
+      "N1",
+      "N2"
+    ],
+    "extension_optional_arms": [
+      "NewTeacher",
+      "VKD",
+      "Boehm",
+      "CDNetE",
+      "MFEWF"
+    ],
+    "reporting": "mean +/- std over the three seeds. Differences at the 0.002 level from a single seed are not used to support a conclusion."
+  },
+  "test": {
+    "when": "run once, only after every structure, loss, lambda, checkpoint and validation threshold is frozen",
+    "select_on_test": false,
+    "report": [
+      "auprc",
+      "iou",
+      "f1",
+      "precision",
+      "recall"
+    ],
+    "partitions": [
+      "overall",
+      "asc",
+      "desc"
+    ],
+    "regions": [
+      "all",
+      "G00",
+      "G01",
+      "G10",
+      "G11"
+    ],
+    "note": "the test partition never changes a model, a checkpoint, a threshold or a hyper-parameter.",
+    "note_under_early_stopping": "one exception, recorded explicitly in monitor_risk: the stopping epoch is chosen by test AUPRC. The threshold, the architecture, the loss and lambda are still chosen without test."
+  },
+  "comparison_structure": {
+    "main_table": [
+      "N0",
+      "VKD",
+      "DIS2",
+      "R3",
+      "N1",
+      "N2",
+      "NewTeacher"
+    ],
+    "internal_causal_chain": [
+      "N0",
+      "N1",
+      "N2"
+    ],
+    "internal_ablation": [
+      "N2",
+      "N2noorbit"
+    ],
+    "legacy_note": "R3 against N2 compares a complete old method against a complete new method. It is not a single-variable ablation. The only causal attribution inside the new method is read off N0 -> N1 -> N2."
+  },
+  "diagnostic_runs": {
+    "note": "Runs outside the frozen protocol, kept only as evidence. They never enter the reported table; the formal N2 row stays the lam = 1.0 run.",
+    "runs": [
+      {
+        "id": "N2_lam0p1",
+        "arm": "N2",
+        "seed": 42,
+        "lam": 0.1,
+        "lam_source": "explicit single override",
+        "reason": "separate auxiliary-weight error from knowledge-object error after N2 < N1 at lam = 1.0",
+        "swept": false,
+        "enters_reported_table": false,
+        "result_best_val_auprc": 0.6313604740403229,
+        "reference_N1": 0.6504477584030826,
+        "reference_N0": 0.6442826890475485,
+        "reference_N2_lam1": 0.5582952536173666,
+        "reading": "second pre-registered row: far above lam = 1.0, still below both N1 and N0. The over-large weight explains about 0.073 of the 0.092 gap to N1; the remaining ~0.019 is not a weight effect and points at raw C_T being a poor matching target. Direct C_S -> C_T feature distillation does not resume.",
+        "conclusion": "lam = 1.0 remains the only protocol value; no third value was tried."
+      }
+    ]
+  }
+}
