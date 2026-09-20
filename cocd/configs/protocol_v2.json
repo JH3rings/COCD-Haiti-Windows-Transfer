@@ -1,0 +1,106 @@
+{
+  "name": "haiti_unified_v2",
+  "frozen": "2026-09-18",
+  "task": "unified single-orbit landslide detector; one model serves both target orbits",
+  "input": {
+    "size": 128,
+    "channels": 5,
+    "layout": "[VV_pre, VH_pre, VV_post, VH_post, OrbitID]",
+    "polarizations": ["VV", "VH"]
+  },
+  "orbits": ["asc", "desc"],
+  "temporal_modes": ["pre_post", "pre_pre", "post_post"],
+  "training_samples_per_location": 6,
+  "split": {
+    "unit": "spatial location",
+    "manifest": "manifests/spatial_80_20_split.csv",
+    "internal_val_fraction": 0.1,
+    "seed": 42,
+    "same_location_never_crosses_splits": true
+  },
+  "validation_and_test": {
+    "synthetic_pairs": false,
+    "cases_per_location": 2,
+    "partitions": ["aggregate", "asc_target", "desc_target"]
+  },
+  "optimizer": {
+    "name": "adam",
+    "lr": 5e-05,
+    "betas": [0.9, 0.999],
+    "eps": 1e-08,
+    "weight_decay": 0.0
+  },
+  "scheduler": null,
+  "batch": {
+    "physical": 16,
+    "effective": 16,
+    "accumulate": 1,
+    "note": "physical 16 measured feasible on MPS; the accumulation path exists but is not needed"
+  },
+  "loss": {
+    "seg": "bce",
+    "dice": false,
+    "focal": false,
+    "pos_weight": false,
+    "note": "plain BCE, author-scale: no class reweighting, no dice, no focal. With pos_weight false the tree is ~6.5% positive per mask, so the first epochs are the window in which a background collapse would show up as validation AUPRC sitting at the prevalence."
+  },
+  "init": {
+    "backbone": "imagenet",
+    "same_init_for_all_internal_arms": true,
+    "teacher": "imagenet",
+    "omega_operator": "teacher",
+    "note": "every internal arm (Single / KD / DIS2 / R3 / COCD / Teacher) is the same ConvNeXt-Tiny with the identical ImageNet initialisation, so no arm is warm-started from another. The one exception is the correction operator Omega of R2/R3, which is the method's definition (it is inherited from the trained Teacher) and is therefore reported separately from the backbone init. External baselines keep their own architectures and load ImageNet where their upstream code allows."
+  },
+  "schedule": {
+    "max_epochs": 20,
+    "validate_every": 1,
+    "early_stop_patience": 3,
+    "monitor": "validation_auprc",
+    "checkpoint": "best_validation_auprc"
+  },
+  "threshold": {
+    "source": "validation",
+    "criterion": "max_f1",
+    "bins": 1000,
+    "frozen_before_test": true,
+    "reselect_on_test": false,
+    "also_report": ["auprc"],
+    "continuity_report": 0.5
+  },
+  "mask_protocol": {
+    "train": "raw_no_mask",
+    "eval": "raw_no_mask",
+    "geometry_masks": "evaluation_only",
+    "regions": ["G00", "G01", "G10", "G11"],
+    "geometry_weighted_kd": false
+  },
+  "corrective_distillation": {
+    "enabled_for": ["R3D"],
+    "loss": "smooth_l1",
+    "beta": 1.0,
+    "space": "prob",
+    "pair": "z34_minus_z0",
+    "aggregation": "balanced",
+    "weight": 1.0,
+    "teacher_stopgrad": true,
+    "note": "R3 + L_delta only, as the minimal upgrade; L_corr is deliberately not implemented yet. L_delta matches the decision change the correction induces (z34 - z0) in probability space, aggregated foreground/background balanced like the selective KD term. Measured at initialisation on validation (v1 Teacher as the probe source): seg 0.742, L_delta 0.0031 balanced / 0.0015 pixel-mean, selective KD 0.088. So at weight 1.0 the term carries ~0.4% of the segmentation loss: it is a real term but a weak channel, and the weight is the knob to decide before reading R3D against R3.",
+    "measured_share_of_seg_at_init": {
+      "balanced": 0.0042,
+      "pixel_mean": 0.002,
+      "selective_kd": 0.119
+    }
+  },
+  "comparison_arms": [
+    "Single-Orbit Baseline",
+    "Vanilla KD",
+    "DIS2-port",
+    "R3",
+    "R3 + L_delta",
+    "Dual-Orbit Teacher"
+  ],
+  "external_baselines": {
+    "arms": ["Boehm", "CDNetE", "FC-Siam", "MFEWF"],
+    "backbone_policy": "own architecture, load ImageNet where available",
+    "protocol_policy": "not forced onto the unified protocol"
+  }
+}

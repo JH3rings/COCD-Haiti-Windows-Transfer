@@ -1,0 +1,44 @@
+# Research data and generated artifacts (never upload)
+data/
+experiments/
+checkpoints/
+legacy_checkpoints/
+results/
+
+# Model weights and prediction payloads
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npz
+*.npy
+*.tif
+*.tiff
+
+# Runtime output and caches
+*.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.workbuddy/
+
+# Local environments and editor state
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+.env.*
+*.pem
+*.key
+credentials*.json
+secrets*.json
+

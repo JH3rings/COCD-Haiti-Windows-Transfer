@@ -1,0 +1,25 @@
+# Runtime dependencies for the COCD Haiti package.
+#
+# Only what the code in this package actually imports is listed; the macOS
+# development environment is recorded in ENVIRONMENT.md rather than dumped here.
+#
+# On Windows, install torch first from the CUDA index that matches the driver,
+# then the rest:
+#
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+#   pip install -r requirements.txt
+#
+# The torch/torchvision lines below are intentionally not pinned to a CUDA
+# wheel: the right wheel depends on the driver on the target machine.
+
+torch>=2.4,<3
+torchvision>=0.19,<1
+
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.3
+rasterio>=1.3
+tqdm>=4.60
+
+# not imported by the package, but useful on the target machine
+# matplotlib>=3.7      # only for ad-hoc inspection of the saved result csv/json
