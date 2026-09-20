@@ -43,9 +43,185 @@ from models.landslide_cocd import ConvNeXtTinyFPN
 __all__ = [
     'FUSED_CHANNELS', 'fused_p2', 'predict_from_fused', 'DCA', 'Phi',
     'NewCOCDTeacher', 'ComplementStudent',
+    'ChannelLayerNorm', 'EARReaderWriter', 'EARTeacher', 'EARStudent',
+    'init_ear_student_from_teacher',
 ]
 
 FUSED_CHANNELS = 128
+
+
+# --------------------------------------------------------------------------- #
+# Evidence Allocation Reallocation (EAR)
+# --------------------------------------------------------------------------- #
+class ChannelLayerNorm(nn.Module):
+    """LayerNorm over channels at each spatial location, without affine terms."""
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # LayerNorm's normalized dimension is last, while FPN tensors are NCHW.
+        return F.layer_norm(x.permute(0, 2, 3, 1), (x.shape[1],),
+                            weight=None, bias=None, eps=1e-5).permute(0, 3, 1, 2)
+
+
+class EARReaderWriter(nn.Module):
+    """One shared 3x3 evidence reader/writer used by Teacher and Student.
+
+    The only quantity supplied by the counter orbit is the low-dimensional
+    guidance ``b``.  Keys and values are always extracted from the target
+    feature passed as ``feat``.  The fixed nine offsets and the valid-neighbour
+    mask make padding an unavailable candidate rather than a learnable value.
+    """
+
+    OFFSETS = tuple((dy, dx) for dy in (-1, 0, 1) for dx in (-1, 0, 1))
+
+    def __init__(self, channels: int = FUSED_CHANNELS, dim: int = 32):
+        super().__init__()
+        self.channels = channels
+        self.dim = dim
+        self.ln = ChannelLayerNorm()
+        self.wq = nn.Conv2d(channels, dim, 1, bias=False)
+        self.wk = nn.Conv2d(channels, dim, 1, bias=False)
+        self.wv = nn.Conv2d(channels, dim, 1, bias=False)
+        self.wo = nn.Conv2d(dim, channels, 1, bias=False)
+
+    @classmethod
+    def _valid_mask(cls, h: int, w: int, device: torch.device) -> torch.Tensor:
+        yy = torch.arange(h, device=device).view(h, 1).expand(h, w)
+        xx = torch.arange(w, device=device).view(1, w).expand(h, w)
+        masks = [((yy + dy >= 0) & (yy + dy < h) &
+                  (xx + dx >= 0) & (xx + dx < w))
+                 for dy, dx in cls.OFFSETS]
+        return torch.stack(masks, dim=0).unsqueeze(0)  # (1, 9, H, W)
+
+    def _project_candidates(self, feat: torch.Tensor) -> tuple[torch.Tensor, ...]:
+        b, _, h, w = feat.shape
+        u = self.ln(feat)
+        q0 = self.wq(u)
+        # Unfold is ordered top-left to bottom-right, the same fixed order as
+        # OFFSETS.  The spatial padding is removed from softmax by the mask.
+        uk = F.unfold(u, kernel_size=3, padding=1)
+        vf = F.unfold(feat, kernel_size=3, padding=1)
+        k = self.wk(uk.view(b, self.channels, 9, h, w)
+                    .permute(0, 2, 1, 3, 4).reshape(b * 9, self.channels, h, w))
+        v = self.wv(vf.view(b, self.channels, 9, h, w)
+                    .permute(0, 2, 1, 3, 4).reshape(b * 9, self.channels, h, w))
+        k = k.view(b, 9, self.dim, h, w)
+        v = v.view(b, 9, self.dim, h, w)
+        return q0, k, v
+
+    def forward(self, feat: torch.Tensor, guidance: torch.Tensor | None) -> dict:
+        b, _, h, w = feat.shape
+        q0, k, v = self._project_candidates(feat)
+        valid = self._valid_mask(h, w, feat.device)
+        scale = math.sqrt(self.dim)
+        scores0 = (q0[:, None] * k).sum(dim=2) / scale
+        scores0 = scores0.masked_fill(~valid, torch.finfo(scores0.dtype).min)
+        a0 = torch.softmax(scores0, dim=1)
+        if guidance is None:
+            a = a0
+            rho = torch.zeros_like(a0)
+            correction = torch.zeros_like(feat)
+        else:
+            if guidance.shape != (b, self.dim, h, w):
+                raise ValueError(f'EAR guidance shape {tuple(guidance.shape)} does not match '
+                                 f'({b}, {self.dim}, {h}, {w})')
+            scores = ((q0 + guidance)[:, None] * k).sum(dim=2) / scale
+            scores = scores.masked_fill(~valid, torch.finfo(scores.dtype).min)
+            a = torch.softmax(scores, dim=1)
+            rho = a - a0
+            correction = self.wo((rho[:, :, None] * v).sum(dim=1))
+        return {'a0': a0, 'a': a, 'rho': rho, 'C': correction}
+
+
+class EARTeacher(nn.Module):
+    """Counter-guided target-orbit Teacher for the evidence-reallocation study."""
+
+    def __init__(self, channels: int = FUSED_CHANNELS, dim: int = 32,
+                 n_points: int = 4):
+        super().__init__()
+        self.backbone = ConvNeXtTinyFPN()
+        self.dca = DCA(channels, n_points=n_points)
+        self.A = nn.Conv2d(channels, dim, 1, bias=False)
+        nn.init.zeros_(self.A.weight)
+        self.ear = EARReaderWriter(channels, dim)
+
+    def encode_fused(self, x: torch.Tensor) -> torch.Tensor:
+        return fused_p2(self.backbone, x)
+
+    def predict(self, p2: torch.Tensor) -> torch.Tensor:
+        return predict_from_fused(self.backbone.head, p2)
+
+    def from_fused(self, target_fused: torch.Tensor,
+                   counter_fused: torch.Tensor) -> dict:
+        # The target feature owns every EAR key/value.  DCA is the only reader
+        # of the counter feature and its output is reduced to bT by A.
+        h = self.dca(target_fused, counter_fused)
+        b_t = self.A(self.ear.ln(h))
+        self_read = self.ear(target_fused, None)
+        dual_read = self.ear(target_fused, b_t)
+        return {
+            'z_self': self.predict(target_fused),
+            'z_dual': self.predict(target_fused + dual_read['C']),
+            'F_t': target_fused,
+            'C_T': dual_read['C'],
+            'bT': b_t,
+            'a0': dual_read['a0'],
+            'a': dual_read['a'],
+            'rho': dual_read['rho'],
+            'self_rho': self_read['rho'],
+        }
+
+    def forward(self, target: torch.Tensor, counter: torch.Tensor) -> dict:
+        return self.from_fused(self.encode_fused(target), self.encode_fused(counter))
+
+    def forward_pair(self, asc: torch.Tensor, desc: torch.Tensor) -> tuple[dict, dict]:
+        # Encode the two orbit views in one batched call.  This is still one
+        # encoding per orbit, while keeping the Teacher-self and copied
+        # Student-self paths numerically aligned on the same batch.
+        fused = self.encode_fused(torch.cat((asc, desc), dim=0))
+        f_asc, f_desc = fused.chunk(2, dim=0)
+        return self.from_fused(f_asc, f_desc), self.from_fused(f_desc, f_asc)
+
+
+class EARStudent(nn.Module):
+    """Single-orbit deployment Student that predicts only the EAR guidance."""
+
+    def __init__(self, channels: int = FUSED_CHANNELS, dim: int = 32):
+        super().__init__()
+        self.backbone = ConvNeXtTinyFPN()
+        self.ear = EARReaderWriter(channels, dim)
+        self.driver = nn.Sequential(
+            nn.Conv2d(channels + 1, dim, 3, padding=1), nn.GELU(),
+            nn.Conv2d(dim, dim, 1),
+        )
+        nn.init.zeros_(self.driver[-1].weight)
+        nn.init.zeros_(self.driver[-1].bias)
+
+    def predict(self, p2: torch.Tensor) -> torch.Tensor:
+        return predict_from_fused(self.backbone.head, p2)
+
+    def forward(self, x: torch.Tensor) -> dict:
+        f_s = fused_p2(self.backbone, x)
+        orbit = F.interpolate(x[:, 4:5], size=f_s.shape[-2:], mode='nearest')
+        b_s = self.driver(torch.cat((self.ear.ln(f_s), orbit), dim=1))
+        read = self.ear(f_s, b_s)
+        z_self = self.predict(f_s)
+        z = self.predict(f_s + read['C'])
+        return {
+            'z': z,
+            'z_self': z_self,
+            'F_t': f_s,
+            'C_S': read['C'],
+            'bS': b_s,
+            'a0': read['a0'],
+            'a': read['a'],
+            'rho': read['rho'],
+        }
+
+
+def init_ear_student_from_teacher(student: EARStudent, teacher: EARTeacher) -> None:
+    """Copy the trained Teacher's target path; leave the zero driver untouched."""
+    student.backbone.load_state_dict(teacher.backbone.state_dict())
+    student.ear.load_state_dict(teacher.ear.state_dict())
 
 
 # --------------------------------------------------------------------------- #

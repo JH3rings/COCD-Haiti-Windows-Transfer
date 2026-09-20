@@ -13,9 +13,14 @@ directories, and large generated result folders are excluded by `.gitignore`.
 4. `cocd/windows_main/models_complement.py` — New COCD Teacher and Student.
 5. `cocd/windows_main/main.py` — training, distillation, evaluation, and
    checkpoint-selection paths.
-6. `cocd/losses/distill.py` — Vanilla KD, DIS2-port, and selective R3 losses.
-7. `cocd/windows_main/tests_complement.py` — architecture/protocol assertions.
-8. `reports/counter_orbit_transfer_audit_20260920.md` — latest evidence audit
+6. `cocd/windows_main/ear_main.py` — EAR Teacher/Student training, fixed lambda
+   calibration, and the train-only merged-split continuation (`all` stage).
+7. `cocd/configs/protocol_ear.json` — EAR protocol: original train and
+   validation IDs merged for training; no validation selection; test unopened.
+8. `cocd/windows_main/tests_ear.py` — EAR structural and gradient assertions.
+9. `cocd/losses/distill.py` — Vanilla KD, DIS2-port, and selective R3 losses.
+10. `cocd/windows_main/tests_complement.py` — architecture/protocol assertions.
+11. `reports/counter_orbit_transfer_audit_20260920.md` — latest evidence audit
    and the boundary between verified results and proposed effect distillation.
 
 ## Important evidence boundary
@@ -29,4 +34,8 @@ The current task is not to add more modules or multiple losses. The unresolved
 scientific question is whether a single-orbit Student can learn any predictable
 part of the counter-orbit Teacher's decision effect. Raw `C_T` matching is a
 negative result; the only admissible proposed follow-up is a single
-decision-effect auxiliary loss, subject to a clean matched protocol.
+decision-effect auxiliary loss, subject to a clean matched protocol. The EAR
+continuation recorded in `experiments/windows_main/ear_reallocation/` used the
+user-requested merged train set (1,370 locations), selected the last requested
+epoch, and did not use validation or test labels; its readout is train-only and
+must not be reported as independent validation/test evidence.

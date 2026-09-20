@@ -1,0 +1,59 @@
+{
+  "name": "haiti_windows_ear",
+  "revision": "EAR-2026-09-20",
+  "question": "Can a single-orbit Student execute the target-orbit evidence reallocation learned from a counter orbit?",
+  "split": {
+    "directory": "data/splits",
+    "unit": "spatial location",
+    "train": 1370,
+    "validation": 0,
+    "test": 343,
+    "test_opened_during_training": false,
+    "note": "The user explicitly merged the pinned validation IDs into train; no validation selection is claimed."
+  },
+  "input": {
+    "size": 128,
+    "channels": 5,
+    "layout": "[VV_pre, VH_pre, VV_post, VH_post, OrbitID]",
+    "p2_channels": 128,
+    "p2_size": "32x32"
+  },
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.00005,
+    "betas": [0.9, 0.999],
+    "weight_decay": 0.0,
+    "batch": 16,
+    "max_epochs": 20,
+    "early_stop_patience": null,
+    "selection": "last epoch on merged train set; no validation selection"
+  },
+  "teacher": {
+    "backbone": "ConvNeXtTinyFPN five-channel early fusion",
+    "dca": "existing DCA, shared ASC/DESC backbone",
+    "guidance": "A(LN_channel(DCA(Ft,Fc))), A is zero-initialized 1x1 Conv 128->32",
+    "ear": "one fixed 3x3, K=9, d=32 reader/writer on Ft only",
+    "loss": "0.5 Lseg(z_self,Y) + 0.5 Lseg(z_dual,Y)"
+  },
+  "student": {
+    "forward": "target orbit only",
+    "driver": "Conv3x3(129->32)+GELU+Conv1x1(32->32), final layer zero",
+    "loss": "Lseg + lambda_EAR * LEAR"
+  },
+  "action_loss": {
+    "definition": "D_action=(1/4) sum_k abs(rhoS-rhoT)",
+    "gain": "clamp((e0-e1)/(e0+epsilon),0,1)",
+    "geometry": "G10=Mt*(1-Mc), w_geo=1+G10",
+    "real_pre_post_only": true,
+    "lambda_rule": "min(0.05, 0.05*mean(Lseg0)/(mean(LEAR0)+epsilon))",
+    "single_static_calibration": true,
+    "other_kd_losses": false
+  },
+  "arms": [
+    {"name": "EAR-GT", "loss": "Lseg", "teacher_inherited": true},
+    {"name": "EAR-Full", "loss": "Lseg + lambda_EAR*LEAR", "geometry_weighted": true},
+    {"name": "EAR-noGeo", "loss": "Lseg + lambda_EAR*LEAR", "geometry_weighted": false}
+  ],
+  "threshold": 0.5,
+  "report": ["overall", "ASC-target", "DESC-target", "G00", "G01", "G10", "G11", "IoU", "F1", "AUPRC", "precision", "recall"]
+}
