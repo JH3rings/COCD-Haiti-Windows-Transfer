@@ -1,0 +1,10 @@
+name: final_S2_distillation
+implementation: cocd/windows_main/student_search_kd_v2.py
+formula: L_seg + lambda_KD * (alpha * L_policy + (1-alpha) * L_evidence)
+policy: Jensen-Shannon_search_distribution
+evidence: cosine_distance_on_shared_student_target_memory
+normalization: fixed_initial_calibration
+alpha: 0.5
+kd_over_seg_initial: 0.10
+ablation_runner: cocd/windows_main/run_student_kd_weight_sweep.py
+strength_runner: cocd/windows_main/run_student_kd_strength_sweep.py

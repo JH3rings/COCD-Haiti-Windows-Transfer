@@ -1,0 +1,1 @@
+Qualitative comparison on representative target-orbit SAR test scenes. Green denotes predicted or reference landslide masks; red dashed contours indicate TGD. CG10 is shown only as a dual-orbit Teacher reference.

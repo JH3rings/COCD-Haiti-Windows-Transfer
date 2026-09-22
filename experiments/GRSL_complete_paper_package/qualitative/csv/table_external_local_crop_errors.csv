@@ -1,0 +1,19 @@
+case_id,method,error_count
+C1,Boehm SAR U-Net++,551
+C1,MFEWF adapted,756
+C1,DIS2-port,574
+C1,Vanilla KD,2353
+C1,SO,493
+C1,S2,389
+C2,Boehm SAR U-Net++,1133
+C2,MFEWF adapted,1732
+C2,DIS2-port,688
+C2,Vanilla KD,3144
+C2,SO,710
+C2,S2,608
+C3,Boehm SAR U-Net++,428
+C3,MFEWF adapted,1111
+C3,DIS2-port,429
+C3,Vanilla KD,1735
+C3,SO,414
+C3,S2,320

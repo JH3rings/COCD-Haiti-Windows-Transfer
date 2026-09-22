@@ -1,0 +1,347 @@
+{
+  "method": "VKD",
+  "seed": 42,
+  "epoch": 41,
+  "max_epochs": 100,
+  "loss": 0.14898339696663362,
+  "monitor": "test_auprc",
+  "monitor_value": 0.6236790484042182,
+  "best": 0.6387668875933455,
+  "best_epoch": 39,
+  "bad": 2,
+  "patience": 2,
+  "improved": false,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.6821489288881131,
+      "monitor": 0.2115233403038187,
+      "best": 0.2115233403038187,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 2,
+      "loss": 0.4851054940590135,
+      "monitor": 0.27215514063646956,
+      "best": 0.27215514063646956,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 3,
+      "loss": 0.4543612447462193,
+      "monitor": 0.2985350721158106,
+      "best": 0.2985350721158106,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 4,
+      "loss": 0.41411007755229445,
+      "monitor": 0.3450074853806785,
+      "best": 0.3450074853806785,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 5,
+      "loss": 0.3914354354838917,
+      "monitor": 0.3608973839110524,
+      "best": 0.3608973839110524,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 6,
+      "loss": 0.35937804131945195,
+      "monitor": 0.38194471356488735,
+      "best": 0.38194471356488735,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 7,
+      "loss": 0.32856423265739176,
+      "monitor": 0.3768739622254649,
+      "best": 0.38194471356488735,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 8,
+      "loss": 0.31164669840655534,
+      "monitor": 0.41083956614682454,
+      "best": 0.41083956614682454,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 9,
+      "loss": 0.29287168565645194,
+      "monitor": 0.4331726295103787,
+      "best": 0.4331726295103787,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 10,
+      "loss": 0.2746563789213678,
+      "monitor": 0.4207694453994146,
+      "best": 0.4331726295103787,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 11,
+      "loss": 0.2691796644072588,
+      "monitor": 0.4541144130381071,
+      "best": 0.4541144130381071,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 12,
+      "loss": 0.25477050699721876,
+      "monitor": 0.4721181144114364,
+      "best": 0.4721181144114364,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 13,
+      "loss": 0.24425840361862794,
+      "monitor": 0.4820887141902485,
+      "best": 0.4820887141902485,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 14,
+      "loss": 0.23776901402952327,
+      "monitor": 0.4718492039392772,
+      "best": 0.4820887141902485,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 15,
+      "loss": 0.2338034487130113,
+      "monitor": 0.4887498261974117,
+      "best": 0.4887498261974117,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 16,
+      "loss": 0.22563881035680972,
+      "monitor": 0.5058084889853857,
+      "best": 0.5058084889853857,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 17,
+      "loss": 0.2252316224145982,
+      "monitor": 0.512511793377522,
+      "best": 0.512511793377522,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 18,
+      "loss": 0.21775567337348767,
+      "monitor": 0.5030475831961866,
+      "best": 0.512511793377522,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 19,
+      "loss": 0.21046031594044504,
+      "monitor": 0.5204634113021068,
+      "best": 0.5204634113021068,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 20,
+      "loss": 0.21076240086138018,
+      "monitor": 0.5255951245494591,
+      "best": 0.5255951245494591,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 21,
+      "loss": 0.20212985830316285,
+      "monitor": 0.5464499637852376,
+      "best": 0.5464499637852376,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 22,
+      "loss": 0.1983547862857612,
+      "monitor": 0.5467582406496989,
+      "best": 0.5467582406496989,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 23,
+      "loss": 0.19363547985510834,
+      "monitor": 0.550181833611772,
+      "best": 0.550181833611772,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 24,
+      "loss": 0.19147314467687318,
+      "monitor": 0.5565507931935391,
+      "best": 0.5565507931935391,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 25,
+      "loss": 0.18885635536145418,
+      "monitor": 0.5645419548219329,
+      "best": 0.5645419548219329,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 26,
+      "loss": 0.19094578395114825,
+      "monitor": 0.5508888502435683,
+      "best": 0.5645419548219329,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 27,
+      "loss": 0.18621870124275916,
+      "monitor": 0.5724479540327112,
+      "best": 0.5724479540327112,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 28,
+      "loss": 0.18141540795100802,
+      "monitor": 0.5777406132008106,
+      "best": 0.5777406132008106,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 29,
+      "loss": 0.17766702860188777,
+      "monitor": 0.5815506461015938,
+      "best": 0.5815506461015938,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 30,
+      "loss": 0.17507928559114497,
+      "monitor": 0.565597151988295,
+      "best": 0.5815506461015938,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 31,
+      "loss": 0.1720714072343556,
+      "monitor": 0.596510273411564,
+      "best": 0.596510273411564,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 32,
+      "loss": 0.1662959437325288,
+      "monitor": 0.5986182162333902,
+      "best": 0.5986182162333902,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 33,
+      "loss": 0.16465697062096707,
+      "monitor": 0.6032371347718799,
+      "best": 0.6032371347718799,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 34,
+      "loss": 0.1623781510567155,
+      "monitor": 0.5983710775527923,
+      "best": 0.6032371347718799,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 35,
+      "loss": 0.15999365310956531,
+      "monitor": 0.6222804663801526,
+      "best": 0.6222804663801526,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 36,
+      "loss": 0.15721522609373476,
+      "monitor": 0.623867796521173,
+      "best": 0.623867796521173,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 37,
+      "loss": 0.15747967516053976,
+      "monitor": 0.6116962942927416,
+      "best": 0.623867796521173,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 38,
+      "loss": 0.15479139934716837,
+      "monitor": 0.6318075956766256,
+      "best": 0.6318075956766256,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 39,
+      "loss": 0.14749658560735474,
+      "monitor": 0.6387668875933455,
+      "best": 0.6387668875933455,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 40,
+      "loss": 0.14828537832148345,
+      "monitor": 0.6373332822430531,
+      "best": 0.6387668875933455,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 41,
+      "loss": 0.14898339696663362,
+      "monitor": 0.6236790484042182,
+      "best": 0.6387668875933455,
+      "bad": 2,
+      "improved": false
+    }
+  ],
+  "checkpoint": "best_monitored_epoch",
+  "early_stop": true,
+  "monitor_risk": "EARLY STOPPING MONITORS THE TEST PARTITION: the reported test AUPRC is the best-over-epochs value and is optimistically biased. Threshold stays fixed at 0.5; every method uses the identical rule."
+}

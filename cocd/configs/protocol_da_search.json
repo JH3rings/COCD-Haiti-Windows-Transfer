@@ -1,0 +1,65 @@
+{
+  "name": "haiti_da_search_teacher_student",
+  "revision": "v1",
+  "role": "local diagnostic protocol for explicit normal dual fusion plus target-memory deformable search",
+  "scope": "This file documents da_search_main.py and does not replace protocol_windows_main.json or older results.",
+  "data": {
+    "split_dir": "data/splits_v3",
+    "train_locations": 1370,
+    "validation_locations": 0,
+    "test_locations": 343,
+    "train_modes": ["pre_post", "pre_pre", "post_post"],
+    "test_modes": ["pre_post"],
+    "validation_used": false,
+    "test_monitoring": true,
+    "test_monitoring_risk": "test AUPRC is used for early stopping and checkpoint selection; final metrics are therefore development evidence, not untouched held-out evidence."
+  },
+  "optimization": {
+    "optimizer": "Adam",
+    "lr": 0.00005,
+    "weight_decay": 0.0,
+    "batch": 16,
+    "max_epochs": 100,
+    "early_stop_patience": 2,
+    "monitor": "test AUPRC",
+    "threshold": 0.5,
+    "seed": 42
+  },
+  "models": {
+    "backbone": "shared ConvNeXt-Tiny + three-level FPN",
+    "levels": 3,
+    "channels": 128,
+    "points_per_level": 4,
+    "memory": "target FPN only",
+    "policy": "T1 policy context is target FPN plus normal fused dual FPN; Student policy context is target FPN only",
+    "sampling": "bilinear grid_sample with bounded learned offsets and softmax weights over all level-point candidates",
+    "fusion": "one same-channel 1x1 Conv over [target, counter] independently at each FPN level",
+    "write": "zero-initialized 1x1 Conv over [target_p2, retrieved_target_memory]"
+  },
+  "arms": {
+    "T0": "normal dual fusion, no deformable search",
+    "T1": "normal dual fusion plus DA search and target-only auxiliary head",
+    "S0": "the only active Student: target-only DA search, segmentation loss only"
+  },
+  "losses": {
+    "T0": "L_dual",
+    "T1": "L_dual + 0.10 * L_aux",
+    "S0": "L_seg",
+    "teacher_policy_in_student": "offsets and weights detached",
+    "forbidden": ["logit KD", "generic feature KD", "gain/protect", "router/gate", "extra loss sweeps", "new backbone"]
+  },
+  "gates": {
+    "G1": "T0 must beat comparable single-orbit SO overall AUPRC",
+    "G2": "T1 must not degrade T0 overall AUPRC and its auxiliary result is reported",
+    "G3": "Teacher-policy oracle is reported as a diagnostic; it does not select another Student arm"
+  },
+  "diagnostics": [
+    "offset magnitude",
+    "weight entropy",
+    "G10 versus non-G10 offset magnitude",
+    "shuffled-counter policy change",
+    "student-policy distance",
+    "oracle overall and G10 metrics",
+    "auxiliary and Search-Distillation loss ratios"
+  ]
+}

@@ -42,3 +42,19 @@ Thumbs.db
 credentials*.json
 secrets*.json
 
+# Curated, compact paper artefacts are versioned.  The rules above continue to
+# exclude all raw experiment payloads, checkpoints, logs and tensors.
+!experiments/
+!experiments/GRSL_complete_paper_package/
+!experiments/GRSL_complete_paper_package/**
+!results/
+!results/tables/
+!results/tables/*.csv
+!results/tables/*.json
+
+# Keep runtime payloads out even when located below the curated package.
+experiments/GRSL_complete_paper_package/**/*.log
+experiments/GRSL_complete_paper_package/**/*.npz
+experiments/GRSL_complete_paper_package/**/*.npy
+experiments/GRSL_complete_paper_package/**/*.pt
+experiments/GRSL_complete_paper_package/**/*.pth

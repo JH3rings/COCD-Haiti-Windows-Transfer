@@ -1,0 +1,10 @@
+name: CG10
+implementation: cocd/windows_main/models_teacher_target_search_v2.py
+runner: cocd/windows_main/teacher_target_search_v2.py
+input: target_orbit_5ch_plus_counter_orbit_5ch
+context: counter_guided
+value_memory: target_only
+decoder_input: searched_target_representation_only
+loss: L_seg + gamma_L_TGD
+gamma: 0.10
+evaluation_regions: [Overall, TGD, Remaining, OmegaTR]

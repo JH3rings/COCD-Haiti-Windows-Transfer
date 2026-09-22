@@ -1,0 +1,88 @@
+{
+  "purpose": "inference-only re-test of retained DIS2-port checkpoint",
+  "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\legacy_checkpoints\\v1_protocol\\DIS2_port_seed42.pt",
+  "input": "target-orbit pre/post SAR plus orbit indicator only",
+  "threshold": 0.5,
+  "tgd_definition": "existing G10: target geometry positive and counter geometry negative",
+  "historical_csv_metric_difference_retest_minus_historical": {
+    "Overall": {
+      "iou": 0.00937419738928158,
+      "f1": 0.00712303260578373,
+      "precision": -0.18679829148373284,
+      "recall": 0.24328646386039077,
+      "auprc": 0.022976551328528272
+    },
+    "TGD": {
+      "iou": 0.004419759694835879,
+      "f1": 0.0033220742816750803,
+      "precision": -0.18146601575318344,
+      "recall": 0.23385797093913374,
+      "auprc": 0.0220965770287328
+    }
+  },
+  "rows": [
+    {
+      "method": "DIS2-port",
+      "region": "Overall",
+      "threshold": 0.5,
+      "iou": 0.6270626578549041,
+      "f1": 0.770791033643662,
+      "precision": 0.6508101249762046,
+      "recall": 0.9450094328498881,
+      "auprc": 0.8963044374337841,
+      "iou@0.5": 0.6270626578549041,
+      "f1@0.5": 0.770791033643662,
+      "pixels": 11239424,
+      "positive_pixels": 814176,
+      "accuracy": 0.9592867926327897,
+      "errors": 457593,
+      "error_rate": 0.04071320736721028,
+      "tp": 769404,
+      "fp": 412821,
+      "fn": 44772,
+      "tn": 10012427
+    },
+    {
+      "method": "DIS2-port",
+      "region": "TGD",
+      "threshold": 0.5,
+      "iou": 0.6334205914804044,
+      "f1": 0.7755756121111674,
+      "precision": 0.6546390369548593,
+      "recall": 0.951320475163048,
+      "auprc": 0.9023018359793571,
+      "iou@0.5": 0.6334205914804044,
+      "f1@0.5": 0.7755756121111674,
+      "pixels": 1039406,
+      "positive_pixels": 153884,
+      "accuracy": 0.9184899837022299,
+      "errors": 84722,
+      "error_rate": 0.08151001629777008,
+      "tp": 146393,
+      "fp": 77231,
+      "fn": 7491,
+      "tn": 808291
+    },
+    {
+      "method": "DIS2-port",
+      "region": "Remaining",
+      "threshold": 0.5,
+      "iou": 0.6255871679576434,
+      "f1": 0.7696753226929529,
+      "precision": 0.6499169101638674,
+      "recall": 0.9435386162485545,
+      "auprc": 0.8949085730063836,
+      "iou@0.5": 0.6255871679576434,
+      "f1@0.5": 0.7696753226929529,
+      "pixels": 10200018,
+      "positive_pixels": 660292,
+      "accuracy": 0.963444084118283,
+      "errors": 372871,
+      "error_rate": 0.03655591588171707,
+      "tp": 623011,
+      "fp": 335590,
+      "fn": 37281,
+      "tn": 9204136
+    }
+  ]
+}

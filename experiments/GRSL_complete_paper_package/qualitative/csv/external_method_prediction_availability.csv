@@ -1,0 +1,6 @@
+method,aligned_predictions,expected_selected_scenes,status
+Boehm SAR U-Net++,7,7,verified_locked_order
+CDNetE Early Fusion,7,7,verified_locked_order
+MFEWF adapted,7,7,verified_locked_order
+DIS2-port,7,7,verified_locked_order
+Vanilla KD,7,7,verified_locked_order

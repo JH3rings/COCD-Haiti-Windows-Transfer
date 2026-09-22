@@ -1,0 +1,36 @@
+{
+  "external_prediction_caches": [
+    {
+      "method": "Boehm SAR U-Net++",
+      "aligned_predictions": 7,
+      "expected_selected_scenes": 7,
+      "status": "verified_locked_order"
+    },
+    {
+      "method": "CDNetE Early Fusion",
+      "aligned_predictions": 7,
+      "expected_selected_scenes": 7,
+      "status": "verified_locked_order"
+    },
+    {
+      "method": "MFEWF adapted",
+      "aligned_predictions": 7,
+      "expected_selected_scenes": 7,
+      "status": "verified_locked_order"
+    },
+    {
+      "method": "DIS2-port",
+      "aligned_predictions": 7,
+      "expected_selected_scenes": 7,
+      "status": "verified_locked_order"
+    },
+    {
+      "method": "Vanilla KD",
+      "aligned_predictions": 7,
+      "expected_selected_scenes": 7,
+      "status": "verified_locked_order"
+    }
+  ],
+  "not_figure_eligible": [],
+  "alignment": "All cache rows were aligned by the identical locked test-order and verified orbit vector; only selected scene predictions were retained while building the figure."
+}

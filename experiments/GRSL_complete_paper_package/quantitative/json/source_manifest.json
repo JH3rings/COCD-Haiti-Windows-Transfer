@@ -1,0 +1,25 @@
+{
+  "sources": {
+    "teacher_metrics": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\teacher_target_search_v2\\teacher_mechanism_metrics.csv",
+      "sha256": "a9177cca61bfd8270f2851d4d47edd615a977f13647b4951acc9dab080e315f4"
+    },
+    "student_metrics": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\student_target_search_v2\\locked_region_mechanism_metrics.csv",
+      "sha256": "623c143b67d62c703b9772de9073186a9fe1467a54eaea401f0db6a2c2d18c5d"
+    },
+    "composition_metrics": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\student_target_search_v2\\weight_sweep\\locked_region_mechanism_metrics.csv",
+      "sha256": "ff81fd02569dcb18870de1c5dd9dee588985116754eedb6f8510b68cf876515a"
+    },
+    "strength_metrics": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\student_target_search_v2\\strength_sweep\\locked_region_mechanism_metrics.csv",
+      "sha256": "c378cc66229976483e9c3b7df6280e673b48cb30491f3ea99ab4642fedf30323"
+    }
+  },
+  "protocol_note": "All values are locked-checkpoint test-set inference or test-monitored selection; test monitoring is not independent blind testing.",
+  "excluded": [
+    "Legacy DA Student distillation artifacts: decoder raw-feature bypass; excluded from final comparisons.",
+    "DIS2/Vanilla KD: no newly re-evaluated checkpoint/prediction under the final CG10/Student-v2 protocol."
+  ]
+}

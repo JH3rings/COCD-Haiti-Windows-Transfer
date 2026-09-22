@@ -1,0 +1,6 @@
+{
+  "quantitative_source": "consolidated retained snapshot",
+  "qualitative_source": "consolidated retained snapshot",
+  "historical_source": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\grsl_assets_v1",
+  "policy": "Final-v2 results are primary. Historical external metrics are retained separately with eligibility labels. DIS2-port was recovered from an archived checkpoint and re-inferred; Vanilla KD was retrained under the recorded VKD protocol and exported by inference-only evaluation."
+}

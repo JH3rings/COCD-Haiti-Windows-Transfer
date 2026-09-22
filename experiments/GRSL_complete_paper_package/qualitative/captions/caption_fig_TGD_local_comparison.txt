@@ -1,0 +1,1 @@
+TGD-focused local comparisons selected automatically from target-orbit pixels where SO is incorrect and S2 is correct. Green, red, and yellow in error maps denote true positives, false negatives, and false positives, respectively; red dashed contours mark TGD.

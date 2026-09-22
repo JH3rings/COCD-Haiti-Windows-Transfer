@@ -1,0 +1,1 @@
+Overall qualitative comparison with verified local prediction caches for external baselines. Green denotes landslide masks. External results are shown for visual comparison only; their historical protocol status is documented in the accompanying availability table.
