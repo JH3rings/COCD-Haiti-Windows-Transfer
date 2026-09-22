@@ -11,4 +11,4 @@
 | TGD | Target-Orbit Geometric Distortion region; legacy G10. |
 | OmegaTR | Fixed Teacher-resolvable TGD subset: SO wrong, CG10 correct. |
 | DIS2-port | Retained adapted DIS2 baseline re-inferred from archived checkpoint. |
-| Vanilla KD / VKD | R1 target-only baseline with ordinary full-pixel logit KD. |
+| Vanilla KD / VKD | Retained external/historical target-only baseline with ordinary logit KD; not a final-v2 network definition. |

@@ -42,12 +42,14 @@ Run:
     python cocd/scripts/23_train_external_baselines.py --seat all
 """
 
-import argparse, importlib.util, json, os, sys, time
+import argparse, json, os, random, sys, time
 from pathlib import Path
 
 import numpy as np
 import torch
 import torch.nn.functional as F
+from sklearn.metrics import average_precision_score
+from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -56,20 +58,18 @@ A = COCD
 sys.path.insert(0, str(COCD))
 
 # ---------------------------------------------------------------------------
-# the shared pipeline: reuse scripts/21 verbatim so the loader, the frozen
-# split and the metric are literally the same objects the internal arms use
+# shared final data path: external baselines use the same loader/split as the
+# final-v2 method, without importing a retired self-owned model runner
 # ---------------------------------------------------------------------------
-_spec = importlib.util.spec_from_file_location('rapid', COCD / 'scripts' / '21_train_rapid_landslide_cocd.py')
-rapid = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(rapid)
+from paths import DEV  # noqa: E402
+from windows_main.data import HaitiPairs, positive_weight, split  # noqa: E402
 
 
 def loader(dataset, shuffle=False):
     """The same DataLoader the internal arms use, with the protocol's batch."""
-    return rapid.dl(dataset, shuffle=shuffle)
+    return DataLoader(dataset, batch_size=BATCH, shuffle=shuffle, num_workers=0)
 
-PROT = json.loads((COCD / 'configs' / 'protocol_windows_main.json').read_text())
-DEV = rapid.DEV
+PROT = json.loads((COCD / 'configs' / 'protocol_windows_main.json').read_text(encoding='utf-8'))
 SEED = PROT['seeds']['main']
 _SCHED = PROT['schedule']
 MAX_EPOCHS = _SCHED['max_epochs']                 # 200, a ceiling, not a plan
@@ -91,6 +91,32 @@ EXPECTED_TRAIN_VIEWS = 8220                      # 1370 locations x 3 modes x 2 
 MONITOR_RISK = ('EARLY STOPPING MONITORS THE TEST PARTITION: the reported test '
                 'AUPRC is the best-over-epochs value and is optimistically biased. '
                 'Threshold stays fixed at 0.5; every method uses the identical rule.')
+
+
+def seed():
+    random.seed(SEED)
+    np.random.seed(SEED)
+    torch.manual_seed(SEED)
+    torch.cuda.manual_seed_all(SEED)
+
+
+def metric(p, y, t=THRESHOLD):
+    """Shared fixed-threshold summary used by the external comparison seats."""
+    p = np.asarray(p).ravel()
+    y = np.asarray(y).astype(bool).ravel()
+    hard = p >= t
+    tp = (hard & y).sum()
+    fp = (hard & ~y).sum()
+    fn = (~hard & y).sum()
+    precision = tp / (tp + fp + 1e-8)
+    recall = tp / (tp + fn + 1e-8)
+    return {
+        'iou': float(tp / (tp + fp + fn + 1e-8)),
+        'f1': float(2 * precision * recall / (precision + recall + 1e-8)),
+        'precision': float(precision),
+        'recall': float(recall),
+        'auprc': float(average_precision_score(y, p)) if y.any() else float('nan'),
+    }
 
 
 _LOGF = None
@@ -248,7 +274,7 @@ def monitor_prob(net, seat, kind, dataset):
 def monitor_auprc(net, seat, kind, dataset):
     """The monitored quantity: threshold-free AUPRC over the whole partition."""
     p, y = monitor_prob(net, seat, kind, dataset)
-    return float(rapid.metric(p.ravel(), y.ravel(), t=THRESHOLD)['auprc'])
+    return float(metric(p.ravel(), y.ravel(), t=THRESHOLD)['auprc'])
 
 
 # ---------------------------------------------------------------------------
@@ -259,7 +285,7 @@ def run_seat(seat, pretrained=True, encoder=None, resume=False):
     out = OUT_ROOT / seat
     out.mkdir(parents=True, exist_ok=True)
 
-    rapid.seed()
+    seed()
     if seat == 'boehm':
         net, kind = cfg['build'](pretrained=pretrained, encoder=encoder or ENCODER)
     elif seat in ('mfewf',):
@@ -269,14 +295,14 @@ def run_seat(seat, pretrained=True, encoder=None, resume=False):
     net = net.to(DEV)
     n_param = sum(p.numel() for p in net.parameters()) / 1e6
 
-    tid, vid, eid = rapid.split()
+    tid, vid, eid = split()
     if vid:
         raise SystemExit(f'{len(vid)} validation locations found; the frozen protocol has no '
                          'validation partition (expect COCD_SPLIT_DIR to hold only train/test)')
-    train_set = rapid.HaitiPairs(tid, True)
-    test_set = rapid.HaitiPairs(eid, False, train_set.stats)
+    train_set = HaitiPairs(tid, True)
+    test_set = HaitiPairs(eid, False, train_set.stats)
 
-    posweight = rapid.posweight(train_set)
+    posweight = positive_weight(train_set)
     # The dataset indexes (location, mode) pairs — the orbit dimension is not in
     # ``spec`` because every __getitem__ returns BOTH orbits and the training
     # step concatenates them.  So one epoch forwards
@@ -393,7 +419,7 @@ def run_seat(seat, pretrained=True, encoder=None, resume=False):
     rows = []
     for part, sel in [('overall', np.ones(len(p), bool)),
                       ('asc', oid == 0), ('desc', oid == 1)]:
-        m = rapid.metric(p[sel].ravel(), yv[sel].ravel(), t=THRESHOLD)
+        m = metric(p[sel].ravel(), yv[sel].ravel(), t=THRESHOLD)
         rows.append(dict(method=cfg['label'], partition=part, threshold=THRESHOLD,
                          selected_epoch=best_epoch, stopped_by=stop_reason, **m))
     import csv

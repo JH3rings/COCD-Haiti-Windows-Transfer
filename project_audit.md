@@ -22,8 +22,8 @@ training logs remain local-only and are excluded from Git.
 
 | Area | Why archived |
 |---|---|
-| `cocd/_removed_pre_v3/` | Historical protocol runners. |
-| `cocd/windows_main/cgsearch_main.py`, `da_search_main.py`, `ear_main.py`, `models_cgsearch.py`, `models_complement.py` | Earlier mechanisms superseded by target-search v2. |
+| `archive/history/code/` | Historical self-owned architectures and protocol runners, preserved byte-for-byte. |
+| `archive/history/docs/` and `archive/history/protocols/` | Old handoffs, checkpoint ledgers, migration logs, plans, and protocol JSON. |
 | `experiments/windows_main/da_search/grsl_assets_v1/` | Historical raw-feature-bypass package; never cite as final S2. |
 | `experiments/windows_main/ear_reallocation*`, `cgsearch/`, old `loss_ablation*` | Exploratory or replaced development branches. |
 | `legacy_checkpoints/` | Local reproducibility cache; DIS2 recovery provenance only. |

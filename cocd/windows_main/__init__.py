@@ -1,6 +1,6 @@
-"""Windows continuation -- active method implementations.
+"""Final Windows entry points for the GRSL target-search method.
 
-``models_complement`` adds the two networks of the new COCD design.  Nothing in
-``cocd/models/`` or ``cocd/losses/`` is modified by this package: the legacy arms
-keep their original definitions and are trained through their original code.
+The executable self-owned method is the v2 counter-guided target-evidence
+Teacher plus target-only search Student. Historical architectures and their
+experiment runners are retained separately under ``archive/history``.
 """

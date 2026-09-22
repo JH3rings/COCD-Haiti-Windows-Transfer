@@ -5,7 +5,9 @@ It asks whether complementary-orbit information available during training can
 improve target-only deployment by transferring a counter-guided evidence-search
 strategy.
 
-## Final method
+## FINAL METHOD
+
+Counter-Guided Target Evidence Search with Target-Only Search Distillation.
 
 The final **CG10 Teacher** receives a target and counter orbit.  The counter
 orbit is used only to generate the search policy; values retrieved by
@@ -27,8 +29,9 @@ so the KD contribution is 10% of segmentation loss at initialization.
 1. [Model description](docs/model_description.md)
 2. [Experiment summary](docs/experiment_summary.md)
 3. [Naming dictionary](docs/naming_dictionary.md)
-4. [Audit and retention policy](project_audit.md)
-5. [Complete paper package](experiments/GRSL_complete_paper_package/README.md)
+4. [Cleanup audit](cleanup_audit.md) and [cleanup report](cleanup_report.md)
+5. [Audit and retention policy](project_audit.md)
+6. [Complete paper package](experiments/GRSL_complete_paper_package/README.md)
 
 ## Canonical code
 

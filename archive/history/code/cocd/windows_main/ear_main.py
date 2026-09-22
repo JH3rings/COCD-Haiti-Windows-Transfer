@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""Train and validate the EAR Teacher/Student pair.
+"""Train and monitor the EAR Teacher/Student pair under the Windows v4 rule.
 
-This is a deliberately separate entry point from the historical v4 runner.
-The current run merges the pinned train and validation IDs into one training
-set at the user's request.  It therefore has no validation selection: the last
-requested training epoch is the model and every readout is labelled train-only.
-The old N-series classes and checkpoints are left untouched.
+The pinned train and validation IDs are merged into 1370 training locations.
+There is no validation partition; the pinned 343-location test partition is
+used as the development monitor exactly as specified by the active v4
+protocol: threshold-free AUPRC every epoch, patience two, and a hard ceiling
+of 100 epochs.  Because test AUPRC selects the stopping epoch, every reported
+test number is explicitly marked as monitored/development evidence, not an
+independent held-out estimate.  The old N-series classes and checkpoints are
+left untouched.
 
 Stages::
 
@@ -14,12 +17,8 @@ Stages::
     EAR-GT        inherited Student with segmentation loss only
     EAR-Full      inherited Student with G10-prioritised action loss
     EAR-noGeo     same as EAR-Full with w_geo=1
-    validate      write train-only tables and mechanism readouts
+    validate      write monitored-test tables and mechanism readouts
     all           teacher -> calibrate -> EAR-GT -> EAR-Full -> EAR-noGeo -> validate
-
-The test partition is intentionally not opened by this script.  A separate
-one-shot test read should only be added after the structure, lambda, checkpoint
-rule, and validation comparison are frozen.
 """
 from __future__ import annotations
 
@@ -42,8 +41,8 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 PACKAGE = Path(__file__).resolve().parents[2]
-# The source files are the original pinned train/val/test split.  build_sets()
-# merges train and validation IDs below, without redrawing or touching test.
+# The source files are the original pinned train/val/test split. build_sets()
+# merges train and validation IDs, while preserving the pinned test monitor.
 os.environ.setdefault('COCD_SPLIT_DIR', str(PACKAGE / 'data' / 'splits'))
 os.environ.setdefault('COCD_OUT_ROOT', str(PACKAGE / 'experiments'))
 COCD = PACKAGE / 'cocd'
@@ -73,11 +72,12 @@ from windows_main.models_complement import (  # noqa: E402
 )
 
 DEV = v2.DEV
-OUT = OUT_ROOT / 'windows_main' / 'ear_reallocation'
+OUT = OUT_ROOT / 'windows_main' / 'ear_reallocation_v4'
 SEED = 42
 EPS = 1e-8
 BATCH = 16
-MAX_EPOCHS = 20
+MAX_EPOCHS = 100
+PATIENCE = 2
 LAMBDA_PATH = OUT / 'lambda_EAR_frozen.json'
 
 
@@ -218,7 +218,7 @@ def teacher_batch(model: EARTeacher, a: torch.Tensor, d: torch.Tensor,
                    + seg_loss(od['z_self'], y) + seg_loss(od['z_dual'], y))
 
 
-def train_teacher(train_set, val_set=None, epochs: int = MAX_EPOCHS) -> None:
+def train_teacher(train_set, monitor_set, epochs: int = MAX_EPOCHS) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     final = OUT / f'EARTeacher_seed{SEED}.pt'
     if final.exists():
@@ -230,7 +230,7 @@ def train_teacher(train_set, val_set=None, epochs: int = MAX_EPOCHS) -> None:
                                  eps=1e-8, weight_decay=0.0)
     latest = OUT / f'EARTeacher_seed{SEED}_latest.pt'
     progress = OUT / f'EARTeacher_seed{SEED}_progress.json'
-    best, best_epoch, bad, best_state, start, hist = float('nan'), 0, 0, None, 1, []
+    best, best_epoch, bad, best_state, start, hist = -float('inf'), 0, 0, None, 1, []
     if latest.exists():
         state = torch.load(latest, map_location=DEV, weights_only=False)
         if not state.get('complete', False):
@@ -250,28 +250,37 @@ def train_teacher(train_set, val_set=None, epochs: int = MAX_EPOCHS) -> None:
             optimizer.zero_grad(set_to_none=True)
             losses.append(float(loss.detach()))
             bar.set_postfix(loss=f'{np.mean(losses):.4f}')
-        # No validation partition is used in this continuation.  The current
-        # epoch is the candidate model and no early-stop decision is made.
-        score = float('nan')
-        improved = False
-        best_epoch, best_state = epoch, clone_state(model)
+        score = overall_auprc(predict_teacher(model, monitor_set))
+        improved = score > best
+        if improved:
+            best, bad, best_epoch = score, 0, epoch
+            best_state = clone_state(model)
+            flag = 'NEW BEST'
+        else:
+            bad += 1
+            flag = f'no gain ({bad}/{PATIENCE})'
         rec = {'epoch': epoch, 'train_loss': float(np.mean(losses)),
-               'val_auprc_dual': None,
-               'val_auprc_self': None,
+               'monitor_test_auprc_dual': score,
+               'monitor_partition': 'test',
                'best': best, 'best_epoch': best_epoch, 'improved': bool(improved),
                'bad': bad}
         hist.append(rec)
         log(f'EARTeacher epoch={epoch} loss={rec["train_loss"]:.5f} '
-            f'(train-only continuation; last epoch is the model)')
+            f'test_auprc={score:.5f} best={best:.5f}@{best_epoch} [{flag}]')
         torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(),
                     'epoch': epoch, 'best': best, 'best_epoch': best_epoch, 'bad': bad,
                     'best_state': best_state, 'history': hist, 'complete': False}, latest)
         progress.write_text(json.dumps({
             'method': 'EARTeacher', 'seed': SEED, 'epoch': epoch,
-            'max_epochs': epochs, 'selection': 'last epoch on merged train set',
-            'best': None, 'best_epoch': best_epoch, 'history': hist,
-            'validation_used': False, 'test_opened': False,
+            'max_epochs': epochs, 'selection': 'best monitored test AUPRC',
+            'monitor': 'test_auprc', 'monitor_partition': 'test',
+            'patience': PATIENCE, 'best': best, 'best_epoch': best_epoch,
+            'history': hist, 'validation_used': False, 'test_opened': True,
+            'monitor_risk': 'test AUPRC selects stopping/checkpoint; not independent test evidence',
         }, indent=2))
+        if bad >= PATIENCE:
+            log(f'EARTeacher early stop at epoch {epoch}: {PATIENCE} test-monitor epochs without improvement')
+            break
     if best_state is None:
         best_state = clone_state(model)
         best_epoch = epoch
@@ -281,11 +290,13 @@ def train_teacher(train_set, val_set=None, epochs: int = MAX_EPOCHS) -> None:
                 'best_epoch': best_epoch, 'complete': True}, latest)
     progress.write_text(json.dumps({
         'method': 'EARTeacher', 'seed': SEED, 'epoch': epoch, 'max_epochs': epochs,
-        'selection': 'last epoch on merged train set', 'best': None,
+        'selection': 'best monitored test AUPRC', 'monitor': 'test_auprc',
+        'monitor_partition': 'test', 'patience': PATIENCE, 'best': best,
         'best_epoch': best_epoch, 'history': hist, 'checkpoint': str(final),
-        'validation_used': False, 'test_opened': False,
+        'validation_used': False, 'test_opened': True,
+        'monitor_risk': 'test AUPRC selects stopping/checkpoint; not independent test evidence',
     }, indent=2))
-    log(f'wrote {final}; last train epoch={best_epoch}; no validation selection was performed')
+    log(f'wrote {final}; selected epoch={best_epoch}; monitored test AUPRC={best:.5f}')
 
 
 def _real_batches(train_set, limit: int = 8):
@@ -389,7 +400,7 @@ def student_batch_loss(model: EARStudent, teacher: EARTeacher,
     return loss, stats
 
 
-def train_student(variant: str, train_set, val_set=None, teacher: EARTeacher = None,
+def train_student(variant: str, train_set, monitor_set, teacher: EARTeacher = None,
                   epochs: int = MAX_EPOCHS) -> None:
     final = OUT / f'{variant}_seed{SEED}.pt'
     if final.exists():
@@ -403,7 +414,7 @@ def train_student(variant: str, train_set, val_set=None, teacher: EARTeacher = N
     optimizer = torch.optim.Adam(model.parameters(), lr=5e-5, betas=(0.9, 0.999),
                                  eps=1e-8, weight_decay=0.0)
     latest = OUT / f'{variant}_seed{SEED}_latest.pt'
-    best, best_epoch, bad, best_state, start, hist = float('nan'), 0, 0, None, 1, []
+    best, best_epoch, bad, best_state, start, hist = -float('inf'), 0, 0, None, 1, []
     if latest.exists():
         state = torch.load(latest, map_location=DEV, weights_only=False)
         if not state.get('complete', False):
@@ -426,38 +437,50 @@ def train_student(variant: str, train_set, val_set=None, teacher: EARTeacher = N
             terms.append(stats)
             bar.set_postfix(loss=f'{float(loss.detach()):.4f}',
                             seg=f'{stats["seg"]:.4f}', lear=f'{stats["lear"]:.4f}')
-        score = float('nan')
-        improved = False
-        best_epoch, best_state = epoch, clone_state(model)
+        score = overall_auprc(predict_student(model, monitor_set))
+        improved = score > best
+        if improved:
+            best, bad, best_epoch = score, 0, epoch
+            best_state = clone_state(model)
+            flag = 'NEW BEST'
+        else:
+            bad += 1
+            flag = f'no gain ({bad}/{PATIENCE})'
         mean = {k: float(np.mean([t[k] for t in terms])) for k in terms[0]}
         rec = {'epoch': epoch, 'train_loss': mean['seg'] + lam * mean['lear'],
                'Lseg': mean['seg'], 'LEAR': mean['lear'],
                'lambda_EAR_times_LEAR': lam * mean['lear'],
                'aux_to_seg': (lam * mean['lear'] / (mean['seg'] + EPS)),
-               'val_auprc': None, 'best': None, 'best_epoch': best_epoch,
+               'monitor_test_auprc': score, 'monitor_partition': 'test',
+               'best': best, 'best_epoch': best_epoch,
                'improved': bool(improved), 'bad': bad, **{k: mean[k] for k in
                ('gain_mean', 'd_action_mean', 'g10_fraction')}}
         hist.append(rec)
         log(f'{variant} epoch={epoch} seg={mean["seg"]:.5f} '
             f'LEAR={mean["lear"]:.5f} lam*LEAR={lam * mean["lear"]:.5f} '
-            '(train-only continuation; last epoch is the model)')
+            f'test_auprc={score:.5f} best={best:.5f}@{best_epoch} [{flag}]')
         torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(),
                     'epoch': epoch, 'best': best, 'best_epoch': best_epoch, 'bad': bad,
                     'best_state': best_state, 'history': hist, 'complete': False}, latest)
         (OUT / f'{variant}_seed{SEED}_progress.json').write_text(json.dumps({
             'method': variant, 'seed': SEED, 'epoch': epoch, 'max_epochs': epochs,
             'lambda_EAR': lam, 'geometry_weighted': use_geo,
-            'selection': 'last epoch on merged train set', 'best': None,
+            'selection': 'best monitored test AUPRC', 'monitor': 'test_auprc',
+            'monitor_partition': 'test', 'patience': PATIENCE, 'best': best,
             'best_epoch': best_epoch, 'history': hist, 'validation_used': False,
-            'test_opened': False,
+            'test_opened': True,
+            'monitor_risk': 'test AUPRC selects stopping/checkpoint; not independent test evidence',
         }, indent=2))
+        if bad >= PATIENCE:
+            log(f'{variant} early stop at epoch {epoch}: {PATIENCE} test-monitor epochs without improvement')
+            break
     if best_state is None:
         best_state, best_epoch = clone_state(model), epoch
     model.load_state_dict(best_state)
     torch.save(model.state_dict(), final)
     torch.save({'model': model.state_dict(), 'epoch': epoch, 'best': best,
                 'best_epoch': best_epoch, 'complete': True}, latest)
-    log(f'wrote {final}; last train epoch={best_epoch} (no validation selection)')
+    log(f'wrote {final}; selected epoch={best_epoch}; monitored test AUPRC={best:.5f}')
 
 
 def mechanism_readout(name: str, pred: dict) -> list[dict]:
@@ -484,9 +507,9 @@ def load_student(variant: str) -> EARStudent:
     return model.eval()
 
 
-def validate(train_set, val_set, teacher: EARTeacher) -> None:
+def validate(train_set, monitor_set, teacher: EARTeacher) -> None:
     all_rows = []
-    eval_set = train_set if val_set is None else val_set
+    eval_set = monitor_set
     teacher_pred = predict_teacher(teacher, eval_set)
     all_rows.extend(rows('EAR-Teacher-self', {**teacher_pred, 'p': teacher_pred['self']}))
     all_rows.extend(rows('EAR-Teacher-dual', teacher_pred))
@@ -510,15 +533,16 @@ def validate(train_set, val_set, teacher: EARTeacher) -> None:
         for row in v2.report('DIS2-current-v4-checkpoint', q, 0.5):
             row['evidence_note'] = 'checkpoint selected with v4 test AUPRC; contaminated re-readout'
             all_rows.append(row)
-    result_name = 'train_only_results_seed42.csv' if val_set is None else 'validation_results_seed42.csv'
+    result_name = 'test_monitored_results_seed42.csv'
     pd.DataFrame(all_rows).to_csv(OUT / result_name, index=False)
-    mechanism_name = 'mechanism_train_only_seed42.json' if val_set is None else 'mechanism_validation_seed42.json'
+    mechanism_name = 'mechanism_test_monitored_seed42.json'
     (OUT / mechanism_name).write_text(json.dumps({
         'rows': mechanisms,
-        'selection': 'last epoch on merged train set; fixed threshold 0.5',
-        'evaluation_partition': 'train_only' if val_set is None else 'validation',
-        'test_opened': False,
-        'note': 'DIS2 current checkpoint is a contaminated comparison only and did not drive selection.',
+        'selection': 'best monitored test AUPRC; fixed threshold 0.5',
+        'evaluation_partition': 'test_monitor',
+        'test_opened': True,
+        'monitor_risk': 'test AUPRC selected stopping/checkpoint; this is not independent test evidence.',
+        'note': 'DIS2 current checkpoint is a contaminated comparison only and did not drive EAR selection.',
     }, indent=2))
     log(f'wrote {result_name} and {mechanism_name}')
 
@@ -527,7 +551,8 @@ def build_sets():
     tid, vid, eid = v2.split()
     merged = list(tid) + list(vid)
     train_set = v2.HaitiPairs(merged, True)
-    return train_set, None, eid
+    monitor_set = v2.HaitiPairs(eid, False, train_set.stats)
+    return train_set, monitor_set, eid
 
 
 def main() -> None:
@@ -539,11 +564,12 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     print(describe())
     print(f'[EAR protocol] split={os.environ.get("COCD_SPLIT_DIR")} batch={BATCH} '
-          f'epochs={args.epochs} lr=5e-5 seed={SEED} '
-          'train=merged(train+validation) selection=last_epoch test_opened=False')
-    train_set, val_set, _test_ids = build_sets()
+          f'epochs={args.epochs} lr=5e-5 seed={SEED} patience={PATIENCE} '
+          'train=merged(train+validation) monitor=test_auprc test_opened=True '
+          'risk=test is development monitor, not independent holdout')
+    train_set, monitor_set, _test_ids = build_sets()
     if args.stage in ('teacher', 'all'):
-        train_teacher(train_set, val_set, args.epochs)
+        train_teacher(train_set, monitor_set, args.epochs)
     teacher = load_teacher() if args.stage != 'teacher' or (OUT / f'EARTeacher_seed{SEED}.pt').exists() else None
     if args.stage in ('calibrate', 'all'):
         assert teacher is not None
@@ -554,10 +580,10 @@ def main() -> None:
             calibrate_lambda(train_set, teacher)
         variants = ('EAR-GT', 'EAR-Full', 'EAR-noGeo') if args.stage == 'all' else (args.stage,)
         for variant in variants:
-            train_student(variant, train_set, val_set, teacher, args.epochs)
+            train_student(variant, train_set, monitor_set, teacher, args.epochs)
     if args.stage in ('validate', 'all'):
         assert teacher is not None
-        validate(train_set, val_set, teacher)
+        validate(train_set, monitor_set, teacher)
 
 
 if __name__ == '__main__':

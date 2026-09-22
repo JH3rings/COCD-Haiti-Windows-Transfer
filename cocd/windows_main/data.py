@@ -1,8 +1,8 @@
-"""Dataset and frozen split loader for the active DA-search experiment.
+"""Dataset and frozen split loader for the final target-search method.
 
-This module deliberately contains no legacy Teacher/Student definitions.  The
-active Windows line (T0, T1 and S0) imports the data path from here so retired
-q3/q4 ablation code can be removed without changing the dataset protocol.
+This module deliberately contains no model definitions. The final Teacher and
+target-only Student both use this fixed pair/split contract, so historical
+architecture code can remain archived without changing data semantics.
 """
 from __future__ import annotations
 

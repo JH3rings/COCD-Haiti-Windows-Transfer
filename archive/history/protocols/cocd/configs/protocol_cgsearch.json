@@ -1,0 +1,20 @@
+{
+  "name": "haiti_windows_cgsearch",
+  "base_protocol": "protocol_windows_main.json",
+  "method": "CGSearch",
+  "search_dim": 32,
+  "teacher_loss": "0.5 * BCE(z_self,Y) + 0.5 * BCE(z_dual,Y)",
+  "student_variants": {
+    "CGSearch-Student-GT": {"lambda_search": 0.0},
+    "CGSearch-Student-KD": {"lambda_search": 0.05}
+  },
+  "kd": {
+    "object": "rho_S = A_S - A0_S versus stopgrad(rho_T = A_T - A0_T)",
+    "pairs": "real_pre_post_only",
+    "weight": "gain3 * (1 + g10frac)",
+    "zero_weight_behavior": "L_action = 0"
+  },
+  "stages": ["CGSearch-Teacher", "CGSearch-Student-GT", "CGSearch-Student-KD"],
+  "noGeo": false,
+  "monitor_risk": "inherits protocol_windows_main: test AUPRC selects stopping/checkpoint and is not independent evidence"
+}

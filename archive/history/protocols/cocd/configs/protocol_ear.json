@@ -8,8 +8,8 @@
     "train": 1370,
     "validation": 0,
     "test": 343,
-    "test_opened_during_training": false,
-    "note": "The user explicitly merged the pinned validation IDs into train; no validation selection is claimed."
+    "test_opened_during_training": true,
+    "note": "Validation is abolished; the pinned test partition is used as the v4 development monitor and is therefore not independent evidence."
   },
   "input": {
     "size": 128,
@@ -24,9 +24,9 @@
     "betas": [0.9, 0.999],
     "weight_decay": 0.0,
     "batch": 16,
-    "max_epochs": 20,
-    "early_stop_patience": null,
-    "selection": "last epoch on merged train set; no validation selection"
+    "max_epochs": 100,
+    "early_stop_patience": 2,
+    "selection": "best monitored test AUPRC; hard ceiling 100 epochs"
   },
   "teacher": {
     "backbone": "ConvNeXtTinyFPN five-channel early fusion",
@@ -55,5 +55,12 @@
     {"name": "EAR-noGeo", "loss": "Lseg + lambda_EAR*LEAR", "geometry_weighted": false}
   ],
   "threshold": 0.5,
+  "monitor": {
+    "partition": "test",
+    "metric": "AUPRC",
+    "validate_every": 1,
+    "patience": 2,
+    "risk": "test AUPRC selects stopping/checkpoint; reported test values are development-monitor evidence, not independent test evidence"
+  },
   "report": ["overall", "ASC-target", "DESC-target", "G00", "G01", "G10", "G11", "IoU", "F1", "AUPRC", "precision", "recall"]
 }

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COCD DA Search 训练进度</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; background: #111827; color: #e5e7eb; }
+    main { max-width: 980px; margin: 28px auto; padding: 0 18px; }
+    h1 { margin-bottom: 6px; font-size: 25px; }
+    .note { color: #a5b4fc; margin-bottom: 20px; }
+    .risk { color: #fbbf24; margin: 12px 0 20px; }
+    .gate { background: #172033; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; margin: 12px 0 18px; }
+    .card { background: #1f2937; border: 1px solid #374151; border-radius: 12px;
+            padding: 16px; margin: 12px 0; }
+    .head { display: flex; justify-content: space-between; gap: 12px; }
+    .method { font-size: 18px; font-weight: 700; }
+    .state { color: #93c5fd; font-size: 13px; }
+    .bar { height: 14px; margin: 12px 0; background: #374151; border-radius: 99px; overflow: hidden; }
+    .fill { height: 100%; background: linear-gradient(90deg,#22c55e,#38bdf8); width: 0%; transition: width .3s; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 8px; }
+    .metric { background: #111827; padding: 8px 10px; border-radius: 8px; }
+    .label { display: block; color: #9ca3af; font-size: 12px; }
+    .value { display: block; margin-top: 3px; font-variant-numeric: tabular-nums; }
+    footer { color: #9ca3af; font-size: 12px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>COCD DA Search 训练进度</h1>
+  <div class="note">T0/T1 Teacher → S0 Student · 1370 个合并训练位置 · 最多 100 epoch · test AUPRC 监控 · patience 2</div>
+  <div class="risk">注意：test 用于开发期早停和选模，因此下面的 test AUPRC 不是独立留出测试证据。</div>
+  <div id="decision" class="gate">等待 gate 结果…</div>
+  <section id="cards"></section>
+  <footer id="updated">等待 progress JSON…</footer>
+</main>
+<script>
+const stages = [
+  ['T0 · Normal Dual Teacher', 'T0_seed42_progress.json'],
+  ['T1 · Dual + DA + Aux', 'T1_seed42_progress.json'],
+  ['S0 · Target-only DA + GT', 'S0_seed42_progress.json']
+];
+const root = 'experiments/windows_main/da_search/';
+const cards = document.getElementById('cards');
+const fmt = x => (typeof x === 'number' && Number.isFinite(x)) ? x.toFixed(5) : '—';
+function card(name, data) {
+  if (!data) return `<article class="card"><div class="head"><span class="method">${name}</span><span class="state">等待开始</span></div><div class="bar"><div class="fill"></div></div></article>`;
+  const epoch = data.epoch || 0, max = data.max_epochs || 100;
+  const hist = data.history || [], last = hist[hist.length - 1] || {};
+  const train = data.loss ?? data.train_loss ?? last.train_loss;
+  const monitor = data.monitor_value ?? last.monitor_test_auprc_dual ?? last.monitor_test_auprc;
+  const aux = data.lambda_aux_L_aux ?? last.lambda_aux_L_aux;
+  const da = data.lambda_DA_L_DA ?? last.lambda_DA_L_DA;
+  const best = data.best ?? last.best;
+  const status = data.stopped_by ? '已停止' : (epoch >= max ? '达到上限' : '训练中');
+  return `<article class="card"><div class="head"><span class="method">${name}</span><span class="state">${status} · ${epoch}/${max}</span></div>
+    <div class="bar"><div class="fill" style="width:${Math.min(100, 100*epoch/max)}%"></div></div>
+    <div class="grid">
+      <div class="metric"><span class="label">当前 epoch</span><span class="value">${epoch}/${max}</span></div>
+      <div class="metric"><span class="label">train loss</span><span class="value">${fmt(train)}</span></div>
+      <div class="metric"><span class="label">test AUPRC</span><span class="value">${fmt(monitor)}</span></div>
+      <div class="metric"><span class="label">best AUPRC</span><span class="value">${fmt(best)}</span></div>
+      <div class="metric"><span class="label">best epoch</span><span class="value">${data.best_epoch ?? last.best_epoch ?? '—'}</span></div>
+      <div class="metric"><span class="label">λ_aux·L_aux</span><span class="value">${fmt(aux)}</span></div>
+      <div class="metric"><span class="label">λ_DA·L_DA</span><span class="value">${fmt(da)}</span></div>
+      <div class="metric"><span class="label">bad / patience</span><span class="value">${data.bad ?? last.bad ?? 0}/2</span></div>
+    </div></article>`;
+}
+async function refresh() {
+  const rows = await Promise.all(stages.map(async ([name, file]) => {
+    try { const r = await fetch(root + file + '?t=' + Date.now(), {cache:'no-store'}); return [name, await r.json()]; }
+    catch (_) { return [name, null]; }
+  }));
+  cards.innerHTML = rows.map(([name, data]) => card(name, data)).join('');
+  try {
+    const r = await fetch(root + 'final_report.json?t=' + Date.now(), {cache:'no-store'});
+    const report = await r.json();
+    const tg = report.gates?.teacher || {}, og = report.gates?.oracle || {};
+    document.getElementById('decision').textContent =
+      `结论：${report.decision} · Teacher gates G1=${tg.gate1_T0_dual_value ? 'PASS' : 'FAIL'} / G2=${tg.gate2_T1_not_degraded ? 'PASS' : 'FAIL'} · Oracle G3=${og.supported ? 'PASS' : 'FAIL'} · ${report.decision_reason}`;
+  } catch (_) {
+    document.getElementById('decision').textContent = 'Teacher/Oracle gate 结果将在阶段结束后显示。';
+  }
+  document.getElementById('updated').textContent = '最后刷新：' + new Date().toLocaleTimeString();
+}
+refresh(); setInterval(refresh, 2000);
+</script>
+</body>
+</html>
