@@ -1,1 +1,0 @@
-重跑引擎的中间结果，不是最终推荐文件。包括继承的旧坡度列、仅 ASC 位移敏感性和旧样例选择。仅用于执行追溯；当前使用 ../../02_tables/dataset_patch_audit.csv 和 ../../01_statistics/registration_shift_statistics.csv。

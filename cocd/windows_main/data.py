@@ -1,9 +1,7 @@
 # FINAL GRSL source; exact checkpoint/protocol contract: paper_release/final_method.json
 """Dataset and frozen split loader for the final target-search method.
 
-This module deliberately contains no model definitions. The final Teacher and
-target-only Student both use this fixed pair/split contract, so historical
-architecture code can remain archived without changing data semantics.
+The Teacher and target-only Student share this fixed pair/split contract.
 """
 from __future__ import annotations
 

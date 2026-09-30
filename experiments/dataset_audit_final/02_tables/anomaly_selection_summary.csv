@@ -1,6 +1,0 @@
-﻿type,ranked_candidates,all_patches,selection_fraction_of_dataset,eligible_patches,selection_fraction_of_eligible,meaning
-A,20,1713,0.011675423234092236,1016,0.01968503937007874,"top20 review quota, not error prevalence"
-B,20,1713,0.011675423234092236,1073,0.01863932898415657,"top20 review quota, not error prevalence"
-C,20,1713,0.011675423234092236,1073,0.01863932898415657,"top20 review quota, not error prevalence"
-D,20,1713,0.011675423234092236,1073,0.01863932898415657,"top20 review quota, not error prevalence"
-E,20,1713,0.011675423234092236,1073,0.01863932898415657,"top20 review quota, not error prevalence"

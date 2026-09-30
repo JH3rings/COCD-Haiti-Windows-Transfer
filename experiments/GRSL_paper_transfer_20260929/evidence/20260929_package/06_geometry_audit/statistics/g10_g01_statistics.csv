@@ -1,5 +1,0 @@
-﻿region,metric,n_patches,mean_patch_fraction,ci_low,ci_high,interpretation
-G10,VV valid stronger pixel fraction,1348,0.4913648090616381,0.48281725529119573,0.5001321907954148,numeric amplitude proxy; human interpretability is not measured
-G10,VH valid stronger pixel fraction,1348,0.5619334614439894,0.5533552885862331,0.5705858650683788,numeric amplitude proxy; human interpretability is not measured
-G01,VV valid stronger pixel fraction,1112,0.5242046145409134,0.5147569583349083,0.5339013899161188,numeric amplitude proxy; human interpretability is not measured
-G01,VH valid stronger pixel fraction,1112,0.5653148773837066,0.5553066229643618,0.575160598566007,numeric amplitude proxy; human interpretability is not measured

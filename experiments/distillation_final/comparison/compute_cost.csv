@@ -1,8 +1,0 @@
-Method,TrainRowsPerEpoch,StepsPerEpoch_BS16,ObservedEpochs,TrainableParams,FrozenTeacherParams,InferenceParams,InferenceSupportedGFLOPsPerOrbit,TrainSupportedForwardGFLOPsPerPairedRow,TrainSupportedForwardTFLOPs_ObservedEpochs,TrainingProtocol
-S0-Raw,4110,257,19,28271679,0,28271679,1.70815488,3.41630976,266.7796291584,seed42 Adam lr=5e-5 batch16; max100 patience2; test Overall AP monitor
-Hinton-KD-Port,4110,257,28,28271679,28321215,28271679,1.70815488,6.876659712,791.3659996569602,seed42 Adam lr=5e-5 batch16; max100 patience2; test Overall AP monitor
-DIS2-Port,4110,257,18,11320589,0,8900476,1.729406976,7.644946432,565.5731370393601,seed42 Adam lr=5e-5 batch16; max100 patience2; test Overall AP monitor
-OGP-Net-Port,4110,514,0,28604200,28321215,28080418,1.562140672,,,Stage-1 reuses frozen S0-Raw; Stage-2 stopped at 32-row sanity gate (deployed IoU/F1 fell); no formal training
-Multi2Uni-Port,4110,257,22,104358370,0,28080353,1.5620096,,,seed42 Adam 5e-5 batch16; max100 patience2; stop epoch22; best epoch20; test Overall AP monitor; one-time FAD/CAD magnitude calibration
-S2-Raw-native,4110,257,44,28271679,28321215,28271679,1.70815488,6.862503936,1241.0152117862401,seed42 Adam lr=5e-5 batch16; max100 patience2; test Overall AP monitor
-S2-2Stage,4110,257,46,28271679,28321215,28271679,1.70815488,6.862503936,1240.76956188672,seed42 Adam lr=5e-5 batch16; max100 patience2; test Overall AP monitor

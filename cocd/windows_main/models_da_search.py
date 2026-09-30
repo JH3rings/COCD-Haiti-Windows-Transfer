@@ -3,8 +3,7 @@
 
 The final Teacher and Student share the same FPN construction, policy context,
 and target-memory deformable search. Counter features are supplied to
-``SearchContext`` only by the Teacher. Superseded search architectures and
-their initialization helpers are archived under ``archive/history/code``.
+``SearchContext`` only by the Teacher. Target projections supply searched values.
 """
 from __future__ import annotations
 

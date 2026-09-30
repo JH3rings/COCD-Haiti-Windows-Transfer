@@ -1,6 +1,0 @@
-arm,region,evidence,AUPRC,IoU,F1,pixels
-SG0:retrained-self-guidance,Overall,"existing independently trained SG0 checkpoint, re-evaluated",0.8814812066575134,0.6321291050290995,0.774606742911835,11239424
-SG0:retrained-self-guidance,BothValid,"existing independently trained SG0 checkpoint, re-evaluated",0.8708695108450525,0.6186431698102064,0.7643972202752324,9058636
-SG0:retrained-self-guidance,TargetValid,"existing independently trained SG0 checkpoint, re-evaluated",0.877362721020053,0.6272341873908589,0.7709206114905676,10098042
-SG0:retrained-self-guidance,G10,"existing independently trained SG0 checkpoint, re-evaluated",0.8896098287192571,0.6393923057511505,0.7800357528922137,1039406
-SG0:retrained-self-guidance,G01,"existing independently trained SG0 checkpoint, re-evaluated",0.896679136383337,0.6540465954316489,0.7908442207590475,1039406

@@ -1,0 +1,14 @@
+{
+  "method": "Counter-Guided Target Evidence Search",
+  "input_channels": 5,
+  "feature_levels": 3,
+  "samples_per_level": 4,
+  "seed": 42,
+  "optimizer": "Adam",
+  "lr": 5e-05,
+  "batch_size": 16,
+  "max_epochs": 100,
+  "patience": 2,
+  "segmentation_only_epochs": 5,
+  "geometry": "evaluation only"
+}

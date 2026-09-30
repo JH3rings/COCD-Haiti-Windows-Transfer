@@ -1,29 +1,18 @@
 # Counter-Guided Target Evidence Search
 
-Final IEEE GRSL evidence for single-orbit SAR landslide mapping. The paired Teacher uses the counter orbit only to generate a search policy; retrieved values are target-side. The Student deploys on one target orbit and learns policy JS and shared-Student-memory evidence cosine distillation.
+Single-orbit SAR landslide mapping with paired-orbit training. A Counter-Guided Teacher uses complementary observations to choose and aggregate target-side evidence. A target-only Student transfers this behavior through Policy Distillation and Shared-Memory Evidence Distillation, and deploys on one orbit.
 
-## Paper / GRSL
+- **Teacher:** target + counter determine the policy; target features supply searched values.
+- **Student:** target only, with no counter image, Teacher or geometry mask at inference.
+- **Policy transfer:** spatial sampling distributions, Jensen-Shannon divergence.
+- **Evidence transfer:** both policies search the same Student target memory, cosine alignment.
 
-Start with [paper_release/README.md](paper_release/README.md). It defines the final method, exact data protocol, eligible results, baseline limits, figure candidates, claim conflicts and checks. This freeze preserves the existing five-page manuscript and all 23 references; manuscript rewriting is a separate task.
-
-| Role | Authoritative source |
-|---|---|
-| Teacher | [models_teacher_target_search_v2.py](cocd/windows_main/models_teacher_target_search_v2.py) |
-| Student | [models_student_target_search_v2.py](cocd/windows_main/models_student_target_search_v2.py) |
-| Target memory/search | [models_da_search.py](cocd/windows_main/models_da_search.py) |
-| Student training and exact KD | [train_s2_2stage.py](experiments/distillation_final/ours_s2_2stage/train_s2_2stage.py) |
-| Data loader | [data.py](cocd/windows_main/data.py) |
-| Evaluation | [evaluate_final.py](paper_release/scripts/evaluate_final.py) |
-
-Final Teacher training uses the existing shared runner with `--stage CG0` (geometry coefficient zero); final Student training is the two-stage source above. Other Teacher arms are controls. No historical geometry-weighted Student defines the final method.
-
-Results are single-seed and checkpoints were selected using test AUPRC. Counter guidance helps, but fixed-center sampling remains competitive. No necessity of large learned displacements or statistical significance is claimed. External implementations are documented task adaptations. Historical DIS2 is separate from reproduced comparisons.
-
-Data, weights and probability tensors are retained locally and excluded from Git. The release provides paths, hashes, pinned split CSVs and compact numerical evidence. Obsolete own-method code/documentation is retained under [archive/history/](archive/history/); baseline code and experiment records are preserved. The backup branch is `archive/pre-grsl-paper-freeze-20260930`.
+[Architecture](docs/final_architecture.md) and [reproduction settings](docs/method_description.md) describe the final method. This branch contains our method code and lightweight documentation. Data, model weights, external comparison adapters, experiment results and manuscript assets remain local.
 
 ```powershell
-python paper_release/scripts/verify_release.py
-python paper_release/scripts/evaluate_final.py --method student --smoke
+pip install -r requirements.txt
+python cocd/windows_main/smoke.py
+python cocd/windows_main/evaluate.py --checkpoint <student.pt> --output <metrics.json>
 ```
 
-The checks load existing weights and perform inference only. See [ENVIRONMENT.md](ENVIRONMENT.md) for dependencies and [requirements.txt](requirements.txt).
+Training sources are `cocd/windows_main/train_teacher.py` and `train_student.py`. Default local inputs are `data/haiti`, `data/splits_v3`, and `artifacts/ours`; dataset/device overrides are supported by `cocd/paths.py`. The input contract is pre/post VV/VH plus orbit indicator. Geometry is used only for regional evaluation.

@@ -1,74 +1,33 @@
-# Research data and generated artifacts (never upload)
-data/
-experiments/
-checkpoints/
-legacy_checkpoints/
-results/
-
-# Model weights and prediction payloads
-*.pt
-*.pth
-*.ckpt
-*.safetensors
-*.npz
-*.npy
-*.tif
-*.tiff
-
-# Runtime output and caches
-*.log
+/*
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/cocd/
+!/configs/
+!/docs/
+/cocd/*
+!/cocd/paths.py
+!/cocd/models/
+!/cocd/windows_main/
+/cocd/models/*
+!/cocd/models/landslide_cocd.py
+/cocd/windows_main/*
+!/cocd/windows_main/__init__.py
+!/cocd/windows_main/data.py
+!/cocd/windows_main/models_da_search.py
+!/cocd/windows_main/models_teacher_target_search_v2.py
+!/cocd/windows_main/models_student_target_search_v2.py
+!/cocd/windows_main/protocol.py
+!/cocd/windows_main/train_student.py
+!/cocd/windows_main/train_teacher.py
+!/cocd/windows_main/evaluate.py
+!/cocd/windows_main/smoke.py
+/configs/*
+!/configs/final.json
+/docs/*
+!/docs/final_architecture.md
+!/docs/method_description.md
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.cache/
-.workbuddy/
 
-# Local environments and editor state
-.venv/
-venv/
-env/
-.idea/
-.vscode/
-.DS_Store
-Thumbs.db
-
-# Local secrets
-.env
-.env.*
-*.pem
-*.key
-credentials*.json
-secrets*.json
-
-# Curated, compact paper artefacts are versioned.  The rules above continue to
-# exclude all raw experiment payloads, checkpoints, logs and tensors.
-!experiments/
-!experiments/GRSL_complete_paper_package/
-!experiments/GRSL_complete_paper_package/**
-!results/
-!results/tables/
-!results/tables/*.csv
-!results/tables/*.json
-
-# Keep runtime payloads out even when located below the curated package.
-experiments/GRSL_complete_paper_package/**/*.log
-experiments/GRSL_complete_paper_package/**/*.npz
-experiments/GRSL_complete_paper_package/**/*.npy
-experiments/GRSL_complete_paper_package/**/*.pt
-experiments/GRSL_complete_paper_package/**/*.pth
-
-# Local bundled runtimes and archives remain on disk, outside Git delivery.
-node_modules/
-*.zip
-*.exe
-*.dll
-paper_release/local_predictions/*
-!paper_release/local_predictions/.gitignore
-
-# Only explicitly curated experiment files are tracked; other local evidence remains retained.
-experiments/**
-cocd/third_party/landslide_baselines/boehm_landslide_sar_unet/
-cocd/third_party/landslide_baselines/dis2_official/
-cocd/third_party/landslide_baselines/fc_siam_diff/
+!/cocd/windows_main/train_objectives.py

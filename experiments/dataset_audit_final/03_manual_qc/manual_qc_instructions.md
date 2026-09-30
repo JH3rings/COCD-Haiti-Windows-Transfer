@@ -1,1 +1,0 @@
-人工填写，AI 未填写。yes/uncertain/no；change 字段 clear/weak/none。先盲检再查看答案；blind 文件名随机化，无 GT、group、异常标签。5 组共 46 张，可能跨组重复。所有 panel 保留，SAR 同 orbit/pol pre/post 同范围；变化使用公共对称范围，absolute panel 使用其正半轴。contact sheet 的 contour 不遮挡 SAR。Type D 为坡度×坡向条件下invalid分布的经验一致性代理，缺原始轨道方位不能裁决方向物理。
