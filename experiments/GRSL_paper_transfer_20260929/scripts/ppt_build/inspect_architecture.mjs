@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {FileBlob,PresentationFile} from '@oai/artifact-tool';
+const here=path.dirname(fileURLToPath(import.meta.url));
+const pack=path.resolve(here,'../..');
+const p=await PresentationFile.importPptx(await FileBlob.load(path.join(pack,'editable/architecture_optional_TGD_draft.pptx')));
+const inspection=await p.inspect({kind:'slide,textbox,shape,layout',maxChars:50000});
+await fs.writeFile(path.join(here,'inspection.txt'),typeof inspection==='string'?inspection:JSON.stringify(inspection,null,2));
+await fs.writeFile(path.join(here,'before.png'),new Uint8Array(await (await p.slides.getItem(0).export({format:'png',scale:2})).arrayBuffer()));
+console.log('INSPECTED');

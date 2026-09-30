@@ -1,0 +1,17 @@
+[
+  {
+    "objective": "Segmentation only",
+    "max_abs_metric_difference": 0.0,
+    "probabilities_recomputed": true
+  },
+  {
+    "objective": "Policy distillation",
+    "max_abs_metric_difference": 0.0,
+    "probabilities_recomputed": true
+  },
+  {
+    "objective": "Evidence distillation",
+    "max_abs_metric_difference": 0.0,
+    "probabilities_recomputed": true
+  }
+]

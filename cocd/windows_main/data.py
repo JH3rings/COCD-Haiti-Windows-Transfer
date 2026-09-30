@@ -1,3 +1,4 @@
+# FINAL GRSL source; exact checkpoint/protocol contract: paper_release/final_method.json
 """Dataset and frozen split loader for the final target-search method.
 
 This module deliberately contains no model definitions. The final Teacher and

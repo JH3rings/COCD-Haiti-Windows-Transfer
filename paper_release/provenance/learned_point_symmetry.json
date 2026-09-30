@@ -1,0 +1,84 @@
+{
+  "records": [
+    {
+      "model": "CG0",
+      "level": "P2",
+      "max_parameter_difference": {
+        "policy.offset.weight": 0.0,
+        "policy.offset.bias": 0.0,
+        "policy.weight.weight": 0.0,
+        "policy.weight.bias": 0.0
+      },
+      "three_learned_offsets_identical_for_all_contexts": true,
+      "checkpoint": "experiments\\windows_main\\teacher_target_search_v2\\CG0_seed42.pt",
+      "sha256": "5b83c8d80ff6893b4b7ae9511227a8f6f8d4ba62e1be99c9850d10a5797dc3af"
+    },
+    {
+      "model": "CG0",
+      "level": "P3",
+      "max_parameter_difference": {
+        "policy.offset.weight": 0.0,
+        "policy.offset.bias": 0.0,
+        "policy.weight.weight": 0.0,
+        "policy.weight.bias": 0.0
+      },
+      "three_learned_offsets_identical_for_all_contexts": true,
+      "checkpoint": "experiments\\windows_main\\teacher_target_search_v2\\CG0_seed42.pt",
+      "sha256": "5b83c8d80ff6893b4b7ae9511227a8f6f8d4ba62e1be99c9850d10a5797dc3af"
+    },
+    {
+      "model": "CG0",
+      "level": "P4",
+      "max_parameter_difference": {
+        "policy.offset.weight": 0.0,
+        "policy.offset.bias": 0.0,
+        "policy.weight.weight": 0.0,
+        "policy.weight.bias": 0.0
+      },
+      "three_learned_offsets_identical_for_all_contexts": true,
+      "checkpoint": "experiments\\windows_main\\teacher_target_search_v2\\CG0_seed42.pt",
+      "sha256": "5b83c8d80ff6893b4b7ae9511227a8f6f8d4ba62e1be99c9850d10a5797dc3af"
+    },
+    {
+      "model": "S2-2Stage",
+      "level": "P2",
+      "max_parameter_difference": {
+        "policy.offset.weight": 0.0,
+        "policy.offset.bias": 0.0,
+        "policy.weight.weight": 0.0,
+        "policy.weight.bias": 0.0
+      },
+      "three_learned_offsets_identical_for_all_contexts": true,
+      "checkpoint": "experiments\\distillation_final\\ours_s2_2stage\\S2-2Stage_seed42_best.pt",
+      "sha256": "07d2434f483512c50b1b63ebaab552198faaebe436ba4180aeaeaad28bb9103d"
+    },
+    {
+      "model": "S2-2Stage",
+      "level": "P3",
+      "max_parameter_difference": {
+        "policy.offset.weight": 0.0,
+        "policy.offset.bias": 0.0,
+        "policy.weight.weight": 0.0,
+        "policy.weight.bias": 0.0
+      },
+      "three_learned_offsets_identical_for_all_contexts": true,
+      "checkpoint": "experiments\\distillation_final\\ours_s2_2stage\\S2-2Stage_seed42_best.pt",
+      "sha256": "07d2434f483512c50b1b63ebaab552198faaebe436ba4180aeaeaad28bb9103d"
+    },
+    {
+      "model": "S2-2Stage",
+      "level": "P4",
+      "max_parameter_difference": {
+        "policy.offset.weight": 0.0,
+        "policy.offset.bias": 0.0,
+        "policy.weight.weight": 0.0,
+        "policy.weight.bias": 0.0
+      },
+      "three_learned_offsets_identical_for_all_contexts": true,
+      "checkpoint": "experiments\\distillation_final\\ours_s2_2stage\\S2-2Stage_seed42_best.pt",
+      "sha256": "07d2434f483512c50b1b63ebaab552198faaebe436ba4180aeaeaad28bb9103d"
+    }
+  ],
+  "implication": "Per level the three learned points have identical offset functions; the effective support is a fixed center plus one learned location. Candidate weights at the same location can be summed without changing retrieval.",
+  "scope": "Retained CG0/S2-2Stage checkpoints, not a claim about every possible initialization or architecture; no checkpoint was changed."
+}

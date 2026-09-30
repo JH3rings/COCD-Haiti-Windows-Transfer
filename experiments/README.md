@@ -1,3 +1,5 @@
+> Historical experiment catalogue/package. The final paper authority is `paper_release/README.md` at the repository root. Retained numbers are not automatically same-protocol eligible.
+
 # Experiment data hub
 
 This folder is the single portable home for Haiti COCD experiment data. Copy `experiments/` to move metrics, checkpoints, logs, figures, packages, and dataset-audit evidence together. Source code and the raw `data/` tree remain at the project root.

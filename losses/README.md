@@ -1,9 +1,3 @@
-# Final loss source map
+# Final source entry
 
-- Segmentation and TGD reweighting: `teacher_target_search_v2.py`.
-- Policy JS and shared-memory evidence cosine losses: `student_search_kd_v2.py`.
-- Legacy general loss utilities retained for baseline reproduction:
-  `cocd/losses/`.
-
-The project avoids duplicate wrappers here so the paper formula is tied to the
-same implementation that generated the retained results.
+The authoritative implementation and mechanisms are listed in [paper_release/final_method.json](../paper_release/final_method.json). No alternate implementation lives in this directory.

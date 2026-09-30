@@ -1,5 +1,3 @@
-# Backbone
+# Final source entry
 
-The final Teacher and Student share `ConvNeXtTinyFPN` from
-`cocd/models/landslide_cocd.py`.  It consumes the five-channel target-orbit
-pre/post SAR view documented in `dataset/README.md`.
+The authoritative implementation and mechanisms are listed in [paper_release/final_method.json](../../paper_release/final_method.json). No alternate implementation lives in this directory.

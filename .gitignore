@@ -58,3 +58,17 @@ experiments/GRSL_complete_paper_package/**/*.npz
 experiments/GRSL_complete_paper_package/**/*.npy
 experiments/GRSL_complete_paper_package/**/*.pt
 experiments/GRSL_complete_paper_package/**/*.pth
+
+# Local bundled runtimes and archives remain on disk, outside Git delivery.
+node_modules/
+*.zip
+*.exe
+*.dll
+paper_release/local_predictions/*
+!paper_release/local_predictions/.gitignore
+
+# Only explicitly curated experiment files are tracked; other local evidence remains retained.
+experiments/**
+cocd/third_party/landslide_baselines/boehm_landslide_sar_unet/
+cocd/third_party/landslide_baselines/dis2_official/
+cocd/third_party/landslide_baselines/fc_siam_diff/

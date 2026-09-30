@@ -1,3 +1,4 @@
+# FINAL GRSL source; exact checkpoint/protocol contract: paper_release/final_method.json
 """Shared search primitives for the final target-evidence method.
 
 The final Teacher and Student share the same FPN construction, policy context,

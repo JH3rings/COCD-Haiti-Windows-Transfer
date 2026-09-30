@@ -1,0 +1,2 @@
+Method,Protocol status,All pixels AUPRC,All pixels IoU,All pixels F1,"Target distorted, counter valid AUPRC",Prediction availability,Source checkpoint/result file,single_seed,notes
+DIS2 (historical report only),historical_report_only,0.8733278861052558,0.6176884604656225,0.7636680010378782,,False,experiments/GRSL_paper_transfer_20260929/evidence/earlier_package/qualitative/csv/table_historical_external_comparison.csv,,Original metric-producing checkpoint/probability lineage unavailable; no ranking against same-protocol reproduced results.

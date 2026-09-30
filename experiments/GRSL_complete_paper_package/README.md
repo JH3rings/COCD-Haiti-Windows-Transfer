@@ -1,3 +1,5 @@
+> Historical experiment catalogue/package. The final paper authority is `paper_release/README.md` at the repository root. Retained numbers are not automatically same-protocol eligible.
+
 # Retained GRSL result sources and MMOKD run
 
 The new manuscript entry point is [`../paper_submission_package_20260929/README.md`](../paper_submission_package_20260929/README.md). This folder remains because it holds the MMOKD-Port checkpoint, its run card, and the source artifacts used to assemble the paper materials. Superseded dated package copies and obsolete run outputs are still on disk: the requested bulk cleanup was blocked by the app's automatic policy before execution, so no candidate files were removed. The current cleanup inventory is `../00_curation/purge_manifest_20260929.csv`. The project-wide metrics catalog and raw/masked comparison charts are linked from [`../README.md`](../README.md).

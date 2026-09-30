@@ -1,7 +1,3 @@
-# Final Student source map
+# Final source entry
 
-The executable final Student is
-`cocd/windows_main/models_student_target_search_v2.py` (`StudentTargetSearchV2`).
-Its policy/evidence distillation is implemented by
-`cocd/windows_main/student_search_kd_v2.py`.  S0/S1/S2 are experiment settings,
-not separate network definitions.
+The authoritative implementation and mechanisms are listed in [paper_release/final_method.json](../../paper_release/final_method.json). No alternate implementation lives in this directory.

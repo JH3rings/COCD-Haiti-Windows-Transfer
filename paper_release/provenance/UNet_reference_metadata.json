@@ -1,0 +1,330 @@
+{
+  "doi": "10.1007/978-3-319-24574-4_28",
+  "url": "https://api.crossref.org/works/10.1007/978-3-319-24574-4_28",
+  "status": "verified_primary_metadata",
+  "metadata": {
+    "indexed": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          30
+        ]
+      ],
+      "date-time": "2026-09-30T03:25:15Z",
+      "timestamp": 1790738715465,
+      "version": "4.1.0"
+    },
+    "publisher-location": "Cham",
+    "reference-count": 14,
+    "publisher": "Springer International Publishing",
+    "isbn-type": [
+      {
+        "value": "9783319245737",
+        "type": "print"
+      },
+      {
+        "value": "9783319245744",
+        "type": "electronic"
+      }
+    ],
+    "license": [
+      {
+        "start": {
+          "date-parts": [
+            [
+              2015,
+              1,
+              1
+            ]
+          ],
+          "date-time": "2015-01-01T00:00:00Z",
+          "timestamp": 1420070400000
+        },
+        "content-version": "tdm",
+        "delay-in-days": 0,
+        "URL": "http://www.springer.com/tdm"
+      },
+      {
+        "start": {
+          "date-parts": [
+            [
+              2015,
+              1,
+              1
+            ]
+          ],
+          "date-time": "2015-01-01T00:00:00Z",
+          "timestamp": 1420070400000
+        },
+        "content-version": "vor",
+        "delay-in-days": 0,
+        "URL": "http://www.springer.com/tdm"
+      }
+    ],
+    "content-domain": {
+      "domain": [
+        "link.springer.com"
+      ],
+      "crossmark-restriction": false
+    },
+    "short-container-title": [],
+    "published-print": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "DOI": "10.1007/978-3-319-24574-4_28",
+    "type": "book-chapter",
+    "created": {
+      "date-parts": [
+        [
+          2015,
+          9,
+          24
+        ]
+      ],
+      "date-time": "2015-09-24T03:03:02Z",
+      "timestamp": 1443063782000
+    },
+    "page": "234-241",
+    "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+    "source": "Crossref",
+    "is-referenced-by-count": 62808,
+    "title": [
+      "U-Net: Convolutional Networks for Biomedical Image Segmentation"
+    ],
+    "prefix": "10.1007",
+    "author": [
+      {
+        "given": "Olaf",
+        "family": "Ronneberger",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Philipp",
+        "family": "Fischer",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Thomas",
+        "family": "Brox",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "member": "297",
+    "published-online": {
+      "date-parts": [
+        [
+          2015,
+          11,
+          18
+        ]
+      ]
+    },
+    "reference": [
+      {
+        "key": "28_CR1",
+        "doi-asserted-by": "crossref",
+        "unstructured": "Cardona, A., et al.: An integrated micro- and macroarchitectural analysis of the drosophila brain by computer-assisted serial section electron microscopy. PLoS Biol. 8(10), e1000502 (2010)",
+        "DOI": "10.1371/journal.pbio.1000502"
+      },
+      {
+        "key": "28_CR2",
+        "unstructured": "Ciresan, D.C., Gambardella, L.M., Giusti, A., Schmidhuber, J.: Deep neural networks segment neuronal membranes in electron microscopy images. In: NIPS, pp. 2852\u20132860 (2012)"
+      },
+      {
+        "key": "28_CR3",
+        "doi-asserted-by": "crossref",
+        "unstructured": "Dosovitskiy, A., Springenberg, J.T., Riedmiller, M., Brox, T.: Discriminative unsupervised feature learning with convolutional neural networks. In: NIPS (2014)",
+        "DOI": "10.1109/CVPR.2015.7298761"
+      },
+      {
+        "key": "28_CR4",
+        "doi-asserted-by": "crossref",
+        "unstructured": "Hariharan, B., Arbel\u00e1ez, P., Girshick, R., Malik, J.: Hypercolumns for object segmentation and fine-grained localization (2014), arXiv:1411.5752 [cs.CV]",
+        "DOI": "10.1109/CVPR.2015.7298642"
+      },
+      {
+        "key": "28_CR5",
+        "doi-asserted-by": "crossref",
+        "unstructured": "He, K., Zhang, X., Ren, S., Sun, J.: Delving deep into rectifiers: Surpassing human-level performance on imagenet classification (2015), arXiv:1502.01852 [cs.CV]",
+        "DOI": "10.1109/ICCV.2015.123"
+      },
+      {
+        "key": "28_CR6",
+        "doi-asserted-by": "crossref",
+        "unstructured": "Jia, Y., Shelhamer, E., Donahue, J., Karayev, S., Long, J., Girshick, R., Guadarrama, S., Darrell, T.: Caffe: Convolutional architecture for fast feature embedding (2014), arXiv:1408.5093 [cs.CV]",
+        "DOI": "10.1145/2647868.2654889"
+      },
+      {
+        "key": "28_CR7",
+        "unstructured": "Krizhevsky, A., Sutskever, I., Hinton, G.E.: Imagenet classification with deep convolutional neural networks. In: NIPS, pp. 1106\u20131114 (2012)"
+      },
+      {
+        "issue": "4",
+        "key": "28_CR8",
+        "doi-asserted-by": "publisher",
+        "first-page": "541",
+        "DOI": "10.1162/neco.1989.1.4.541",
+        "volume": "1",
+        "author": "Y. LeCun",
+        "year": "1989",
+        "unstructured": "LeCun, Y., Boser, B., Denker, J.S., Henderson, D., Howard, R.E., Hubbard, W., Jackel, L.D.: Backpropagation applied to handwritten zip code recognition. Neural Computation\u00a01(4), 541\u2013551 (1989)",
+        "journal-title": "Neural Computation"
+      },
+      {
+        "key": "28_CR9",
+        "doi-asserted-by": "crossref",
+        "unstructured": "Long, J., Shelhamer, E., Darrell, T.: Fully convolutional networks for semantic segmentation (2014), arXiv:1411.4038 [cs.CV]",
+        "DOI": "10.1109/CVPR.2015.7298965"
+      },
+      {
+        "key": "28_CR10",
+        "doi-asserted-by": "publisher",
+        "first-page": "1609",
+        "DOI": "10.1093/bioinformatics/btu080",
+        "volume": "30",
+        "author": "M. Maska",
+        "year": "2014",
+        "unstructured": "Maska, M., et al.: A benchmark for comparison of cell tracking algorithms. Bioinformatics\u00a030, 1609\u20131617 (2014)",
+        "journal-title": "Bioinformatics"
+      },
+      {
+        "key": "28_CR11",
+        "doi-asserted-by": "crossref",
+        "unstructured": "Seyedhosseini, M., Sajjadi, M., Tasdizen, T.: Image segmentation with cascaded hierarchical models and logistic disjunctive normal networks. In: 2013 IEEE International Conference on Computer Vision (ICCV), pp. 2168\u20132175 (2013)",
+        "DOI": "10.1109/ICCV.2013.269"
+      },
+      {
+        "key": "28_CR12",
+        "unstructured": "Simonyan, K., Zisserman, A.: Very deep convolutional networks for large-scale image recognition (2014), arXiv:1409.1556 [cs.CV]"
+      },
+      {
+        "key": "28_CR13",
+        "unstructured": "WWW: Web page of the cell tracking challenge, \n                      \n                        http://www.codesolorzano.com/celltrackingchallenge/Cell_Tracking_Challenge/Welcome.html"
+      },
+      {
+        "key": "28_CR14",
+        "unstructured": "WWW: Web page of the em segmentation challenge, \n                      \n                        http://brainiac2.mit.edu/isbi_challenge/"
+      }
+    ],
+    "container-title": [
+      "Lecture Notes in Computer Science",
+      "Medical Image Computing and Computer-Assisted Intervention \u2013 MICCAI 2015"
+    ],
+    "original-title": [],
+    "language": "en",
+    "link": [
+      {
+        "URL": "http://link.springer.com/content/pdf/10.1007/978-3-319-24574-4_28",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ],
+    "deposited": {
+      "date-parts": [
+        [
+          2020,
+          10,
+          5
+        ]
+      ],
+      "date-time": "2020-10-05T20:49:06Z",
+      "timestamp": 1601930946000
+    },
+    "score": 1,
+    "resource": {
+      "primary": {
+        "URL": "http://link.springer.com/10.1007/978-3-319-24574-4_28"
+      }
+    },
+    "subtitle": [],
+    "short-title": [],
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "ISBN": [
+      "9783319245737",
+      "9783319245744"
+    ],
+    "references-count": 14,
+    "URL": "https://doi.org/10.1007/978-3-319-24574-4_28",
+    "relation": {
+      "is-referenced-by": [
+        {
+          "id-type": "doi",
+          "id": "10.1007/s12530-026-09825-x",
+          "asserted-by": "object"
+        }
+      ]
+    },
+    "ISSN": [
+      "0302-9743",
+      "1611-3349"
+    ],
+    "issn-type": [
+      {
+        "value": "0302-9743",
+        "type": "print"
+      },
+      {
+        "value": "1611-3349",
+        "type": "electronic"
+      }
+    ],
+    "subject": [],
+    "published": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "assertion": [
+      {
+        "value": "18 November 2015",
+        "order": 1,
+        "name": "first_online",
+        "label": "First Online",
+        "group": {
+          "name": "ChapterHistory",
+          "label": "Chapter History"
+        }
+      },
+      {
+        "value": "This content has been made available to all.",
+        "name": "free",
+        "label": "Free to read"
+      }
+    ]
+  }
+}

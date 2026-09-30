@@ -1,3 +1,4 @@
+# FINAL GRSL source; exact checkpoint/protocol contract: paper_release/final_method.json
 """Target-only Student whose decoder is reachable only through searched evidence."""
 from __future__ import annotations
 

@@ -1,3 +1,4 @@
+# FINAL GRSL source; exact checkpoint/protocol contract: paper_release/final_method.json
 """Counter-guided, target-value-only deformable-search Teacher (v2).
 
 Counter features may affect only the policy context.  The task decoder consumes

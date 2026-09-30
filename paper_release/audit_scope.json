@@ -1,0 +1,7 @@
+{
+  "python_sources_scanned": 156,
+  "figure_inventory": "figure_inventory.csv",
+  "additional_historical_result_entries": "additional_historical_results_audit.csv",
+  "boundary": "All repository Python and figure paths inventoried, final closure source-reviewed and smoke-tested. Historical results with unresolved lineage are explicitly ineligible; no claim of full historical reproduction.",
+  "protected": "No raw data/checkpoint/prediction overwrite; archive changes are byte-identical moves; manuscript source/PDF untouched."
+}

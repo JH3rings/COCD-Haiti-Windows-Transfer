@@ -1,0 +1,137 @@
+{
+  "dataset": "Multimodal Remote Sensing Dataset for Landslide Change Detection in Haiti",
+  "citation": "Bralet et al., IEEE DataPort (2024), DOI 10.21227/4heb-7h07",
+  "spatial_locations": 1713,
+  "patch_size": [
+    128,
+    128
+  ],
+  "acquisitions": {
+    "ascending": {
+      "pre": "2021-08-05",
+      "post": "2021-08-17"
+    },
+    "descending": {
+      "pre": "2021-08-03",
+      "post": "2021-08-15"
+    }
+  },
+  "channels": [
+    "pre VV",
+    "pre VH",
+    "post VV",
+    "post VH",
+    "orbit indicator (ascending=0, descending=1)"
+  ],
+  "raw_bands": {
+    "VV": 2,
+    "VH": 1,
+    "band_3": "unused"
+  },
+  "split": {
+    "unit": "spatial location; both orbits and synthetic modes share partition",
+    "train": 1370,
+    "validation": 0,
+    "test": 343,
+    "train_rows": 4110,
+    "test_orbit_predictions": 686,
+    "partition_overlap": {
+      "train/test": 0,
+      "train/val": 0,
+      "test/val": 0
+    }
+  },
+  "split_sources": [
+    {
+      "path": "data/splits_v3/train_ids.csv",
+      "exists": true,
+      "sha256": "754b0fd6e829a78d050d958f86b4899e4e938a3880cc46ea0cd18ed4424d6f1f"
+    },
+    {
+      "path": "data/splits_v3/test_ids.csv",
+      "exists": true,
+      "sha256": "31528c417f361a85b7ba7fd7ecf8a2fdb62f70cff07400a0fce33aa9ea66fb2b"
+    }
+  ],
+  "normalization": {
+    "mean": [
+      -8.153660251056083,
+      -14.789286040824695
+    ],
+    "std": [
+      5.257983428539885,
+      5.065991146195142
+    ],
+    "source": {
+      "path": "experiments/GRSL_paper_transfer_20260929/new_evidence/20260930/normalization.npz",
+      "exists": true,
+      "sha256": "b54db0e827a86dc56678ad4d084691ce3454a8ae226b2c31ccde6624fb086487"
+    },
+    "estimator": "Train locations only, pooled across pre/post and both orbits; float32 per-raster sums, variance + 1e-6; same VV/VH statistics reused for pre/post; orbit unchanged"
+  },
+  "training_modes": [
+    "actual pre/post with landslide mask",
+    "pre/pre with zero change label",
+    "post/post with zero change label"
+  ],
+  "target": "Binary landslide change: processed/sample_{id:06d}/landslide_mask.tif > 0; synthetic unchanged modes use all-zero labels",
+  "geometry": {
+    "model_input": false,
+    "training_supervision": false,
+    "training_mask": false,
+    "search_or_kd_weighting": false,
+    "evaluation_only": true,
+    "meaning": "Existing geometry code > 0 denotes distorted; == 0 denotes valid. These maps are not independent distortion ground truth.",
+    "sources": [
+      "asc_pre_geom.tif",
+      "desc_pre_geom.tif"
+    ],
+    "regions": {
+      "Overall": "All pixels",
+      "TargetValid": "Target-valid pixels",
+      "BothValid": "Both-orbit-valid pixels",
+      "G10": "Target distorted, counter valid",
+      "G01": "Target valid, counter distorted"
+    }
+  },
+  "training": {
+    "seed": 42,
+    "batch": 16,
+    "optimizer": "Adam",
+    "lr": 5e-05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0,
+    "max_epochs": 100,
+    "patience": 2,
+    "validation_locations": 0,
+    "selection": "test Overall AUPRC",
+    "caveat": "Test-monitored checkpoint selection; not independent held-out validation; single-seed development evidence"
+  },
+  "evaluation": {
+    "AUPRC": "sklearn.metrics.average_precision_score; global pooled pixels, not per-patch mean",
+    "threshold": 0.5,
+    "IoU": "TP/(TP+FP+FN+1e-8)",
+    "F1": "2TP/(2TP+FP+FN+1e-8)",
+    "mask_semantics": {
+      "All pixels": "all",
+      "Target-valid pixels": "target geometry == 0",
+      "Both-orbit-valid pixels": "target == 0 and counter == 0",
+      "Target distorted, counter valid": "target > 0 and counter == 0"
+    },
+    "indexing": "Join predictions by spatial sample ID and orbit. Original comparison cache groups by orbit; loader/export groups by batch then orbit."
+  },
+  "loader": {
+    "path": "cocd/windows_main/data.py",
+    "exists": true,
+    "sha256": "9df9c79c93948a32ecd3905a35ca328f3bffb26ae9935b41a7744fcea6f82252"
+  },
+  "paths": {
+    "path": "cocd/paths.py",
+    "exists": true,
+    "sha256": "5e7eea3ebf77f539c64d205a142df36eefeeb610cf8a2f861c4e2fa5ee642769"
+  }
+}

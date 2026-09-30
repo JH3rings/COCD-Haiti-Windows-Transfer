@@ -1,68 +1,29 @@
-# Counter-guided Target Evidence Search for target-only SAR segmentation
+# Counter-Guided Target Evidence Search
 
-This repository is the curated technical record for the Haiti SAR GRSL study.
-It asks whether complementary-orbit information available during training can
-improve target-only deployment by transferring a counter-guided evidence-search
-strategy.
+Final IEEE GRSL evidence for single-orbit SAR landslide mapping. The paired Teacher uses the counter orbit only to generate a search policy; retrieved values are target-side. The Student deploys on one target orbit and learns policy JS and shared-Student-memory evidence cosine distillation.
 
-## FINAL METHOD
+## Paper / GRSL
 
-Counter-Guided Target Evidence Search with Target-Only Search Distillation.
+Start with [paper_release/README.md](paper_release/README.md). It defines the final method, exact data protocol, eligible results, baseline limits, figure candidates, claim conflicts and checks. This freeze preserves the existing five-page manuscript and all 23 references; manuscript rewriting is a separate task.
 
-The final **CG10 Teacher** receives a target and counter orbit.  The counter
-orbit is used only to generate the search policy; values retrieved by
-deformable search come only from target features, and the decoder receives only
-the searched target representation.  The final **S2 Student** receives only a
-single target-orbit stack `[VV_pre, VH_pre, VV_post, VH_post, orbit_id]`.  It
-learns a target-side policy and searched evidence through policy and evidence
-distillation from CG10.
-
-The final objectives are:
-
-`L_teacher = L_seg + 0.1 L_TGD`
-
-`L_student = L_seg + lambda_KD [0.5 L_policy + 0.5 L_evidence]`, calibrated
-so the KD contribution is 10% of segmentation loss at initialization.
-
-## Read in this order
-
-1. [Model description](docs/model_description.md)
-2. [Experiment summary](docs/experiment_summary.md)
-3. [Naming dictionary](docs/naming_dictionary.md)
-4. [Cleanup audit](cleanup_audit.md) and [cleanup report](cleanup_report.md)
-5. [Audit and retention policy](project_audit.md)
-6. [Complete paper package](experiments/GRSL_complete_paper_package/README.md)
-
-## Canonical code
-
-| Purpose | Entrypoint |
+| Role | Authoritative source |
 |---|---|
-| Final Teacher and SG/CG ablation | `cocd/windows_main/teacher_target_search_v2.py` |
-| Final Teacher model | `cocd/windows_main/models_teacher_target_search_v2.py` |
-| Final Student S0/S1/S2 | `cocd/windows_main/student_search_kd_v2.py` |
-| Final Student model | `cocd/windows_main/models_student_target_search_v2.py` |
-| KD evaluation | `cocd/windows_main/evaluate_student_search_kd_v2.py` |
-| KD composition/strength ablations | `cocd/windows_main/run_student_kd_weight_sweep.py`, `run_student_kd_strength_sweep.py` |
-| Paper-package builders | `cocd/windows_main/build_grsl_final_package.py`, `build_grsl_qualitative_package.py`, `assemble_grsl_complete_paper_package.py` |
+| Teacher | [models_teacher_target_search_v2.py](cocd/windows_main/models_teacher_target_search_v2.py) |
+| Student | [models_student_target_search_v2.py](cocd/windows_main/models_student_target_search_v2.py) |
+| Target memory/search | [models_da_search.py](cocd/windows_main/models_da_search.py) |
+| Student training and exact KD | [train_s2_2stage.py](experiments/distillation_final/ours_s2_2stage/train_s2_2stage.py) |
+| Data loader | [data.py](cocd/windows_main/data.py) |
+| Evaluation | [evaluate_final.py](paper_release/scripts/evaluate_final.py) |
 
-## Results and figures
+Final Teacher training uses the existing shared runner with `--stage CG0` (geometry coefficient zero); final Student training is the two-stage source above. Other Teacher arms are controls. No historical geometry-weighted Student defines the final method.
 
-All experiment outputs are collected under `experiments/`. Start from
-[`experiments/README.md`](experiments/README.md) for the unified run catalog,
-long-form metrics, and figure inventory. The current paper package is
-[`experiments/GRSL_complete_paper_package/`](experiments/GRSL_complete_paper_package/);
-its quantitative tables are in `04_tables/`, method and qualitative figures
-are in `01_method/` and `02_qualitative/`, and search diagnostics are in
-`03_search_behavior/`. Comparison figures across raw and geometry-masked runs
-are in `experiments/summary/figures/`.
+Results are single-seed and checkpoints were selected using test AUPRC. Counter guidance helps, but fixed-center sampling remains competitive. No necessity of large learned displacements or statistical significance is claimed. External implementations are documented task adaptations. Historical DIS2 is separate from reproduced comparisons.
 
-Raw data, checkpoints, NPZ prediction tensors and full logs are intentionally
-excluded from Git.  See `dataset/README.md` and `project_audit.md`.
+Data, weights and probability tensors are retained locally and excluded from Git. The release provides paths, hashes, pinned split CSVs and compact numerical evidence. Obsolete own-method code/documentation is retained under [archive/history/](archive/history/); baseline code and experiment records are preserved. The backup branch is `archive/pre-grsl-paper-freeze-20260930`.
 
-## Current dataset quality audit
+```powershell
+python paper_release/scripts/verify_release.py
+python paper_release/scripts/evaluate_final.py --method student --smoke
+```
 
-The current dataset audit entry is
-[`experiments/dataset_audit_final/README.md`](experiments/dataset_audit_final/README.md).
-It contains the 2026-09-27 all-patch audit, manual QC and blind review sheets,
-historical dataset evidence, and verified cleanup manifests. Earlier dataset
-reports are historical provenance and do not define the current quality verdict.
+The checks load existing weights and perform inference only. See [ENVIRONMENT.md](ENVIRONMENT.md) for dependencies and [requirements.txt](requirements.txt).

@@ -1,0 +1,11 @@
+Method,DOI,verified_title,registered_publication_year,citation_form,primary_source,status
+Online multimodal KD,10.1109/TGRS.2024.3388604,Multimodal Online Knowledge Distillation Framework for Land Use/Cover Classification Using Full or Missing Modalities,2024,2024,https://api.crossref.org/works/10.1109/TGRS.2024.3388604,PASS
+Multi-to-Uni,10.1016/j.inffus.2026.104696,Multi-to-Uni modality knowledge distillation for remote sensing image semantic segmentation,2027,"online 2026, assigned 2027 volume explicitly noted",https://api.crossref.org/works/10.1016/j.inffus.2026.104696,PASS
+MFEWF,10.1080/17538947.2024.2393261,Automatic detection of earthquake triggered landslides using Sentinel-1 SAR imagery based on deep learning,2024,2024,https://api.crossref.org/works/10.1080/17538947.2024.2393261,PASS
+OGP-Net,10.1609/aaai.v39i7.32743,OGP-Net: Optical Guidance Meets Pixel-Level Contrastive Distillation for Robust Multi-Modal and Missing Modality Segmentation,2025,2025,https://api.crossref.org/works/10.1609/aaai.v39i7.32743,PASS
+SAR U-Net++ source,10.48550/arXiv.2211.02869,Deep Learning for Rapid Landslide Detection using Synthetic Aperture Radar (SAR) Datacubes,2022,2022,https://arxiv.org/abs/2211.02869,PASS
+Logit KD,10.48550/arXiv.1503.02531,Distilling the Knowledge in a Neural Network,2015,2015,https://arxiv.org/abs/1503.02531,PASS
+DIS2,not supplied by CVF official BibTeX,DIS2: Disentanglement Meets Distillation with Classwise Attention for Robust Remote Sensing Segmentation under Missing Modalities,2026,2026,https://openaccess.thecvf.com/content/WACV2026W/CV4EO/html/Kieu_DIS2_Disentanglement_Meets_Distillation_with_Classwise_Attention_for_Robust_Remote_WACVW_2026_paper.html,PASS
+Standard U-Net,10.1007/978-3-319-24574-4_28,U-Net: Convolutional Networks for Biomedical Image Segmentation,2015,2015,https://link.springer.com/chapter/10.1007/978-3-319-24574-4_28,PASS
+DeepLabV3,10.48550/arXiv.1706.05587,Rethinking Atrous Convolution for Semantic Image Segmentation,2017,2017,https://arxiv.org/abs/1706.05587,PASS
+CDNetE local early-fusion seat,,,,unverified source-paper mapping; excluded from exact-protocol main table,cocd/scripts/23_train_external_baselines.py,UNVERIFIED
