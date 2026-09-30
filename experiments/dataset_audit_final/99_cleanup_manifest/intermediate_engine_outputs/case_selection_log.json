@@ -1,0 +1,34 @@
+{
+  "seed": 20260927,
+  "selection_rules": {
+    "Case_A": {
+      "rule": "gt_frac>=0.03, >=90% GT BothValid, both orbit invalid<5%; retain >=P75 max GT/BG |ΔVV| contrast; nearest eligible median",
+      "eligible_n": 70,
+      "clear_subset_n": 18,
+      "id": 1380
+    },
+    "Case_B": {
+      "rule": "GT>=2%; ASC invalid overlap>=70% and >=50% of ASC-invalid GT is layover; DESC invalid overlap<=30%; nearest pool median",
+      "eligible_n": 86,
+      "id": 641
+    },
+    "Case_C": {
+      "rule": "GT>=2%; DESC invalid overlap>=50% and >=25% of DESC-invalid GT is layover; ASC invalid overlap<=30%; nearest pool median",
+      "eligible_n": 51,
+      "id": 1632
+    },
+    "Case_D": {
+      "rule": "GT>=2%; highest mean percentile rank across bilateral weak event contrast, bilateral GT-mask overlap, low-slope GT, inverse DEM-slope/mask association, ASC/DESC contrast discordance; flagged candidate only, not an error finding",
+      "eligible_n": 1073,
+      "id": 50,
+      "score": 0.9136458439154959
+    }
+  },
+  "selected": {
+    "Case_A": 1380,
+    "Case_B": 641,
+    "Case_C": 1632,
+    "Case_D": 50
+  },
+  "optical_panels": "unavailable: optical source references exist in metadata but actual image directories are absent"
+}

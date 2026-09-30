@@ -1,0 +1,57 @@
+{
+  "pdf": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\GRSL_paper_transfer_20260929\\preview\\GRSL_updated_20260930.pdf",
+  "sha256": "b140900dc0d8fdce5588d1d9c40d0638af017b87c3a966ef3262c6befe56198a",
+  "pages": 5,
+  "project_compile": "SUCCESS",
+  "native_editor_compile": "platform-directory error; source remains in native editor",
+  "compiler_source": "https://github.com/tectonic-typesetting/tectonic/releases/tag/tectonic@0.17.0",
+  "compiler_archive_verified_against_github_digest": true,
+  "overfull_warnings": [],
+  "page_info": [
+    {
+      "page": 1,
+      "text_characters": 5038,
+      "embedded_images": 0
+    },
+    {
+      "page": 2,
+      "text_characters": 4474,
+      "embedded_images": 1
+    },
+    {
+      "page": 3,
+      "text_characters": 3959,
+      "embedded_images": 9
+    },
+    {
+      "page": 4,
+      "text_characters": 2828,
+      "embedded_images": 39
+    },
+    {
+      "page": 5,
+      "text_characters": 6680,
+      "embedded_images": 0
+    }
+  ],
+  "human_visual_review": "Assistant inspected five rendered pages; scientific scene adjudication remains pending.",
+  "completed_loss_arms": [
+    "Seg",
+    "SegP",
+    "SegE"
+  ],
+  "strict_page_limit": 5,
+  "reader_revision": {
+    "actual_cited_references": 23,
+    "prior_actual_cited_references": 16,
+    "scenario_page": 2,
+    "internal_codes_in_published_text": [],
+    "masked_comparison_methods": 5,
+    "full_pixel_comparison_methods": 5,
+    "matched_objective_variants": 4,
+    "search_table_rows": 7,
+    "method_equations_retained": 6,
+    "references_last": true,
+    "online_checkpoint_to_cache_exact": true
+  }
+}

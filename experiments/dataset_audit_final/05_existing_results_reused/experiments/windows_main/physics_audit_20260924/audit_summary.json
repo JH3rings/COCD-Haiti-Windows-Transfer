@@ -1,0 +1,121 @@
+{
+  "n_locations": 1713,
+  "extent_lonlat": [
+    -74.24310068119043,
+    18.188275601470608,
+    -73.42096253316424,
+    18.579222413119425
+  ],
+  "prepost_band3_diff_pixels": {
+    "asc": 0,
+    "desc": 0
+  },
+  "processed_geom_mismatch_locations": {
+    "asc": 0,
+    "desc": 0
+  },
+  "asc_class_counts": [
+    24206168,
+    3839721,
+    15254,
+    4649
+  ],
+  "asc_class_pct": [
+    86.2479,
+    13.6811,
+    0.0544,
+    0.0166
+  ],
+  "asc_contingency_maskclass_x_gt": [
+    [
+      22841083,
+      1365085
+    ],
+    [
+      3333456,
+      506265
+    ],
+    [
+      11279,
+      3975
+    ],
+    [
+      3565,
+      1084
+    ]
+  ],
+  "asc_P_bad_given_gt1": 0.2725013576464406,
+  "asc_P_bad_given_gt0": 0.12784951825707386,
+  "asc_P_gt1_given_bad": 0.13248026232607113,
+  "asc_P_gt1_given_good": 0.05639409757050352,
+  "asc_IoU": 0.09786650318706745,
+  "asc_Dice": 0.17828488783101493,
+  "asc_odds_ratio": 2.555223025180742,
+  "asc_relative_risk": 2.1314226393759856,
+  "asc_P_gt1_given_layover": 0.13184942343467143,
+  "asc_frac_of_layover_that_is_gt": 0.13184942343467143,
+  "asc_P_gt1_given_shadow": 0.26058738691490757,
+  "asc_frac_of_shadow_that_is_gt": 0.26058738691490757,
+  "asc_P_gt1_given_both": 0.23316842331684234,
+  "asc_frac_of_both_that_is_gt": 0.23316842331684234,
+  "asc_P_bad_given_gt1_by_class": {
+    "layover": 0.2698052503478719,
+    "shadow": 0.0021184080869362703,
+    "both": 0.0005776992116324319
+  },
+  "desc_class_counts": [
+    26388458,
+    1495068,
+    179095,
+    3171
+  ],
+  "desc_class_pct": [
+    94.0236,
+    5.327,
+    0.6381,
+    0.0113
+  ],
+  "desc_contingency_maskclass_x_gt": [
+    [
+      24804001,
+      1584457
+    ],
+    [
+      1247857,
+      247211
+    ],
+    [
+      134765,
+      44330
+    ],
+    [
+      2760,
+      411
+    ]
+  ],
+  "desc_P_bad_given_gt1": 0.15559081202445735,
+  "desc_P_bad_given_gt0": 0.05289861162441284,
+  "desc_P_gt1_given_bad": 0.17405716452417944,
+  "desc_P_gt1_given_good": 0.06004356146918475,
+  "desc_IoU": 0.08950665447295673,
+  "desc_Dice": 0.16430676050575407,
+  "desc_odds_ratio": 3.299006693686504,
+  "desc_relative_risk": 2.941302375366158,
+  "desc_P_gt1_given_layover": 0.16535100744581518,
+  "desc_frac_of_layover_that_is_gt": 0.16535100744581518,
+  "desc_P_gt1_given_shadow": 0.24752226471984143,
+  "desc_frac_of_shadow_that_is_gt": 0.24752226471984143,
+  "desc_P_gt1_given_both": 0.12961210974456008,
+  "desc_frac_of_both_that_is_gt": 0.12961210974456008,
+  "desc_P_bad_given_gt1_by_class": {
+    "layover": 0.131746863290466,
+    "shadow": 0.023624913331794933,
+    "both": 0.00021903540219642945
+  },
+  "gt_class_counts_raw": [
+    26189383,
+    773296,
+    460284,
+    642829
+  ]
+}

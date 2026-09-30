@@ -1,0 +1,12 @@
+\section{Introduction}
+\label{sec:introduction}
+SAR supports rapid landslide mapping when cloud cover limits optical observations \cite{Mondini2021,Handwerger2022,Amatya2023}. Side-looking geometry produces view-dependent foreshortening, layover, and shadow, while backscatter and speckle complicate landslide signatures \cite{Shi2024,Santangelo2022}. Ascending and descending passes provide complementary observations, but requiring both post-event orbits can delay a response map. We therefore use paired orbits during training and deploy with only the available target orbit (Fig.~\ref{fig:scenario}).
+
+Privileged-information learning and missing-modality distillation generally transfer representations or predictions \cite{LopezPaz2016,Li2022,Liu2024}. Here the objective is to teach a model to exploit evidence that remains available in the target view. Deformable operators separate sampling locations and weights from sampled values \cite{Dai2017,Zhu2021}, and adaptive aggregation has been applied to remote-sensing segmentation \cite{Zuo2022,Dai2023}. This separation permits complementary context to guide target-side search without giving the decoder an unavailable counter-orbit value path.
+
+Our Counter-Guided Search Teacher generates a policy from paired context but retrieves only target-orbit values. The target-only Student distills that policy and its retrieval from a shared Student target memory. The contributions are:
+\begin{itemize}
+\item Paired-orbit training with target-only deployment and a constrained target-side value path.
+\item Counter-guided search and policy/shared-memory evidence distillation, with explicit stop-gradient boundaries.
+\item Geometry-free training evaluated on valid and distorted regions, supported by current search interventions and matched loss controls.
+\end{itemize}

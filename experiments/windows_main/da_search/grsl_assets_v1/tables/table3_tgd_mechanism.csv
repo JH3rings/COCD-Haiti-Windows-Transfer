@@ -1,0 +1,19 @@
+panel,condition,display,region,AUPRC,IoU,F1,subset,model,pixels,share_of_TGD_percent,accuracy_or_correction
+A counter intervention,correct,Correct,Overall,0.9097635015752681,0.6777577490897269,0.8079327844274525,,,,,
+A counter intervention,correct,Correct,TGD,0.9200591310731829,0.6940420351812028,0.8193917465355627,,,,,
+A counter intervention,correct,Correct,Remaining,0.9072810114390981,0.6739736642418659,0.8052380685165249,,,,,
+A counter intervention,shuffled,Shuffled,Overall,0.4524639709095031,0.2133672547688634,0.35169442964552355,,,,,
+A counter intervention,shuffled,Shuffled,TGD,0.48762489815217697,0.19994080299001774,0.33325110740121316,,,,,
+A counter intervention,shuffled,Shuffled,Remaining,0.44752003149623837,0.2163985592035496,0.355802060218035,,,,,
+A counter intervention,removed,Target-FPN bypass,Overall,0.8784179921661389,0.6323564716554955,0.7747774197235315,,,,,
+A counter intervention,removed,Target-FPN bypass,TGD,0.887063425442393,0.6380465644519796,0.7790334832009508,,,,,
+A counter intervention,removed,Target-FPN bypass,Remaining,0.8764993257551954,0.6310471172717949,0.7737938487803032,,,,,
+B Teacher-corrected baseline errors,,,,,,,T0_resolvable,SO,21602.0,2.078302415033182,0.0
+B Teacher-corrected baseline errors,,,,,,,T0_resolvable,Student,21602.0,2.078302415033182,0.5062957133598741
+B Teacher-corrected baseline errors,,,,,,,T0_resolvable,Single-DA-scratch,21602.0,2.078302415033182,
+B Teacher-corrected baseline errors,,,,,,,T1_resolvable,SO,22171.0,2.133045220058359,0.0
+B Teacher-corrected baseline errors,,,,,,,T1_resolvable,Student,22171.0,2.133045220058359,0.4997068242298498
+B Teacher-corrected baseline errors,,,,,,,T1_resolvable,Single-DA-scratch,22171.0,2.133045220058359,
+B Teacher-corrected baseline errors,,,,,,,union_resolvable,SO,26019.0,2.503256667750595,0.0
+B Teacher-corrected baseline errors,,,,,,,union_resolvable,Student,26019.0,2.503256667750595,0.4766132441677236
+B Teacher-corrected baseline errors,,,,,,,union_resolvable,Single-DA-scratch,26019.0,2.503256667750595,

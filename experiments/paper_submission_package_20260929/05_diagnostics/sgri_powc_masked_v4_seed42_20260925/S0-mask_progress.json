@@ -1,0 +1,928 @@
+{
+  "arm": "S0-mask",
+  "seed": 42,
+  "best_test_auprc_raw_overall": 0.8719814832910743,
+  "best_epoch": 18,
+  "epoch": 20,
+  "patience": 2,
+  "max_epochs": 100,
+  "monitor_risk": "test AUPRC selects checkpoint under canonical project v4 rule",
+  "optimizer": {
+    "name": "Adam",
+    "lr": 5e-05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0
+  },
+  "batch_size": 16,
+  "init": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\SO_backbone_seed42.pt",
+  "teacher": null,
+  "geometry_loss_mask": "per-orbit target geometry code == 0; all codes >0 excluded",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.07440738717876809,
+      "monitor_test_auprc_raw_overall": 0.6908153245763813,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.6723700375878002,
+          "IoU": 0.3447757431047012,
+          "F1": 0.5127631798424813,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.6857642664937467,
+          "IoU": 0.3604479123734695,
+          "F1": 0.5298959395580586,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.6885969533569991,
+          "IoU": 0.358865408138528,
+          "F1": 0.5281838892788179,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.7016100182297422,
+          "IoU": 0.35225109489049033,
+          "F1": 0.5209847434717985,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.6908153245763813,
+          "IoU": 0.35984389821691243,
+          "F1": 0.5292429501485512,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.07440738717876809,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.024193892365727342,
+      "monitor_test_auprc_raw_overall": 0.8253265971354224,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8159560809346891,
+          "IoU": 0.5330422358911006,
+          "F1": 0.6954045014699323,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8236841099153728,
+          "IoU": 0.5457893130778227,
+          "F1": 0.7061626166778202,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8233294106657623,
+          "IoU": 0.5438728746675567,
+          "F1": 0.7045565520213823,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8215549580108352,
+          "IoU": 0.5360037476858865,
+          "F1": 0.697919843611605,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8253265971354224,
+          "IoU": 0.5460574789455138,
+          "F1": 0.7063870346113541,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.024193892365727342,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.018406001171269292,
+      "monitor_test_auprc_raw_overall": 0.8522408329511263,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8442467098946882,
+          "IoU": 0.5838036244367653,
+          "F1": 0.7372171845412696,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8515224135520651,
+          "IoU": 0.594513012143571,
+          "F1": 0.745698539448533,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8504306864685187,
+          "IoU": 0.5912210290896215,
+          "F1": 0.743103589358512,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8459832365775669,
+          "IoU": 0.5776873046142854,
+          "F1": 0.7323216748017365,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8522408329511263,
+          "IoU": 0.5934335162068263,
+          "F1": 0.7448487937162219,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.018406001171269292,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.01654157341693749,
+      "monitor_test_auprc_raw_overall": 0.8611453464124519,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8540408070651379,
+          "IoU": 0.5902470452405274,
+          "F1": 0.7423337738712812,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8608802789084421,
+          "IoU": 0.5997999999999917,
+          "F1": 0.7498437304663018,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8594656449739457,
+          "IoU": 0.5961834190762022,
+          "F1": 0.7470111667006863,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8537568691177656,
+          "IoU": 0.5813958771082638,
+          "F1": 0.7352945401266667,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8611453464124519,
+          "IoU": 0.5982669865698963,
+          "F1": 0.7486446151951879,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.01654157341693749,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.01603222731670896,
+      "monitor_test_auprc_raw_overall": 0.8637321178628703,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8569801184154943,
+          "IoU": 0.5983984987063987,
+          "F1": 0.7487475735127244,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8637031206696819,
+          "IoU": 0.6089144312515216,
+          "F1": 0.7569258121177608,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8621180550921191,
+          "IoU": 0.6041632056351064,
+          "F1": 0.7532440633381955,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8562854352973427,
+          "IoU": 0.5845054394828745,
+          "F1": 0.7377765010054317,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8637321178628703,
+          "IoU": 0.6062118453004934,
+          "F1": 0.7548342356883592,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.01603222731670896,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.015647143106056007,
+      "monitor_test_auprc_raw_overall": 0.8662750698207383,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8597535966211395,
+          "IoU": 0.6076350730538381,
+          "F1": 0.7559365719728721,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8665188108047549,
+          "IoU": 0.6172677690927314,
+          "F1": 0.7633464054490018,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8646786694478621,
+          "IoU": 0.6129976567962705,
+          "F1": 0.760072594294779,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8576145184271947,
+          "IoU": 0.5954367425154735,
+          "F1": 0.7464247583726418,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8662750698207383,
+          "IoU": 0.6148792966289659,
+          "F1": 0.7615173442529313,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.015647143106056007,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.015379140096225555,
+      "monitor_test_auprc_raw_overall": 0.8675522508450901,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8613399841759987,
+          "IoU": 0.604570417267226,
+          "F1": 0.7535604679748257,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8681726037187829,
+          "IoU": 0.6140030723154454,
+          "F1": 0.760844985796214,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8660160073862883,
+          "IoU": 0.6086332630493118,
+          "F1": 0.756708538894181,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.858093205705293,
+          "IoU": 0.5865221076342535,
+          "F1": 0.7393809450393949,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8675522508450901,
+          "IoU": 0.6105170645964487,
+          "F1": 0.7581628012733009,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.015379140096225555,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.01521013277621611,
+      "monitor_test_auprc_raw_overall": 0.8678260443767922,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8619630089480784,
+          "IoU": 0.5998854769278247,
+          "F1": 0.7499105224453353,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8687645595657916,
+          "IoU": 0.6102905761130035,
+          "F1": 0.757988136012262,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8663272692790365,
+          "IoU": 0.6043647388080536,
+          "F1": 0.7534006752816822,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8576923081258834,
+          "IoU": 0.579927208431848,
+          "F1": 0.7341188952717044,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8678260443767922,
+          "IoU": 0.6063120057044368,
+          "F1": 0.7549118770839828,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.01521013277621611,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.015136755405198639,
+      "monitor_test_auprc_raw_overall": 0.8678780526844545,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8626665454703285,
+          "IoU": 0.60143761300325,
+          "F1": 0.7511221269186331,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.869238607377512,
+          "IoU": 0.6113612308394063,
+          "F1": 0.7588133798166783,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.866378132525177,
+          "IoU": 0.6047314543646994,
+          "F1": 0.753685549965253,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8562277553129435,
+          "IoU": 0.5773783906304362,
+          "F1": 0.7320734125179353,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8678780526844545,
+          "IoU": 0.6066406224580259,
+          "F1": 0.7551665431313649,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.015136755405198639,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.01495218088380188,
+      "monitor_test_auprc_raw_overall": 0.8682802573627603,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8636469896348179,
+          "IoU": 0.6075961111636563,
+          "F1": 0.7559064207039523,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8702214186938219,
+          "IoU": 0.6170949399076944,
+          "F1": 0.7632142364417006,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8668824338081776,
+          "IoU": 0.6099467179711733,
+          "F1": 0.7577228627041986,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8551571988692024,
+          "IoU": 0.5803998360580752,
+          "F1": 0.734497464269222,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8682802573627603,
+          "IoU": 0.6116390403782541,
+          "F1": 0.7590273318704187,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.01495218088380188,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.014869787996854083,
+      "monitor_test_auprc_raw_overall": 0.8687544063478142,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8639642215350951,
+          "IoU": 0.603099032378926,
+          "F1": 0.7524164386575102,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8706126737156813,
+          "IoU": 0.613364422217798,
+          "F1": 0.7603544664442788,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8673934028380501,
+          "IoU": 0.6063585837862306,
+          "F1": 0.7549479797431369,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8557499831596485,
+          "IoU": 0.5775080683924685,
+          "F1": 0.7321776413872391,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8687544063478142,
+          "IoU": 0.6080730478452921,
+          "F1": 0.7562754051006183,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014869787996854083,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.014922106468684044,
+      "monitor_test_auprc_raw_overall": 0.869495488831493,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8653784879788452,
+          "IoU": 0.6136658112902358,
+          "F1": 0.7605859986580098,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8718641417157635,
+          "IoU": 0.6233542732598918,
+          "F1": 0.7679830379946837,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8681829278494821,
+          "IoU": 0.6162742310036001,
+          "F1": 0.7625862235283356,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8548271016333243,
+          "IoU": 0.5871350416212303,
+          "F1": 0.7398677821661379,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.869495488831493,
+          "IoU": 0.6178791122043116,
+          "F1": 0.7638136960214165,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014922106468684044,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.014628838878650408,
+      "monitor_test_auprc_raw_overall": 0.869924266731868,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8667768284941513,
+          "IoU": 0.6162101045365171,
+          "F1": 0.7625371265863092,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8730170944647198,
+          "IoU": 0.6254438587666877,
+          "F1": 0.7695668544852061,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8686867559043094,
+          "IoU": 0.6168480978574383,
+          "F1": 0.7630254180029068,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8540104443856121,
+          "IoU": 0.5810735681219603,
+          "F1": 0.7350367242078107,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.869924266731868,
+          "IoU": 0.6184316869890714,
+          "F1": 0.7642357622639001,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014628838878650408,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.014610622112833123,
+      "monitor_test_auprc_raw_overall": 0.8706403776804175,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8673618407797058,
+          "IoU": 0.6155106330926013,
+          "F1": 0.7620013393713394,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8738148326322591,
+          "IoU": 0.6255109320633149,
+          "F1": 0.7696176257262486,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8693948295028424,
+          "IoU": 0.6169547112716682,
+          "F1": 0.7631069775435563,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8535782996202158,
+          "IoU": 0.5815568685878404,
+          "F1": 0.7354232783385246,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8706403776804175,
+          "IoU": 0.6185080183673818,
+          "F1": 0.7642940428448195,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014610622112833123,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.014473426732839835,
+      "monitor_test_auprc_raw_overall": 0.8714616845624218,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.868156771107218,
+          "IoU": 0.6136043396047226,
+          "F1": 0.7605387820846274,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8746456008223614,
+          "IoU": 0.623217835450019,
+          "F1": 0.7678794821487885,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8702372278596381,
+          "IoU": 0.6151410075517506,
+          "F1": 0.7617180229783014,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8537358206380966,
+          "IoU": 0.5821062378607558,
+          "F1": 0.7358623889225675,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8714616845624218,
+          "IoU": 0.6167519045536202,
+          "F1": 0.7629518206430111,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014473426732839835,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.014448221144742054,
+      "monitor_test_auprc_raw_overall": 0.8713318113004898,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8691194271270903,
+          "IoU": 0.6096085777413116,
+          "F1": 0.7574618900164496,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8754068562702416,
+          "IoU": 0.6188049265642146,
+          "F1": 0.7645206861058659,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8701882039600669,
+          "IoU": 0.6088149098263007,
+          "F1": 0.7568489154442667,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8509693374986566,
+          "IoU": 0.5677827919206904,
+          "F1": 0.7243130806724823,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8713318113004898,
+          "IoU": 0.6102549245551333,
+          "F1": 0.757960637473261,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014448221144742054,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.014272028154735219,
+      "monitor_test_auprc_raw_overall": 0.8717280087473196,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8697168699168298,
+          "IoU": 0.616296193564505,
+          "F1": 0.7626030377580162,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8761357120346009,
+          "IoU": 0.6249917028973396,
+          "F1": 0.7692244850025847,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8706326263473025,
+          "IoU": 0.6153211998928876,
+          "F1": 0.7618561558328953,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8500639341856877,
+          "IoU": 0.5757901222703642,
+          "F1": 0.7307954455772045,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8717280087473196,
+          "IoU": 0.6166506429062765,
+          "F1": 0.7628743360380132,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014272028154735219,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.014450835159286695,
+      "monitor_test_auprc_raw_overall": 0.8719814832910743,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8700671615770137,
+          "IoU": 0.6183819198522295,
+          "F1": 0.7641977610682804,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8765388222587155,
+          "IoU": 0.627248783659427,
+          "F1": 0.7709316362171038,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8709321255853287,
+          "IoU": 0.6179658958559315,
+          "F1": 0.7638800019687894,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8494415189781834,
+          "IoU": 0.5801420031992489,
+          "F1": 0.7342909713489789,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8719814832910743,
+          "IoU": 0.6193030812228805,
+          "F1": 0.7649007630556589,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014450835159286695,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.014393771042313451,
+      "monitor_test_auprc_raw_overall": 0.8716551955374761,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8704195161311616,
+          "IoU": 0.6059228652703589,
+          "F1": 0.754610172597986,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8766229575462826,
+          "IoU": 0.6152865182947193,
+          "F1": 0.7618295718140282,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8706043914553531,
+          "IoU": 0.6050592024699505,
+          "F1": 0.7539400435060005,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8477448356305658,
+          "IoU": 0.5633279668812923,
+          "F1": 0.7206779112447969,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8716551955374761,
+          "IoU": 0.6064556938434706,
+          "F1": 0.7550232429909297,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014393771042313451,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.014127084347129535,
+      "monitor_test_auprc_raw_overall": 0.8712519636311297,
+      "valid_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8701885295987171,
+          "IoU": 0.6095615465335025,
+          "F1": 0.7574255831922792,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8766227268610826,
+          "IoU": 0.6183699199362657,
+          "F1": 0.764188597821465,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8702277637521824,
+          "IoU": 0.6072254097483006,
+          "F1": 0.755619474487272,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8463122221615552,
+          "IoU": 0.5616219814525433,
+          "F1": 0.7192803227963663,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8712519636311297,
+          "IoU": 0.6085257564359634,
+          "F1": 0.7566254428953426,
+          "pixels": 11239424
+        }
+      },
+      "mechanism": {
+        "self_loss": 0.014127084347129535,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": null
+      }
+    }
+  ],
+  "complete": true,
+  "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\sgri_powc_masked_v4_seed42_20260925\\S0-mask_seed42_best.pt"
+}

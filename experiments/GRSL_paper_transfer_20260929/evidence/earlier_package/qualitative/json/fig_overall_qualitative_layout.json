@@ -1,0 +1,16 @@
+{
+  "selection_rule": "three distinct high TGD-and-SO-wrong/S2-correct scenes plus one low-TGD positive representative",
+  "methods": [
+    "SO",
+    "S0",
+    "S1",
+    "S2",
+    "CG10"
+  ],
+  "scenes": [
+    "000618_asc",
+    "000662_asc",
+    "000664_asc",
+    "000096_desc"
+  ]
+}

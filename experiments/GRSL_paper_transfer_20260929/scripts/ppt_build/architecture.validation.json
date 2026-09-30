@@ -1,0 +1,1395 @@
+{
+  "schemaVersion": "presentation-finalization.v1",
+  "finalSha256": "dc1e7b79e8dd184a3f143eb9950ac93b56660c0089533d6570d333baffdfd7f1",
+  "byteCount": 150647,
+  "packageIntegrity": {
+    "chart_count": 0,
+    "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+    "finding_count": 0,
+    "findings": [],
+    "notes_parts_skipped": 0,
+    "relationship_part_count": 15,
+    "slide_count": 1,
+    "status": "pass",
+    "exitCode": 0,
+    "findingCount": 0,
+    "warnings": []
+  },
+  "presentationLayout": {
+    "finding_count": 0,
+    "findings": [],
+    "slide_count": 1,
+    "slide_size_in": [
+      13.333,
+      7.5
+    ],
+    "warning_count": 168,
+    "warnings": [
+      {
+        "connector_id": "53",
+        "connector_z": 53,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "7",
+        "text_z": 7
+      },
+      {
+        "connector_id": "53",
+        "connector_z": 53,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "25",
+        "text_z": 25
+      },
+      {
+        "connector_id": "53",
+        "connector_z": 53,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "48",
+        "text_z": 48
+      },
+      {
+        "connector_id": "54",
+        "connector_z": 54,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "27",
+        "text_z": 27
+      },
+      {
+        "connector_id": "54",
+        "connector_z": 54,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "45",
+        "text_z": 45
+      },
+      {
+        "connector_id": "54",
+        "connector_z": 54,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "51",
+        "text_z": 51
+      },
+      {
+        "connector_id": "85",
+        "connector_z": 85,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "48",
+        "text_z": 48
+      },
+      {
+        "connector_id": "85",
+        "connector_z": 85,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "49",
+        "text_z": 49
+      },
+      {
+        "connector_id": "117",
+        "connector_z": 117,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "51",
+        "text_z": 51
+      },
+      {
+        "connector_id": "117",
+        "connector_z": 117,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "52",
+        "text_z": 52
+      },
+      {
+        "connector_id": "119",
+        "connector_z": 119,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "25",
+        "text_z": 25
+      },
+      {
+        "connector_id": "119",
+        "connector_z": 119,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "48",
+        "text_z": 48
+      },
+      {
+        "connector_id": "119",
+        "connector_z": 119,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "49",
+        "text_z": 49
+      },
+      {
+        "connector_id": "120",
+        "connector_z": 120,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "45",
+        "text_z": 45
+      },
+      {
+        "connector_id": "120",
+        "connector_z": 120,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "51",
+        "text_z": 51
+      },
+      {
+        "connector_id": "120",
+        "connector_z": 120,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "52",
+        "text_z": 52
+      },
+      {
+        "connector_id": "120",
+        "connector_z": 120,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "82",
+        "text_z": 82
+      },
+      {
+        "connector_id": "120",
+        "connector_z": 120,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "83",
+        "text_z": 83
+      },
+      {
+        "connector_id": "139",
+        "connector_z": 139,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "140",
+        "connector_z": 140,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "122",
+        "text_z": 122
+      },
+      {
+        "connector_id": "140",
+        "connector_z": 140,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "141",
+        "connector_z": 141,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "122",
+        "text_z": 122
+      },
+      {
+        "connector_id": "141",
+        "connector_z": 141,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "154",
+        "connector_z": 154,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "154",
+        "connector_z": 154,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "143",
+        "text_z": 143
+      },
+      {
+        "connector_id": "154",
+        "connector_z": 154,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "156",
+        "connector_z": 156,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "156",
+        "connector_z": 156,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "143",
+        "text_z": 143
+      },
+      {
+        "connector_id": "156",
+        "connector_z": 156,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "158",
+        "connector_z": 158,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "158",
+        "connector_z": 158,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "160",
+        "connector_z": 160,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "160",
+        "connector_z": 160,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "166",
+        "connector_z": 166,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "166",
+        "connector_z": 166,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "143",
+        "text_z": 143
+      },
+      {
+        "connector_id": "166",
+        "connector_z": 166,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "166",
+        "connector_z": 166,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "168",
+        "connector_z": 168,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "168",
+        "connector_z": 168,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "143",
+        "text_z": 143
+      },
+      {
+        "connector_id": "168",
+        "connector_z": 168,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "168",
+        "connector_z": 168,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "174",
+        "connector_z": 174,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "143",
+        "text_z": 143
+      },
+      {
+        "connector_id": "174",
+        "connector_z": 174,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "174",
+        "connector_z": 174,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "174",
+        "connector_z": 174,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "173",
+        "text_z": 173
+      },
+      {
+        "connector_id": "179",
+        "connector_z": 179,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "123",
+        "text_z": 123
+      },
+      {
+        "connector_id": "179",
+        "connector_z": 179,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "179",
+        "connector_z": 179,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "179",
+        "connector_z": 179,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "173",
+        "text_z": 173
+      },
+      {
+        "connector_id": "180",
+        "connector_z": 180,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "180",
+        "connector_z": 180,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "180",
+        "connector_z": 180,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "173",
+        "text_z": 173
+      },
+      {
+        "connector_id": "194",
+        "connector_z": 194,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "84",
+        "text_z": 84
+      },
+      {
+        "connector_id": "194",
+        "connector_z": 194,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "153",
+        "text_z": 153
+      },
+      {
+        "connector_id": "194",
+        "connector_z": 194,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "194",
+        "connector_z": 194,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "173",
+        "text_z": 173
+      },
+      {
+        "connector_id": "199",
+        "connector_z": 199,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "165",
+        "text_z": 165
+      },
+      {
+        "connector_id": "199",
+        "connector_z": 199,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "173",
+        "text_z": 173
+      },
+      {
+        "connector_id": "199",
+        "connector_z": 199,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "193",
+        "text_z": 193
+      },
+      {
+        "connector_id": "199",
+        "connector_z": 199,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "198",
+        "text_z": 198
+      },
+      {
+        "connector_id": "203",
+        "connector_z": 203,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "193",
+        "text_z": 193
+      },
+      {
+        "connector_id": "203",
+        "connector_z": 203,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "198",
+        "text_z": 198
+      },
+      {
+        "connector_id": "203",
+        "connector_z": 203,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "202",
+        "text_z": 202
+      },
+      {
+        "connector_id": "212",
+        "connector_z": 212,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "193",
+        "text_z": 193
+      },
+      {
+        "connector_id": "212",
+        "connector_z": 212,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "201",
+        "text_z": 201
+      },
+      {
+        "connector_id": "212",
+        "connector_z": 212,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "202",
+        "text_z": 202
+      },
+      {
+        "connector_id": "212",
+        "connector_z": 212,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "207",
+        "text_z": 207
+      },
+      {
+        "connector_id": "212",
+        "connector_z": 212,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "209",
+        "text_z": 209
+      },
+      {
+        "connector_id": "213",
+        "connector_z": 213,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "193",
+        "text_z": 193
+      },
+      {
+        "connector_id": "213",
+        "connector_z": 213,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "202",
+        "text_z": 202
+      },
+      {
+        "connector_id": "217",
+        "connector_z": 217,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "83",
+        "text_z": 83
+      },
+      {
+        "connector_id": "217",
+        "connector_z": 217,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "84",
+        "text_z": 84
+      },
+      {
+        "connector_id": "217",
+        "connector_z": 217,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "115",
+        "text_z": 115
+      },
+      {
+        "connector_id": "217",
+        "connector_z": 217,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "116",
+        "text_z": 116
+      },
+      {
+        "connector_id": "222",
+        "connector_z": 222,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "219",
+        "text_z": 219
+      },
+      {
+        "connector_id": "223",
+        "connector_z": 223,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "221",
+        "text_z": 221
+      },
+      {
+        "connector_id": "240",
+        "connector_z": 240,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "219",
+        "text_z": 219
+      },
+      {
+        "connector_id": "240",
+        "connector_z": 240,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "225",
+        "text_z": 225
+      },
+      {
+        "connector_id": "241",
+        "connector_z": 241,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "225",
+        "text_z": 225
+      },
+      {
+        "connector_id": "258",
+        "connector_z": 258,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "221",
+        "text_z": 221
+      },
+      {
+        "connector_id": "258",
+        "connector_z": 258,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "243",
+        "text_z": 243
+      },
+      {
+        "connector_id": "259",
+        "connector_z": 259,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "243",
+        "text_z": 243
+      },
+      {
+        "connector_id": "260",
+        "connector_z": 260,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "216",
+        "text_z": 216
+      },
+      {
+        "connector_id": "260",
+        "connector_z": 260,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "219",
+        "text_z": 219
+      },
+      {
+        "connector_id": "260",
+        "connector_z": 260,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "225",
+        "text_z": 225
+      },
+      {
+        "connector_id": "261",
+        "connector_z": 261,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "221",
+        "text_z": 221
+      },
+      {
+        "connector_id": "261",
+        "connector_z": 261,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "243",
+        "text_z": 243
+      },
+      {
+        "connector_id": "288",
+        "connector_z": 288,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "225",
+        "text_z": 225
+      },
+      {
+        "connector_id": "289",
+        "connector_z": 289,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "243",
+        "text_z": 243
+      },
+      {
+        "connector_id": "290",
+        "connector_z": 290,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "225",
+        "text_z": 225
+      },
+      {
+        "connector_id": "290",
+        "connector_z": 290,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "243",
+        "text_z": 243
+      },
+      {
+        "connector_id": "320",
+        "connector_z": 320,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "297",
+        "text_z": 297
+      },
+      {
+        "connector_id": "320",
+        "connector_z": 320,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "315",
+        "text_z": 315
+      },
+      {
+        "connector_id": "320",
+        "connector_z": 320,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "318",
+        "text_z": 318
+      },
+      {
+        "connector_id": "351",
+        "connector_z": 351,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "318",
+        "text_z": 318
+      },
+      {
+        "connector_id": "351",
+        "connector_z": 351,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "319",
+        "text_z": 319
+      },
+      {
+        "connector_id": "353",
+        "connector_z": 353,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "315",
+        "text_z": 315
+      },
+      {
+        "connector_id": "353",
+        "connector_z": 353,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "318",
+        "text_z": 318
+      },
+      {
+        "connector_id": "353",
+        "connector_z": 353,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "319",
+        "text_z": 319
+      },
+      {
+        "connector_id": "371",
+        "connector_z": 371,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "372",
+        "connector_z": 372,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "373",
+        "connector_z": 373,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "374",
+        "connector_z": 374,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "387",
+        "connector_z": 387,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "387",
+        "connector_z": 387,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "376",
+        "text_z": 376
+      },
+      {
+        "connector_id": "387",
+        "connector_z": 387,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "389",
+        "connector_z": 389,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "389",
+        "connector_z": 389,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "376",
+        "text_z": 376
+      },
+      {
+        "connector_id": "389",
+        "connector_z": 389,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "391",
+        "connector_z": 391,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "391",
+        "connector_z": 391,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "393",
+        "connector_z": 393,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "393",
+        "connector_z": 393,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "399",
+        "connector_z": 399,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "399",
+        "connector_z": 399,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "376",
+        "text_z": 376
+      },
+      {
+        "connector_id": "399",
+        "connector_z": 399,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "399",
+        "connector_z": 399,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "401",
+        "connector_z": 401,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "401",
+        "connector_z": 401,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "401",
+        "connector_z": 401,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "407",
+        "connector_z": 407,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "407",
+        "connector_z": 407,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "407",
+        "connector_z": 407,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "406",
+        "text_z": 406
+      },
+      {
+        "connector_id": "412",
+        "connector_z": 412,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "355",
+        "text_z": 355
+      },
+      {
+        "connector_id": "412",
+        "connector_z": 412,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "412",
+        "connector_z": 412,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "412",
+        "connector_z": 412,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "406",
+        "text_z": 406
+      },
+      {
+        "connector_id": "413",
+        "connector_z": 413,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "413",
+        "connector_z": 413,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "413",
+        "connector_z": 413,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "406",
+        "text_z": 406
+      },
+      {
+        "connector_id": "427",
+        "connector_z": 427,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "386",
+        "text_z": 386
+      },
+      {
+        "connector_id": "427",
+        "connector_z": 427,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "427",
+        "connector_z": 427,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "406",
+        "text_z": 406
+      },
+      {
+        "connector_id": "428",
+        "connector_z": 428,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "349",
+        "text_z": 349
+      },
+      {
+        "connector_id": "428",
+        "connector_z": 428,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "350",
+        "text_z": 350
+      },
+      {
+        "connector_id": "432",
+        "connector_z": 432,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "398",
+        "text_z": 398
+      },
+      {
+        "connector_id": "432",
+        "connector_z": 432,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "406",
+        "text_z": 406
+      },
+      {
+        "connector_id": "432",
+        "connector_z": 432,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "426",
+        "text_z": 426
+      },
+      {
+        "connector_id": "432",
+        "connector_z": 432,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "431",
+        "text_z": 431
+      },
+      {
+        "connector_id": "436",
+        "connector_z": 436,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "426",
+        "text_z": 426
+      },
+      {
+        "connector_id": "436",
+        "connector_z": 436,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "431",
+        "text_z": 431
+      },
+      {
+        "connector_id": "436",
+        "connector_z": 436,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "435",
+        "text_z": 435
+      },
+      {
+        "connector_id": "443",
+        "connector_z": 443,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "426",
+        "text_z": 426
+      },
+      {
+        "connector_id": "443",
+        "connector_z": 443,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "434",
+        "text_z": 434
+      },
+      {
+        "connector_id": "443",
+        "connector_z": 443,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "435",
+        "text_z": 435
+      },
+      {
+        "connector_id": "443",
+        "connector_z": 443,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "440",
+        "text_z": 440
+      },
+      {
+        "connector_id": "444",
+        "connector_z": 444,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "426",
+        "text_z": 426
+      },
+      {
+        "connector_id": "444",
+        "connector_z": 444,
+        "kind": "connector_over_text",
+        "slide": 1,
+        "text_object_id": "435",
+        "text_z": 435
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "19",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "21",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "22",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "39",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "41",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "42",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "205",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "207",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "209",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "211",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "286",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "287",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "291",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "309",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "311",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "312",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "438",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "440",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "442",
+        "object_kind": "sp",
+        "slide": 1
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "446",
+        "object_kind": "sp",
+        "slide": 1
+      }
+    ],
+    "exitCode": 0,
+    "findingCount": 0
+  },
+  "fontSelection": {
+    "basis": "unspecified",
+    "approvedFamilies": [],
+    "scriptFonts": {},
+    "referenceSha256": null,
+    "referenceFontsVerifiedInEncodedText": false
+  },
+  "firstPartyImport": {
+    "performed": true,
+    "passed": true,
+    "slideCount": 1,
+    "sha256": "dc1e7b79e8dd184a3f143eb9950ac93b56660c0089533d6570d333baffdfd7f1",
+    "runtimeNodeModules": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+    "nodeExecutable": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe"
+  },
+  "nativeTableArithmetic": {
+    "performed": true,
+    "checked_column_count": 0,
+    "checks": [],
+    "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+    "eligible_table_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "native_table_count": 0,
+    "passed": true,
+    "schema_version": "presentation-native-table-arithmetic.v1",
+    "skipped_tables": [],
+    "slide_count": 1,
+    "warning_count": 0,
+    "warnings": []
+  },
+  "nativeChartTitles": {
+    "performed": true,
+    "checks": [],
+    "finding_count": 0,
+    "findings": [],
+    "native_chart_count": 0,
+    "native_powerpoint_verified": false,
+    "passed": true,
+    "presentation_sha256": "dc1e7b79e8dd184a3f143eb9950ac93b56660c0089533d6570d333baffdfd7f1",
+    "schema_version": "presentation-native-chart-titles.v1",
+    "slide_count": 1,
+    "source_text_emitted": false,
+    "unresolved_linked_title_count": 0
+  },
+  "sourceDerivedPolicyFlags": [
+    "--expected-slide-size-emu",
+    "12191695,6858000",
+    "--cover-role",
+    "none"
+  ],
+  "nativeChartValidation": {
+    "detectedOwnerSlides": [],
+    "detectedChartCount": 0,
+    "targetApplication": null,
+    "sourceChartOwnersExplicitlyDeclared": false,
+    "validatorRan": false,
+    "passed": true
+  }
+}

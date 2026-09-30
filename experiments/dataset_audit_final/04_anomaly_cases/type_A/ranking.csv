@@ -1,0 +1,21 @@
+﻿type,rank,sample_id,score,status,rule
+A,1,562,0.9922202274087373,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,2,36,0.9898264512268103,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,3,741,0.9868342309994016,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,4,29,0.9838420107719928,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,5,468,0.9790544584081389,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,6,1269,0.9784560143626571,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,7,1281,0.9760622381807301,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,8,1162,0.9748653500897666,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,9,970,0.9742669060442849,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,10,157,0.9718731298623579,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,11,484,0.9712746858168761,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,12,520,0.9676840215439857,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,13,924,0.9670855774985039,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,14,159,0.9652902453620587,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,15,950,0.964691801316577,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,16,885,0.9634949132256134,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,17,786,0.9622980251346499,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,18,1305,0.9611011370436864,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,19,863,0.9581089168162776,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio
+A,20,1369,0.9569120287253142,needs_manual_review,GT>=2%; BothValid GT>=100; lowest max orbit terrain-matched VV ratio

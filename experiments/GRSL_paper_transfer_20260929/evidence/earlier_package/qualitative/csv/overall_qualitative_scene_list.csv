@@ -1,0 +1,5 @@
+scene_id,row_order,whether_contains_TGD,crop_box_if_any,methods_included
+000618_asc,1,True,,SO;S2;CG10 Teacher reference
+000662_asc,2,True,,SO;S2;CG10 Teacher reference
+000664_asc,3,True,,SO;S2;CG10 Teacher reference
+000096_desc,4,False,,SO;S2;CG10 Teacher reference

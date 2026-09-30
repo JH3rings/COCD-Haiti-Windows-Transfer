@@ -1,0 +1,17 @@
+\begin{table}[!t]
+\caption{Distillation objectives under matched training (\%). The surviving objective retains its original coefficient.}
+\label{tab:loss_parts}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lrrrr}
+\toprule
+Method & \multicolumn{2}{c}{Valid pixels} & \multicolumn{2}{c}{All pixels}\\
+ & AUPRC & IoU & AUPRC & IoU\\
+\midrule
+Segmentation only & 88.28 & 63.48 & 88.69 & 64.07\\
+Policy distillation & 88.55 & 63.88 & 88.96 & 64.45\\
+Evidence distillation & 88.28 & 63.45 & 88.68 & 64.02\\
+Policy + evidence & 88.77 & 64.65 & 89.16 & 65.10\\
+\bottomrule
+\end{tabular}
+\end{table}

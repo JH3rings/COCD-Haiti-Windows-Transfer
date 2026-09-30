@@ -1,0 +1,20 @@
+[
+  {
+    "index": 232,
+    "sample_id": 603,
+    "target_orbit": "ASC",
+    "selection_rule": "high TGD fraction / largest TGD S0-vs-SO improvement / failure case"
+  },
+  {
+    "index": 40,
+    "sample_id": 141,
+    "target_orbit": "ASC",
+    "selection_rule": "high TGD fraction / largest TGD S0-vs-SO improvement / failure case"
+  },
+  {
+    "index": 362,
+    "sample_id": 916,
+    "target_orbit": "ASC",
+    "selection_rule": "high TGD fraction / largest TGD S0-vs-SO improvement / failure case"
+  }
+]

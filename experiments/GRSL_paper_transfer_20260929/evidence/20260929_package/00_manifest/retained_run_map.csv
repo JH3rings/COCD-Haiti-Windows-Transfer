@@ -1,0 +1,11 @@
+MethodGroup,SourcePath_relative_to_experiments,Role
+S0-Raw,windows_main/raw_cver_v1_seed42/S0-Raw_seed42_best.pt,final core; no geometry training mask
+S2-Raw-native,windows_main/raw_cver_v1_seed42/S2-Raw_seed42_best.pt,historical native Search-KD; geometry-weighted queries
+S2-2Stage,distillation_final/ours_s2_2stage/S2-2Stage_seed42_best.pt,final core; target-only deployment
+Hinton-KD-Port,distillation_final/hinton_kd/Hinton-KD-Port_seed42_best.pt,external comparison
+DIS2-Port,distillation_final/dis2_port/DIS2-Port_seed42_best.pt,external comparison; low result retained
+Multi2Uni-Port,distillation_final/multi2uni_port/Multi2Uni-Port_seed42_best.pt,external comparison; mechanism-faithful port
+MMOKD-Port,GRSL_complete_paper_package/baselines/mmokd_port,external comparison; checkpoint and progress in source directory
+SG/CG teachers,windows_main/teacher_target_search_v2/,teacher/search diagnostics
+single-orbit baselines,single_orbit_baselines_v3/,"Boehm, CDNetE, DeepLabV3, MFEWF, U-Net"
+masked diagnostics,"windows_main/{geometry_transfer_restored_v1,mask_aware_search_kd_v5_seed42,sgri_powc_masked_v4_seed42_20260925}",metrics/report cards included; original output folders may be retired after packaging

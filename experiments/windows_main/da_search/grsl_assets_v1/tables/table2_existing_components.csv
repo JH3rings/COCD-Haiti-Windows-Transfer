@@ -1,0 +1,5 @@
+Variant,Dual-orbit training,DA,Target-evidence auxiliary,Teacher initialization,Inference input,Overall AUPRC,Overall IoU,TGD AUPRC,TGD IoU,changed_factors
+SO-reference,False,False,False,False,target,0.87963963043849,0.6334734110435277,0.8882809898270467,0.6439752169643803,reference
+T0,True,False,False,False,target+counter,0.9080183888850286,0.6716840670418411,0.9180804474355652,0.687368488171866,reference
+T1,True,True,True,False,target+counter,0.9097635015752681,0.6777577490897269,0.9200591310731829,0.6940420351812028,joint DA+aux
+S0,False,True,False,True,target,0.8965449649798376,0.6551538735028644,0.9035665855949775,0.6633539942518402,T1->S0 target-only adaptation

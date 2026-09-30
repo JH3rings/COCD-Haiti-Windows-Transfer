@@ -1,0 +1,48 @@
+{
+ "CVER-A": {
+  "learned": {
+   "Overall": 0.8605,
+   "BothValid": 0.8492,
+   "TargetValid": 0.8562,
+   "G10": 0.8679,
+   "G01": 0.8774
+  },
+  "random": {
+   "Overall": 0.7164,
+   "BothValid": 0.6949,
+   "TargetValid": 0.7074,
+   "G10": 0.7389,
+   "G01": 0.7444
+  },
+  "uniform": {
+   "Overall": 0.7274,
+   "BothValid": 0.7074,
+   "TargetValid": 0.7191,
+   "G10": 0.7474,
+   "G01": 0.754
+  }
+ },
+ "CVER-B": {
+  "learned": {
+   "Overall": 0.8563,
+   "BothValid": 0.8437,
+   "TargetValid": 0.8517,
+   "G10": 0.865,
+   "G01": 0.8755
+  },
+  "random": {
+   "Overall": 0.6278,
+   "BothValid": 0.5998,
+   "TargetValid": 0.6163,
+   "G10": 0.6601,
+   "G01": 0.6668
+  },
+  "uniform": {
+   "Overall": 0.6545,
+   "BothValid": 0.6271,
+   "TargetValid": 0.6435,
+   "G10": 0.6845,
+   "G01": 0.6934
+  }
+ }
+}

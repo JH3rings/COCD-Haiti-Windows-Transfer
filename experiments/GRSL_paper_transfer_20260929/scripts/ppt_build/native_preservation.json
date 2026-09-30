@@ -1,0 +1,14 @@
+{
+  "source": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\GRSL_paper_transfer_20260929\\editable\\architecture_optional_TGD_draft.pptx",
+  "source_sha256": "5bd3ac1a5c82d8dd14956a90c2c8aa93f0fb45ba29f4b099e78bb31da31346dd",
+  "output_sha256": "dc1e7b79e8dd184a3f143eb9950ac93b56660c0089533d6570d333baffdfd7f1",
+  "changes": {
+    "Teacher search (on target features)": "Teacher policy on Student memory",
+    "Student search (on target features)": "Student policy on same memory",
+    "TGD (optional)": "TGD (off in CG0)"
+  },
+  "repair_reason": "artifact-tool rendering changed formula styles and shadows; source objects/styles retained",
+  "native_parts_unchanged_except": [
+    "ppt/slides/slide1.xml text nodes"
+  ]
+}

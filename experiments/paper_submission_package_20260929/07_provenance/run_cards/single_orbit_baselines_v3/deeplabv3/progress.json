@@ -1,0 +1,218 @@
+{
+  "seat": "deeplabv3",
+  "epoch": 25,
+  "max_epochs": 100,
+  "loss": 0.030730353711817978,
+  "monitor": "test_auprc",
+  "monitor_value": 0.5114988615750948,
+  "best": 0.5150504184304023,
+  "best_epoch": 23,
+  "bad": 2,
+  "patience": 2,
+  "improved": false,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.2500255059175454,
+      "monitor": 0.1869620479542097,
+      "best": 0.1869620479542097,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 2,
+      "loss": 0.09399969510531148,
+      "monitor": 0.24977460716661165,
+      "best": 0.24977460716661165,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 3,
+      "loss": 0.07871685487287054,
+      "monitor": 0.28785365371412985,
+      "best": 0.28785365371412985,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 4,
+      "loss": 0.06998102567684093,
+      "monitor": 0.32519573169208743,
+      "best": 0.32519573169208743,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 5,
+      "loss": 0.0642295282710967,
+      "monitor": 0.35422078306338417,
+      "best": 0.35422078306338417,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 6,
+      "loss": 0.06014974642878376,
+      "monitor": 0.3612583171246691,
+      "best": 0.3612583171246691,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 7,
+      "loss": 0.05747602920587889,
+      "monitor": 0.39561293138741915,
+      "best": 0.39561293138741915,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 8,
+      "loss": 0.054345384761981,
+      "monitor": 0.41401986696785853,
+      "best": 0.41401986696785853,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 9,
+      "loss": 0.05163309246062479,
+      "monitor": 0.41754272623819194,
+      "best": 0.41754272623819194,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 10,
+      "loss": 0.049277850252789974,
+      "monitor": 0.4362768515206667,
+      "best": 0.4362768515206667,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 11,
+      "loss": 0.047087134081319496,
+      "monitor": 0.4450321459451097,
+      "best": 0.4450321459451097,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 12,
+      "loss": 0.04584008151600101,
+      "monitor": 0.45718786800825356,
+      "best": 0.45718786800825356,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 13,
+      "loss": 0.04369597455870781,
+      "monitor": 0.4682552979257159,
+      "best": 0.4682552979257159,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 14,
+      "loss": 0.04184744396728938,
+      "monitor": 0.4762841075967895,
+      "best": 0.4762841075967895,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 15,
+      "loss": 0.040137997634549435,
+      "monitor": 0.48392574456568077,
+      "best": 0.48392574456568077,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 16,
+      "loss": 0.038609177627916005,
+      "monitor": 0.4867741309621598,
+      "best": 0.4867741309621598,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 17,
+      "loss": 0.037409773150799575,
+      "monitor": 0.4818188469677154,
+      "best": 0.4867741309621598,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 18,
+      "loss": 0.03629451955791838,
+      "monitor": 0.4992160197100261,
+      "best": 0.4992160197100261,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 19,
+      "loss": 0.03565821882993244,
+      "monitor": 0.4938622006902188,
+      "best": 0.4992160197100261,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 20,
+      "loss": 0.03433266894870115,
+      "monitor": 0.50214125969886,
+      "best": 0.50214125969886,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 21,
+      "loss": 0.033381384023708015,
+      "monitor": 0.5058837286586266,
+      "best": 0.5058837286586266,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 22,
+      "loss": 0.03249988596748691,
+      "monitor": 0.5092882235348783,
+      "best": 0.5092882235348783,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 23,
+      "loss": 0.03200958894496849,
+      "monitor": 0.5150504184304023,
+      "best": 0.5150504184304023,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 24,
+      "loss": 0.03127911028086212,
+      "monitor": 0.5111778173634457,
+      "best": 0.5150504184304023,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 25,
+      "loss": 0.030730353711817978,
+      "monitor": 0.5114988615750948,
+      "best": 0.5150504184304023,
+      "bad": 2,
+      "improved": false
+    }
+  ],
+  "model": "best_monitored_epoch",
+  "early_stop": true,
+  "monitor_risk": "EARLY STOPPING MONITORS THE TEST PARTITION: the reported test AUPRC is the best-over-epochs value and is optimistically biased. Threshold stays fixed at 0.5; every method uses the identical rule."
+}

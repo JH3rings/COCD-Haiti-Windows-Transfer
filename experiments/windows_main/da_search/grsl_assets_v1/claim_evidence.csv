@@ -1,0 +1,7 @@
+claim,evidence,figure_or_table,support,limitation
+S0 improves the target-only baseline,metrics_full.csv; table1_deployment,Table 1; Figure 3a,supported,SO-reference is a non-student reference and values are test-monitor development evidence
+Correct counter matters to T1 in TGD,counter_interventions.csv,Table 3A; Figure 3b,supported as intervention evidence,shuffle/bypass are analysis-only conditions
+S0 uses Search KD,protocol_da_search.json; S0 progress,none,not supported,S1/Search KD was not trained
+T1 auxiliary branch is counter-independent,models_da_search.py,Figure 1,not supported,policy context includes dual fused features
+S0 recovered unavailable raw counter observations,none,none,not supported,only target-only learned inference/search is evidenced
+S0 corrected 47.66% of all TGD,diagnostic_subset_metrics.csv,Table 3B,not supported,47.6613% is within the fixed Union diagnostic subset

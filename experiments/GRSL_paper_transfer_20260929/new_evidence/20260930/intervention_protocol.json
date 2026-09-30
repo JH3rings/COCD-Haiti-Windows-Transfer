@@ -1,0 +1,29 @@
+{
+  "sources": {
+    "experiments\\distillation_final\\ours_s2_2stage\\S2-2Stage_seed42_best.pt": {
+      "sha256": "07d2434f483512c50b1b63ebaab552198faaebe436ba4180aeaeaad28bb9103d"
+    },
+    "experiments\\windows_main\\teacher_target_search_v2\\CG0_seed42.pt": {
+      "sha256": "5b83c8d80ff6893b4b7ae9511227a8f6f8d4ba62e1be99c9850d10a5797dc3af"
+    },
+    "experiments\\GRSL_paper_transfer_20260929\\scripts\\current_mechanisms.py": {
+      "sha256": "6383e70c57792ddffc3d626511ec46fee6c72b0627def7046ddc5f73f03b31e8"
+    },
+    "data\\splits_v3\\test_ids.csv": {
+      "sha256": "31528c417f361a85b7ba7fd7ecf8a2fdb62f70cff07400a0fce33aa9ea66fb2b"
+    }
+  },
+  "regions": "Overall all; TargetValid gt=0; BothValid gt=gc=0; G10 gt>0,gc=0",
+  "threshold": 0.5,
+  "split": {
+    "train_locations": 1370,
+    "validation_locations": 0,
+    "test_locations": 343,
+    "train_rows": 4110
+  },
+  "random": "uniform feature offsets [-2,2], fixed centre, learned weights; seed 42000+batch start+orbit offset",
+  "counter_shuffle": "global shift 42 in pinned sample order, no self pairs",
+  "self_context": "CG0 frozen weights with target as counter; not retrained SG0",
+  "no_search": "inference bypass via projected P2; not architecture retraining",
+  "alignment": "pixel-weighted strict full-valid 4x4 query blocks; JS on 12 candidate weights, not spatial training JS"
+}

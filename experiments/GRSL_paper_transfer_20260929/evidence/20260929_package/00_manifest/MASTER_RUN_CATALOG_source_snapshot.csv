@@ -1,0 +1,42 @@
+﻿RunOrPackage,Status,ProtocolSummary,FilesRecursive,BytesRecursive,CheckpointCount,FigureCount,MetricReportArtifacts
+00_curation/superseded/cofad_cocad_aborted_firstbatch_calib,SUPERSEDED_QUARANTINE,"method={'CO-FAD': 'P2 Haar high-freq energy consensus, BothValid ratio>=0.9, SmoothL1', 'CO-CAD': 'P3 L2-normalized 7x7 local affinity consensus, BothValid cells, SmoothL1 with ll/lb/bb balance', 'kd_share_target': 0.075, 'consensus': 'stopgrad mean of the two orbits; symmetric per-orbit terms'}; seed=42; train_ids=1370; test_ids=343",2,18856,0,0,
+00_curation/superseded/first_batch_static_lambda_reference,SUPERSEDED_QUARANTINE,method=Mask-Aware Search-KD v5; seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; patience=2,4,113231580,1,0,final_metrics.json
+00_curation/superseded/fixed30_masked_20260923/experiments/windows_main/geometry_validity_diagnostic,SUPERSEDED_QUARANTINE,,23,1132576886,10,0,final_report.md; metrics.csv; report.json; report.md
+00_curation/superseded/fixed30_masked_20260923/experiments/windows_main/geometry_validity_diagnostic/masked_training,SUPERSEDED_QUARANTINE,,2,12102,0,0,metrics.csv; report.json
+00_curation/superseded/fixed30_masked_20260923/experiments/windows_main/geometry_validity_diagnostic/masked_training_strict,SUPERSEDED_QUARANTINE,,2,12304,0,0,metrics.csv; report.json
+00_curation/superseded/pilot_firstbatch_controller_superseded,SUPERSEDED_QUARANTINE,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,4,70084,0,0,
+00_curation/superseded/pilot_halfstep_ema_controller_superseded,SUPERSEDED_QUARANTINE,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,4,65343,0,0,
+00_curation/superseded/pilot_step4_cap1p25_superseded,SUPERSEDED_QUARANTINE,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,4,72274,0,0,
+00_curation/superseded/pilot_step8_cap1p5_superseded,SUPERSEDED_QUARANTINE,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,4,41760,0,0,
+dataset_audit_final/01_statistics,RESULTS_PRESENT,,24,19997041,0,3,audit_summary.json; geometry_summary.csv; joint_geometry_summary.csv; patch_distribution_summary.csv
+dataset_audit_final/05_existing_results_reused/cocd/metadata,RESULTS_PRESENT,,4,6524552,0,0,global_categorical_summary.json
+dataset_audit_final/05_existing_results_reused/experiments/windows_main/dataset_forensic_audit_20260927,RESULTS_PRESENT,,15,9338872,0,4,audit_summary.json
+dataset_audit_final/05_existing_results_reused/experiments/windows_main/physics_audit_20260924,RESULTS_PRESENT,,26,70192885,0,13,audit_summary.json; candidate_metrics.csv; haiti_physics_audit_report.md
+distillation_final/comparison,RESULTS_PRESENT,,13,117139,0,0,final_report.md
+distillation_final/dis2_port,RESULTS_PRESENT,,7,45579249,1,0,summary.json
+distillation_final/hinton_kd,RESULTS_PRESENT,,5,113189448,1,0,summary.json
+distillation_final/multi2uni_port,RESULTS_PRESENT,,13,530147651,2,0,sanity_32_report.json; summary.json
+distillation_final/ours_s2_2stage,RESULTS_PRESENT,,5,113249518,1,0,summary.json
+GRSL_complete_paper_package/05_analysis,RESULTS_PRESENT,,3,37781,0,0,s2_2stage_source_summary.json
+GRSL_complete_paper_package/06_baselines/dis2_summary,RESULTS_PRESENT,,2,8060,0,0,summary.json
+GRSL_complete_paper_package/06_baselines/hinton_summary,RESULTS_PRESENT,,2,11703,0,0,summary.json
+GRSL_complete_paper_package/06_baselines/multi2uni_port_summary,RESULTS_PRESENT,,2,36699,0,0,summary.json
+GRSL_complete_paper_package/baselines/mmokd_port,RESULTS_PRESENT,,21,695540107,3,0,region_metrics.csv; sanity_32_report.json; summary.json
+results/grsl_external_baselines,RESULTS_PRESENT,,2,893,0,0,metrics.csv
+results/rapid_landslide_cocd,RESULTS_PRESENT,,13,8599,0,0,DIS2_metrics.csv; KD_metrics.csv; Ours_metrics.csv; S0_metrics.csv; T_metrics.csv; four_region_metrics.csv; mechanism_main_metrics.csv; metrics.csv
+single_orbit_baselines_v3/boehm,RESULTS_PRESENT,,5,702287565,2,0,metrics.csv
+single_orbit_baselines_v3/cdnette,RESULTS_PRESENT,,5,669305763,2,0,metrics.csv
+single_orbit_baselines_v3/deeplabv3,RESULTS_PRESENT,,5,700713777,2,0,metrics.csv
+single_orbit_baselines_v3/mfewf,RESULTS_PRESENT,,5,720056413,2,0,metrics.csv
+single_orbit_baselines_v3/unet,RESULTS_PRESENT,,5,669314753,2,0,metrics.csv
+windows_main,RESULTS_PRESENT,,467,16596398561,113,34,CO-CAD_summary.json; CO-FAD_summary.json; CVER-A_summary.json; CVER-B_summary.json; DIS2-RS-10%_summary.json; DIS2-RS_summary.json; N1_seed42_summary.json; N2_seed42_summary.json; N2noorbit_seed42_summary.json; RKD-10%_summary.json; RKD_summary.json; S0-Raw_summary.json; S2-10%_summary.json; S2-Raw_summary.json; audit_report.json; diagnostic_subset_metrics.csv; distillation_benchmark_report.md; equal_kd10_report.md; final_metrics.json; final_report.json; final_report.md; final_student_contribution_report.json; final_student_distillation_report.json; g10_mechanism_report.json; g10_mechanism_summary.csv; kd_budget_summary.csv; locked_region_mechanism_metrics.csv; loss_distillation_final_report.json; main_metrics.csv; metrics_full.csv
+windows_main/asrd_poec_20260924,RESULTS_PRESENT,,19,339535798,3,0,final_report.md; test_metrics.json
+windows_main/cofad_cocad_v1_seed42,RESULTS_PRESENT,"method={'CO-FAD': 'P2 Haar high-freq energy consensus, BothValid ratio>=0.9, SmoothL1', 'CO-CAD': 'P3 L2-normalized 7x7 local affinity consensus, BothValid cells, SmoothL1 with ll/lb/bb balance', 'kd_share_target': 0.075, 'calibration': 'epoch-1 pure-seg warm-up; lambda calibrated once from epoch-1 mean seg and KD terms, then frozen (no sweep)', 'consensus': 'stopgrad mean of the two orbits; symmetric per-orbit terms'}; seed=42; train_ids=1370; test_ids=343",9,226372467,2,0,CO-CAD_summary.json; CO-FAD_summary.json; final_report.md
+windows_main/geometry_transfer_restored_v1,RESULTS_PRESENT,,16,679384619,6,0,final_report.md; test_metrics.json
+windows_main/mask_aware_search_kd_v5_seed42,RESULTS_PRESENT,method=Mask-Aware Search-KD v5; seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; patience=2,6,226418058,2,0,final_metrics.json
+windows_main/multitoone_kd_10pct_20260927,RESULTS_PRESENT,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,16,343563066,3,0,DIS2-RS-10%_summary.json; RKD-10%_summary.json; S2-10%_summary.json; equal_kd10_report.md; kd_budget_summary.csv
+windows_main/multitoone_kd_10pct_batchratio_20260928,RESULTS_PRESENT,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,16,343546353,3,0,DIS2-RS-10%_summary.json; RKD-10%_summary.json; S2-10%_summary.json; equal_kd10_report.md; kd_budget_summary.csv
+windows_main/multitoone_kd_10pct_lossratio_ema_20260928,RESULTS_PRESENT,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; selects best checkpoint,15,343880883,3,0,DIS2-RS-10%_summary.json; RKD-10%_summary.json; S2-10%_summary.json; equal_kd10_report.md; kd_budget_summary.csv
+windows_main/multitoone_kd_benchmark_20260927,RESULTS_PRESENT,seed=42; train_ids=1370; validation_ids=0; test_ids=343; max_epochs=100; monitor=test overall AUPRC; canonical project rule; this selects checkpoints,14,226776489,2,0,DIS2-RS_summary.json; RKD_summary.json; distillation_benchmark_report.md
+windows_main/raw_cver_v1_seed42,RESULTS_PRESENT,seed=42; train_ids=1370; test_ids=343,16,452961107,4,0,CVER-A_summary.json; CVER-B_summary.json; S0-Raw_summary.json; S2-Raw_summary.json; final_report.md
+windows_main/sgri_powc_masked_v4_seed42_20260925,RESULTS_PRESENT,seed=42; train_ids=1370; test_ids=343,26,1246693834,11,0,final_metrics.json; final_report.md

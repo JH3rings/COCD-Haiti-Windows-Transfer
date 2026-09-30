@@ -1,0 +1,1 @@
+TGD-focused local comparison with verified external prediction caches. Green, red, and yellow in error maps denote true positives, false negatives, and false positives, respectively; red dashed contours mark TGD.

@@ -1,0 +1,38 @@
+{
+  "arm": "CVER-B",
+  "best_epoch": 29,
+  "monitor_auprc": 0.8563142544538439,
+  "best_metrics": {
+    "Overall": {
+      "AUPRC": 0.8563142544538439,
+      "IoU": 0.6056255515118542,
+      "F1": 0.7543795637053711,
+      "pixels": 11239424
+    },
+    "BothValid": {
+      "AUPRC": 0.8436786214495671,
+      "IoU": 0.589703496979002,
+      "F1": 0.7419037551337678,
+      "pixels": 9058636
+    },
+    "TargetValid": {
+      "AUPRC": 0.8516982024515264,
+      "IoU": 0.6003738703210892,
+      "F1": 0.7502920179528224,
+      "pixels": 10098042
+    },
+    "G10": {
+      "AUPRC": 0.864969087277182,
+      "IoU": 0.6136689853151919,
+      "F1": 0.7605884365377775,
+      "pixels": 1039406
+    },
+    "G01": {
+      "AUPRC": 0.875495783092256,
+      "IoU": 0.6334700961733519,
+      "F1": 0.7756127249067496,
+      "pixels": 1039406
+    }
+  },
+  "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\raw_cver_v1_seed42\\CVER-B_seed42_best.pt"
+}

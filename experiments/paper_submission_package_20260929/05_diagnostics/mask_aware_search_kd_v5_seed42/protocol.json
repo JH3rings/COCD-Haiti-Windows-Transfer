@@ -1,0 +1,35 @@
+{
+  "method": "Mask-Aware Search-KD v5",
+  "seed": 42,
+  "batch_size": 16,
+  "optimizer": {
+    "name": "Adam",
+    "lr": 5e-05,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08
+  },
+  "max_epochs": 100,
+  "patience": 2,
+  "train_ids": 1370,
+  "validation_ids": 0,
+  "test_ids": 343,
+  "split_policy": "reuse pinned split(); no validation created; test used per canonical monitoring rule",
+  "init_checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\SO_backbone_seed42.pt",
+  "teacher_checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\teacher_target_search_v2\\CG10_seed42.pt",
+  "geometry_codes": {
+    "0": "valid",
+    "1": "layover",
+    "2": "shadow",
+    "3": "layover+shadow"
+  },
+  "segmentation_mask": "per-orbit target geometry == 0; BCE denominator is valid pixel count",
+  "kd_query_mask": "strict BothValid 4x4 blocks; additionally both policy distributions and masked searches must have support",
+  "memory_mask": "all corresponding geometry pixels in each FPN cell must be valid; bilinear support >0.999; mask sampled weights then jointly renormalize",
+  "counter_context": "counter FPN feature maps multiplied by conservative counter geometry-valid masks before Teacher context",
+  "kd": "original policy JS + same Student target-memory evidence distance only; a single detached scalar lambda is batch-calibrated from training losses to maintain 10% KD contribution; no test values enter lambda",
+  "no_new_parameters_or_loss_terms": true
+}

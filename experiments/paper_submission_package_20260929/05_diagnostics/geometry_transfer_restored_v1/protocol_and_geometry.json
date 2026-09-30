@@ -1,0 +1,146 @@
+{
+  "root": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer",
+  "device": "cuda",
+  "torch": "2.6.0+cu126",
+  "seed": 42,
+  "batch_size": 16,
+  "optimizer": {
+    "name": "Adam",
+    "lr": 5e-05,
+    "weight_decay": 0.0,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08
+  },
+  "max_epochs": 100,
+  "patience": 2,
+  "selection_metric": "validation overall AUPRC; test not used for checkpoint selection",
+  "split_dir": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\data\\splits",
+  "split_sizes": {
+    "train": 1233,
+    "validation": 137,
+    "test": 343
+  },
+  "v3_union_verified": true,
+  "initialization": {
+    "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\SO_backbone_seed42.pt",
+    "sha256": "b63e26cf75588e84f587706dcf0b08113fad49bb1cc51c0b64fe5c085f13bfd8",
+    "source": "official teacher/student scripts load this shared ConvNeXt-Tiny backbone initialization; its architecture constructor uses torchvision ConvNeXt_Tiny_Weights.IMAGENET1K_V1"
+  },
+  "geometry_codes": {
+    "0": "valid",
+    "1": "layover",
+    "2": "shadow",
+    "3": "layover+shadow"
+  },
+  "invalid_loss_rule": "target geometry code > 0 excluded from segmentation BCE; all KD query cells require all underlying 4x4 target pixels valid; both-view KD/reliability/stable objectives require both codes 0",
+  "regions": {
+    "BothValid": "target==0 and counter==0",
+    "TargetValid": "target==0",
+    "OverallValid": "target==0 or counter==0",
+    "TGD_G10": "target>0 and counter==0; diagnostic only"
+  },
+  "geometry_summary": {
+    "train": {
+      "locations": 1233,
+      "codes_target": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "codes_counter": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "pixel_counts": {
+        "BothValid": 32749226,
+        "TargetValid": 36426064,
+        "OverallValid": 40102902,
+        "TGD_G10": 3676838,
+        "TargetLayover": 3837193,
+        "TargetShadow": 134653,
+        "TargetLayoverShadow": 5034,
+        "CounterLayover": 3837193,
+        "CounterShadow": 134653,
+        "CounterLayoverShadow": 5034
+      },
+      "pixel_fractions": {
+        "BothValid": 0.8105653390010391,
+        "TargetValid": 0.9015695489912814,
+        "OverallValid": 0.9925737589815237,
+        "TGD_G10": 0.0910042099902423
+      }
+    },
+    "validation": {
+      "locations": 137,
+      "codes_target": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "codes_counter": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "pixel_counts": {
+        "BothValid": 3686108,
+        "TargetValid": 4070520,
+        "OverallValid": 4454932,
+        "TGD_G10": 384412,
+        "TargetLayover": 402631,
+        "TargetShadow": 14955,
+        "TargetLayoverShadow": 1110,
+        "CounterLayover": 402631,
+        "CounterShadow": 14955,
+        "CounterLayoverShadow": 1110
+      },
+      "pixel_fractions": {
+        "BothValid": 0.8211028384466241,
+        "TargetValid": 0.906732935104927,
+        "OverallValid": 0.9923630317632299,
+        "TGD_G10": 0.08563009665830291
+      }
+    },
+    "test": {
+      "locations": 343,
+      "codes_target": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "codes_counter": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "pixel_counts": {
+        "BothValid": 9058636,
+        "TargetValid": 10098042,
+        "OverallValid": 11137448,
+        "TGD_G10": 1039406,
+        "TargetLayover": 1094965,
+        "TargetShadow": 44741,
+        "TargetLayoverShadow": 1676,
+        "CounterLayover": 1094965,
+        "CounterShadow": 44741,
+        "CounterLayoverShadow": 1676
+      },
+      "pixel_fractions": {
+        "BothValid": 0.8059697721164358,
+        "TargetValid": 0.8984483546487791,
+        "OverallValid": 0.9909269371811225,
+        "TGD_G10": 0.0924785825323433
+      }
+    }
+  }
+}

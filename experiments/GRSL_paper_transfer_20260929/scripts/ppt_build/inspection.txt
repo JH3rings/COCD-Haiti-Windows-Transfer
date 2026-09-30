@@ -1,0 +1,26 @@
+{
+  "recordCount": 424,
+  "truncated": true,
+  "metadata": {
+    "revision": "um6sgq",
+    "target": {
+      "id": "pr/5arm8s"
+    },
+    "kind": {
+      "requested": "slide,textbox,shape,layout",
+      "tokens": [
+        "slide",
+        "textbox",
+        "shape",
+        "layout"
+      ]
+    },
+    "include": {
+      "tokens": []
+    },
+    "exclude": {
+      "tokens": []
+    },
+    "notices": []
+  }
+}

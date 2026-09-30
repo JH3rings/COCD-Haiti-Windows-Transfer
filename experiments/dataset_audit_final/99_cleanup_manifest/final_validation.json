@@ -1,0 +1,23 @@
+{
+  "patches": 1713,
+  "contact_sheets": 46,
+  "unique_manual_patches": 46,
+  "blind_sheets": 20,
+  "anomaly_rankings": {
+    "A": 20,
+    "B": 20,
+    "C": 20,
+    "D": 20,
+    "E": 20
+  },
+  "pngs_decoded": 289,
+  "manual_fields_all_blank": true,
+  "archived_files": 45,
+  "deleted_files": 9,
+  "inventory_dispositions": {
+    "keep": 3768,
+    "merge": 45,
+    "uncertain": 38,
+    "delete": 5
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "arm": "S2-Raw",
+  "best_epoch": 44,
+  "monitor_auprc": 0.8888349598160061,
+  "best_metrics": {
+    "Overall": {
+      "AUPRC": 0.8888349598160061,
+      "IoU": 0.6423411276031382,
+      "F1": 0.7822261974777217,
+      "pixels": 11239424
+    },
+    "BothValid": {
+      "AUPRC": 0.8784400278539313,
+      "IoU": 0.62667376189493,
+      "F1": 0.770497166149543,
+      "pixels": 9058636
+    },
+    "TargetValid": {
+      "AUPRC": 0.8847662255327208,
+      "IoU": 0.6359610768713571,
+      "F1": 0.7774770266387768,
+      "pixels": 10098042
+    },
+    "G10": {
+      "AUPRC": 0.8964029612208726,
+      "IoU": 0.653938506923365,
+      "F1": 0.790765199777364,
+      "pixels": 1039406
+    },
+    "G01": {
+      "AUPRC": 0.9035670588234581,
+      "IoU": 0.6649627691688086,
+      "F1": 0.7987719383067944,
+      "pixels": 1039406
+    }
+  },
+  "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\raw_cver_v1_seed42\\S2-Raw_seed42_best.pt"
+}

@@ -1,0 +1,765 @@
+{
+  "protocol": {
+    "seed": 42,
+    "split": "data/splits_v3",
+    "train_locations": 1370,
+    "test_locations": 343,
+    "validation_used": false,
+    "test_opened_for_monitoring": true,
+    "threshold": 0.5,
+    "g10_definition": "existing G10 = target geometry mask positive and counter geometry mask negative"
+  },
+  "locked_checkpoints": {
+    "SO": "experiments\\windows_main\\da_search\\SO_backbone_seed42.pt",
+    "T0": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\T0_seed42.pt",
+    "T1": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\T1_seed42.pt",
+    "Student": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\S0_seed42.pt"
+  },
+  "single_DA_scratch": {
+    "available": false,
+    "checkpoint": null,
+    "reason": "No locked Single-DA-scratch checkpoint or result exists in the current experiment artifacts; no new training was started."
+  },
+  "experiment_1": {
+    "performance_by_region": {
+      "SO": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9694640935336188,
+          "iou": 0.6334772913676373,
+          "f1": 0.775618113148782,
+          "precision": 0.8291719435381621,
+          "recall": 0.7285623747199533,
+          "auprc": 0.8796393221130586,
+          "tp": 593178,
+          "fp": 122208,
+          "fn": 220998,
+          "tn": 10303040
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.9393009084034535,
+          "iou": 0.6439901363864277,
+          "f1": 0.7834476838225023,
+          "precision": 0.8302548396248459,
+          "recall": 0.7416365574068297,
+          "auprc": 0.8882806049447463,
+          "tp": 114126,
+          "fp": 23333,
+          "fn": 39758,
+          "tn": 862189
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9725377935607564,
+          "iou": 0.6310232136012152,
+          "f1": 0.7737758779636588,
+          "precision": 0.8289143784595489,
+          "recall": 0.725515378044854,
+          "auprc": 0.8775762226241507,
+          "tp": 479052,
+          "fp": 98875,
+          "fn": 181240,
+          "tn": 9440851
+        }
+      },
+      "T0": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9733412495159894,
+          "iou": 0.6716840670418411,
+          "f1": 0.8036016806335516,
+          "precision": 0.8616220835681725,
+          "recall": 0.7529023208741015,
+          "auprc": 0.9080183888850286,
+          "tp": 612995,
+          "fp": 98448,
+          "fn": 201181,
+          "tn": 10326800
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.948111709957418,
+          "iou": 0.687368488171866,
+          "f1": 0.8147224376721348,
+          "precision": 0.864229022877445,
+          "recall": 0.7705804372123956,
+          "auprc": 0.9180804474355652,
+          "tp": 118580,
+          "fp": 18629,
+          "fn": 35304,
+          "tn": 866893
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9759121993706286,
+          "iou": 0.6680281741522465,
+          "f1": 0.8009794802680132,
+          "precision": 0.8609991745525193,
+          "recall": 0.7487823568966344,
+          "auprc": 0.9055912933431394,
+          "tp": 494415,
+          "fp": 79819,
+          "fn": 165877,
+          "tn": 9459907
+        }
+      },
+      "T1": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9736448237916818,
+          "iou": 0.6777577490897269,
+          "f1": 0.8079327844274525,
+          "precision": 0.855701494751259,
+          "recall": 0.7652153834060355,
+          "auprc": 0.9097635015752681,
+          "tp": 623020,
+          "fp": 105061,
+          "fn": 191156,
+          "tn": 10320187
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.9489785512109801,
+          "iou": 0.6940420351812028,
+          "f1": 0.8193917465355627,
+          "precision": 0.8608403818355543,
+          "recall": 0.781751189207404,
+          "auprc": 0.9200591310731829,
+          "tp": 120299,
+          "fp": 19447,
+          "fn": 33585,
+          "tn": 866075
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9761583754067885,
+          "iou": 0.6739736642418659,
+          "f1": 0.8052380685165249,
+          "precision": 0.8544808654932844,
+          "recall": 0.7613616400016847,
+          "auprc": 0.9072810114390981,
+          "tp": 502721,
+          "fp": 85614,
+          "fn": 157571,
+          "tn": 9454112
+        }
+      },
+      "Student": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9718671526227679,
+          "iou": 0.6551538735028644,
+          "f1": 0.7916531264860183,
+          "precision": 0.8539442279781134,
+          "recall": 0.7378318692764128,
+          "auprc": 0.8965449649798376,
+          "tp": 600725,
+          "fp": 102746,
+          "fn": 213451,
+          "tn": 10322502
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.9438794850135558,
+          "iou": 0.6633539942518402,
+          "f1": 0.7976101207619837,
+          "precision": 0.8556561355447059,
+          "recall": 0.7469392529437272,
+          "auprc": 0.9035665855949775,
+          "tp": 114942,
+          "fp": 19390,
+          "fn": 38942,
+          "tn": 866132
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9747191622603019,
+          "iou": 0.6532432010843752,
+          "f1": 0.7902566259404723,
+          "precision": 0.8535401720844845,
+          "recall": 0.7357093528317663,
+          "auprc": 0.8948774186052421,
+          "tp": 485783,
+          "fp": 83356,
+          "fn": 174509,
+          "tn": 9456370
+        }
+      }
+    },
+    "deltas": {
+      "Student_minus_SO": {
+        "overall": {
+          "auprc": 0.01690564286677898,
+          "iou": 0.02167658213522705,
+          "f1": 0.016035013337236226
+        },
+        "G10": {
+          "auprc": 0.015285980650231235,
+          "iou": 0.019363857865412504,
+          "f1": 0.014162436939481382
+        },
+        "non-G10": {
+          "auprc": 0.017301195981091366,
+          "iou": 0.02221998748316001,
+          "f1": 0.016480747976813537
+        }
+      },
+      "Student_minus_Single_DA_scratch": {
+        "overall": {
+          "auprc": null,
+          "iou": null,
+          "f1": null
+        },
+        "G10": {
+          "auprc": null,
+          "iou": null,
+          "f1": null
+        },
+        "non-G10": {
+          "auprc": null,
+          "iou": null,
+          "f1": null
+        }
+      }
+    }
+  },
+  "experiment_2_counter_dependence": {
+    "conditions": {
+      "correct": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9736448237916818,
+          "iou": 0.6777577490897269,
+          "f1": 0.8079327844274525,
+          "precision": 0.855701494751259,
+          "recall": 0.7652153834060355,
+          "auprc": 0.9097635015752681,
+          "tp": 623020,
+          "fp": 105061,
+          "fn": 191156,
+          "tn": 10320187
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.9489785512109801,
+          "iou": 0.6940420351812028,
+          "f1": 0.8193917465355627,
+          "precision": 0.8608403818355543,
+          "recall": 0.781751189207404,
+          "auprc": 0.9200591310731829,
+          "tp": 120299,
+          "fp": 19447,
+          "fn": 33585,
+          "tn": 866075
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9761583754067885,
+          "iou": 0.6739736642418659,
+          "f1": 0.8052380685165249,
+          "precision": 0.8544808654932844,
+          "recall": 0.7613616400016847,
+          "auprc": 0.9072810114390981,
+          "tp": 502721,
+          "fp": 85614,
+          "fn": 157571,
+          "tn": 9454112
+        }
+      },
+      "shuffled": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9345259152070426,
+          "iou": 0.2133672547688634,
+          "f1": 0.35169442964552355,
+          "precision": 0.6219685095801603,
+          "recall": 0.24516075148370567,
+          "auprc": 0.4524639709095031,
+          "tp": 199604,
+          "fp": 121319,
+          "fn": 614572,
+          "tn": 10303929
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.8673713640290704,
+          "iou": 0.19994080299001774,
+          "f1": 0.33325110740121316,
+          "precision": 0.6515802016150679,
+          "recall": 0.22387642639909125,
+          "auprc": 0.48762489815217697,
+          "tp": 34451,
+          "fp": 18422,
+          "fn": 119433,
+          "tn": 867100
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9413691230740965,
+          "iou": 0.2163985592035496,
+          "f1": 0.355802060218035,
+          "precision": 0.6161275881365187,
+          "recall": 0.2501211585177429,
+          "auprc": 0.44752003149623837,
+          "tp": 165153,
+          "fp": 102897,
+          "fn": 495139,
+          "tn": 9436829
+        }
+      },
+      "removed": {
+        "overall": {
+          "pixels": 11239424,
+          "accuracy": 0.9692072298366892,
+          "iou": 0.6323564716554955,
+          "f1": 0.7747774197235315,
+          "precision": 0.8239351137377999,
+          "recall": 0.7311551802067277,
+          "auprc": 0.8784179921661389,
+          "tp": 595289,
+          "fp": 127206,
+          "fn": 218887,
+          "tn": 10298042
+        },
+        "G10": {
+          "pixels": 1039406,
+          "accuracy": 0.9386765133162595,
+          "iou": 0.6380465644519796,
+          "f1": 0.7790334832009508,
+          "precision": 0.8349185590297797,
+          "recall": 0.7301603805463381,
+          "auprc": 0.887063425442393,
+          "tp": 112360,
+          "fp": 22216,
+          "fn": 41524,
+          "tn": 863306
+        },
+        "non-G10": {
+          "pixels": 10200018,
+          "accuracy": 0.9723183821832472,
+          "iou": 0.6310471172717949,
+          "f1": 0.7737938487803032,
+          "precision": 0.8214209780598888,
+          "recall": 0.7313870227111531,
+          "auprc": 0.8764993257551954,
+          "tp": 482929,
+          "fp": 104990,
+          "fn": 177363,
+          "tn": 9434736
+        }
+      }
+    },
+    "drops": {
+      "overall": {
+        "shuffled": {
+          "auprc": 0.457299530665765,
+          "iou": 0.46439049432086343,
+          "f1": 0.456238354781929
+        },
+        "removed": {
+          "auprc": 0.03134550940912917,
+          "iou": 0.04540127743423139,
+          "f1": 0.033155364703921
+        }
+      },
+      "G10": {
+        "shuffled": {
+          "auprc": 0.43243423292100597,
+          "iou": 0.49410123219118507,
+          "f1": 0.4861406391343495
+        },
+        "removed": {
+          "auprc": 0.03299570563078991,
+          "iou": 0.055995470729223173,
+          "f1": 0.0403582633346119
+        }
+      },
+      "non-G10": {
+        "shuffled": {
+          "auprc": 0.45976097994285975,
+          "iou": 0.4575751050383163,
+          "f1": 0.4494360082984899
+        },
+        "removed": {
+          "auprc": 0.030781685683902715,
+          "iou": 0.04292654697007103,
+          "f1": 0.03144421973622169
+        }
+      }
+    },
+    "shuffled_definition": "batch permutation of whole counter samples; each counter pre/post pair remains intact",
+    "removed_definition": "analysis-only target-FPN bypass of T1 counter fusion; no artificial zero SAR input"
+  },
+  "experiment_3_teacher_resolvable": {
+    "T0_resolvable": {
+      "pixels": 21602,
+      "fraction_of_G10": 0.020783024150331817,
+      "definition": "G10 AND SO wrong AND selected dual Teacher correct",
+      "models": {
+        "SO": {
+          "pixels": 21602,
+          "accuracy": 0.0,
+          "iou": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "auprc": 0.31995404774582303,
+          "tp": 0,
+          "fp": 10439,
+          "fn": 11163,
+          "tn": 0,
+          "correction_fraction_vs_SO": 0.0
+        },
+        "Student": {
+          "pixels": 21602,
+          "accuracy": 0.5062957133598741,
+          "iou": 0.30988740779066265,
+          "f1": 0.47315120781738074,
+          "precision": 0.5274229074884059,
+          "recall": 0.4290065394603341,
+          "auprc": 0.5192512163131027,
+          "tp": 4789,
+          "fp": 4291,
+          "fn": 6374,
+          "tn": 6148,
+          "correction_fraction_vs_SO": 0.5062957133598741
+        },
+        "Single-DA-scratch": null
+      },
+      "student_gain_vs_SO_accuracy": 0.5062957133598741,
+      "student_gain_vs_single_DA_scratch_accuracy": null
+    },
+    "T1_resolvable": {
+      "pixels": 22171,
+      "fraction_of_G10": 0.02133045220058359,
+      "definition": "G10 AND SO wrong AND selected dual Teacher correct",
+      "models": {
+        "SO": {
+          "pixels": 22171,
+          "accuracy": 0.0,
+          "iou": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "auprc": 0.3465494086355741,
+          "tp": 0,
+          "fp": 9981,
+          "fn": 12190,
+          "tn": 0,
+          "correction_fraction_vs_SO": 0.0
+        },
+        "Student": {
+          "pixels": 22171,
+          "accuracy": 0.4997068242298498,
+          "iou": 0.3142927794261163,
+          "f1": 0.4782690449661243,
+          "precision": 0.5605292171989409,
+          "recall": 0.4170631665296004,
+          "auprc": 0.5537857774029158,
+          "tp": 5084,
+          "fp": 3986,
+          "fn": 7106,
+          "tn": 5995,
+          "correction_fraction_vs_SO": 0.4997068242298498
+        },
+        "Single-DA-scratch": null
+      },
+      "student_gain_vs_SO_accuracy": 0.4997068242298498,
+      "student_gain_vs_single_DA_scratch_accuracy": null
+    },
+    "union_resolvable": {
+      "pixels": 26019,
+      "fraction_of_G10": 0.02503256667750595,
+      "definition": "G10 AND SO wrong AND selected dual Teacher correct",
+      "models": {
+        "SO": {
+          "pixels": 26019,
+          "accuracy": 0.0,
+          "iou": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "auprc": 0.3391797947900816,
+          "tp": 0,
+          "fp": 11948,
+          "fn": 14071,
+          "tn": 0,
+          "correction_fraction_vs_SO": 0.0
+        },
+        "Student": {
+          "pixels": 26019,
+          "accuracy": 0.4766132441677236,
+          "iou": 0.2916514954484829,
+          "f1": 0.4515947115833205,
+          "precision": 0.5210482297179434,
+          "recall": 0.3984791414964121,
+          "auprc": 0.5198571499214933,
+          "tp": 5607,
+          "fp": 5154,
+          "fn": 8464,
+          "tn": 6794,
+          "correction_fraction_vs_SO": 0.4766132441677236
+        },
+        "Single-DA-scratch": null
+      },
+      "student_gain_vs_SO_accuracy": 0.4766132441677236,
+      "student_gain_vs_single_DA_scratch_accuracy": null
+    }
+  },
+  "experiment_4_da_behavior": {
+    "stats": {
+      "T1": {
+        "G10": {
+          "offset_magnitude": {
+            "count": 92190,
+            "mean": 0.5347291827201843,
+            "median": 0.4844120144844055,
+            "p10": 0.27947922348976134,
+            "p90": 0.8806295633316041,
+            "min": 0.009062045253813267,
+            "max": 1.4271234273910522
+          },
+          "weight_entropy": {
+            "count": 92190,
+            "mean": 2.4792468547821045,
+            "median": 2.4810304641723633,
+            "p10": 2.472506809234619,
+            "p90": 2.48391056060791,
+            "min": 2.399404525756836,
+            "max": 2.4849066734313965
+          },
+          "sampling_diversity": {
+            "count": 92190,
+            "mean": 0.9912266731262207,
+            "median": 0.8844888210296631,
+            "p10": 0.5029779732227325,
+            "p90": 1.6667224168777466,
+            "min": 0.016619184985756874,
+            "max": 3.0231096744537354
+          },
+          "sampling_y_common32": {
+            "count": 1106280,
+            "mean": 15.933991432189941,
+            "median": 15.953859329223633,
+            "p10": 3.1015480995178226,
+            "p90": 28.624018669128414,
+            "min": -1.5726070404052734,
+            "max": 32.77735900878906
+          },
+          "sampling_x_common32": {
+            "count": 1106280,
+            "mean": 15.417823791503906,
+            "median": 15.388347625732422,
+            "p10": 2.7026047229766847,
+            "p90": 28.4459077835083,
+            "min": -3.159567356109619,
+            "max": 32.730159759521484
+          }
+        },
+        "non-G10": {
+          "offset_magnitude": {
+            "count": 610274,
+            "mean": 0.6533786058425903,
+            "median": 0.6235889196395874,
+            "p10": 0.325484374165535,
+            "p90": 1.0320181488990783,
+            "min": 0.007469623815268278,
+            "max": 1.548601508140564
+          },
+          "weight_entropy": {
+            "count": 610274,
+            "mean": 2.475905179977417,
+            "median": 2.479588508605957,
+            "p10": 2.4624797344207763,
+            "p90": 2.483708381652832,
+            "min": 2.378592014312744,
+            "max": 2.4849069118499756
+          },
+          "sampling_diversity": {
+            "count": 610274,
+            "mean": 1.2235581874847412,
+            "median": 1.140897512435913,
+            "p10": 0.5837668299674988,
+            "p90": 1.9989385724067692,
+            "min": 0.007723299786448479,
+            "max": 3.352576971054077
+          },
+          "sampling_y_common32": {
+            "count": 7323288,
+            "mean": 15.803582191467285,
+            "median": 15.736127853393555,
+            "p10": 3.0235419273376465,
+            "p90": 28.616334915161133,
+            "min": -1.551924467086792,
+            "max": 33.125755310058594
+          },
+          "sampling_x_common32": {
+            "count": 7323288,
+            "mean": 15.579052925109863,
+            "median": 15.650059700012207,
+            "p10": 2.7399039268493652,
+            "p90": 28.467247009277344,
+            "min": -3.8572492599487305,
+            "max": 32.84636306762695
+          }
+        },
+        "mapping": "exact 128-to-32 4x4 query-cell reduction; sample locations are reported in common 32x32 feature coordinates"
+      },
+      "Student": {
+        "G10": {
+          "offset_magnitude": {
+            "count": 92190,
+            "mean": 0.571789026260376,
+            "median": 0.5640681982040405,
+            "p10": 0.36686983704566956,
+            "p90": 0.7867902398109436,
+            "min": 0.060743823647499084,
+            "max": 1.540029525756836
+          },
+          "weight_entropy": {
+            "count": 92190,
+            "mean": 2.2963345050811768,
+            "median": 2.312509059906006,
+            "p10": 2.1279425382614137,
+            "p90": 2.444100093841553,
+            "min": 1.883714199066162,
+            "max": 2.484891176223755
+          },
+          "sampling_diversity": {
+            "count": 92190,
+            "mean": 1.1450785398483276,
+            "median": 1.1192107200622559,
+            "p10": 0.6905372917652131,
+            "p90": 1.6360273838043213,
+            "min": 0.05598284676671028,
+            "max": 2.882754325866699
+          },
+          "sampling_y_common32": {
+            "count": 1106280,
+            "mean": 16.018985748291016,
+            "median": 16.083759307861328,
+            "p10": 3.1664777278900176,
+            "p90": 28.74903793334961,
+            "min": -2.2348828315734863,
+            "max": 33.70206832885742
+          },
+          "sampling_x_common32": {
+            "count": 1106280,
+            "mean": 15.330845832824707,
+            "median": 15.205368041992188,
+            "p10": 2.6155133485794075,
+            "p90": 28.306276702880837,
+            "min": -3.027442455291748,
+            "max": 33.04071807861328
+          }
+        },
+        "non-G10": {
+          "offset_magnitude": {
+            "count": 610274,
+            "mean": 0.6447611451148987,
+            "median": 0.6434497833251953,
+            "p10": 0.4173250079154968,
+            "p90": 0.8666283130645752,
+            "min": 0.04450848698616028,
+            "max": 1.8020634651184082
+          },
+          "weight_entropy": {
+            "count": 610274,
+            "mean": 2.3376739025115967,
+            "median": 2.365522861480713,
+            "p10": 2.1676899194717407,
+            "p90": 2.450282025337219,
+            "min": 1.8231931924819946,
+            "max": 2.4849061965942383
+          },
+          "sampling_diversity": {
+            "count": 610274,
+            "mean": 1.1288981437683105,
+            "median": 1.1064550876617432,
+            "p10": 0.6993418157100678,
+            "p90": 1.5861373186111454,
+            "min": 0.032700248062610626,
+            "max": 3.7421836853027344
+          },
+          "sampling_y_common32": {
+            "count": 7323288,
+            "mean": 15.784262657165527,
+            "median": 15.75996208190918,
+            "p10": 2.971865653991699,
+            "p90": 28.6256160736084,
+            "min": -2.219665288925171,
+            "max": 34.1846809387207
+          },
+          "sampling_x_common32": {
+            "count": 7323288,
+            "mean": 15.688373565673828,
+            "median": 15.690492630004883,
+            "p10": 2.819761276245117,
+            "p90": 28.581947326660156,
+            "min": -4.498522758483887,
+            "max": 33.352630615234375
+          }
+        },
+        "mapping": "exact 128-to-32 4x4 query-cell reduction; sample locations are reported in common 32x32 feature coordinates"
+      }
+    },
+    "student_teacher_comparison": {
+      "G10": {
+        "offset_abs_difference": 0.17832732200622559,
+        "weight_abs_difference": 0.03473162278532982
+      },
+      "non-G10": {
+        "offset_abs_difference": 0.20866191387176514,
+        "weight_abs_difference": 0.030260175466537476
+      }
+    },
+    "Single-DA-scratch": null,
+    "geometry_aware_sampling": {
+      "status": "skipped",
+      "reason": "The project stores geometry masks at 128x128 while DA sampling spans multi-level feature maps; no declared invertible mask-to-feature coordinate contract exists, so no approximate outside-region claim is made."
+    }
+  },
+  "experiment_5_student_teacher_behavior": {
+    "student_teacher_comparison": {
+      "G10": {
+        "offset_abs_difference": 0.17832732200622559,
+        "weight_abs_difference": 0.03473162278532982
+      },
+      "non-G10": {
+        "offset_abs_difference": 0.20866191387176514,
+        "weight_abs_difference": 0.030260175466537476
+      }
+    },
+    "single_DA_scratch_comparison": null,
+    "interpretation": "behavior-level auxiliary evidence; no exact pointwise equality claim"
+  },
+  "verdicts": {
+    "Q1": {
+      "verdict": "YES",
+      "T0_G10_all_metrics_above_SO": true,
+      "T1_G10_all_metrics_above_SO": true
+    },
+    "Q2": {
+      "verdict": "YES",
+      "shuffle_all_metric_drops_positive": true,
+      "removed_all_metric_drops_positive": true
+    },
+    "Q3": {
+      "verdict": "PARTIAL",
+      "student_better_than_SO_on_union": true,
+      "single_DA_scratch_available": false
+    },
+    "Q4": {
+      "verdict": "PARTIAL",
+      "teacher_student_behavior_comparison_available": true,
+      "single_DA_scratch_available": false,
+      "geometry_aware_sampling": "skipped"
+    }
+  },
+  "artifacts": {
+    "report": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\g10_mechanism_report.json",
+    "csv": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\g10_mechanism_summary.csv"
+  },
+  "SO_role": "non-student target-only reference; current S0 is the only Student"
+}

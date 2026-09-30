@@ -1,0 +1,16 @@
+{
+  "mean": {
+    "offset_abs": 0.26076964830810373,
+    "weight_entropy": 2.4763033390045166,
+    "policy_offset_error": 0.12283596362579953,
+    "policy_weight_error": 0.030735107816078445
+  },
+  "G10_vs_nonG10_offset_abs": {
+    "G10": 0.20675193821769,
+    "non-G10": 0.26785639188448457
+  },
+  "shuffled_counter_policy_change": {
+    "offset": 0.12648313289338892,
+    "weight": 0.004728601208295335
+  }
+}

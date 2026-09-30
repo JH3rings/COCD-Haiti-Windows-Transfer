@@ -1,0 +1,46 @@
+% Draft for IEEE Geoscience and Remote Sensing Letters (GRSL).
+% Based on the IEEEtran journal template distributed by IEEE/CTAN.
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{placeins}
+
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\feat}[1]{\mathcal{#1}}
+
+\begin{document}
+
+\title{Counter-Guided Target Evidence Search for Single-Orbit SAR Landslide Mapping}
+
+\author{Anonymous~Author(s)%
+\thanks{Manuscript prepared as a draft for submission to \emph{IEEE Geoscience and Remote Sensing Letters}. Author names, affiliations, funding, and the corresponding-author designation will be added after the submission plan is finalized.}}
+
+\markboth{IEEE Geoscience and Remote Sensing Letters, draft manuscript}%
+{Anonymous Author(s): Counter-Guided Target Evidence Search}
+
+\maketitle
+
+\begin{abstract}
+Rapid landslide mapping with synthetic aperture radar (SAR) must contend with view-dependent backscatter and side-looking geometric distortion. Paired ascending and descending observations can be used during training, although only one orbit may be available for rapid inference. We propose a counter-guided Teacher that uses the complementary orbit to guide a search policy while retrieving evidence only from the target orbit. A target-only Student distills that policy and the retrieved target evidence. We train on all labelled pixels and evaluate the same predictions both with and without excluding geometrically distorted target pixels. On the target-valid region of the Haiti paired-orbit benchmark, the Student improves AUPRC from 87.55\% to 88.77\% and IoU from 62.27\% to 64.65\% over its target-only baseline. On the full region, AUPRC rises from 87.98\% to 89.16\% and IoU from 62.91\% to 65.10\%. A separate target-distorted diagnostic shows an IoU gain from 64.14\% to 65.64\%. These results indicate that counter-guided target-side search improves single-orbit mapping across both valid and distorted evaluation regions.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Synthetic aperture radar (SAR), landslide mapping, semantic segmentation, privileged information, knowledge distillation, deformable attention.
+\end{IEEEkeywords}
+
+\input{sections/introduction}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/conclusion}
+
+{\scriptsize
+\bibliographystyle{template/IEEEtran}
+\bibliography{references}
+}
+
+\end{document}

@@ -1,0 +1,44 @@
+{
+  "device": "cuda",
+  "checks": {
+    "teacher_student_shapes": [
+      [
+        1,
+        1,
+        128,
+        128
+      ],
+      [
+        1,
+        1,
+        128,
+        128
+      ]
+    ],
+    "hinton_soft_kd_finite": true,
+    "s2_policy_evidence_backward_finite": true,
+    "s2_loss_values": [
+      0.0053610969334840775,
+      0.469454824924469
+    ],
+    "dis2_both_training_orientations_backward": [
+      9.13325023651123,
+      9.189580917358398
+    ],
+    "dis2_target_only_shapes": [
+      [
+        1,
+        2,
+        128,
+        128
+      ],
+      [
+        1,
+        2,
+        128,
+        128
+      ]
+    ],
+    "dis2_probabilities_finite": true
+  }
+}

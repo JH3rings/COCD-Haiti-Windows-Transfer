@@ -1,0 +1,11 @@
+我把 `GRSL_paper_transfer_20260929/` 论文文件夹复制到了当前跑代码的项目。请直接在这个项目里继续完成 IEEE GRSL SAR 滑坡识别论文，不要只给建议。先阅读这个文件夹的 `README.md`、`manuscript/main.tex` 与各个 `sections/*.tex`，查看 `preview/GRSL_revised_20260929.pdf` 的现有版面，再查阅 `evidence/20260929_package/` 和 `evidence/earlier_package/`。请同时搜索当前代码项目里真实的训练代码、实验输出、预测概率、几何掩膜、样本索引、模型权重和可编辑原图，建立“论文每个表格/图片 ↔ 模型版本 ↔ 原始文件”的对应关系。以 `manuscript/main.tex` 为唯一正式稿，直接修改它和同目录资源，编译 PDF，逐页检查图表清晰度与排版。
+
+论文的主线已经确定：配对升降轨用于训练，Counter-Guided Teacher 只用互补轨道产生搜索策略，检索值始终来自目标轨道；部署的 S2-2Stage Student 只输入目标轨道，并蒸馏 policy 和 shared-memory evidence。当前主模型使用几何无掩膜训练，训练时不排除畸变像素；推理完成后，对同一次预测分别计算 TargetValid（目标轨道几何码 0）、BothValid（双轨几何码均 0）、Overall（不排除）和 G10（目标轨道畸变、互补轨道有效）。请保留原版详细网络图的全部 Teacher/Student 路径，不要退回简化概念图；TGD 辅助支路在主模型中未启用，应在可编辑结构图内清楚标成可选支路或给出只对应主模型的详图。除非我另行要求，不要在论文中展开数据集划分、模型选择或验证集问题；当前工作重点是方法、机制、对比、区域评价与图表。
+
+请先完善论文现有结构。主对比表保持五个左右有代表性的对照加 Ours，以 TargetValid 为主，同时列出 Overall；旧 DIS2 的历史 Overall AUPRC 87.33%、IoU 61.77% 必须保留，不能用新训练但低分的 DIS2-Port 替换。请在代码项目中查找旧 DIS2 对应的完整逐像素预测概率、样本顺序和几何掩膜，按同一定义补算 TargetValid、BothValid、G10 的 AUPRC、IoU、F1；若找不到，就保持格子空白，并明确需要什么文件。旧 TGD 与当前 G10 只有在区域定义核对一致后才可合并。
+
+请针对当前 CG0/S2-2Stage 配置补齐能够说明方法确实有用的实验，并直接更新论文表格。损失组成至少对比 segmentation only、加入 policy distillation、加入 shared-memory evidence distillation、两项同时加入；搜索机制至少对比 learned search、center/fixed sampling、random offsets、去掉搜索模块，以及 correctly paired counter、counter shuffle、self-guided Teacher。尽量保持骨干网络、训练像素范围、推理输入与评价区域一致，说明每项是重训还是推理干预。每行给出 Overall、TargetValid、BothValid、G10 的 AUPRC、IoU、F1，并保存计算脚本和原始输出。旧版 loss composition、CG10 搜索消融及 loss 权重曲线已放在稿中作历史结构参考，不要把它们说成当前 S2-2Stage 的新结果。如有当前主模型的 loss 权重扫描，请用真实逐设置数值重画曲线，替换旧图；如果没有，旧图可以保留但须继续注明所属版本。不要把 10% 或 20% 的具体选择写成论文的中心结论。
+
+请完善图片，而不只是提出制图计划。现稿已有详细网络图、SAR/几何/真值/S0/Multi2Uni/Ours 总览图、搜索对齐图和旧版 loss 曲线。请从当前项目原始图层制作清晰的 2–3 个代表性预测场景，并重点补一张 G10 畸变区局部放大图：同一场景中给目标 SAR、互补 SAR（只用于解释）、几何码、滑坡真值、S0、至少一个外部对照、Ours 的**未灰化原始预测**，用统一颜色标出 TP、FP、FN 和评价区域。现有 C 类候选图在目标无效像素上是灰色，不能拿它直接证明 G10 的预测。请另制作能够解释搜索模块的真实机制图，显示目标 SAR 上的查询点、Teacher 与 Student 在不同 FPN 尺度的采样位置与权重；如果采样点高度重合，请如实展示，改用尺度或权重分配说明，不要夸大位移。图件需提供原始图层、场景编号与裁图坐标、可直接入稿的英文图注、300 dpi PNG 和矢量 PDF。没有数据的图片位置可在论文里留清楚的占位，不得生成貌似真实的结果。
+
+请交付已更新的 LaTeX、重新编译并检查的 PDF、所有新增 CSV/图和来源说明。每次替换数值前，先确认 `evidence/earlier_package/` 的历史实验与 `evidence/20260929_package/` 的当前主实验是否真正同配置；不能核实就分开报告。完成后向我说明论文目前已经成形的部分、仍需我提供的最少原始材料，以及哪个结论最需要进一步实验支持。请尽可能在当前代码项目中自行找齐并处理，不要让我重复制作项目里已经存在的数据或图片。

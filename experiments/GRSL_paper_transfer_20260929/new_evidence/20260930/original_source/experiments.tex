@@ -1,0 +1,138 @@
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Data and Evaluation Regions}
+We use 1,713 paired ascending (ASC) and descending (DESC) Sentinel-1 locations from the 2021 Haiti landslide-change dataset \cite{Bralet2024DataPort}. Each orbit contributes pre/post-event VV and VH channels and an orbit identifier in a $128\times128$ patch. The Student receives only the target orbit at inference. Our principal models train on all labelled pixels, with neither geometry codes as inputs nor a geometry mask on the segmentation or distillation losses. We run the model once and apply the geometry mask only when computing regional metrics.
+
+Let $g_t,g_c\in\{0,1,2,3\}$ be target and counter geometry codes, where zero denotes valid geometry and positive values denote layover and/or shadow. The primary \emph{TargetValid} region has $g_t=0$. \emph{Overall} includes all pixels; \emph{BothValid} has $g_t=g_c=0$; and $G_{10}$ has $g_t>0,g_c=0$. Thus, TargetValid measures mapping where the deployed target view is geometrically valid, while Overall and $G_{10}$ check behavior when target-distorted pixels are retained. AUPRC uses prediction scores; IoU and F1 use a 0.5 threshold. The Student uses a ConvNeXt-Tiny/FPN backbone, Adam, learning rate $5\times10^{-5}$, and batch size 16.
+
+\subsection{Primary Comparison on Valid Target Geometry}
+Table~\ref{tab:primary} puts TargetValid first and also shows Overall results from the same inference outputs. The five comparison rows cover a target-only in-project baseline, a SAR segmentation architecture, two distillation approaches, and DIS2. The external methods are adaptations to the target-only input setting. Ours is the two-stage geometry-free Search-KD Student. It improves TargetValid AUPRC and IoU over S0 by 1.21 and 2.38 percentage points, respectively, and over Multi2Uni by 0.52 and 1.17 points. On Overall, its gains over S0 are 1.17 AUPRC points and 2.18 IoU points.
+
+\begin{table}[t]
+\caption{Target-valid primary comparison and full-region check (\%). For rows with both regions, the same predictions are scored twice. The archived DIS2 record provides only Overall metrics; its TargetValid cells remain unfilled.}
+\label{tab:primary}
+\centering\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Method & \multicolumn{2}{c}{TargetValid} & \multicolumn{2}{c}{Overall}\\
+ & AUPRC & IoU & AUPRC & IoU\\
+\midrule
+S0 target-only & 87.55 & 62.27 & 87.98 & 62.91\\
+Boehm SAR U-Net++ \cite{Boehm2022} & 78.67 & 53.74 & 79.33 & 54.26\\
+Hinton-KD port \cite{Hinton2015} & 87.63 & 63.66 & 88.07 & 64.23\\
+Multi2Uni port & 88.24 & 63.48 & 88.63 & 64.00\\
+DIS2 (archived) \cite{Kieu2026DIS2} & -- & -- & 87.33 & 61.77\\
+\midrule
+\textbf{Ours} & \textbf{88.77} & \textbf{64.65} & \textbf{89.16} & \textbf{65.10}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The archived DIS2 values are retained from the earlier experiment record. Its regional predictions or region-specific scores are not present in the current materials, so a TargetValid value cannot be inferred from its Overall score. In the stricter BothValid region, S0 achieves 86.91\% AUPRC and 61.34\% IoU, while Ours reaches 88.15\% and 63.72\%. These results confirm the primary gain where both observations have valid geometry.
+
+\subsection{Target-Distorted Region}
+Table~\ref{tab:g10} examines $G_{10}$, where the target orbit is distorted but the counter orbit is valid. This is a regional prediction diagnostic; the counter observation is not available to the deployed Student. Ours improves over S0 by 1.13 AUPRC points and 1.50 IoU points. The older DIS2 report gives 88.02\% AUPRC and 62.90\% IoU for its TGD region, but its exact region definition is not recorded as $G_{10}$ in the current package; we therefore keep it outside this table until the region masks can be matched.
+
+\begin{table}[t]
+\caption{Target-distorted/counter-valid $G_{10}$ diagnostic (\%). All listed models use target-only inference.}
+\label{tab:g10}
+\centering\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+Method & AUPRC & IoU & F1\\
+\midrule
+S0 target-only & 88.82 & 64.14 & 78.15\\
+Boehm SAR U-Net++ & 81.38 & 55.76 & 71.60\\
+Hinton-KD port & 88.96 & 65.28 & 78.99\\
+Multi2Uni port & 89.36 & 64.89 & 78.71\\
+\midrule
+\textbf{Ours} & \textbf{89.96} & \textbf{65.64} & \textbf{79.26}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{Qualitative Results and Counter Guidance}
+Fig.~\ref{fig:qualitative} restores a direct image, annotation, and prediction comparison using September 29 outputs. The first row shows a scene with extensive mapped landslides, and the second shows a sparse case. Green marks landslide in the annotation and predictions. The geometry panel depicts both-valid pixels in pale green, target-invalid pixels in violet, and counter-invalid pixels in orange. These whole-scene panels provide context; regional metrics above use pixelwise masks rather than treating each entire patch as belonging to one region. The maps show visual differences in detected landslide extent, while aggregate results in Tables~\ref{tab:primary}--\ref{tab:g10} provide the quantitative comparison.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_qualitative_20260929.png}
+\caption{September 29 qualitative examples: target SAR, geometry code, landslide ground truth, and target-only predictions. Rows show two candidate scenes; columns show S0, Multi2Uni, and our Student predictions against the same ground truth. Green denotes mapped landslide.}
+\label{fig:qualitative}
+\end{figure*}
+
+Counter guidance is isolated by comparing self-guided and counter-guided Teachers trained without geometry masking (Table~\ref{tab:teacher_search}). The latter raises Overall AUPRC from 88.15\% to 89.48\% and IoU from 63.21\% to 65.65\%; target-distorted IoU rises from 63.94\% to 67.04\%. The Teacher is a training-time reference rather than a deployable single-orbit competitor.
+
+\begin{table}[t]
+\caption{Teacher guidance ablation without geometry masking (\%). TGD is the recorded target-distorted diagnostic.}
+\label{tab:teacher_search}
+\centering\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+Teacher & Overall AUPRC & Overall IoU & TGD IoU\\
+\midrule
+Self guided & 88.15 & 63.21 & 63.94\\
+Counter guided & \textbf{89.48} & \textbf{65.65} & \textbf{67.04}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{Search and Distillation Mechanisms}
+Two complementary analyses address whether the proposed components contribute beyond the backbone. In the September 29 package, our Student's policy is closer to the correctly paired counter-guided Teacher than a counter-shuffled policy on TargetValid queries (JS distance 0.028 versus 0.052). The same target-memory retrieval comparison gives cosine distance 0.006 versus 0.036 (Fig.~\ref{fig:search_alignment}). This measures alignment, not segmentation accuracy, so it is paired with the intervention results below.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_search_alignment_20260929.pdf}
+\caption{TargetValid search alignment in the September 29 package. ``Shuffled'' denotes the Teacher policy generated with mismatched counter context. Each evidence distance compares retrievals from the same Student target memory; smaller is closer to the correctly paired Teacher.}
+\label{fig:search_alignment}
+\end{figure}
+
+Table~\ref{tab:search_intervention} restores the earlier search intervention study. Replacing learned offsets with random ones markedly reduces performance; fixing samples at the center causes a smaller drop. The counter shuffle is a separate disruption of the complementary guidance. These rows were recorded for the earlier CG10 Teacher configuration, so they establish the intended ablation layout but are not combined numerically with the geometry-free CG0/S2-2Stage main comparison. A matched CG0 search intervention remains to be filled.
+
+\begin{table}[t]
+\caption{Earlier CG10 Teacher search interventions (\%). TGD is the recorded target-distorted region; matched CG0 TargetValid results are pending.}
+\label{tab:search_intervention}
+\centering\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrr}
+\toprule
+Search condition & Overall AUPRC & TGD IoU\\
+\midrule
+Learned offsets & 90.12 & 68.84\\
+Center sampling & 89.95 & 68.55\\
+Random offsets & 86.69 & 60.04\\
+Shuffled counter & 77.86 & 49.76\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Table~\ref{tab:loss_parts} restores the earlier policy/evidence loss decomposition. Policy-only alignment does not improve segmentation, whereas evidence-only improves TGD IoU and the combined losses have the highest AUPRC among these rows. This is an earlier Student run; the principal two-stage Student's matched loss-component ablation, including TargetValid and Overall metrics, is the remaining experiment needed to attach this causal claim directly to the main model.
+
+\begin{table}[t]
+\caption{Earlier Student loss-component study (\%). P and E denote policy and shared-memory evidence distillation. Matched S2-2Stage results are pending.}
+\label{tab:loss_parts}
+\centering\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrr}
+\toprule
+Loss components & Overall AUPRC & TGD IoU\\
+\midrule
+Segmentation only & 87.98 & 64.14\\
+Segmentation + P & 87.42 & 62.94\\
+Segmentation + E & 88.60 & 65.04\\
+Segmentation + P + E & 88.82 & 65.13\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_kd_sensitivity.png}
+\caption{Earlier Student sensitivity to the initial distillation-to-segmentation loss weight. Left: Overall AUPRC; right: F1 on the recorded $\Omega_{TR}$ diagnostic. The response is non-monotonic. Points are completed earlier experiments, connected only to show the trend; the highlighted setting is not a new result for S2-2Stage.}
+\label{fig:kd_sensitivity}
+\end{figure}
+\FloatBarrier

@@ -1,0 +1,3 @@
+﻿Region,S0_FN_to_Ours_TP,S0_TP_to_Ours_FN,S0_FP_to_Ours_TN,S0_TN_to_Ours_FP,net_positive_pixel_transitions,net_error_reduction
+TargetValid,36969,17115,22663,26693,19854,15824
+BothValid,27975,13208,17389,20196,14767,11960

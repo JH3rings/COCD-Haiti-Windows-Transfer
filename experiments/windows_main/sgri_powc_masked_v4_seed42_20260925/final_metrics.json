@@ -1,0 +1,820 @@
+{
+  "protocol": "v4 train=1370/test=343/no validation; Adam 5e-5 batch16; test raw Overall AUPRC monitor; patience2; max100; seed42; target geometry>0 excluded from all new Student segmentation losses and KD queries",
+  "geometry": {
+    "0": "valid",
+    "1": "layover",
+    "2": "shadow",
+    "3": "layover+shadow"
+  },
+  "teacher_guide": "masked CG reused from legacy 1233/137 split; frozen; not retrained",
+  "metrics": {
+    "S0-mask": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8700671615770137,
+          "IoU": 0.6183819198522295,
+          "F1": 0.7641977610682804,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8765388222587155,
+          "IoU": 0.627248783659427,
+          "F1": 0.7709316362171038,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8709321255853287,
+          "IoU": 0.6179658958559315,
+          "F1": 0.7638800019687894,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8494415189781834,
+          "IoU": 0.5801420031992489,
+          "F1": 0.7342909713489789,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8719814832910743,
+          "IoU": 0.6193030812228805,
+          "F1": 0.7649007630556589,
+          "pixels": 11239424
+        }
+      },
+      "monitor_raw_overall_ap": 0.8719814832910743,
+      "best_epoch": 18
+    },
+    "S2-mask": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.861978779600979,
+          "IoU": 0.6053268765133061,
+          "F1": 0.7541478129713338,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.868772848237172,
+          "IoU": 0.615137027270069,
+          "F1": 0.7617149714037373,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8652243388370524,
+          "IoU": 0.60678429163391,
+          "F1": 0.7552778487980885,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8523176502107458,
+          "IoU": 0.5720964919828716,
+          "F1": 0.7278134578893326,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8666991077787933,
+          "IoU": 0.6085908762391659,
+          "F1": 0.7566757778236712,
+          "pixels": 11239424
+        }
+      },
+      "monitor_raw_overall_ap": 0.8666991077787933,
+      "best_epoch": 9
+    },
+    "SGRI-A1": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8655136392931477,
+          "IoU": 0.6033041684121832,
+          "F1": 0.7525760617333885,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8725432635421934,
+          "IoU": 0.6144513797084872,
+          "F1": 0.7611890793756023,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.869617122602105,
+          "IoU": 0.6085331826052561,
+          "F1": 0.7566311832245165,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8586056667188834,
+          "IoU": 0.5842212598244435,
+          "F1": 0.737550081721772,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8710186814863765,
+          "IoU": 0.6104490406104044,
+          "F1": 0.7581103471352654,
+          "pixels": 11239424
+        }
+      },
+      "monitor_raw_overall_ap": 0.8710186814863765,
+      "best_epoch": 10,
+      "guided_path_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8801247668227651,
+          "IoU": 0.6166996493290705,
+          "F1": 0.7629118365739741,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.883601132088314,
+          "IoU": 0.6228332159614366,
+          "F1": 0.7675874634996835,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8834147269215641,
+          "IoU": 0.6207117501715628,
+          "F1": 0.7659742703856579,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8830398667130344,
+          "IoU": 0.6119640576802735,
+          "F1": 0.7592775468715247,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8845944816951076,
+          "IoU": 0.6224688110784127,
+          "F1": 0.7673106648684037,
+          "pixels": 11239424
+        }
+      }
+    },
+    "SGRI-A2": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8701286641305375,
+          "IoU": 0.6174847628035234,
+          "F1": 0.763512308744425,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8762160713766772,
+          "IoU": 0.6267644299746078,
+          "F1": 0.7705656927652285,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8711116128147125,
+          "IoU": 0.6157013621480103,
+          "F1": 0.7621474816725536,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8524588841807673,
+          "IoU": 0.5695919411686587,
+          "F1": 0.7257834679560882,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8723040215263145,
+          "IoU": 0.6172669006150512,
+          "F1": 0.7633457413619271,
+          "pixels": 11239424
+        }
+      },
+      "monitor_raw_overall_ap": 0.8723040215263145,
+      "best_epoch": 16,
+      "guided_path_metrics": {
+        "BothValid": {
+          "AUPRC": 0.3232649726029023,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.3331748724155203,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.3441440819914555,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.4167093527231907,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.345240379322767,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 11239424
+        }
+      }
+    },
+    "POWC-B1": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8700618257637187,
+          "IoU": 0.6247606424784466,
+          "F1": 0.7690494539865548,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8755636473860514,
+          "IoU": 0.6335815057592102,
+          "F1": 0.7756962276146142,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.869251052272186,
+          "IoU": 0.6220565622537899,
+          "F1": 0.7669973744805353,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.844714251567156,
+          "IoU": 0.5742680573809136,
+          "F1": 0.7295683281998554,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.870524685486076,
+          "IoU": 0.6236744408928797,
+          "F1": 0.7682259758303679,
+          "pixels": 11239424
+        }
+      },
+      "monitor_raw_overall_ap": 0.870524685486076,
+      "best_epoch": 19,
+      "paired_guided_metrics": {
+        "BothValid": {
+          "AUPRC": 0.890084427088384,
+          "IoU": 0.6438706735842625,
+          "F1": 0.7833592799370036,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8912016248476348,
+          "IoU": 0.6441158158212446,
+          "F1": 0.783540684449295,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8900773862731662,
+          "IoU": 0.6414109917718945,
+          "F1": 0.7815361234781238,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8855197454167654,
+          "IoU": 0.6303288324791623,
+          "F1": 0.7732536159845148,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.891223971770714,
+          "IoU": 0.6430727434092964,
+          "F1": 0.7827684391805462,
+          "pixels": 11239424
+        }
+      }
+    },
+    "POWC-B2": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8645078603604686,
+          "IoU": 0.6130484926026596,
+          "F1": 0.7601116710552249,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8711879286967618,
+          "IoU": 0.6227327130647112,
+          "F1": 0.7675111348296063,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8672013396761427,
+          "IoU": 0.6147704809654105,
+          "F1": 0.7614338857592472,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8522750682293031,
+          "IoU": 0.5818616691991343,
+          "F1": 0.7356669429808227,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8685291155197323,
+          "IoU": 0.6163977095262818,
+          "F1": 0.7626807510225063,
+          "pixels": 11239424
+        }
+      },
+      "monitor_raw_overall_ap": 0.8685291155197323,
+      "best_epoch": 15,
+      "paired_guided_metrics": {
+        "BothValid": {
+          "AUPRC": 0.47732380707581623,
+          "IoU": 0.0003120092354733635,
+          "F1": 0.0006238238321497879,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.4948609383750454,
+          "IoU": 0.00041755956132609955,
+          "F1": 0.0008347705562249339,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.4997663656680351,
+          "IoU": 0.0003829940496421113,
+          "F1": 0.0007656948427156208,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.5300133588167831,
+          "IoU": 0.00024044085155050293,
+          "F1": 0.00048076610728877274,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.5035363193931417,
+          "IoU": 0.0003966942960764061,
+          "F1": 0.0007930739842269027,
+          "pixels": 11239424
+        }
+      }
+    },
+    "SG-Teacher": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8676048074482053,
+          "IoU": 0.6148854184101828,
+          "F1": 0.761522039149407,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8741744762795703,
+          "IoU": 0.6240371136405487,
+          "F1": 0.7685010501289172,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8695069639145092,
+          "IoU": 0.6152011661678336,
+          "F1": 0.761764143134489,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8517637009847152,
+          "IoU": 0.5788633171747961,
+          "F1": 0.7332659019662436,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8706553641651856,
+          "IoU": 0.6165777800679251,
+          "F1": 0.7628185759698093,
+          "pixels": 11239424
+        }
+      },
+      "best_epoch": 15,
+      "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\SG_seed42_bestval.pt",
+      "context": "self",
+      "protocol_status": "legacy masked train=1233/validation=137; reused without retraining"
+    },
+    "CG-Teacher": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8871588218595627,
+          "IoU": 0.6370608974950503,
+          "F1": 0.778298349767989,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8918426496556497,
+          "IoU": 0.6444606157447539,
+          "F1": 0.783795743813404,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.889184363120332,
+          "IoU": 0.6387859521816956,
+          "F1": 0.7795843640608314,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8787058211756286,
+          "IoU": 0.6154768529939577,
+          "F1": 0.761975452453307,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8898091480677163,
+          "IoU": 0.6397171299570186,
+          "F1": 0.7802774250138953,
+          "pixels": 11239424
+        }
+      },
+      "best_epoch": 27,
+      "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\CG_seed42_bestval.pt",
+      "context": "counter",
+      "protocol_status": "legacy masked train=1233/validation=137; reused without retraining"
+    },
+    "CG-shuffle": {
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8029950039733383,
+          "IoU": 0.500358688883285,
+          "F1": 0.6669854250062048,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.816591055148822,
+          "IoU": 0.5137735551186113,
+          "F1": 0.6787984284457325,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8156056539380747,
+          "IoU": 0.5098719104469628,
+          "F1": 0.6753843248809457,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8138742970192286,
+          "IoU": 0.4938405562074754,
+          "F1": 0.6611690305975161,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8175374776817323,
+          "IoU": 0.5120077461395031,
+          "F1": 0.6772554538120249,
+          "pixels": 11239424
+        }
+      },
+      "best_epoch": 27,
+      "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\CG_seed42_bestval.pt",
+      "context": "batchwise counter permutation; fixed seed 42+1701",
+      "protocol_status": "diagnostic intervention; no retraining"
+    }
+  },
+  "mechanisms": {
+    "S2-mask": {
+      "policy_js": 0.021688781870884813,
+      "evidence_distance": 0.006871252037088132,
+      "query_pixels": 0.8574825145981528,
+      "both_valid_queries": 0.7381155843084509
+    },
+    "SGRI-A1": {
+      "best_epoch_train_diagnostics": {
+        "self_loss": 0.015029621807901834,
+        "guide_loss": 0.014649719175618098,
+        "guide_benefit": -0.00037990263228373535,
+        "guide_alpha": 0.9375,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": 0.05353598624235925
+      },
+      "best_self_path_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8655136392931477,
+          "IoU": 0.6033041684121832,
+          "F1": 0.7525760617333885,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8725432635421934,
+          "IoU": 0.6144513797084872,
+          "F1": 0.7611890793756023,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.869617122602105,
+          "IoU": 0.6085331826052561,
+          "F1": 0.7566311832245165,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8586056667188834,
+          "IoU": 0.5842212598244435,
+          "F1": 0.737550081721772,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8710186814863765,
+          "IoU": 0.6104490406104044,
+          "F1": 0.7581103471352654,
+          "pixels": 11239424
+        }
+      },
+      "guided_path_test_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8801247668227651,
+          "IoU": 0.6166996493290705,
+          "F1": 0.7629118365739741,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.883601132088314,
+          "IoU": 0.6228332159614366,
+          "F1": 0.7675874634996835,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8834147269215641,
+          "IoU": 0.6207117501715628,
+          "F1": 0.7659742703856579,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8830398667130344,
+          "IoU": 0.6119640576802735,
+          "F1": 0.7592775468715247,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8845944816951076,
+          "IoU": 0.6224688110784127,
+          "F1": 0.7673106648684037,
+          "pixels": 11239424
+        }
+      },
+      "best_alpha": 0.9375,
+      "internalization_ap_gap_bothvalid": -0.014611127529617352
+    },
+    "SGRI-A2": {
+      "best_epoch_train_diagnostics": {
+        "self_loss": 0.014572385853475344,
+        "guide_loss": 0.4083857286272114,
+        "guide_benefit": 0.39381334310984567,
+        "guide_alpha": 0.5625,
+        "paired_loss": null,
+        "single_loss": null,
+        "beneficial_ratio": 0.058367201732290395
+      },
+      "best_self_path_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8701286641305375,
+          "IoU": 0.6174847628035234,
+          "F1": 0.763512308744425,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8762160713766772,
+          "IoU": 0.6267644299746078,
+          "F1": 0.7705656927652285,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8711116128147125,
+          "IoU": 0.6157013621480103,
+          "F1": 0.7621474816725536,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8524588841807673,
+          "IoU": 0.5695919411686587,
+          "F1": 0.7257834679560882,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8723040215263145,
+          "IoU": 0.6172669006150512,
+          "F1": 0.7633457413619271,
+          "pixels": 11239424
+        }
+      },
+      "guided_path_test_metrics": {
+        "BothValid": {
+          "AUPRC": 0.3232649726029023,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.3331748724155203,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.3441440819914555,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.4167093527231907,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.345240379322767,
+          "IoU": 0.0,
+          "F1": 0.0,
+          "pixels": 11239424
+        }
+      },
+      "best_alpha": 0.5625,
+      "internalization_ap_gap_bothvalid": 0.5468636915276351
+    },
+    "POWC-B1": {
+      "best_epoch_train_diagnostics": {
+        "self_loss": null,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "guide_alpha": null,
+        "paired_loss": 0.01156724649906839,
+        "single_loss": 0.014934794350612388,
+        "beneficial_ratio": null
+      },
+      "single_path_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8700618257637187,
+          "IoU": 0.6247606424784466,
+          "F1": 0.7690494539865548,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8755636473860514,
+          "IoU": 0.6335815057592102,
+          "F1": 0.7756962276146142,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.869251052272186,
+          "IoU": 0.6220565622537899,
+          "F1": 0.7669973744805353,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.844714251567156,
+          "IoU": 0.5742680573809136,
+          "F1": 0.7295683281998554,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.870524685486076,
+          "IoU": 0.6236744408928797,
+          "F1": 0.7682259758303679,
+          "pixels": 11239424
+        }
+      },
+      "paired_guided_metrics": {
+        "BothValid": {
+          "AUPRC": 0.890084427088384,
+          "IoU": 0.6438706735842625,
+          "F1": 0.7833592799370036,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8912016248476348,
+          "IoU": 0.6441158158212446,
+          "F1": 0.783540684449295,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8900773862731662,
+          "IoU": 0.6414109917718945,
+          "F1": 0.7815361234781238,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8855197454167654,
+          "IoU": 0.6303288324791623,
+          "F1": 0.7732536159845148,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.891223971770714,
+          "IoU": 0.6430727434092964,
+          "F1": 0.7827684391805462,
+          "pixels": 11239424
+        }
+      },
+      "paired_minus_single_ap_bothvalid": 0.020022601324665268
+    },
+    "POWC-B2": {
+      "best_epoch_train_diagnostics": {
+        "self_loss": null,
+        "guide_loss": null,
+        "guide_benefit": null,
+        "guide_alpha": null,
+        "paired_loss": 0.29031266723961935,
+        "single_loss": 0.015295635611235602,
+        "beneficial_ratio": 0.07636981279305789
+      },
+      "single_path_metrics": {
+        "BothValid": {
+          "AUPRC": 0.8645078603604686,
+          "IoU": 0.6130484926026596,
+          "F1": 0.7601116710552249,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.8711879286967618,
+          "IoU": 0.6227327130647112,
+          "F1": 0.7675111348296063,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8672013396761427,
+          "IoU": 0.6147704809654105,
+          "F1": 0.7614338857592472,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.8522750682293031,
+          "IoU": 0.5818616691991343,
+          "F1": 0.7356669429808227,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8685291155197323,
+          "IoU": 0.6163977095262818,
+          "F1": 0.7626807510225063,
+          "pixels": 11239424
+        }
+      },
+      "paired_guided_metrics": {
+        "BothValid": {
+          "AUPRC": 0.47732380707581623,
+          "IoU": 0.0003120092354733635,
+          "F1": 0.0006238238321497879,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.4948609383750454,
+          "IoU": 0.00041755956132609955,
+          "F1": 0.0008347705562249339,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.4997663656680351,
+          "IoU": 0.0003829940496421113,
+          "F1": 0.0007656948427156208,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.5300133588167831,
+          "IoU": 0.00024044085155050293,
+          "F1": 0.00048076610728877274,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.5035363193931417,
+          "IoU": 0.0003966942960764061,
+          "F1": 0.0007930739842269027,
+          "pixels": 11239424
+        }
+      },
+      "paired_minus_single_ap_bothvalid": -0.38718405328465233
+    }
+  },
+  "best_epochs": {
+    "S0-mask": 18,
+    "S2-mask": 9,
+    "SGRI-A1": 10,
+    "SGRI-A2": 16,
+    "POWC-B1": 19,
+    "POWC-B2": 15
+  },
+  "teacher_deltas": {
+    "CG_minus_SG": {
+      "BothValid": {
+        "AUPRC": 0.0195540144113574,
+        "IoU": 0.0221754790848675,
+        "F1": 0.01677631061858198
+      },
+      "TargetValid": {
+        "AUPRC": 0.0176681733760794,
+        "IoU": 0.020423502104205182,
+        "F1": 0.015294693684486771
+      }
+    },
+    "CG_minus_shuffle": {
+      "BothValid": {
+        "AUPRC": 0.0841638178862244,
+        "IoU": 0.1367022086117653,
+        "F1": 0.11131292476178412
+      },
+      "TargetValid": {
+        "AUPRC": 0.07525159450682772,
+        "IoU": 0.13068706062614255,
+        "F1": 0.10499731536767154
+      }
+    }
+  },
+  "tgd_role": "TGD_G10 is diagnostic only and excluded from optimization; OverallValid is target valid OR counter valid.",
+  "test_selection_risk": "Project v4 selects early stopping/best epoch using test AUPRC; region metrics are therefore not strictly untouched test estimates."
+}

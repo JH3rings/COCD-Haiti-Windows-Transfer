@@ -1,0 +1,331 @@
+{
+  "test_rows": 343,
+  "selected_checkpoints": {
+    "SG": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\SG_seed42_bestval.pt",
+      "best_epoch": 15,
+      "best_val_auprc": 0.9242308712546841
+    },
+    "CG": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\CG_seed42_bestval.pt",
+      "best_epoch": 27,
+      "best_val_auprc": 0.9298104755044624
+    },
+    "S0": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\S0_seed42_bestval.pt",
+      "best_epoch": 11,
+      "best_val_auprc": 0.9222807894544537
+    },
+    "S2": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\S2_seed42_bestval.pt",
+      "best_epoch": 12,
+      "best_val_auprc": 0.9193473677601669
+    },
+    "ReliabilityKD": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\ReliabilityKD_seed42_bestval.pt",
+      "best_epoch": 18,
+      "best_val_auprc": 0.9147230080946637
+    },
+    "StableEvidenceKD": {
+      "path": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\geometry_transfer_restored_v1\\StableEvidenceKD_seed42_bestval.pt",
+      "best_epoch": 11,
+      "best_val_auprc": 0.9189949309004309
+    }
+  },
+  "metrics": [
+    {
+      "method": "SG",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.8675940764221223,
+          "iou": 0.6145883963467913,
+          "f1": 0.7612942019518459
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8741603748608101,
+          "iou": 0.623772431079067,
+          "f1": 0.7683003050238892
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.869497826787366,
+          "iou": 0.614946573464389,
+          "f1": 0.7615689330640064
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8517485269671135,
+          "iou": 0.5786659416349137,
+          "f1": 0.7331075213187457
+        }
+      }
+    },
+    {
+      "method": "CG",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.8871526650369421,
+          "iou": 0.6368243461622873,
+          "f1": 0.7781217863636201
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8918363473736161,
+          "iou": 0.6442107469778402,
+          "f1": 0.7836109137188211
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.8891769530763066,
+          "iou": 0.63854973499543,
+          "f1": 0.779408421103687
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8786829275643486,
+          "iou": 0.6153025033572871,
+          "f1": 0.7618418198144666
+        }
+      }
+    },
+    {
+      "method": "CG_shuffle",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.8029840178909967,
+          "iou": 0.5000094683699539,
+          "f1": 0.6666750781707643
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8165651978676582,
+          "iou": 0.5133778447842556,
+          "f1": 0.6784529625933473
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.8155982731694217,
+          "iou": 0.509507016231091,
+          "f1": 0.6750641197946984
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8139037290380303,
+          "iou": 0.49360630404262695,
+          "f1": 0.6609590481049693
+        }
+      }
+    },
+    {
+      "method": "S0",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.8628141666396888,
+          "iou": 0.6108319273901676,
+          "f1": 0.7584055331912637
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8696672170205134,
+          "iou": 0.620633907156823,
+          "f1": 0.765914992131716
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.8668459246898295,
+          "iou": 0.6143250658436101,
+          "f1": 0.761092142874532
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8569840130404629,
+          "iou": 0.588219021864893,
+          "f1": 0.7407278339214353
+        }
+      }
+    },
+    {
+      "method": "S2",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.8618903961848561,
+          "iou": 0.6149753121039799,
+          "f1": 0.7615909710449629
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8686176603037289,
+          "iou": 0.6237857122677786,
+          "f1": 0.7683103792653713
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.8650820146081494,
+          "iou": 0.6163054097985504,
+          "f1": 0.7626100884586792
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8522683268173171,
+          "iou": 0.585217488538489,
+          "f1": 0.7383434624405132
+        }
+      }
+    },
+    {
+      "method": "ReliabilityKD",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.857993375034565,
+          "iou": 0.5929269377816313,
+          "f1": 0.744449628903849
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8652213360626807,
+          "iou": 0.6026315127072697,
+          "f1": 0.7520524886334358
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.8589741631714543,
+          "iou": 0.5903245339762268,
+          "f1": 0.7423950488621281
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8347047132353949,
+          "iou": 0.5395623284036326,
+          "f1": 0.7009294975466596
+        }
+      }
+    },
+    {
+      "method": "StableEvidenceKD",
+      "regions": {
+        "BothValid": {
+          "pixels": 9058636,
+          "positive_pixels": 480704,
+          "positive_fraction": 0.053065825804238076,
+          "auprc": 0.8607725087198466,
+          "iou": 0.6017307308973028,
+          "f1": 0.7513506675295866
+        },
+        "TargetValid": {
+          "pixels": 10098042,
+          "positive_pixels": 634588,
+          "positive_fraction": 0.06284267781813543,
+          "auprc": 0.8678850968579173,
+          "iou": 0.6120376572975462,
+          "f1": 0.7593341886639199
+        },
+        "OverallValid": {
+          "pixels": 11137448,
+          "positive_pixels": 788472,
+          "positive_fraction": 0.07079467396839922,
+          "auprc": 0.8647917730755464,
+          "iou": 0.6054541022635759,
+          "f1": 0.7542465367663965
+        },
+        "TGD_G10": {
+          "pixels": 1039406,
+          "positive_pixels": 153884,
+          "positive_fraction": 0.14804994391027182,
+          "auprc": 0.8528822468334041,
+          "iou": 0.5784160475651504,
+          "f1": 0.7329069475157173
+        }
+      }
+    }
+  ],
+  "mechanism_metrics": {
+    "S0": {
+      "policy_js_both": 0.049830836497924545,
+      "policy_js_target": 0.04911909608001059,
+      "evidence_both": 0.0157383690926839,
+      "evidence_target": 0.016587840562516994,
+      "reliability_alignment_both": null,
+      "stable_evidence_alignment_both": 0.984643898226998
+    },
+    "S2": {
+      "policy_js_both": 0.021959715014831585,
+      "policy_js_target": 0.021721149371428924,
+      "evidence_both": 0.006837841546670957,
+      "evidence_target": 0.007041260621256449,
+      "reliability_alignment_both": null,
+      "stable_evidence_alignment_both": 0.993430270390077
+    },
+    "ReliabilityKD": {
+      "policy_js_both": 0.04710687290538441,
+      "policy_js_target": 0.046365403146906334,
+      "evidence_both": 0.011918391016396608,
+      "evidence_target": 0.012722465548325668,
+      "reliability_alignment_both": 0.017297105525027622,
+      "stable_evidence_alignment_both": 0.9883559481664137
+    },
+    "StableEvidenceKD": {
+      "policy_js_both": 0.027330979535525494,
+      "policy_js_target": 0.026735213754529304,
+      "evidence_both": 0.006516552233899181,
+      "evidence_target": 0.006624621106311679,
+      "reliability_alignment_both": null,
+      "stable_evidence_alignment_both": 0.9937718998302113
+    }
+  },
+  "test_opened_after_checkpoint_lock": true
+}

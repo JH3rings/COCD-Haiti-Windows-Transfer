@@ -1,0 +1,258 @@
+{
+  "seat": "cdnette",
+  "epoch": 30,
+  "max_epochs": 200,
+  "loss": 0.025404946719104215,
+  "monitor": "test_auprc",
+  "monitor_value": 0.5908830519980894,
+  "best": 0.5917120464706392,
+  "best_epoch": 28,
+  "bad": 2,
+  "patience": 2,
+  "improved": false,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.22040376351269303,
+      "monitor": 0.16099345863417236,
+      "best": 0.16099345863417236,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 2,
+      "loss": 0.10529458205349715,
+      "monitor": 0.24170080535970137,
+      "best": 0.24170080535970137,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 3,
+      "loss": 0.08486884896161491,
+      "monitor": 0.30536206325651616,
+      "best": 0.30536206325651616,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 4,
+      "loss": 0.07336025552440015,
+      "monitor": 0.32571506073411716,
+      "best": 0.32571506073411716,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 5,
+      "loss": 0.0665894343448868,
+      "monitor": 0.35248852357822896,
+      "best": 0.35248852357822896,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 6,
+      "loss": 0.061634436822297044,
+      "monitor": 0.3837629367709025,
+      "best": 0.3837629367709025,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 7,
+      "loss": 0.05805396417641454,
+      "monitor": 0.39515397709107347,
+      "best": 0.39515397709107347,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 8,
+      "loss": 0.05457897773483616,
+      "monitor": 0.41992405456426385,
+      "best": 0.41992405456426385,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 9,
+      "loss": 0.052294916194294674,
+      "monitor": 0.39794962933646394,
+      "best": 0.41992405456426385,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 10,
+      "loss": 0.04957494071905831,
+      "monitor": 0.43680931448954835,
+      "best": 0.43680931448954835,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 11,
+      "loss": 0.04692105762298121,
+      "monitor": 0.45317183052091564,
+      "best": 0.45317183052091564,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 12,
+      "loss": 0.044867145272645854,
+      "monitor": 0.46183174546302797,
+      "best": 0.46183174546302797,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 13,
+      "loss": 0.04294711964907929,
+      "monitor": 0.47818082385982374,
+      "best": 0.47818082385982374,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 14,
+      "loss": 0.041074994755800134,
+      "monitor": 0.48460681448677634,
+      "best": 0.48460681448677634,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 15,
+      "loss": 0.0396342391795062,
+      "monitor": 0.49676148212628113,
+      "best": 0.49676148212628113,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 16,
+      "loss": 0.0383810279274845,
+      "monitor": 0.5070855356269405,
+      "best": 0.5070855356269405,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 17,
+      "loss": 0.036764417302066366,
+      "monitor": 0.5141593572801052,
+      "best": 0.5141593572801052,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 18,
+      "loss": 0.03514720505857224,
+      "monitor": 0.5189949253473093,
+      "best": 0.5189949253473093,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 19,
+      "loss": 0.034003426257433945,
+      "monitor": 0.5278838490866254,
+      "best": 0.5278838490866254,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 20,
+      "loss": 0.03336094596952287,
+      "monitor": 0.5363407855235905,
+      "best": 0.5363407855235905,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 21,
+      "loss": 0.03243542717885704,
+      "monitor": 0.5472343409732947,
+      "best": 0.5472343409732947,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 22,
+      "loss": 0.03180775745655863,
+      "monitor": 0.5490849755998638,
+      "best": 0.5490849755998638,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 23,
+      "loss": 0.030310197971609026,
+      "monitor": 0.5582291877454589,
+      "best": 0.5582291877454589,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 24,
+      "loss": 0.029191734659728314,
+      "monitor": 0.5673772019814314,
+      "best": 0.5673772019814314,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 25,
+      "loss": 0.028646441047887973,
+      "monitor": 0.5687794744506006,
+      "best": 0.5687794744506006,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 26,
+      "loss": 0.02794927232155888,
+      "monitor": 0.5784667791336943,
+      "best": 0.5784667791336943,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 27,
+      "loss": 0.027110859758496024,
+      "monitor": 0.5832576813886152,
+      "best": 0.5832576813886152,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 28,
+      "loss": 0.02637625982937791,
+      "monitor": 0.5917120464706392,
+      "best": 0.5917120464706392,
+      "bad": 0,
+      "improved": true
+    },
+    {
+      "epoch": 29,
+      "loss": 0.026012766351180463,
+      "monitor": 0.5902414416442836,
+      "best": 0.5917120464706392,
+      "bad": 1,
+      "improved": false
+    },
+    {
+      "epoch": 30,
+      "loss": 0.025404946719104215,
+      "monitor": 0.5908830519980894,
+      "best": 0.5917120464706392,
+      "bad": 2,
+      "improved": false
+    }
+  ],
+  "model": "best_monitored_epoch",
+  "early_stop": true,
+  "monitor_risk": "EARLY STOPPING MONITORS THE TEST PARTITION: the reported test AUPRC is the best-over-epochs value and is optimistically biased. Threshold stays fixed at 0.5; every method uses the identical rule."
+}

@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Mechanism and ablation}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+Method & Overall AP & TargetValid AP & BothValid AP & Overall IoU & TargetValid IoU & BothValid IoU \\
+\midrule
+SG Teacher & 0.8808 & 0.8750 & 0.8682 & 0.6326 & 0.6248 & 0.6164 \\
+CG Teacher & \textbf{0.9012} & \textbf{0.8958} & \textbf{0.8893} & \textbf{0.6662} & \textbf{0.6580} & \textbf{0.6482} \\
+CG + shuffled counter & 0.7786 & 0.7663 & 0.7515 & 0.4783 & 0.4705 & 0.4606 \\
+S0 Student & 0.8798 & 0.8755 & 0.8691 & 0.6291 & 0.6227 & 0.6134 \\
+S2-native & 0.8888 & 0.8848 & 0.8784 & 0.6423 & 0.6360 & 0.6267 \\
+S2-2Stage & \underline{0.8916} & \underline{0.8877} & \underline{0.8815} & \underline{0.6510} & \underline{0.6465} & \underline{0.6372} \\
+\bottomrule
+\end{tabular}}
+\end{table}

@@ -1,0 +1,7 @@
+{
+  "checkpoint": "experiments\\windows_main\\teacher_target_search_v2\\SG0_seed42.pt",
+  "sha256": "e196688720ac09932bcc406590d1209c04087500ce8beb6dc897e82c6ede8dc3",
+  "code": "cocd/windows_main/teacher_target_search_v2.py: ARMS SG0=(self,0)",
+  "normalization": "current training set mean/std from normalization.npz",
+  "distinction": "SG0 is independently trained; CG0:self-context is a frozen CG0 inference intervention"
+}

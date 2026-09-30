@@ -1,0 +1,17 @@
+\begin{table*}[!t]
+\caption{Current two-stage loss composition (\%). P: spatial-policy JS; E: shared-memory cosine loss. New single-component arms retain their canonical coefficient rather than reallocating the removed component weight. The combined row is the frozen principal model. Dashes denote unfinished retraining, never interim results.}
+\label{tab:loss_parts}
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+Condition & \multicolumn{3}{c}{TargetValid} & \multicolumn{3}{c}{Overall} & \multicolumn{3}{c}{BothValid} & \multicolumn{3}{c}{G10}\\
+ & AUPRC & IoU & F1 & AUPRC & IoU & F1 & AUPRC & IoU & F1 & AUPRC & IoU & F1\\
+\midrule
+Segmentation only & -- & -- & -- & -- & -- & -- & -- & -- & -- & -- & -- & --\\
+Segmentation + P & -- & -- & -- & -- & -- & -- & -- & -- & -- & -- & -- & --\\
+Segmentation + E & -- & -- & -- & -- & -- & -- & -- & -- & -- & -- & -- & --\\
+Segmentation + P + E (current) & 88.77 & 64.65 & 78.53 & 89.16 & 65.10 & 78.86 & 88.15 & 63.72 & 77.84 & 89.96 & 65.64 & 79.26\\
+\bottomrule
+\end{tabular}
+\end{table*}

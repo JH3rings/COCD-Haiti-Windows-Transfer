@@ -1,0 +1,40 @@
+\begin{table}[!t]
+\caption{Current search controls (\%). All changes except trained SG0 are frozen-weight inference interventions. Center retains weights; random retains the center candidate; no-search bypasses aggregation with projected P2. Full probabilities and intervention definitions are saved.}
+\label{tab:search_intervention}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.03}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & \multicolumn{3}{c}{TargetValid} & \multicolumn{3}{c}{Overall}\\
+ & AP & IoU & F1 & AP & IoU & F1\\
+\midrule
+CG0 paired & 89.04 & 65.01 & 78.79 & 89.48 & 65.65 & 79.26\\
+CG0 center & 88.91 & 64.77 & 78.62 & 89.34 & 65.38 & 79.07\\
+CG0 random & 86.85 & 57.42 & 72.95 & 87.40 & 58.27 & 73.63\\
+CG0 no search & 86.68 & 52.43 & 68.79 & 87.12 & 52.91 & 69.21\\
+CG0 shuffled & 81.73 & 51.45 & 67.94 & 82.54 & 52.08 & 68.49\\
+CG0 self context & 87.38 & 63.20 & 77.45 & 87.81 & 63.68 & 77.81\\
+SG0 trained & 87.74 & 62.72 & 77.09 & 88.15 & 63.21 & 77.46\\
+S2 learned & 88.77 & 64.65 & 78.53 & 89.16 & 65.10 & 78.86\\
+S2 center & 88.71 & 64.63 & 78.51 & 89.10 & 65.06 & 78.84\\
+S2 random & 86.96 & 58.72 & 73.99 & 87.43 & 59.27 & 74.43\\
+S2 no search & 87.90 & 64.31 & 78.28 & 88.31 & 64.79 & 78.63\\
+\midrule
+Condition & \multicolumn{3}{c}{BothValid} & \multicolumn{3}{c}{$G_{10}$}\\
+ & AP & IoU & F1 & AP & IoU & F1\\
+\midrule
+CG0 paired & 88.48 & 64.14 & 78.15 & 90.45 & 67.04 & 80.27\\
+CG0 center & 88.34 & 63.91 & 77.98 & 90.30 & 66.69 & 80.02\\
+CG0 random & 86.12 & 56.17 & 71.93 & 88.63 & 60.19 & 75.15\\
+CG0 no search & 85.97 & 51.26 & 67.78 & 88.01 & 53.29 & 69.53\\
+CG0 shuffled & 80.43 & 50.13 & 66.79 & 84.39 & 53.03 & 69.31\\
+CG0 self context & 86.72 & 62.28 & 76.75 & 88.67 & 64.42 & 78.36\\
+SG0 trained & 87.09 & 61.86 & 76.44 & 88.96 & 63.94 & 78.00\\
+S2 learned & 88.15 & 63.72 & 77.84 & 89.96 & 65.64 & 79.26\\
+S2 center & 88.10 & 63.71 & 77.83 & 89.91 & 65.59 & 79.22\\
+S2 random & 86.28 & 57.51 & 73.02 & 88.40 & 60.15 & 75.12\\
+S2 no search & 87.26 & 63.45 & 77.64 & 89.17 & 65.57 & 79.21\\
+\bottomrule
+\end{tabular}
+\end{table}

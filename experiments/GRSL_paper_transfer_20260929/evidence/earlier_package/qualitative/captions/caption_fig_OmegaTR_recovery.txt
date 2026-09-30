@@ -1,0 +1,1 @@
+Recovery on the fixed OmegaTR subset, defined as TGD pixels missed by SO but correctly predicted by the CG10 Teacher. White denotes OmegaTR, green recovered pixels, and red OmegaTR pixels still missed by S2.

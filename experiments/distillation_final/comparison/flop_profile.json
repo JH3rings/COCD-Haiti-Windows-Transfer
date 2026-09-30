@@ -1,0 +1,154 @@
+{
+  "input": "single 1x5x128x128 orbit; batch-one fvcore JIT trace",
+  "accounting": "fvcore-supported operators only; unsupported elementwise, sampling, softmax/attention, pad ops omitted; no claim of exact total FLOPs",
+  "Student_S0_Hinton_S2_inference": {
+    "supported_forward_flops": 1708154880.0,
+    "supported_forward_gflops": 1.70815488,
+    "unsupported_ops": {
+      "aten::gelu": 20,
+      "aten::mul": 79,
+      "aten::add_": 18,
+      "aten::add": 89,
+      "aten::div": 49,
+      "aten::softmax": 1,
+      "aten::tanh": 1,
+      "aten::sub": 48,
+      "aten::meshgrid": 12
+    }
+  },
+  "CG0_Teacher_two_orbit_pair_forward": {
+    "supported_forward_flops": 3460349952.0,
+    "supported_forward_gflops": 3.460349952,
+    "unsupported_ops": {
+      "aten::gelu": 22,
+      "aten::mul": 140,
+      "aten::add_": 18,
+      "aten::add": 184,
+      "aten::div": 98,
+      "aten::softmax": 2,
+      "aten::tanh": 2,
+      "aten::sub": 96,
+      "aten::meshgrid": 24
+    }
+  },
+  "S2_SearchKD_training_forward_pair": {
+    "supported_forward_flops": 6862503936.0,
+    "supported_forward_gflops": 6.862503936,
+    "unsupported_ops": {
+      "aten::gelu": 62,
+      "aten::mul": 606,
+      "aten::add_": 54,
+      "aten::add": 660,
+      "aten::div": 310,
+      "aten::softmax": 6,
+      "aten::tanh": 10,
+      "aten::sub": 388,
+      "aten::meshgrid": 76,
+      "aten::rsub": 50,
+      "aten::scatter_add_": 48,
+      "aten::sum": 8,
+      "aten::clamp_min": 12,
+      "aten::log": 8,
+      "aten::mean": 4,
+      "aten::cosine_similarity": 2
+    }
+  },
+  "DIS2_ASC_target_inference": {
+    "supported_forward_flops": 1729406976.0,
+    "supported_forward_gflops": 1.729406976,
+    "unsupported_ops": {
+      "aten::leaky_relu": 6,
+      "aten::leaky_relu_": 23,
+      "aten::add": 7,
+      "aten::softmax": 3,
+      "aten::mul": 11,
+      "aten::sum": 1,
+      "aten::div": 3,
+      "aten::unflatten": 2,
+      "aten::scaled_dot_product_attention": 2,
+      "aten::pad": 14
+    }
+  },
+  "DIS2_DESC_target_inference": {
+    "supported_forward_flops": 1729406976.0,
+    "supported_forward_gflops": 1.729406976,
+    "unsupported_ops": {
+      "aten::leaky_relu": 6,
+      "aten::leaky_relu_": 23,
+      "aten::add": 7,
+      "aten::softmax": 3,
+      "aten::mul": 11,
+      "aten::sum": 1,
+      "aten::div": 3,
+      "aten::unflatten": 2,
+      "aten::scaled_dot_product_attention": 2,
+      "aten::pad": 14
+    }
+  },
+  "DIS2_training_forward_one_direction_epoch6": {
+    "supported_forward_flops": 3822473216.0,
+    "supported_forward_gflops": 3.822473216,
+    "unsupported_ops": {
+      "aten::leaky_relu": 9,
+      "aten::softmax": 29,
+      "aten::leaky_relu_": 46,
+      "aten::add": 84,
+      "aten::mul": 100,
+      "aten::sum": 77,
+      "aten::div": 48,
+      "aten::unflatten": 4,
+      "aten::scaled_dot_product_attention": 4,
+      "aten::pad": 28,
+      "aten::linalg_vector_norm": 16,
+      "aten::clamp_min": 16,
+      "aten::expand_as": 16,
+      "aten::broadcast_tensors": 4,
+      "aten::mse_loss": 4,
+      "aten::sub": 1,
+      "aten::pow": 4,
+      "aten::mean": 28,
+      "aten::add_": 2,
+      "aten::log_softmax": 1,
+      "aten::kl_div": 1,
+      "aten::one_hot": 1,
+      "aten::rsub": 24,
+      "aten::log": 12
+    }
+  },
+  "DIS2_training_forward_reverse_direction_epoch6": {
+    "supported_forward_flops": 3822473216.0,
+    "supported_forward_gflops": 3.822473216,
+    "unsupported_ops": {
+      "aten::leaky_relu": 9,
+      "aten::softmax": 29,
+      "aten::leaky_relu_": 46,
+      "aten::add": 84,
+      "aten::mul": 100,
+      "aten::sum": 77,
+      "aten::div": 48,
+      "aten::unflatten": 4,
+      "aten::scaled_dot_product_attention": 4,
+      "aten::pad": 28,
+      "aten::linalg_vector_norm": 16,
+      "aten::clamp_min": 16,
+      "aten::expand_as": 16,
+      "aten::broadcast_tensors": 4,
+      "aten::mse_loss": 4,
+      "aten::sub": 1,
+      "aten::pow": 4,
+      "aten::mean": 28,
+      "aten::add_": 2,
+      "aten::log_softmax": 1,
+      "aten::kl_div": 1,
+      "aten::one_hot": 1,
+      "aten::rsub": 24,
+      "aten::log": 12
+    }
+  },
+  "params": {
+    "Student": 28271679,
+    "Teacher": 28321215,
+    "DIS2_full": 11320589,
+    "DIS2_deployment_paths_both_orbits": 8900476
+  }
+}

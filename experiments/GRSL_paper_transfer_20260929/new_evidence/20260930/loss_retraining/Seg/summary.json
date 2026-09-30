@@ -1,0 +1,431 @@
+{
+  "status": "COMPLETE",
+  "stopping_reason": "patience 2",
+  "protocol": {
+    "arm": "Seg",
+    "seed": 42,
+    "batch_size": 16,
+    "optimizer": {
+      "name": "Adam",
+      "lr": 5e-05,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0
+    },
+    "max_epochs": 100,
+    "patience": 2,
+    "selection_monitor": "test Overall AUPRC (locked project protocol)",
+    "validation_locations": 0,
+    "geometry_use": "none in training; posthoc metrics only",
+    "initialization": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\SO_backbone_seed42.pt",
+    "paired_teacher": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\teacher_target_search_v2\\CG0_seed42.pt",
+    "stage1_epochs": 5,
+    "calibration_epoch": 5,
+    "policy_enabled": false,
+    "evidence_enabled": false,
+    "component_coefficients": {
+      "policy": 0.0,
+      "evidence": 0.0
+    },
+    "ablation_control": "retain canonical per-component coefficient; do not reallocate disabled loss weight",
+    "canonical_source": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\distillation_final\\ours_s2_2stage\\train_s2_2stage.py",
+    "split": {
+      "train_locations": 1370,
+      "validation_locations": 0,
+      "test_locations": 343,
+      "train_rows": 4110
+    },
+    "execution_change": "omit diagnostic grad_norm calls, torch threads=4; same optimizer and losses"
+  },
+  "best_epoch": 30,
+  "metrics": {
+    "Overall": {
+      "AUPRC": 0.8868970875097122,
+      "IoU": 0.6407272837440934,
+      "F1": 0.7810283769792281,
+      "pixels": 11239424
+    },
+    "BothValid": {
+      "AUPRC": 0.8764118041509499,
+      "IoU": 0.6253852994838109,
+      "F1": 0.7695225245145512,
+      "pixels": 9058636
+    },
+    "TargetValid": {
+      "AUPRC": 0.8827827942911057,
+      "IoU": 0.6347960860057412,
+      "F1": 0.7766058304638146,
+      "pixels": 10098042
+    },
+    "G10": {
+      "AUPRC": 0.8950161793900676,
+      "IoU": 0.6510033703171387,
+      "F1": 0.7886154347366214,
+      "pixels": 1039406
+    },
+    "G01": {
+      "AUPRC": 0.9016825591471758,
+      "IoU": 0.6640660199268474,
+      "F1": 0.7981246080080884,
+      "pixels": 1039406
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "seg": 0.042906517855069284,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.042906517855069284,
+      "test_overall_auprc": 0.7546929976598918,
+      "seconds_since_start": 40.51622271537781
+    },
+    {
+      "epoch": 2,
+      "seg": 0.02351904674143266,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.02351904674143266,
+      "test_overall_auprc": 0.8466472516363246,
+      "seconds_since_start": 89.93287873268127
+    },
+    {
+      "epoch": 3,
+      "seg": 0.01929587556922569,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01929587556922569,
+      "test_overall_auprc": 0.8621353184386762,
+      "seconds_since_start": 139.1753969192505
+    },
+    {
+      "epoch": 4,
+      "seg": 0.018262923146590792,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.018262923146590792,
+      "test_overall_auprc": 0.8666337291966122,
+      "seconds_since_start": 188.74102592468262
+    },
+    {
+      "epoch": 5,
+      "seg": 0.017804206767507217,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.017804206767507217,
+      "test_overall_auprc": 0.8693890277339726,
+      "seconds_since_start": 237.92919254302979
+    },
+    {
+      "epoch": 6,
+      "seg": 0.01738500921871035,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01738500921871035,
+      "test_overall_auprc": 0.8715813110631875,
+      "seconds_since_start": 288.06869673728943
+    },
+    {
+      "epoch": 7,
+      "seg": 0.01718320087464037,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01718320087464037,
+      "test_overall_auprc": 0.8714128323286371,
+      "seconds_since_start": 336.9816334247589
+    },
+    {
+      "epoch": 8,
+      "seg": 0.01701898164804684,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01701898164804684,
+      "test_overall_auprc": 0.872687931547938,
+      "seconds_since_start": 376.75128531455994
+    },
+    {
+      "epoch": 9,
+      "seg": 0.016985411892086993,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016985411892086993,
+      "test_overall_auprc": 0.8734922191953476,
+      "seconds_since_start": 424.7625777721405
+    },
+    {
+      "epoch": 10,
+      "seg": 0.016899518448957297,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016899518448957297,
+      "test_overall_auprc": 0.8717157647151691,
+      "seconds_since_start": 473.44402027130127
+    },
+    {
+      "epoch": 11,
+      "seg": 0.016820304567748065,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016820304567748065,
+      "test_overall_auprc": 0.8751033107029499,
+      "seconds_since_start": 513.7229228019714
+    },
+    {
+      "epoch": 12,
+      "seg": 0.016639594906170823,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016639594906170823,
+      "test_overall_auprc": 0.8768648195212148,
+      "seconds_since_start": 563.2434828281403
+    },
+    {
+      "epoch": 13,
+      "seg": 0.016434785543718095,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016434785543718095,
+      "test_overall_auprc": 0.877059439729161,
+      "seconds_since_start": 612.2030653953552
+    },
+    {
+      "epoch": 14,
+      "seg": 0.016186704292915154,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016186704292915154,
+      "test_overall_auprc": 0.878751436051667,
+      "seconds_since_start": 661.7550761699677
+    },
+    {
+      "epoch": 15,
+      "seg": 0.01631491913338797,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01631491913338797,
+      "test_overall_auprc": 0.8785299215990064,
+      "seconds_since_start": 710.2261168956757
+    },
+    {
+      "epoch": 16,
+      "seg": 0.01626980529802739,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01626980529802739,
+      "test_overall_auprc": 0.8792857548791515,
+      "seconds_since_start": 750.2013311386108
+    },
+    {
+      "epoch": 17,
+      "seg": 0.016337077674213146,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.016337077674213146,
+      "test_overall_auprc": 0.8796869630018003,
+      "seconds_since_start": 799.135400056839
+    },
+    {
+      "epoch": 18,
+      "seg": 0.0161487817850801,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.0161487817850801,
+      "test_overall_auprc": 0.8801695414809773,
+      "seconds_since_start": 848.4294183254242
+    },
+    {
+      "epoch": 19,
+      "seg": 0.01603738703481411,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01603738703481411,
+      "test_overall_auprc": 0.881395551986104,
+      "seconds_since_start": 897.2609806060791
+    },
+    {
+      "epoch": 20,
+      "seg": 0.01603158530534575,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01603158530534575,
+      "test_overall_auprc": 0.8818314775598408,
+      "seconds_since_start": 946.2876415252686
+    },
+    {
+      "epoch": 21,
+      "seg": 0.01591215188368604,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01591215188368604,
+      "test_overall_auprc": 0.8818999033059696,
+      "seconds_since_start": 995.0009639263153
+    },
+    {
+      "epoch": 22,
+      "seg": 0.015872245263543836,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015872245263543836,
+      "test_overall_auprc": 0.8831962732581263,
+      "seconds_since_start": 1045.2683644294739
+    },
+    {
+      "epoch": 23,
+      "seg": 0.01572510026801189,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01572510026801189,
+      "test_overall_auprc": 0.8825919900742685,
+      "seconds_since_start": 1093.5949687957764
+    },
+    {
+      "epoch": 24,
+      "seg": 0.015648544794093486,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015648544794093486,
+      "test_overall_auprc": 0.883291024257279,
+      "seconds_since_start": 1133.139295578003
+    },
+    {
+      "epoch": 25,
+      "seg": 0.015742215341960845,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015742215341960845,
+      "test_overall_auprc": 0.8832709314580023,
+      "seconds_since_start": 1181.5189888477325
+    },
+    {
+      "epoch": 26,
+      "seg": 0.015732406080040923,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015732406080040923,
+      "test_overall_auprc": 0.8842107163660748,
+      "seconds_since_start": 1221.3452589511871
+    },
+    {
+      "epoch": 27,
+      "seg": 0.015622297353074969,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015622297353074969,
+      "test_overall_auprc": 0.8846886875035246,
+      "seconds_since_start": 1269.9286336898804
+    },
+    {
+      "epoch": 28,
+      "seg": 0.01551226405157338,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01551226405157338,
+      "test_overall_auprc": 0.8848467452341325,
+      "seconds_since_start": 1318.425153017044
+    },
+    {
+      "epoch": 29,
+      "seg": 0.01564480678383569,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01564480678383569,
+      "test_overall_auprc": 0.8857593366758962,
+      "seconds_since_start": 1366.8391284942627
+    },
+    {
+      "epoch": 30,
+      "seg": 0.015352065107945519,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015352065107945519,
+      "test_overall_auprc": 0.8868970875097122,
+      "seconds_since_start": 1415.0305433273315
+    },
+    {
+      "epoch": 31,
+      "seg": 0.01538775863233729,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.01538775863233729,
+      "test_overall_auprc": 0.8850971954454815,
+      "seconds_since_start": 1463.4225425720215
+    },
+    {
+      "epoch": 32,
+      "seg": 0.015377916652955665,
+      "policy": 0.0,
+      "evidence": 0.0,
+      "weighted_policy": 0.0,
+      "weighted_evidence": 0.0,
+      "total": 0.015377916652955665,
+      "test_overall_auprc": 0.8868524276447082,
+      "seconds_since_start": 1503.5075647830963
+    }
+  ],
+  "prediction_order": "for each ordered batch of 16 locations: ASC rows then DESC rows; see matched_prediction_index.csv"
+}

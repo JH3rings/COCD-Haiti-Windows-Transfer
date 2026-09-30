@@ -1,0 +1,20 @@
+\begin{table}[!t]
+\caption{Landslide segmentation (\%). Valid pixels exclude geometric distortion in the input orbit; all pixels retain it. DIS2 has only the available historical full-image record.}
+\label{tab:primary}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & \multicolumn{3}{c}{Valid pixels} & \multicolumn{3}{c}{All pixels}\\
+ & AUPRC & IoU & F1 & AUPRC & IoU & F1\\
+\midrule
+Baseline & 87.55 & 62.27 & 76.75 & 87.98 & 62.91 & 77.24\\
+SAR U-Net++ \cite{Boehm2022} & 78.67 & 53.74 & 69.91 & 79.33 & 54.26 & 70.35\\
+Logit distillation \cite{Hinton2015} & 87.63 & 63.66 & 77.79 & 88.07 & 64.23 & 78.22\\
+Online distillation \cite{Liu2024} & 86.89 & 62.45 & 76.89 & 87.34 & 62.97 & 77.28\\
+Multi-to-Uni \cite{Sun2027} & 88.24 & 63.48 & 77.66 & 88.63 & 64.00 & 78.05\\
+DIS2 \cite{Kieu2026DIS2} & -- & -- & -- & 87.33 & 61.77 & 76.37\\
+Ours & 88.77 & 64.65 & 78.53 & 89.16 & 65.10 & 78.86\\
+\bottomrule
+\end{tabular}
+\end{table}

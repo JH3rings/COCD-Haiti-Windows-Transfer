@@ -1,0 +1,4 @@
+Method,Explicit Search Policy KD,TGD Prediction KD,Overall AUPRC,TGD AUPRC,OmegaTR F1,source
+No KD (W0),x,x,0.8976592489850015,0.9049733829225027,0.5256308051238899,
+Previous Evidence KD (Student-DA-KD20),x,x,0.8977551208300883,0.9050294841119448,0.4934645619869293,D:\deeplearning\COCD_Haiti_Windows_Transfer\experiments\windows_main\da_search\loss_ablation_v3\loss_distillation_final_report.json
+Final KD (W5),yes,yes,0.8987522905772479,0.9060524787323797,0.5348686595276348,

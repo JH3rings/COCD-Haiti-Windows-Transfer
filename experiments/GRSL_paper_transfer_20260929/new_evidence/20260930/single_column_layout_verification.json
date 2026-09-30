@@ -1,0 +1,20 @@
+{
+  "scenario_figure_count": 1,
+  "double_column_figure": "architecture only",
+  "references_start_page": 5,
+  "references_after_all_floats": true,
+  "table_values": {
+    "primary": {
+      "numerical_cells_unchanged": true,
+      "models": 6
+    },
+    "search": {
+      "numerical_cells_unchanged": true,
+      "models": 11
+    },
+    "loss": {
+      "numerical_cells_unchanged": true,
+      "models": 4
+    }
+  }
+}

@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{llllllllllll}
+\toprule
+panel & condition & display & region & AUPRC & IoU & F1 & subset & model & pixels & share\_of\_TGD\_percent & accuracy\_or\_correction \\
+\midrule
+A counter intervention & correct & Correct & Overall & 0.9098 & 0.6778 & 0.8079 & — & — & — & — & — \\
+A counter intervention & correct & Correct & TGD & 0.9201 & 0.6940 & 0.8194 & — & — & — & — & — \\
+A counter intervention & correct & Correct & Remaining & 0.9073 & 0.6740 & 0.8052 & — & — & — & — & — \\
+A counter intervention & shuffled & Shuffled & Overall & 0.4525 & 0.2134 & 0.3517 & — & — & — & — & — \\
+A counter intervention & shuffled & Shuffled & TGD & 0.4876 & 0.1999 & 0.3333 & — & — & — & — & — \\
+A counter intervention & shuffled & Shuffled & Remaining & 0.4475 & 0.2164 & 0.3558 & — & — & — & — & — \\
+A counter intervention & removed & Target-FPN bypass & Overall & 0.8784 & 0.6324 & 0.7748 & — & — & — & — & — \\
+A counter intervention & removed & Target-FPN bypass & TGD & 0.8871 & 0.6380 & 0.7790 & — & — & — & — & — \\
+A counter intervention & removed & Target-FPN bypass & Remaining & 0.8765 & 0.6310 & 0.7738 & — & — & — & — & — \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & T0\_resolvable & SO & 21602.0000 & 2.0783 & 0.0000 \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & T0\_resolvable & Student & 21602.0000 & 2.0783 & 0.5063 \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & T0\_resolvable & Single-DA-scratch & 21602.0000 & 2.0783 & — \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & T1\_resolvable & SO & 22171.0000 & 2.1330 & 0.0000 \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & T1\_resolvable & Student & 22171.0000 & 2.1330 & 0.4997 \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & T1\_resolvable & Single-DA-scratch & 22171.0000 & 2.1330 & — \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & union\_resolvable & SO & 26019.0000 & 2.5033 & 0.0000 \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & union\_resolvable & Student & 26019.0000 & 2.5033 & 0.4766 \\
+B Teacher-corrected baseline errors & — & — & — & — & — & — & union\_resolvable & Single-DA-scratch & 26019.0000 & 2.5033 & — \\
+\bottomrule
+\end{tabular}
+\caption{TGD mechanism evidence from fixed evaluation and diagnostic subsets.}\label{tab:tgd}
+\end{table}

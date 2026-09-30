@@ -1,0 +1,14 @@
+{
+  "source": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\grsl_assets_v1\\tables\\table1_deployment.csv",
+  "sha256": "b6d3b3cfaa9bac5eb2c349c088acd994ae6c1a390696257736bfc635e3fab2e9",
+  "policy": "Historical values retained verbatim with comparability status; they are not combined with final-v2 ranking or qualitative figures.",
+  "methods": {
+    "SO-reference": "historical protocol-matched reference; final-v2 SO row remains MISSING",
+    "DIS2": "historical CSV only; current checkpoint and pixel cache missing",
+    "Vanilla KD": "historical CSV only; current checkpoint and pixel cache missing",
+    "Boehm SAR U-Net++": "historical local prediction cache; not re-evaluated under final-v2 protocol",
+    "CDNetE Early Fusion": "historical local prediction cache; not re-evaluated under final-v2 protocol",
+    "MFEWF adapted": "historical local prediction cache; not re-evaluated under final-v2 protocol",
+    "S0": "legacy raw-feature-bypass Student; excluded from final-v2 claims"
+  }
+}

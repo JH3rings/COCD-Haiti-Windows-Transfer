@@ -1,0 +1,21 @@
+﻿type,rank,sample_id,score,status,rule
+E,1,604,0.9964093357271095,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,2,603,0.995212447636146,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,3,823,0.9946140035906643,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,4,175,0.9886295631358468,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,5,202,0.988031119090365,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,6,560,0.9868342309994016,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,7,23,0.9826451226810293,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,8,22,0.9820466786355476,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,9,25,0.9814482345900658,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,10,50,0.9796529024536206,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,11,164,0.9790544584081389,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,12,72,0.9778575703171754,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,13,707,0.9754637941352483,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,14,670,0.9730700179533214,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,15,123,0.9724715739078397,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,16,563,0.9611011370436864,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,17,56,0.959904248952723,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,18,176,0.9593058049072412,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,19,203,0.9587073608617595,needs_manual_review,GT>=2%; highest clipped same-support shift gain
+E,20,1015,0.9521244763614602,needs_manual_review,GT>=2%; highest clipped same-support shift gain

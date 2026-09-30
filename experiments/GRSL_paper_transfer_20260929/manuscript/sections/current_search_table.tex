@@ -1,0 +1,23 @@
+\begin{table}[!t]
+\caption{Guidance and sampling comparison (\%). Teacher rows compare guidance; Student rows alter sampling during inference.}
+\label{tab:search_intervention}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lrrrr}
+\toprule
+Method & \multicolumn{2}{c}{Valid pixels} & \multicolumn{2}{c}{All pixels}\\
+ & AUPRC & IoU & AUPRC & IoU\\
+\midrule
+\multicolumn{5}{l}{\emph{Teacher guidance}}\\
+Self-guided & 87.74 & 62.72 & 88.15 & 63.21\\
+Counter-guided & 89.04 & 65.01 & 89.48 & 65.65\\
+Shuffled counter & 81.73 & 51.45 & 82.54 & 52.08\\
+\midrule
+\multicolumn{5}{l}{\emph{Student sampling}}\\
+Learned sampling & 88.77 & 64.65 & 89.16 & 65.10\\
+Fixed center & 88.71 & 64.63 & 89.10 & 65.06\\
+Random offsets & 86.96 & 58.72 & 87.43 & 59.27\\
+Without search & 87.90 & 64.31 & 88.31 & 64.79\\
+\bottomrule
+\end{tabular}
+\end{table}

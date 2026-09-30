@@ -1,0 +1,70 @@
+{
+  "includes": [
+    {
+      "source": "main.tex",
+      "reference": "sections/introduction",
+      "exists": true
+    },
+    {
+      "source": "main.tex",
+      "reference": "sections/method",
+      "exists": true
+    },
+    {
+      "source": "main.tex",
+      "reference": "sections/experiments",
+      "exists": true
+    },
+    {
+      "source": "main.tex",
+      "reference": "sections/conclusion",
+      "exists": true
+    },
+    {
+      "source": "sections\\experiments.tex",
+      "reference": "sections/current_primary_table",
+      "exists": true
+    },
+    {
+      "source": "sections\\experiments.tex",
+      "reference": "figures/fig_comparison_valid_reader.pdf",
+      "exists": true
+    },
+    {
+      "source": "sections\\experiments.tex",
+      "reference": "figures/fig_comparison_full_reader.pdf",
+      "exists": true
+    },
+    {
+      "source": "sections\\experiments.tex",
+      "reference": "sections/current_search_table",
+      "exists": true
+    },
+    {
+      "source": "sections\\experiments.tex",
+      "reference": "figures/fig_search_reader.pdf",
+      "exists": true
+    },
+    {
+      "source": "sections\\experiments.tex",
+      "reference": "sections/current_loss_table",
+      "exists": true
+    },
+    {
+      "source": "sections\\method.tex",
+      "reference": "figures/fig_task_scenario.png",
+      "exists": true
+    },
+    {
+      "source": "sections\\method.tex",
+      "reference": "figures/fig_architecture_reader.pdf",
+      "exists": true
+    }
+  ],
+  "missing_citation_keys": [],
+  "missing_labels": [],
+  "duplicate_labels": [],
+  "native_editor_status": "FAILED environment: Unable to find standard directories for platform",
+  "project_pdf_exists": true,
+  "scope": "Static resource checks do not verify typesetting or bibliographic accuracy."
+}

@@ -1,0 +1,45 @@
+{
+  "method": "Multi2Uni-Port",
+  "sanity_kind": "32 training rows; no formal checkpoint selection",
+  "seed": 42,
+  "training_rows": 32,
+  "locked_split": {
+    "train_locations": 1370,
+    "validation_locations": 0,
+    "test_locations": 343,
+    "train_rows": 4110
+  },
+  "steps": 500,
+  "initial_loss_magnitude_calibration": {
+    "seg": 0.004712552763521671,
+    "fad": 0.013471001759171486,
+    "cad": 0.046669915318489075,
+    "lambda_fad": 0.03498294223228956,
+    "lambda_cad": 0.010097624414704506,
+    "target_each_auxiliary_contribution_fraction": 0.1,
+    "calibration_batches": 1
+  },
+  "loss_first": 0.007031907793134451,
+  "loss_last_10_mean": 0.0042667703470215205,
+  "all_training_losses_finite": true,
+  "kd_terms": {
+    "FAD": {
+      "raw": 0.014940022490918636,
+      "gradient_norm_to_student": 0.13127362728118896
+    },
+    "CAD": {
+      "raw": 0.13481581211090088,
+      "gradient_norm_to_student": 1.0612637996673584
+    }
+  },
+  "single_orbit_student_output": true,
+  "initial_deploy_metrics": {
+    "IoU": 0.8279015630182442,
+    "F1": 0.9058491767480161
+  },
+  "final_deploy_metrics": {
+    "IoU": 0.8927698218636173,
+    "F1": 0.9433474810842005
+  },
+  "passed": true
+}

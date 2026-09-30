@@ -1,0 +1,4 @@
+case_id,source_scene,crop_box,TGD_pixel_count,whether_in_OmegaTR,baseline_errors,S2_errors,included_methods
+C1,000305_asc,"32,0,96,96",1202,True,493,389,SO;S0;S2;CG10
+C2,000568_asc,"26,32,96,96",5216,True,710,608,SO;S0;S2;CG10
+C3,000655_desc,"0,32,96,96",523,True,414,320,SO;S0;S2;CG10

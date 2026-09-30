@@ -1,0 +1,68 @@
+{
+  "Hinton_recomputed_metrics": {
+    "Overall": {
+      "AUPRC": 0.8807357571736482,
+      "IoU": 0.6422987692595724,
+      "F1": 0.7821947885270008,
+      "pixels": 11239424
+    },
+    "BothValid": {
+      "AUPRC": 0.8697891453672991,
+      "IoU": 0.6276473320804805,
+      "F1": 0.7712325879319488,
+      "pixels": 9058636
+    },
+    "TargetValid": {
+      "AUPRC": 0.8763323974346215,
+      "IoU": 0.6365930750698164,
+      "F1": 0.777949124638279,
+      "pixels": 10098042
+    },
+    "G10": {
+      "AUPRC": 0.8895675544178819,
+      "IoU": 0.6527793108015268,
+      "F1": 0.7899170887914334,
+      "pixels": 1039406
+    },
+    "G01": {
+      "AUPRC": 0.8957165054892451,
+      "IoU": 0.664505325573698,
+      "F1": 0.7984418137498788,
+      "pixels": 1039406
+    }
+  },
+  "Hinton_minus_recorded": {
+    "Overall": {
+      "AUPRC": 0.0,
+      "IoU": 0.0,
+      "F1": 0.0
+    },
+    "BothValid": {
+      "AUPRC": 0.0,
+      "IoU": 0.0,
+      "F1": 0.0
+    },
+    "TargetValid": {
+      "AUPRC": 0.0,
+      "IoU": 0.0,
+      "F1": 0.0
+    },
+    "G10": {
+      "AUPRC": 0.0,
+      "IoU": 0.0,
+      "F1": 0.0
+    },
+    "G01": {
+      "AUPRC": 0.0,
+      "IoU": 0.0,
+      "F1": 0.0
+    }
+  },
+  "Boehm_index_checks": {
+    "y": true,
+    "gt": true,
+    "gc": true,
+    "orbit": true
+  },
+  "Boehm_order": "identical labels, target/counter geometry and orbit arrays to live pinned dataset in canonical batch order; sample IDs reconstructed from pinned index"
+}

@@ -1,0 +1,236 @@
+{
+  "protocol": {
+    "method": "Mask-Aware Search-KD v5",
+    "seed": 42,
+    "batch_size": 16,
+    "optimizer": {
+      "name": "Adam",
+      "lr": 5e-05,
+      "weight_decay": 0.0,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08
+    },
+    "max_epochs": 100,
+    "patience": 2,
+    "train_ids": 1370,
+    "validation_ids": 0,
+    "test_ids": 343,
+    "split_policy": "reuse pinned split(); no validation created; test used per canonical monitoring rule",
+    "init_checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\da_search\\SO_backbone_seed42.pt",
+    "teacher_checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\teacher_target_search_v2\\CG10_seed42.pt",
+    "geometry_codes": {
+      "0": "valid",
+      "1": "layover",
+      "2": "shadow",
+      "3": "layover+shadow"
+    },
+    "segmentation_mask": "per-orbit target geometry == 0; BCE denominator is valid pixel count",
+    "kd_query_mask": "strict BothValid 4x4 blocks; additionally both policy distributions and masked searches must have support",
+    "memory_mask": "all corresponding geometry pixels in each FPN cell must be valid; bilinear support >0.999; mask sampled weights then jointly renormalize",
+    "counter_context": "counter FPN feature maps multiplied by conservative counter geometry-valid masks before Teacher context",
+    "kd": "original policy JS + same Student target-memory evidence distance only; a single detached scalar lambda is batch-calibrated from training losses to maintain 10% KD contribution; no test values enter lambda",
+    "no_new_parameters_or_loss_terms": true
+  },
+  "results": {
+    "S0-clean": {
+      "best_epoch": 29,
+      "best_test_auprc_overall": 0.8002038984922248,
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8690361783410429,
+          "IoU": 0.6096634925088162,
+          "F1": 0.7575042800512258,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.875606984577118,
+          "IoU": 0.619370760515032,
+          "F1": 0.76495238226735,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8062616003807963,
+          "IoU": 0.5275897513036442,
+          "F1": 0.6907479588068713,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.3779970235871105,
+          "IoU": 0.12202516950512392,
+          "F1": 0.21750879181960575,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.8002038984922248,
+          "IoU": 0.5189254042659851,
+          "F1": 0.6832796433696542,
+          "pixels": 11239424
+        }
+      },
+      "query_counts": {
+        "total": 702464,
+        "target_valid": 602578,
+        "both_valid": 518998,
+        "kd_used": 0,
+        "all_invalid_search": 96753
+      },
+      "search_sampling": {
+        "sampled_points": 8429568,
+        "valid_sampled_points": 5101146,
+        "masked_sampled_points": 3328422,
+        "usable_queries": 605711
+      },
+      "kd_evidence_search_sampling": null,
+      "mean_valid_samples_per_usable_query": 8.421748985902518,
+      "all_invalid_search_query_fraction": 0.13773374863338192,
+      "counter_fpn_valid_ratio_by_level": null,
+      "counter_fpn_nonzero_after_mask_by_level": null,
+      "mechanism": {
+        "seg_raw_mean": 0.07354193688793616,
+        "policy_js_raw_mean": null,
+        "evidence_distance_raw_mean": null,
+        "weighted_contribution_mean": {},
+        "weighted_contribution_percent_of_total": null
+      },
+      "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\mask_aware_search_kd_v5_seed42\\S0-clean_seed42_best.pt"
+    },
+    "S2-MaskAware": {
+      "best_epoch": 29,
+      "best_test_auprc_overall": 0.798140242104387,
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.8672437291438254,
+          "IoU": 0.6074543895715873,
+          "F1": 0.7557967349026727,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.873782317329286,
+          "IoU": 0.6169641735635145,
+          "F1": 0.7631142157019227,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.8042306041943811,
+          "IoU": 0.5251258914940583,
+          "F1": 0.688632845882158,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.3743305864368093,
+          "IoU": 0.11699435588909526,
+          "F1": 0.2094806572159823,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.798140242104387,
+          "IoU": 0.5162542487277233,
+          "F1": 0.6809600027975626,
+          "pixels": 11239424
+        }
+      },
+      "query_counts": {
+        "total": 702464,
+        "target_valid": 602578,
+        "both_valid": 518998,
+        "kd_used": 518998,
+        "all_invalid_search": 99886
+      },
+      "search_sampling": {
+        "sampled_points": 8429568,
+        "valid_sampled_points": 5179824,
+        "masked_sampled_points": 3249744,
+        "usable_queries": 602578
+      },
+      "kd_evidence_search_sampling": {
+        "sampled_points": 16859136,
+        "valid_sampled_points": 10306200,
+        "masked_sampled_points": 6552936,
+        "all_invalid_queries": 197808,
+        "usable_queries": 1207120
+      },
+      "mean_valid_samples_per_usable_query": 8.59610540046268,
+      "all_invalid_search_query_fraction": 0.14219376366618075,
+      "counter_fpn_valid_ratio_by_level": [
+        0.8574825145981528,
+        0.8056093698198145,
+        0.7054586044766686
+      ],
+      "counter_fpn_nonzero_after_mask_by_level": [
+        0.8574825145981528,
+        0.8056093698198145,
+        0.7054586044766686
+      ],
+      "mechanism": {
+        "seg_raw_mean": 0.07323492398824204,
+        "policy_js_raw_mean": 0.008252110649746928,
+        "evidence_distance_raw_mean": 0.004086373627863147,
+        "weighted_contribution_mean": {
+          "seg": 0.07323492398824204,
+          "policy": 0.008002127663613382,
+          "evidence": 0.00013508634029593932,
+          "total": 0.08137213853611187
+        },
+        "weighted_contribution_percent_of_total": {
+          "seg": 89.99999914681037,
+          "policy": 9.833989627865249,
+          "evidence": 0.16601055683941476
+        }
+      },
+      "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\mask_aware_search_kd_v5_seed42\\S2-MaskAware_seed42_best.pt"
+    },
+    "CG-Teacher-masked-inference": {
+      "best_epoch": null,
+      "metrics": {
+        "BothValid": {
+          "AUPRC": 0.7202239398910046,
+          "IoU": 0.43533300757984694,
+          "F1": 0.6065951319741103,
+          "pixels": 9058636
+        },
+        "TargetValid": {
+          "AUPRC": 0.7154535026285103,
+          "IoU": 0.43681431431758994,
+          "F1": 0.6080316850477,
+          "pixels": 10098042
+        },
+        "OverallValid": {
+          "AUPRC": 0.5843829764361471,
+          "IoU": 0.3411849099205014,
+          "F1": 0.5087813132951594,
+          "pixels": 11137448
+        },
+        "TGD_G10": {
+          "AUPRC": 0.2635908385938704,
+          "IoU": 0.17072606373654226,
+          "F1": 0.29165843150641957,
+          "pixels": 1039406
+        },
+        "Overall": {
+          "AUPRC": 0.5797453389419026,
+          "IoU": 0.3387135707503875,
+          "F1": 0.5060284412602597,
+          "pixels": 11239424
+        }
+      },
+      "checkpoint": "D:\\deeplearning\\COCD_Haiti_Windows_Transfer\\experiments\\windows_main\\teacher_target_search_v2\\CG10_seed42.pt",
+      "note": "existing canonical CG checkpoint; evaluated with v5 memory and counter masks, not retrained"
+    },
+    "delta_S2_minus_S0": {
+      "BothValid": {
+        "AUPRC": -0.0017924491972174383,
+        "IoU": -0.0022091029372289794,
+        "F1": -0.0017075451485530913
+      },
+      "TargetValid": {
+        "AUPRC": -0.0018246672478320347,
+        "IoU": -0.0024065869515175198,
+        "F1": -0.001838166565427235
+      }
+    }
+  },
+  "test_selection_risk": "test AUPRC is used for stopping/best checkpoint under the requested canonical project protocol"
+}
