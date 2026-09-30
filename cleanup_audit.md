@@ -183,8 +183,19 @@ docs/FROZEN_EXPERIMENT_PROTOCOL_v4.md
 ```
 
 Reports that describe retired architectures were moved unchanged to
-`archive/history/reports/`; the remaining `reports/README.md` points readers to
-the final method and retained external/dataset provenance.
+`archive/history/reports/` during the 2026-09-22 cleanup. In the 2026-09-29
+experiment-data consolidation, they were gathered under
+`experiments/reports/historical_archive/`; the current report index is
+`experiments/reports/README.md`.
+
+## 2026-09-29 experiment-data consolidation
+
+Experiment outputs, paper packages, checkpoints, reports, and dataset-audit
+artifacts were gathered under the single `experiments/` data root. The current
+entry point is `experiments/README.md`; per-file migration hashes and cleanup
+handling are recorded in `experiments/00_curation/`. Temporary and superseded
+artifacts were isolated there rather than deleted because the execution policy
+rejected the deletion request.
 
 `GITHUB_CODE_PACKAGE.md` and `README_WINDOWS.md` should remain at the root only
 after their reading order is updated to point to the final-v2 documents rather

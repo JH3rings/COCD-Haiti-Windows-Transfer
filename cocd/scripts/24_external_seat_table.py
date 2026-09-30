@@ -41,6 +41,8 @@ PROT = json.loads((ROOT / 'cocd' / 'configs' / 'protocol_windows_main.json').rea
 SEATS = [
     ('boehm', 'Boehm SAR U-Net++', 26.0850, 'CE', 'U-Net++ with the paper setting'),
     ('cdnette', 'CDNetE Early Fusion', 24.4428, 'CE', 'smp Unet(resnet34), no official code'),
+    ('unet', 'Standard U-Net', 24.442786, 'CE', 'standard smp Unet(ResNet34), target-only 5-channel input'),
+    ('deeplabv3', 'DeepLabV3', 26.013634, 'CE', 'standard smp DeepLabV3(ResNet34), target-only 5-channel input'),
     ('mfewf', 'MFEWF adapted', 26.9821, 'CE', 'local reimplementation, no official code'),
 ]
 EXCLUDED = [('fc_siam', 'FC-Siam (official impl)')]

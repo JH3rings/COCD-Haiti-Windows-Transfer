@@ -1,11 +1,29 @@
-# GRSL complete paper package
+# Retained GRSL result sources and MMOKD run
 
-This is the single entry point for the completed Haiti SAR GRSL materials.
+The new manuscript entry point is [`../paper_submission_package_20260929/README.md`](../paper_submission_package_20260929/README.md). This folder remains because it holds the MMOKD-Port checkpoint, its run card, and the source artifacts used to assemble the paper materials. Superseded dated package copies and obsolete run outputs are still on disk: the requested bulk cleanup was blocked by the app's automatic policy before execution, so no candidate files were removed. The current cleanup inventory is `../00_curation/purge_manifest_20260929.csv`. The project-wide metrics catalog and raw/masked comparison charts are linked from [`../README.md`](../README.md).
 
-- `quantitative/`: final-v2 Teacher/Student tables, loss ablations, figure data, source hashes, and final-protocol checklist.
-- `qualitative/`: reproducible Overall, TGD-local, OmegaTR, and external-method comparison figures, crops, overlays, captions, and scene/crop metrics.  The external panels include Boehm SAR U-Net++, CDNetE, MFEWF, recovered DIS2-port, recovered Vanilla KD, SO, and final S2.
-- `historical_external/`: retained external-method metric records with explicit comparability status. These rows must not be pooled into the final-v2 main ranking.
+- `01_method/fig1_method.svg` and `fig1_method.png`: editable method figure source and rendered preview; counter is restricted to the teacher policy and the decoder reads target-side retrieved evidence.
+- `02_qualitative/`: automatic test-set candidates and the contact sheet; human final case choices are recorded separately and are not inferred from ranking.
+- `03_search_behavior/`: compact search-policy and retrieval diagnostics.
+- `04_tables/`: paper tables and the complete metric export.
+- `05_analysis/`: region gains, rescue counts, mechanism analyses, and provenance pointers.
+- `06_baselines/`: baseline summaries; the full MMOKD implementation and checkpoints are in `baselines/mmokd_port/`.
+- `07_reproduction/`: method reproduction notes and related-work source notes.
 
-Use `quantitative/paper_summary.md` and `qualitative/qualitative_summary.md` when drafting. This consolidated directory is the retained, self-contained paper package.
+For project-wide comparison across raw/no-mask, masked, repeated, and historical
+protocols, use `../summary/MASTER_METRICS.csv` and
+`../summary/MASTER_RUN_CATALOG.csv`. The plot inventory is
+`../summary/ALL_FIGURE_INVENTORY.csv`; generated comparison figures are in
+`../summary/figures/`.
 
-DIS2-port was recovered from its archived checkpoint and re-inferred without training on the locked test set. Vanilla KD was retrained from the recorded VKD protocol, then exported by a separate inference-only pass. Both runs are test-monitored development evidence and are kept distinct from the final-v2 primary claim.
+## Provenance
+
+S0-Raw, Hinton-KD, DIS2-Port, Multi2Uni-Port, S2-Raw-native, and S2-2Stage are frozen project runs. OGP-Net-Port failed its sanity gate and is excluded from quantitative tables. MMOKD-Port is the only new training arm in this closeout; it is a mechanism-faithful port on the project ConvNeXt-Tiny/FPN, not an official numerical reproduction. Exact published details that were unavailable are listed in `07_reproduction/mmokd_spec.md`.
+
+All model metrics are reused from their recorded run summaries or final CSVs,
+except MMOKD-Port which is evaluated from its newly selected checkpoint. The
+locked project protocol has no validation split and selects checkpoints using
+fixed-test Overall AUPRC; treat comparisons as test-monitored development
+evidence. Geometry-masked and legacy validation-split results remain separate
+in the project-wide catalog and are not silently mixed into these raw benchmark
+tables.

@@ -63,9 +63,11 @@ TRANSFER CHECK PASSED
 
 ## Results and baselines
 
-The paper-ready evidence is retained under
-`experiments/GRSL_complete_paper_package/`, especially its `quantitative/` and
-`qualitative/` directories. External comparison source and provenance remain
-under `baselines/` and `cocd/third_party/landslide_baselines/`. Do not rerun a
-training command as part of repository cleanup or overwrite existing result
-files.
+All experiment data is collected under `experiments/`. Start with
+`experiments/README.md`; it links the current paper package, master run catalog,
+unified metrics, comparison charts, full figure inventory, dataset audit,
+checkpoints, and retained historical runs. The current paper tables are under
+`experiments/GRSL_complete_paper_package/04_tables/`; qualitative and method
+figures are under `02_qualitative/` and `01_method/`. External comparison
+source code and provenance remain under `baselines/` and
+`cocd/third_party/landslide_baselines/`.

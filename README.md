@@ -47,11 +47,22 @@ so the KD contribution is 10% of segmentation loss at initialization.
 
 ## Results and figures
 
-All paper-ready compact artefacts are under
-`experiments/GRSL_complete_paper_package/`.  In particular,
-`qualitative/figures/fig_overall_external_comparison.png` compares Boehm,
-CDNetE, MFEWF, DIS2, Vanilla KD, SO and S2; the matching TGD local comparison
-is `fig_TGD_external_comparison.png`.
+All experiment outputs are collected under `experiments/`. Start from
+[`experiments/README.md`](experiments/README.md) for the unified run catalog,
+long-form metrics, and figure inventory. The current paper package is
+[`experiments/GRSL_complete_paper_package/`](experiments/GRSL_complete_paper_package/);
+its quantitative tables are in `04_tables/`, method and qualitative figures
+are in `01_method/` and `02_qualitative/`, and search diagnostics are in
+`03_search_behavior/`. Comparison figures across raw and geometry-masked runs
+are in `experiments/summary/figures/`.
 
 Raw data, checkpoints, NPZ prediction tensors and full logs are intentionally
 excluded from Git.  See `dataset/README.md` and `project_audit.md`.
+
+## Current dataset quality audit
+
+The current dataset audit entry is
+[`experiments/dataset_audit_final/README.md`](experiments/dataset_audit_final/README.md).
+It contains the 2026-09-27 all-patch audit, manual QC and blind review sheets,
+historical dataset evidence, and verified cleanup manifests. Earlier dataset
+reports are historical provenance and do not define the current quality verdict.

@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json, shutil
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2];exp=ROOT/'experiments';q=exp/'GRSL_final_experiment_package';v=exp/'GRSL_qualitative_package';out=exp/'GRSL_complete_paper_package'
+ROOT=Path(__file__).resolve().parents[2];exp=ROOT/'experiments';q=exp/'GRSL_final_experiment_package';v=exp/'GRSL_qualitative_package';out=exp/'GRSL_legacy_assembly_v2'
 for source,name in ((q,'quantitative'),(v,'qualitative')):shutil.copytree(source,out/name,dirs_exist_ok=True)
 (out/'historical_external').mkdir(parents=True,exist_ok=True)
 for source in (q/'csv/table_historical_external_comparison.csv',q/'historical_baseline_comparability.md',q/'json/historical_comparison_manifest.json'):

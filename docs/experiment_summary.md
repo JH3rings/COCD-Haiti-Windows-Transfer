@@ -1,37 +1,37 @@
-# Experiment summary
+# Experiment summary and evidence map
 
-## 1. Teacher counter-guidance ablation
+The consolidated experiment data lives under `experiments/`. Use these files as the current entry points:
 
-**Purpose:** establish that counter-guided policy and TGD supervision improve
-target-side evidence retrieval.  **Models:** SG0, SG10, CG0, CG10.
-**Conclusion:** CG10 is the final Teacher (Overall AUPRC 0.9012; TGD AUPRC
-0.9158, IoU 0.6884).  Source:
-`experiments/GRSL_complete_paper_package/quantitative/csv/table_teacher_ablation.csv`.
+- `experiments/summary/MASTER_METRICS.csv` — one row per run, method, and evaluation region.
+- `experiments/summary/MASTER_RUN_CATALOG.csv` — protocol, checkpoints, metrics, and artifact counts for retained runs.
+- `experiments/summary/ALL_FIGURE_INVENTORY.csv` — paths to current, historical, and quarantined visual artifacts.
+- `experiments/summary/figures/` — consolidated method-comparison plots.
+- `experiments/GRSL_complete_paper_package/04_tables/` — current paper tables and full metric exports.
 
-## 2. Search mechanism interventions
+## Current raw benchmark
 
-**Purpose:** test whether policy positions and counter context matter.
-**Conditions:** normal, centered offsets, random offsets, counter shuffle.
-Random and counter-shuffle degrade CG10, demonstrating non-decorative search
-and counter dependence. Source: `table_search_mechanism.csv`.
+The current paper package reports S2-2Stage against S0-Raw on the fixed test set. In the source table, S2-2Stage improves AUPRC by about 0.0117 overall, 0.0121 on TargetValid, and 0.0125 on BothValid. This is test-monitored development evidence under the project protocol; it should not be presented as an independent test estimate.
 
-## 3. Student knowledge transfer
+## Geometry-masked evidence
 
-**Purpose:** separate no KD (S0), policy-only KD (S1) and policy+evidence KD
-(S2). **Conclusion:** S1 aligns policy but has limited task gain; S2 reduces
-evidence distance and improves S2-S1 TGD IoU by 0.0225 and OmegaTR F1 by
-0.1080. Sources: `table_student_distillation.csv` and
-`table_student_mechanism.csv`.
+The legacy validation-split experiment (`windows_main/geometry_transfer_restored_v1`, train/validation/test = 1233/137/343) shows a clear masked Teacher gain on valid pixels: BothValid CG−SG is +0.01956 AUPRC, and CG−counter-shuffle is +0.08417. Student Search-KD is mixed: BothValid AUPRC is 0.00092 below S0, while IoU and F1 are slightly higher.
 
-## 4. Loss ablations
+The full-train masked runs (`mask_aware_search_kd_v5_seed42` and `sgri_powc_masked_v4_seed42_20260925`, 1370/0/343) are kept separately. In both, S2 is below its matched S0 on BothValid AUPRC. Their test set was used by the recorded monitoring/selection rule. The teacher rows in the v4 package reuse the earlier validation-selected geometry-masked checkpoints. These protocols must not be pooled with the legacy validation-split experiment.
 
-**Composition:** P100E0, P50E50, P25E75, P0E100 at fixed initial KD/Seg=10%.
-**Strength:** 0%, 5%, 10%, 20% with alpha=0.5.  P50E50 and 10% are the final
-setting. Sources: `table_loss_composition.csv`, `table_loss_strength.csv`.
+## Repeated and matched-budget runs
 
-## 5. External comparison and robustness
+All completed 10% KD controller runs are retained independently under `experiments/windows_main/multitoone_kd_*`; the initial EMA, batch-ratio EMA, and pooled-loss EMA variants are distinct controller protocols. Their metrics and per-epoch KD budget curves remain in each run folder and are indexed in the master catalog. No averages across these runs are implied.
 
-The curated package retains SO, Boehm SAR U-Net++, CDNetE, MFEWF, DIS2-port,
-Vanilla KD and S2 visual comparisons.  DIS2-port and Vanilla KD are
-test-monitored development evidence and are explicitly separated from final-v2
-primary claims.  Sources: `quantitative/csv/` and `qualitative/figures/`.
+## Geometry-region definitions
+
+- `BothValid`: target geometry code = 0 and counter geometry code = 0.
+- `TargetValid`: target geometry code = 0.
+- `OverallValid`: at least one orbit is geometry-valid; this includes the G10 reference region.
+- `G10`: target invalid, counter valid. Diagnostic only.
+- `G01`: target valid, counter invalid. Diagnostic only.
+
+Geometry codes are stored separately for layover, shadow, and their overlap. The authoritative data audit and human-review forms are in `experiments/dataset_audit_final/`.
+
+## Interpretation and provenance
+
+Raw/no-mask, masked, and validation-split runs are explicitly tagged in `MASTER_METRICS.csv`. Results from different selection protocols are evidence records, not directly matched comparisons. Completed, non-duplicate runs are preserved; superseded and temporary files are isolated under `experiments/00_curation/superseded/` and recorded in the curation log.

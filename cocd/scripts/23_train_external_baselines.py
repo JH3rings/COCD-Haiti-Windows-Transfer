@@ -4,6 +4,8 @@ Four seats, all retrained from scratch under the SAME protocol the internal
 arms use, so the main table is finally internally comparable:
 
     Boehm SAR U-Net++      smp.UnetPlusPlus  encoder resnet34
+    Standard U-Net         smp.Unet          encoder ResNet-34, 24.44 M
+    DeepLabV3              smp.DeepLabV3     encoder ResNet-34, 26.01 M
     CDNetE Early Fusion    smp.Unet          encoder resnet34
     MFEWF adapted          our DRN/AMM/CAASP/MFFRM reimplementation
     FC-Siam-diff           official SiamUnet_diff, adapted input
@@ -183,6 +185,33 @@ def build_cdnette(pretrained=True):
     return net, 'ce'
 
 
+def build_unet(pretrained=True):
+    """Standard single-stream U-Net baseline under the shared input contract.
+
+    This is deliberately a plain semantic-segmentation control, rather than
+    the literature-specific CDNetE label.  It consumes exactly one target
+    orbit's five-channel pre/post representation.
+    """
+    import segmentation_models_pytorch as smp
+    net = smp.Unet(
+        encoder_name='resnet34',
+        encoder_weights='imagenet' if pretrained else None,
+        in_channels=5, classes=2,
+    )
+    return net, 'ce'
+
+
+def build_deeplabv3(pretrained=True):
+    """Standard DeepLabV3 semantic-segmentation baseline, ResNet-34 trunk."""
+    import segmentation_models_pytorch as smp
+    net = smp.DeepLabV3(
+        encoder_name='resnet34',
+        encoder_weights='imagenet' if pretrained else None,
+        in_channels=5, classes=2,
+    )
+    return net, 'ce'
+
+
 def build_fc_siam():
     """FC-Siam-diff, rcdaudt/fully_convolutional_change_detection @ 4dd8323.
 
@@ -212,6 +241,8 @@ def build_mfewf(pretrained=True):
 SEATS = {
     'boehm':   dict(build=build_boehm,   label='Boehm SAR U-Net++'),
     'cdnette': dict(build=build_cdnette, label='CDNetE Early Fusion'),
+    'unet':    dict(build=build_unet,    label='Standard U-Net'),
+    'deeplabv3': dict(build=build_deeplabv3, label='DeepLabV3'),
     'mfewf':   dict(build=build_mfewf,   label='MFEWF adapted'),
 }
 
@@ -288,7 +319,7 @@ def run_seat(seat, pretrained=True, encoder=None, resume=False):
     seed()
     if seat == 'boehm':
         net, kind = cfg['build'](pretrained=pretrained, encoder=encoder or ENCODER)
-    elif seat in ('mfewf',):
+    elif seat in ('mfewf', 'unet', 'deeplabv3'):
         net, kind = cfg['build'](pretrained=pretrained)
     else:
         net, kind = cfg['build']()
@@ -435,7 +466,8 @@ def run_seat(seat, pretrained=True, encoder=None, resume=False):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--seat', default='all', help='boehm | cdnette | mfewf | all')
+    ap.add_argument('--seat', default='all',
+                    help='boehm | cdnette | unet | deeplabv3 | mfewf | all')
     ap.add_argument('--no-pretrained', action='store_true',
                     help='disable ImageNet weights (the old external-seat behaviour)')
     ap.add_argument('--encoder', default=None,

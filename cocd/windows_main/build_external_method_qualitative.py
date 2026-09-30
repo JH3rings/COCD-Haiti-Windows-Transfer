@@ -11,7 +11,7 @@ from windows_main.data import HaitiPairs,split
 from windows_main.models_da_search import TargetOnlyBaseline
 from windows_main.models_student_target_search_v2 import StudentTargetSearchV2
 from windows_main.models_teacher_target_search_v2 import load_so_backbone
-OUT=ROOT/'experiments/GRSL_complete_paper_package/qualitative';OLD=ROOT/'experiments/windows_main/da_search/grsl_assets_v1/figure_data/predictions/predictions_SO.npz';EXT=ROOT/'experiments/single_orbit_baselines_v3';SP=ROOT/'experiments/windows_main/da_search/SO_backbone_seed42.pt';S2=ROOT/'experiments/windows_main/student_target_search_v2/S2_seed42.pt'
+OUT=ROOT/'experiments/GRSL_complete_paper_package/99_historical_qualitative';OLD=ROOT/'experiments/windows_main/da_search/grsl_assets_v1/figure_data/predictions/predictions_SO.npz';EXT=ROOT/'experiments/single_orbit_baselines_v3';SP=ROOT/'experiments/windows_main/da_search/SO_backbone_seed42.pt';S2=ROOT/'experiments/windows_main/student_target_search_v2/S2_seed42.pt'
 DIS2=ROOT/'experiments/tgd_robustness_analysis/dis2_checkpoint_retest_predictions.npz'
 VKD=ROOT/'experiments/tgd_robustness_analysis/vanilla_kd_retest_predictions.npz'
 GREEN=ListedColormap(['black','#32b44a']);ERR=ListedColormap(['black','#32b44a','#dc2626','#f3c623'])
