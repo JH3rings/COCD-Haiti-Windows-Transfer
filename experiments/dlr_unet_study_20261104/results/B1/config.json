@@ -1,0 +1,17 @@
+{
+  "fields": [
+    "PRE1_gVV",
+    "PRE1_gVH",
+    "POST1_gVV",
+    "POST1_gVH"
+  ],
+  "epochs": 100,
+  "validation_every": 5,
+  "batch_size": 16,
+  "loss": "masked BCE + per-image foreground soft Dice 1:1",
+  "selection": "validation pooled IoU at 0.5",
+  "split_sha256": "7800c2801daed6000906a6fd0d445dec0d1240fb976cef9cd78cf14d8165f4dc",
+  "normalization_sha256": "40522544b14c5d2cc7feca3fa8da9afdd7353c9144ab3642217704396105e2f5",
+  "parameters": 31044097,
+  "initial_sha256": "0c0fc5c77ddac57ed6e990dd1307bad0d64bc43698d04237b1fbdcf55c02daa7"
+}
