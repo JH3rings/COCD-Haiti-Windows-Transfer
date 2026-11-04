@@ -1,0 +1,12 @@
+{
+  "state": "FROZEN",
+  "epochs_completed": 100,
+  "selected_epoch": 90,
+  "validation_IoU": 0.8321935141407533,
+  "checkpoint_sha256": "2b2c1971a8cff683c9afda3026aa5d3767777f763348414dc753f2ace8388833",
+  "lambda": {
+    "att": 0.19333355505971556,
+    "out": 0.021827498029187327,
+    "wave": 0.18826967702121422
+  }
+}

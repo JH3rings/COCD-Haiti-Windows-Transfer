@@ -1,0 +1,29 @@
+{
+  "dataset": "DLR released HDF5",
+  "official_split": {"train": 355, "val": 88, "testind": 44, "testspt": 76},
+  "sar": {
+    "pre": ["PRE1", "PRE2", "PRE3"],
+    "post": ["POST1"],
+    "bands": ["gVV", "gVH"],
+    "post_definition": "One official dataset-selected POST1 observation"
+  },
+  "student": {
+    "architecture": "ConvNeXtV2-Tiny shared encoder, masked mean PRE feature aggregation, change head, FPN, segmentation head",
+    "inputs": ["target SAR", "OrbitID"],
+    "deployment_uses_optical": false
+  },
+  "teacher": {
+    "sar": "Same official 3+1 observations",
+    "privileged_optical_times": ["PRE1", "POST1"],
+    "optical_bands": ["B02", "B03", "B04", "B08", "B11", "B12"],
+    "shared_checkpoint_across_distilled_arms": true
+  },
+  "arms": ["SAR-only", "M-FSAD-KD", "change attention + output KD", "change attention + Haar + output KD"],
+  "reference": "DLR U-Net with DEM and slope reported separately by input budget",
+  "training_policy": "docs/DLR_CURRENT_TRAINING_PROTOCOL.md",
+  "epochs": 100,
+  "validation_every": 5,
+  "test_threshold": 0.5,
+  "reuse_old_1plus1_as_matched_baseline": false,
+  "state": "PROTOCOL_FIXED_TRAINING_NOT_STARTED"
+}

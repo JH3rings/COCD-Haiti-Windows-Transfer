@@ -1,0 +1,51 @@
+{
+  "by_split": {
+    "testind": {
+      "samples": 44,
+      "calendar_3plus1": 44,
+      "same_calendar_day_post": 0,
+      "relative_orbit_verified": 0,
+      "actual_first_post_verified": 0,
+      "nonempty_joint_sar_valid": 44,
+      "exact_sar_footprint_match": 44
+    },
+    "testspt": {
+      "samples": 76,
+      "calendar_3plus1": 60,
+      "same_calendar_day_post": 16,
+      "relative_orbit_verified": 0,
+      "actual_first_post_verified": 0,
+      "nonempty_joint_sar_valid": 76,
+      "exact_sar_footprint_match": 76
+    },
+    "train": {
+      "samples": 355,
+      "calendar_3plus1": 341,
+      "same_calendar_day_post": 14,
+      "relative_orbit_verified": 7,
+      "actual_first_post_verified": 0,
+      "nonempty_joint_sar_valid": 355,
+      "exact_sar_footprint_match": 355
+    },
+    "val": {
+      "samples": 88,
+      "calendar_3plus1": 84,
+      "same_calendar_day_post": 4,
+      "relative_orbit_verified": 2,
+      "actual_first_post_verified": 0,
+      "nonempty_joint_sar_valid": 88,
+      "exact_sar_footprint_match": 88
+    }
+  },
+  "optical_bands": [
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "B11",
+    "B12"
+  ],
+  "mean_joint_valid_3plus1": 0.9770592372751998,
+  "mean_joint_valid_1plus1": 0.9778431541754552,
+  "official_split_changed": false
+}

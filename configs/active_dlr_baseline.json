@@ -1,0 +1,80 @@
+{
+  "status": "USER_FROZEN_CANONICAL",
+  "scope": "DLR only",
+  "policy": "REUSE_ONLY_NO_RETRAIN_NO_RETEST",
+  "model": "ConvNeXtV2-Tiny SARStudent, shared temporal encoder/change/FPN/head, NO SEARCH",
+  "deployment_parameters": 28809793,
+  "student_inputs": "PRE/POST VV/VH + OrbitID only",
+  "training": "100epochs,val5,BCE+foregroundDice1:1,AdamW encoder2e-5/new1e-4,50constant50cosine",
+  "selection": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8270474070554104,
+    "checkpoint_sha256": "36cbcbd28bfea67aeacddd1751cdb7cfed4900e7d2089837f46aff05074473b4",
+    "lambda": {}
+  },
+  "independent44": {
+    "TP": 26421,
+    "FP": 3874,
+    "FN": 59311,
+    "TN": 569522,
+    "IoU": 0.2948574872218378,
+    "F1": 0.4554284778542925,
+    "Precision": 0.8721241128899159,
+    "Recall": 0.3081813091960995,
+    "AUPRC": 0.6597776858770523,
+    "foreground_fraction": 0.1300688181961622,
+    "predicted_positive_fraction": 0.04596224102147079,
+    "background_FP_rate": 0.0067562382716307755,
+    "pixels": 659128,
+    "patches": 44
+  },
+  "all120": {
+    "IoU": 0.31199661569675985,
+    "F1": 0.4756058239236667,
+    "AUPRC": 0.5956361041280023,
+    "Precision": 0.8271161342305263,
+    "Recall": 0.3337624506258815
+  },
+  "locked_artifacts": {
+    "checkpoint": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\base\\best.pt",
+      "sha256": "36cbcbd28bfea67aeacddd1751cdb7cfed4900e7d2089837f46aff05074473b4"
+    },
+    "initial": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\student_initial.pt",
+      "sha256": "72bacce3fd98a196e36e49e0efcc39ecda29a9b5463c94f695bcead6e2869527"
+    },
+    "split": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\split_manifest.csv",
+      "sha256": "7800c2801daed6000906a6fd0d445dec0d1240fb976cef9cd78cf14d8165f4dc"
+    },
+    "normalization": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\normalization.json",
+      "sha256": "ba6545bba316f80e17d24082f9065c49271c0083c826c0867721befeb78062b8"
+    },
+    "selection": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\base\\selection.json",
+      "sha256": "5762dfd5ec245bfa5ba076cb76cf6104635955a0a0a8d9e041eed4abd04167e1"
+    },
+    "history": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\base\\history.json",
+      "sha256": "f5ddbe161981fe34f8b410858fc8b84d42053ec409a107f6d213ccedb0fe858c"
+    },
+    "metrics": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\base\\test_metrics.json",
+      "sha256": "7b6df6f737ea996682d92e55587e529696d46ae6ce8b20a95b4a6c65a3d7ae57"
+    },
+    "predictions": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\base\\test_predictions.npz",
+      "sha256": "997b2b461f8059ea6f183576eb5adb1155b16913dca26806077de44795a3064c"
+    },
+    "source_config": {
+      "path": "experiments\\mfsad_v2tiny_20261103\\results\\config.json",
+      "sha256": "4d45e6db941778d772ee7fe928e85579435cc20b101769c4bae1f73be46b8fd4"
+    }
+  },
+  "history_policy": "Retain other baselines as historical; never silently overwrite their records or treat them as alternate current baselines.",
+  "new_KD_initialization": "Use locked clean initial, not trained baseline checkpoint."
+}
