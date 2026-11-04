@@ -63,6 +63,58 @@ def build():
     return model.cuda().to(memory_format=torch.channels_last)
 
 
+def baseline_objective(model, batch):
+    return segmentation(model(batch["x"]), batch)
+
+
+def fit(model, dl, val, generator, out, objective):
+    opt = common.optimizer(model)
+    history, best, selected, start, step = [], -1., None, 1, 0
+    latest = out / "latest.pt"
+    if latest.exists():
+        state = torch.load(latest, map_location="cpu", weights_only=False)
+        model.load_state_dict(state["model"])
+        opt.load_state_dict(state["optimizer"])
+        history, best, selected, start, step = (state["history"], state["best"],
+                                                state["selected"], state["epoch"] + 1, state["step"])
+        restore_rng(state["rng"])
+        generator.set_state(state["generator"])
+    for epoch in range(start, 101):
+        model.train()
+        running = 0.
+        for index, batch in enumerate(dl, 1):
+            batch = common.cuda(batch)
+            for group in opt.param_groups:
+                group["lr"] = 1e-4 * common.lr_factor(step, len(dl))
+            opt.zero_grad(set_to_none=True)
+            loss = objective(model, batch)
+            assert torch.isfinite(loss)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1., error_if_nonfinite=True)
+            opt.step()
+            step += 1
+            running += loss.detach().item() * len(batch["x"])
+            common.write(out / "progress.json", {"state": "TRAINING", "epoch": epoch,
+                         "batch": index, "batches": len(dl), "best_validation_IoU": best})
+        score = common.evaluate(model, val) if epoch % 5 == 0 else None
+        if score is not None and score["IoU"] > best:
+            best, selected = score["IoU"], epoch
+            torch.save(model.state_dict(), out / "best.pt")
+        history.append({"epoch": epoch, "train_loss": running / len(dl.dataset), "validation": score})
+        common.write(out / "history.json", history)
+        temporary = latest.with_suffix(".tmp")
+        torch.save({"model": model.state_dict(), "optimizer": opt.state_dict(),
+                    "history": history, "epoch": epoch, "step": step, "best": best,
+                    "selected": selected, "rng": common.rng(), "generator": generator.get_state()}, temporary)
+        temporary.replace(latest)
+        print(out.name, epoch, "val IoU", None if score is None else score["IoU"], flush=True)
+    assert step == 2300 and selected is not None
+    common.write(out / "selection.json", {"state": "FROZEN", "epochs_completed": 100,
+                 "selected_epoch": selected, "validation_IoU": best,
+                 "checkpoint_sha256": common.sha(out / "best.pt")})
+    return selected, best
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     common.setup()
@@ -91,50 +143,7 @@ def main():
     generator = torch.Generator().manual_seed(123)
     dl = common.loader(Inputs(frames["train"], stats, augment=True), True, generator)
     val = Inputs(frames["val"], stats)
-    opt = common.optimizer(model)
-    history, best, selected, start, step = [], -1., None, 1, 0
-    latest = OUT / "latest.pt"
-    if latest.exists():
-        state = torch.load(latest, map_location="cpu", weights_only=False)
-        model.load_state_dict(state["model"])
-        opt.load_state_dict(state["optimizer"])
-        history, best, selected, start, step = (state["history"], state["best"],
-                                                state["selected"], state["epoch"] + 1, state["step"])
-        restore_rng(state["rng"])
-        generator.set_state(state["generator"])
-    for epoch in range(start, 101):
-        model.train()
-        running = 0.
-        for index, batch in enumerate(dl, 1):
-            batch = common.cuda(batch)
-            for group in opt.param_groups:
-                group["lr"] = 1e-4 * common.lr_factor(step, len(dl))
-            opt.zero_grad(set_to_none=True)
-            loss = segmentation(model(batch["x"]), batch)
-            assert torch.isfinite(loss)
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1., error_if_nonfinite=True)
-            opt.step()
-            step += 1
-            running += loss.detach().item() * len(batch["x"])
-            common.write(OUT / "progress.json", {"state": "TRAINING", "epoch": epoch,
-                         "batch": index, "batches": len(dl), "best_validation_IoU": best})
-        score = common.evaluate(model, val) if epoch % 5 == 0 else None
-        if score is not None and score["IoU"] > best:
-            best, selected = score["IoU"], epoch
-            torch.save(model.state_dict(), OUT / "best.pt")
-        history.append({"epoch": epoch, "train_loss": running / len(dl.dataset), "validation": score})
-        common.write(OUT / "history.json", history)
-        temporary = latest.with_suffix(".tmp")
-        torch.save({"model": model.state_dict(), "optimizer": opt.state_dict(),
-                    "history": history, "epoch": epoch, "step": step, "best": best,
-                    "selected": selected, "rng": common.rng(), "generator": generator.get_state()}, temporary)
-        temporary.replace(latest)
-        print("B1", epoch, "val IoU", None if score is None else score["IoU"], flush=True)
-    assert step == 2300 and selected is not None
-    common.write(OUT / "selection.json", {"state": "FROZEN", "epochs_completed": 100,
-                 "selected_epoch": selected, "validation_IoU": best,
-                 "checkpoint_sha256": common.sha(OUT / "best.pt")})
+    selected, best = fit(model, dl, val, generator, OUT, baseline_objective)
     if not (OUT / "test_metrics.json").exists():
         marker = OUT / "test_started.json"
         assert not marker.exists(), "Inspect interrupted final test before repeating"

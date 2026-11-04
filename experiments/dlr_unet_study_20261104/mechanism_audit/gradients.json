@@ -1,0 +1,1066 @@
+{
+  "D0": [
+    {
+      "samples": [
+        "EID_BR0001__SID_00268",
+        "EID_BR0001__SID_00269"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.018608257174491882,
+            "cosine_seg": 0.670788049697876,
+            "cosine_output": 1.0
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.017389453947544098,
+            "cosine_seg": 0.6000186204910278,
+            "cosine_output": 1.0
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.02601064182817936,
+            "cosine_seg": 0.7711267471313477,
+            "cosine_output": 1.0000001192092896
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.019188761711120605,
+            "cosine_seg": 0.9764129519462585,
+            "cosine_output": 1.0
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_CL0001__SID_00558",
+        "EID_CL0001__SID_00559"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.0381246879696846,
+            "cosine_seg": -0.501167893409729,
+            "cosine_output": 1.0
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.03413199633359909,
+            "cosine_seg": -0.1804131418466568,
+            "cosine_output": 1.0
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.07640331983566284,
+            "cosine_seg": 0.36994415521621704,
+            "cosine_output": 1.0
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.03249112516641617,
+            "cosine_seg": 0.3586323857307434,
+            "cosine_output": 1.0000001192092896
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_GT0001__SID_00027",
+        "EID_GT0001__SID_00028"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.02863527089357376,
+            "cosine_seg": -0.6961609125137329,
+            "cosine_output": 1.0
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.03719596192240715,
+            "cosine_seg": -0.33982351422309875,
+            "cosine_output": 1.0
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.047330934554338455,
+            "cosine_seg": 0.36365747451782227,
+            "cosine_output": 0.9999999403953552
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.038621675223112106,
+            "cosine_seg": 0.8912873268127441,
+            "cosine_output": 1.0
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_IT0001__SID_00026",
+        "EID_JP0001__SID_00014"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.028401806950569153,
+            "cosine_seg": 0.6713740825653076,
+            "cosine_output": 0.9999999403953552
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.018997544422745705,
+            "cosine_seg": 0.34800994396209717,
+            "cosine_output": 1.0
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.033797841519117355,
+            "cosine_seg": 0.7568954229354858,
+            "cosine_output": 1.0
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.04857146739959717,
+            "cosine_seg": 0.8573390245437622,
+            "cosine_output": 1.0
+          }
+        }
+      }
+    }
+  ],
+  "D1": [
+    {
+      "samples": [
+        "EID_BR0001__SID_00268",
+        "EID_BR0001__SID_00269"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.01553543470799923,
+            "cosine_seg": 0.32898402214050293,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.081794872879982,
+            "cosine_seg": -0.4559699296951294,
+            "cosine_output": -0.2596755921840668
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.01445640716701746,
+            "cosine_seg": 0.15051968395709991,
+            "cosine_output": 0.9999999403953552
+          },
+          "att": {
+            "weighted_norm_ratio": 0.03366929665207863,
+            "cosine_seg": -0.2791745662689209,
+            "cosine_output": -0.19111227989196777
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.00865192525088787,
+            "cosine_seg": -0.022193066775798798,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.10020314157009125,
+            "cosine_seg": -0.7387409210205078,
+            "cosine_output": -0.006681711412966251
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.007036115508526564,
+            "cosine_seg": -0.059381354600191116,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.01985752582550049,
+            "cosine_seg": -0.04871825873851776,
+            "cosine_output": -0.10235948115587234
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_CL0001__SID_00558",
+        "EID_CL0001__SID_00559"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.1424161195755005,
+            "cosine_seg": -0.1570916473865509,
+            "cosine_output": 1.0000001192092896
+          },
+          "att": {
+            "weighted_norm_ratio": 0.08061306923627853,
+            "cosine_seg": -0.2582010328769684,
+            "cosine_output": -0.19567081332206726
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.14519456028938293,
+            "cosine_seg": 0.18549783527851105,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.07244022935628891,
+            "cosine_seg": -0.13202451169490814,
+            "cosine_output": -0.25262439250946045
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.09272898733615875,
+            "cosine_seg": 0.4002143144607544,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.09180004894733429,
+            "cosine_seg": 0.28171586990356445,
+            "cosine_output": 0.2020416557788849
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.0601184107363224,
+            "cosine_seg": 0.10062955319881439,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.039000995457172394,
+            "cosine_seg": 0.11481386423110962,
+            "cosine_output": 0.0179334357380867
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_GT0001__SID_00027",
+        "EID_GT0001__SID_00028"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.07633354514837265,
+            "cosine_seg": -0.07539162784814835,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.01718003675341606,
+            "cosine_seg": -0.2300276905298233,
+            "cosine_output": 0.6958121061325073
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.08572585135698318,
+            "cosine_seg": 0.31103870272636414,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.022025752812623978,
+            "cosine_seg": 0.09899285435676575,
+            "cosine_output": 0.5718151926994324
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.05502597615122795,
+            "cosine_seg": 0.603192925453186,
+            "cosine_output": 0.9999999403953552
+          },
+          "att": {
+            "weighted_norm_ratio": 0.035341981798410416,
+            "cosine_seg": 0.3400241732597351,
+            "cosine_output": 0.3092576265335083
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.032073602080345154,
+            "cosine_seg": 0.749512791633606,
+            "cosine_output": 0.9999998807907104
+          },
+          "att": {
+            "weighted_norm_ratio": 0.01217595674097538,
+            "cosine_seg": -0.003219327889382839,
+            "cosine_output": 0.14401958882808685
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_IT0001__SID_00026",
+        "EID_JP0001__SID_00014"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.007008587475866079,
+            "cosine_seg": 0.6128557920455933,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.010443131439387798,
+            "cosine_seg": -0.02527281828224659,
+            "cosine_output": 0.09150998294353485
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.006389964837580919,
+            "cosine_seg": 0.7103308439254761,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.0059783076867461205,
+            "cosine_seg": -0.03231033310294151,
+            "cosine_output": 0.028957486152648926
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.009398427791893482,
+            "cosine_seg": 0.6533626914024353,
+            "cosine_output": 1.0000001192092896
+          },
+          "att": {
+            "weighted_norm_ratio": 0.020081209018826485,
+            "cosine_seg": -0.20560860633850098,
+            "cosine_output": -0.495089590549469
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.008321062661707401,
+            "cosine_seg": 0.6608061790466309,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.007181928493082523,
+            "cosine_seg": -0.19257815182209015,
+            "cosine_output": -0.1227102130651474
+          }
+        }
+      }
+    }
+  ],
+  "D2": [
+    {
+      "samples": [
+        "EID_BR0001__SID_00268",
+        "EID_BR0001__SID_00269"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.022913388907909393,
+            "cosine_seg": 0.8216692209243774,
+            "cosine_output": 1.0000001192092896
+          },
+          "att": {
+            "weighted_norm_ratio": 0.02427983097732067,
+            "cosine_seg": -0.39689767360687256,
+            "cosine_output": -0.42110180854797363
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.03218160942196846,
+            "cosine_seg": -0.3706774115562439,
+            "cosine_output": -0.294019877910614
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.024623854085803032,
+            "cosine_seg": 0.8770343661308289,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.018905222415924072,
+            "cosine_seg": -0.3689684569835663,
+            "cosine_output": -0.42307475209236145
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.020814970135688782,
+            "cosine_seg": -0.2925639748573303,
+            "cosine_output": -0.3375581204891205
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.012462236918509007,
+            "cosine_seg": 0.7525065541267395,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.05402044206857681,
+            "cosine_seg": -0.1584189236164093,
+            "cosine_output": -0.25064700841903687
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.10700201243162155,
+            "cosine_seg": 0.0960940271615982,
+            "cosine_output": -0.01456516608595848
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.012358679436147213,
+            "cosine_seg": 0.6925021409988403,
+            "cosine_output": 1.0000001192092896
+          },
+          "att": {
+            "weighted_norm_ratio": 0.01864277757704258,
+            "cosine_seg": -0.05274791643023491,
+            "cosine_output": -0.12086443603038788
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.00647231750190258,
+            "cosine_seg": 0.04676268994808197,
+            "cosine_output": 0.08720588684082031
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_CL0001__SID_00558",
+        "EID_CL0001__SID_00559"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.07847484201192856,
+            "cosine_seg": -0.4312373995780945,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.09460409730672836,
+            "cosine_seg": -0.09298805147409439,
+            "cosine_output": -0.1684274971485138
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.09228938817977905,
+            "cosine_seg": -0.15707606077194214,
+            "cosine_output": 0.010890314355492592
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.0845114216208458,
+            "cosine_seg": -0.17383934557437897,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.09485659003257751,
+            "cosine_seg": 0.012888852506875992,
+            "cosine_output": -0.24388256669044495
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.09086773544549942,
+            "cosine_seg": -0.03429550305008888,
+            "cosine_output": -0.09225954860448837
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.057253144681453705,
+            "cosine_seg": 0.02944295108318329,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.17233726382255554,
+            "cosine_seg": -0.0772925466299057,
+            "cosine_output": 0.08376802504062653
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.2919929027557373,
+            "cosine_seg": 0.23273184895515442,
+            "cosine_output": 0.11735657602548599
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.04528863728046417,
+            "cosine_seg": -0.06140571087598801,
+            "cosine_output": 0.9999998807907104
+          },
+          "att": {
+            "weighted_norm_ratio": 0.032817404717206955,
+            "cosine_seg": 0.08405470848083496,
+            "cosine_output": -0.14123854041099548
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.017201870679855347,
+            "cosine_seg": -0.0074562616646289825,
+            "cosine_output": 0.06963600218296051
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_GT0001__SID_00027",
+        "EID_GT0001__SID_00028"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.052475523203611374,
+            "cosine_seg": 0.09745249152183533,
+            "cosine_output": 0.9999999403953552
+          },
+          "att": {
+            "weighted_norm_ratio": 0.04866699129343033,
+            "cosine_seg": -0.012351199984550476,
+            "cosine_output": 0.24685204029083252
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.06704746931791306,
+            "cosine_seg": -0.30509644746780396,
+            "cosine_output": 0.18871812522411346
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.0634603276848793,
+            "cosine_seg": 0.16551053524017334,
+            "cosine_output": 1.0000001192092896
+          },
+          "att": {
+            "weighted_norm_ratio": 0.06220397725701332,
+            "cosine_seg": -0.007929709739983082,
+            "cosine_output": 0.21655605733394623
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.09106805920600891,
+            "cosine_seg": -0.09018619358539581,
+            "cosine_output": 0.2345632016658783
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.04859837889671326,
+            "cosine_seg": 0.7089477777481079,
+            "cosine_output": 1.0000001192092896
+          },
+          "att": {
+            "weighted_norm_ratio": 0.10972168296575546,
+            "cosine_seg": -0.09779931604862213,
+            "cosine_output": 0.014180244877934456
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.1653456836938858,
+            "cosine_seg": -0.25921154022216797,
+            "cosine_output": -0.064705990254879
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.03233954310417175,
+            "cosine_seg": 0.828819751739502,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.013632532209157944,
+            "cosine_seg": -0.03411807119846344,
+            "cosine_output": 0.021534521132707596
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.007252450566738844,
+            "cosine_seg": -0.01193595677614212,
+            "cosine_output": 0.030187703669071198
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_IT0001__SID_00026",
+        "EID_JP0001__SID_00014"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.013910253532230854,
+            "cosine_seg": 0.7055760622024536,
+            "cosine_output": 0.9999999403953552
+          },
+          "att": {
+            "weighted_norm_ratio": 0.09189441055059433,
+            "cosine_seg": -0.5243463516235352,
+            "cosine_output": -0.5171741247177124
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.03514552861452103,
+            "cosine_seg": -0.23204784095287323,
+            "cosine_output": -0.16045856475830078
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.01363467238843441,
+            "cosine_seg": 0.6085941791534424,
+            "cosine_output": 0.9999998211860657
+          },
+          "att": {
+            "weighted_norm_ratio": 0.06677514314651489,
+            "cosine_seg": -0.1880079209804535,
+            "cosine_output": -0.18410038948059082
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.03928828984498978,
+            "cosine_seg": -0.002511724829673767,
+            "cosine_output": -0.06027091294527054
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.024593399837613106,
+            "cosine_seg": 0.8312749862670898,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.12852366268634796,
+            "cosine_seg": -0.1890403777360916,
+            "cosine_output": -0.433750182390213
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.12575162947177887,
+            "cosine_seg": 0.03297126293182373,
+            "cosine_output": -0.02047852799296379
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.02776775322854519,
+            "cosine_seg": 0.7323501110076904,
+            "cosine_output": 1.0
+          },
+          "att": {
+            "weighted_norm_ratio": 0.025997905060648918,
+            "cosine_seg": -0.021846162155270576,
+            "cosine_output": -0.03546692430973053
+          },
+          "wave": {
+            "weighted_norm_ratio": 0.008769284002482891,
+            "cosine_seg": 0.010876900516450405,
+            "cosine_output": 0.010785471647977829
+          }
+        }
+      }
+    }
+  ],
+  "D3": [
+    {
+      "samples": [
+        "EID_BR0001__SID_00268",
+        "EID_BR0001__SID_00269"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.05812640115618706,
+            "cosine_seg": -0.3548840880393982,
+            "cosine_output": 0.9999999403953552
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.18095725774765015,
+            "cosine_seg": -0.20768269896507263,
+            "cosine_output": 0.09543493390083313
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.08852212131023407,
+            "cosine_seg": -0.17709854245185852,
+            "cosine_output": 0.03153371810913086
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.11717018485069275,
+            "cosine_seg": -0.2135319709777832,
+            "cosine_output": 0.10094057768583298
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.06684187054634094,
+            "cosine_seg": -0.13969705998897552,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.10550450533628464,
+            "cosine_seg": 0.01949133351445198,
+            "cosine_output": -0.2761596441268921
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.06138830631971359,
+            "cosine_seg": -0.0257197767496109,
+            "cosine_output": -0.11649195849895477
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.0684896931052208,
+            "cosine_seg": -0.017564591020345688,
+            "cosine_output": -0.21144239604473114
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.06600753962993622,
+            "cosine_seg": -0.0511593334376812,
+            "cosine_output": 1.000000238418579
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.20077843964099884,
+            "cosine_seg": 0.22553519904613495,
+            "cosine_output": -0.17629611492156982
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.2609226405620575,
+            "cosine_seg": -0.21236687898635864,
+            "cosine_output": -0.3569411039352417
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.19842468202114105,
+            "cosine_seg": 0.011388922110199928,
+            "cosine_output": -0.3878917694091797
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.024390071630477905,
+            "cosine_seg": 0.814340353012085,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.0,
+            "cosine_seg": 0.0,
+            "cosine_output": 0.0
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.027030084282159805,
+            "cosine_seg": -0.00601059477776289,
+            "cosine_output": -0.022881602868437767
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.013762632384896278,
+            "cosine_seg": -0.0009685654658824205,
+            "cosine_output": -0.017668791115283966
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_CL0001__SID_00558",
+        "EID_CL0001__SID_00559"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.12477763742208481,
+            "cosine_seg": 0.5455515384674072,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.09476940333843231,
+            "cosine_seg": -0.11889500916004181,
+            "cosine_output": -0.045596592128276825
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.0351162850856781,
+            "cosine_seg": -0.30314865708351135,
+            "cosine_output": -0.2706039249897003
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.03791385143995285,
+            "cosine_seg": -0.31332647800445557,
+            "cosine_output": -0.46247774362564087
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.10460210591554642,
+            "cosine_seg": 0.38224273920059204,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.05182066187262535,
+            "cosine_seg": -0.15993869304656982,
+            "cosine_output": -0.30270683765411377
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.027072401717305183,
+            "cosine_seg": -0.3054007887840271,
+            "cosine_output": -0.3989565968513489
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.03205404058098793,
+            "cosine_seg": -0.25669217109680176,
+            "cosine_output": -0.5875731706619263
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.06722329556941986,
+            "cosine_seg": 0.5664197206497192,
+            "cosine_output": 0.9999998807907104
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.13849958777427673,
+            "cosine_seg": 0.3099757432937622,
+            "cosine_output": 0.1172386184334755
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.2162702977657318,
+            "cosine_seg": 0.7315506339073181,
+            "cosine_output": 0.4579200744628906
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.2638623118400574,
+            "cosine_seg": 0.8538088798522949,
+            "cosine_output": 0.38938915729522705
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.08224301785230637,
+            "cosine_seg": 0.19885864853858948,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.0,
+            "cosine_seg": 0.0,
+            "cosine_output": 0.0
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.03493069112300873,
+            "cosine_seg": -0.05368955433368683,
+            "cosine_output": 0.07749791443347931
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.015980171039700508,
+            "cosine_seg": -0.014121619053184986,
+            "cosine_output": 0.0062143849208951
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_GT0001__SID_00027",
+        "EID_GT0001__SID_00028"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.03624719753861427,
+            "cosine_seg": -0.6356604099273682,
+            "cosine_output": 0.9999999403953552
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.048655811697244644,
+            "cosine_seg": -0.42558833956718445,
+            "cosine_output": 0.3277706205844879
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.10060849040746689,
+            "cosine_seg": -0.4387700855731964,
+            "cosine_output": 0.557890772819519
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.06417162716388702,
+            "cosine_seg": -0.3830522894859314,
+            "cosine_output": 0.46197059750556946
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.05084532871842384,
+            "cosine_seg": -0.5061220526695251,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.05609271675348282,
+            "cosine_seg": -0.3296055197715759,
+            "cosine_output": 0.3112792372703552
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.10874900966882706,
+            "cosine_seg": -0.23037849366664886,
+            "cosine_output": 0.327190101146698
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.0775144174695015,
+            "cosine_seg": -0.2650972008705139,
+            "cosine_output": 0.29751139879226685
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.055055178701877594,
+            "cosine_seg": -0.04413944110274315,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.34273841977119446,
+            "cosine_seg": -0.2780722677707672,
+            "cosine_output": 0.2607141435146332
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.7055861353874207,
+            "cosine_seg": -0.20336243510246277,
+            "cosine_output": 0.23171696066856384
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.5758318305015564,
+            "cosine_seg": -0.1808054894208908,
+            "cosine_output": 0.210697203874588
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.04555140435695648,
+            "cosine_seg": 0.7215175628662109,
+            "cosine_output": 0.9999999403953552
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.0,
+            "cosine_seg": 0.0,
+            "cosine_output": 0.0
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.012364286929368973,
+            "cosine_seg": -0.006147900130599737,
+            "cosine_output": 0.1535099893808365
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.005977851804345846,
+            "cosine_seg": -0.008162613958120346,
+            "cosine_output": 0.10217343270778656
+          }
+        }
+      }
+    },
+    {
+      "samples": [
+        "EID_IT0001__SID_00026",
+        "EID_JP0001__SID_00014"
+      ],
+      "groups": {
+        "shallow": {
+          "out": {
+            "weighted_norm_ratio": 0.022211333736777306,
+            "cosine_seg": 0.30604949593544006,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.1814444661140442,
+            "cosine_seg": 0.22230002284049988,
+            "cosine_output": -0.18524816632270813
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.5316327214241028,
+            "cosine_seg": 0.11248522996902466,
+            "cosine_output": -0.3074888586997986
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.36266204714775085,
+            "cosine_seg": 0.1208503320813179,
+            "cosine_output": -0.1275205910205841
+          }
+        },
+        "middle": {
+          "out": {
+            "weighted_norm_ratio": 0.012233074754476547,
+            "cosine_seg": 0.45152905583381653,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.2202015370130539,
+            "cosine_seg": -0.02204888127744198,
+            "cosine_output": -0.061516016721725464
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.5690136551856995,
+            "cosine_seg": -0.008019732311367989,
+            "cosine_output": -0.11233609914779663
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.47262901067733765,
+            "cosine_seg": -0.022805890068411827,
+            "cosine_output": -0.07249750196933746
+          }
+        },
+        "deep": {
+          "out": {
+            "weighted_norm_ratio": 0.026425234973430634,
+            "cosine_seg": 0.7608309984207153,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.9182531237602234,
+            "cosine_seg": -0.12437763810157776,
+            "cosine_output": 0.3038330078125
+          },
+          "freq": {
+            "weighted_norm_ratio": 2.328538417816162,
+            "cosine_seg": -0.2087072730064392,
+            "cosine_output": 0.3141167461872101
+          },
+          "jscad": {
+            "weighted_norm_ratio": 2.6826887130737305,
+            "cosine_seg": -0.1908109039068222,
+            "cosine_output": 0.3253750503063202
+          }
+        },
+        "decoder": {
+          "out": {
+            "weighted_norm_ratio": 0.05579564347863197,
+            "cosine_seg": 0.8200244903564453,
+            "cosine_output": 1.0
+          },
+          "bk": {
+            "weighted_norm_ratio": 0.0,
+            "cosine_seg": 0.0,
+            "cosine_output": 0.0
+          },
+          "freq": {
+            "weighted_norm_ratio": 0.14668408036231995,
+            "cosine_seg": 0.002350074239075184,
+            "cosine_output": -0.011459842324256897
+          },
+          "jscad": {
+            "weighted_norm_ratio": 0.0701909065246582,
+            "cosine_seg": 0.0031683689448982477,
+            "cosine_output": -0.007000827230513096
+          }
+        }
+      }
+    }
+  ]
+}
