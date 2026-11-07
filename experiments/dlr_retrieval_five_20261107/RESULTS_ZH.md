@@ -36,8 +36,8 @@
 | M2_student_seed42 | 100 | 100 | 87.224% |
 | M3_sar_seed42 | 100 | 100 | 87.586% |
 | M3_teacher_seed42 | 100 | 100 | 91.818% |
-| M3_student_seed42 | 运行到第1轮 | — | — |
-| M4_sar_seed42 | NOT_RUN | — | — |
+| M3_student_seed42 | 100 | 100 | 87.234% |
+| M4_sar_seed42 | 运行到第1轮 | — | — |
 | M4_teacher_seed42 | NOT_RUN | — | — |
 | M4_student_seed42 | NOT_RUN | — | — |
 
