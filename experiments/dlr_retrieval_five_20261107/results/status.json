@@ -1,6 +1,6 @@
 {
   "state": "TRAINING",
-  "method": "M0",
-  "role": "student",
+  "method": "M1",
+  "role": "sar",
   "seed": 42
 }
