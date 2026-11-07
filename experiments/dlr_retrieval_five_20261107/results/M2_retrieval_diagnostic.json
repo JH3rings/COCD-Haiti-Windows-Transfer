@@ -1,0 +1,57 @@
+{
+  "fixed_student_memory_and_decoder": {
+    "student": {
+      "TP": 161205,
+      "FP": 40401,
+      "FN": 66306,
+      "TN": 1633971,
+      "IoU": 0.601708770043895,
+      "F1": 0.7513335523878103,
+      "Precision": 0.79960417844707,
+      "Recall": 0.7085591465907143,
+      "AUPRC": 0.7779833194569759,
+      "foreground_fraction": 0.11962407782182184,
+      "predicted_positive_fraction": 0.10600336613766462,
+      "pixels": 1901883
+    },
+    "teacher_rule": {
+      "TP": 167764,
+      "FP": 47636,
+      "FN": 59747,
+      "TN": 1626736,
+      "IoU": 0.6097249833725245,
+      "F1": 0.757551742900944,
+      "Precision": 0.7788486536675951,
+      "Recall": 0.7373885218736677,
+      "AUPRC": 0.7840092497707207,
+      "foreground_fraction": 0.11962407782182184,
+      "predicted_positive_fraction": 0.11325617821916491,
+      "pixels": 1901883
+    },
+    "sar_rule": {
+      "TP": 159869,
+      "FP": 38914,
+      "FN": 67642,
+      "TN": 1635458,
+      "IoU": 0.6000525476212818,
+      "F1": 0.7500410514809028,
+      "Precision": 0.8042387930557442,
+      "Recall": 0.7026869030508415,
+      "AUPRC": 0.7896620624008983,
+      "foreground_fraction": 0.11962407782182184,
+      "predicted_positive_fraction": 0.1045190477016725,
+      "pixels": 1901883
+    }
+  },
+  "query_summary": {
+    "JS": 0.17542163530985513,
+    "cosine": 0.8849006811777751,
+    "offset": 0.5556499640146891
+  },
+  "scale_mass": [
+    0.39428412119547523,
+    0.2874803553024928,
+    0.3182355225086212
+  ],
+  "note": "Teacher and control rules are generated from their own SAR memories then applied to the same frozen Student value bank"
+}

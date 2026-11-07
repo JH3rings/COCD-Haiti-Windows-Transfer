@@ -1,0 +1,20 @@
+{
+  "user_instruction": "Stop multiple-seed replication and directly test completed seed42 models.",
+  "stopped_seed43_progress": {
+    "M0_sar_seed43": {
+      "state": "TRAINING",
+      "epoch": 86,
+      "batch": 20,
+      "batches": 23,
+      "losses": {
+        "seg": 0.15993556380271912
+      },
+      "gradient_norm": 5.850474834442139,
+      "lr": 1.9290826292752672e-05,
+      "best_validation_IoU": 0.864291714632401
+    }
+  },
+  "original_run_sha256": "245296dd1154d758d22d8e60f8585fb38a108e4aa2e7d69a3b38cd5bc95f17b3",
+  "formal_test_scope": "13 completed seed42 model selections only",
+  "training_weights_changed": false
+}

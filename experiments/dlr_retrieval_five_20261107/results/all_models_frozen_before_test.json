@@ -1,0 +1,106 @@
+{
+  "M0_sar_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8695097831900788,
+    "checkpoint_sha256": "359dacff17889c2b2ed6c860932edc3c27eb90ad89240875cb3ec6fc3b97a2e3",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M0_student_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8766092949636701,
+    "checkpoint_sha256": "77904b0401bfa667e13f4049c478f192c642ed45b9bfda5ef0e7d35386924bc0",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M0_teacher_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 95,
+    "validation_IoU": 0.926239366011748,
+    "checkpoint_sha256": "b2297a56440bf99f9790a150164c88194d41c91228baa4f4ca909fd9ebccb1f3",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M1_sar_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.875213270732406,
+    "checkpoint_sha256": "f4459e5fcb0ca2855bfa8bafa7345dc65413d657c8fc85541b6b894179b0783c",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M1_student_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 95,
+    "validation_IoU": 0.8719658989377544,
+    "checkpoint_sha256": "de1794c71ce0924fa0c2e872e764aa72acd7dd65b5a631077970ada3cef751e9",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M1_teacher_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.925661979372506,
+    "checkpoint_sha256": "27ffd6133c21a66af4d5fcdd0341a425e0b0d48c69312c7c8d566cc47676c89e",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M2_student_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8722367254304972,
+    "checkpoint_sha256": "48d41ca53392bd7c55601859a1356e70a35e40a6d9bff8bda142b8b31703c870",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M3_sar_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8758630160929872,
+    "checkpoint_sha256": "930e83c56eefa1988b003cd7b5144449260ddce0afefdc02768c67dfbdd7d46c",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M3_student_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.872342406076628,
+    "checkpoint_sha256": "745793843d33e03bc0c5f9fd4531e99603d7121fdb9ee5e936269a0a6a6c6480",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M3_teacher_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.9181830290037991,
+    "checkpoint_sha256": "e92306eb367ab4e1bc4ac3e8ac3ab2565e8b375fe680cda90ad33e1b82caec91",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M4_sar_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8754477663080383,
+    "checkpoint_sha256": "aece90a27b1bf32b22c71461a7cbbe28eb8bf475287742bd869ef0be0da86cdb",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M4_student_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 100,
+    "validation_IoU": 0.8722336954148131,
+    "checkpoint_sha256": "d293dbda9347ad07e7f241e519f364e434ef9bf5466b791a4389f79b7e4acd0b",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  },
+  "M4_teacher_seed42": {
+    "state": "FROZEN",
+    "epochs_completed": 100,
+    "selected_epoch": 95,
+    "validation_IoU": 0.9243427947182227,
+    "checkpoint_sha256": "b1042c02f19687bb9f8f87e18496e65b6780932fbeae87d7b2bbf8ec08bf4c7a",
+    "selection": "all scheduled validation epochs including segmentation warmup"
+  }
+}

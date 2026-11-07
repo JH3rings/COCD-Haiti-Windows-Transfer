@@ -1,0 +1,8 @@
+{
+  "state": "FROZEN",
+  "epochs_completed": 100,
+  "selected_epoch": 100,
+  "validation_IoU": 0.8722336954148131,
+  "checkpoint_sha256": "d293dbda9347ad07e7f241e519f364e434ef9bf5466b791a4389f79b7e4acd0b",
+  "selection": "all scheduled validation epochs including segmentation warmup"
+}

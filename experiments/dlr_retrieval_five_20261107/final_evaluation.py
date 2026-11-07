@@ -36,11 +36,11 @@ def complexity(model,optical):
     def count(m,inputs,out):
         nonlocal total
         if isinstance(m,nn.Conv2d):
-            total+=out.numel()*(m.in_channels//m.groups)*np.prod(m.kernel_size)
+            total+=out.numel()*(m.in_channels//m.groups)*int(np.prod(m.kernel_size))
         elif isinstance(m,nn.ConvTranspose2d):
-            total+=inputs[0].numel()*(m.out_channels//m.groups)*np.prod(m.kernel_size)
+            total+=inputs[0].numel()*(m.out_channels//m.groups)*int(np.prod(m.kernel_size))
         else:
-            total+=out.numel()*(m.in_channels//m.groups)*np.prod(m.kernel_size)
+            total+=out.numel()*(m.in_channels//m.groups)*int(np.prod(m.kernel_size))
     for m in model.modules():
         if isinstance(m,(nn.Conv2d,nn.ConvTranspose2d,nn.Conv1d)):
             handles.append(m.register_forward_hook(count))
@@ -109,7 +109,7 @@ def qualitative(method,test):
         sizes=[int(test.cache[i]["mask"].sum()) for i in candidates]
         chosen.append(int(candidates[np.argsort(sizes)[len(sizes)//2]]))
     fig,axs=plt.subplots(len(chosen),6,figsize=(12,2*len(chosen)),layout="constrained",squeeze=False)
-    for row,i in enumerate(chosen):
+    for row,i in zip(axs,chosen):
         sample=test.cache[i]
         gt=sample["mask"].numpy()[0]>.5;valid=sample["valid"].numpy()[0]
         sar=sample["x"].numpy()[-1]
@@ -133,7 +133,8 @@ def qualitative(method,test):
 
 def finish(eligible,repeats,frames,stats,optical):
     common.write(OUT/"status.json",{"state":"EVALUATING"})
-    folders=sorted(p.parent for p in OUT.glob("*/selection.json"))
+    folders=sorted(p.parent for p in OUT.glob("*_seed42/selection.json"))
+    assert len(folders) == 13
     locks={p.name:selection(p) for p in folders}
     common.write(OUT/"all_models_frozen_before_test.json",locks)
     test=SARInputs(frames["test"],stats)

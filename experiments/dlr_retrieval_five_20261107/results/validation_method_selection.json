@@ -1,0 +1,11 @@
+{
+  "eligible": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ],
+  "seed43_repeats": [],
+  "reason": "User requested immediate test of all five completed seed42 methods."
+}

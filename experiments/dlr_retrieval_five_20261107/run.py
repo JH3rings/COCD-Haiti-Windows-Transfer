@@ -306,17 +306,7 @@ def main():
         train(method,"student",train_data,val,guide=guide)
         del guide
         eligible.append(method)
-    repeats=[]
-    for method in eligible:
-        arch="M0" if method=="M2" else method
-        a=selection(OUT/f"{arch}_sar_seed42")
-        b=selection(OUT/f"{method}_student_seed42")
-        if b["validation_IoU"]-a["validation_IoU"]>=REPEAT_MARGIN:
-            train(arch,"sar",train_data,val,43)
-            guide=load(arch,"teacher").requires_grad_(False)
-            train(method,"student",train_data,val,43,guide)
-            del guide
-            repeats.append(method)
+    repeats=[]  # User stopped extra seeds and authorized immediate seed42 testing.
     common.write(OUT/"validation_method_selection.json",{"eligible":eligible,"seed43_repeats":repeats})
     del train_data,val
     torch.cuda.empty_cache()

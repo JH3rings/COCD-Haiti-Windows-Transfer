@@ -1,0 +1,8 @@
+{
+  "definition": "4-connected within-patch components <=100 valid pixels",
+  "valid_positive_pixels": 2550,
+  "pixel_recall": 0.21215686274509804,
+  "components": 120,
+  "detected_at_10_percent_overlap": 0.35833333333333334,
+  "limitation": "patch components can fragment a physical landslide; overlapping patches repeat objects"
+}

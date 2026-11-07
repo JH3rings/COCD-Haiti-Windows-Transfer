@@ -1,0 +1,80 @@
+{
+  "M0_sar_seed42": {
+    "parameters": 31434463,
+    "convolution_GMACs": 12.28079104,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M0_student_seed42": {
+    "parameters": 31434463,
+    "convolution_GMACs": 12.28079104,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M0_teacher_seed42": {
+    "parameters": 31635199,
+    "convolution_GMACs": 12.517244928,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M1_sar_seed42": {
+    "parameters": 31462495,
+    "convolution_GMACs": 12.293177344,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M1_student_seed42": {
+    "parameters": 31462495,
+    "convolution_GMACs": 12.293177344,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M1_teacher_seed42": {
+    "parameters": 31663231,
+    "convolution_GMACs": 12.529631232,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M2_student_seed42": {
+    "parameters": 31434463,
+    "convolution_GMACs": 12.28079104,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M3_sar_seed42": {
+    "parameters": 31435615,
+    "convolution_GMACs": 12.284985344,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M3_student_seed42": {
+    "parameters": 31435615,
+    "convolution_GMACs": 12.284985344,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M3_teacher_seed42": {
+    "parameters": 31636351,
+    "convolution_GMACs": 12.521439232,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M4_sar_seed42": {
+    "parameters": 31450978,
+    "convolution_GMACs": 12.29756864,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M4_student_seed42": {
+    "parameters": 31450978,
+    "convolution_GMACs": 12.29756864,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  },
+  "M4_teacher_seed42": {
+    "parameters": 31651714,
+    "convolution_GMACs": 12.534022528,
+    "excluded": "grid_sample, interpolation, normalization, nonlinearities, reductions and memory traffic",
+    "latency": "NOT_MEASURED with concurrent GPU work"
+  }
+}

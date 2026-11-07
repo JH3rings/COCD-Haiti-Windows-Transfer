@@ -50,6 +50,9 @@ def main():
         for name,m in rows.items():
             lines.append(f"| {name} | {m['IoU']*100:.3f}% | {m['per_official_subset']['testind']['IoU']*100:.3f}% | {m['AUPRC']*100:.3f}% |")
         lines.extend(["","正式方法筛选使用先前验证集记录。测试结果不用于重新选择损失权重或追加方案。"])
+    amendment=OUT/"user_test_amendment.json"
+    if amendment.exists():
+        lines.extend(["","用户指示停止额外随机种子，直接测试13个已冻结的seed42模型。"])
     if status["state"]=="TEACHER_SEARCH_GATE_NOT_PASSED":
         lines.extend(["","## 研究判断","",
                       "M0的教师检索前提未通过。本轮没有进入学生蒸馏阶段，M1–M4学生均为NOT_RUN。"
@@ -59,7 +62,7 @@ def main():
         lines.extend(["","## 研究判断","",
                       "独立模块的收益须相对各自的同结构无蒸馏对照计算。"
                       "Teacher精度、JS或余弦改善单独不构成学生有效性的证明。"
-                      "验证提升触发的seed43为探索性复核，两种子不足以证明普遍稳定性。"])
+                      "本轮按用户要求只报告seed42，额外种子在完成前被停止，结果不用于方法筛选。"])
     else:
         lines.extend(["","最终机制判断仍待教师检索验证和后续实际训练结果。"])
     (HERE/"RESULTS_ZH.md").write_text("\n".join(lines)+"\n",encoding="utf-8")

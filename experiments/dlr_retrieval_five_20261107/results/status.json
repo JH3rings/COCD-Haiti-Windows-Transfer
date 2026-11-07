@@ -1,6 +1,4 @@
 {
-  "state": "TRAINING",
-  "method": "M0",
-  "role": "sar",
-  "seed": 43
+  "state": "COMPLETE",
+  "scope": "seed42 only; extra seeds stopped by user"
 }
