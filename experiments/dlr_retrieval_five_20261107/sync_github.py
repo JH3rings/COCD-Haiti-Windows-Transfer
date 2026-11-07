@@ -3,6 +3,7 @@ import ast
 import json
 import shutil
 import subprocess
+import urllib.request
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parent
@@ -13,7 +14,14 @@ BRANCH="codex/dlr-retrieval-five-20261107"
 
 
 def git(*args):
-    return subprocess.run(["git","-C",str(WORKTREE),*args],capture_output=True,text=True,check=True).stdout.strip()
+    proxy=urllib.request.getproxies().get("https")
+    command=["git","-C",str(WORKTREE)]
+    if proxy:
+        command.extend(["-c",f"http.proxy={proxy}"])
+    result=subprocess.run([*command,*args],capture_output=True,text=True,timeout=55)
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip())
+    return result.stdout.strip()
 
 
 def dependencies():
@@ -64,7 +72,7 @@ def publish(label):
     changed=subprocess.run(["git","-C",str(WORKTREE),"diff","--cached","--quiet"]).returncode
     if changed:
         git("commit","-m",f"DLR retrieval study: {label}")
-        git("push","origin",f"HEAD:refs/heads/{BRANCH}")
+    git("push","origin",f"HEAD:refs/heads/{BRANCH}")
     result={"branch":BRANCH,"commit":git("rev-parse","HEAD"),"files":len(relative),"stage":label}
     (HERE/"github_sync.json").write_text(json.dumps(result,indent=2)+"\n")
     print(json.dumps(result),flush=True)
