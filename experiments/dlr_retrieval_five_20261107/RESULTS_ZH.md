@@ -9,13 +9,27 @@
 - mechanism_AB_checks.json 已完成，完整记录见同目录文件。
 - real_train16_gradients.json 已完成，完整记录见同目录文件。
 
+## 教师检索价值验证
+
+| 条件 | 验证 IoU |
+|---|---:|
+| native_A | 86.951% |
+| native_B | 92.624% |
+| AA | 86.951% |
+| AB | 86.923% |
+| BA | 23.604% |
+| BB | 92.624% |
+
+固定宿主A与B的规则替换收益分别为 -0.028 和 69.020 个百分点。
+预先设定的教师检索验证条件通过情况为 True。
+
 ## 验证选模
 
 | 模型 | 完成轮数 | 选中轮次 | 验证 IoU |
 |---|---:|---:|---:|
 | M0_sar_seed42 | 100 | 100 | 86.951% |
-| M0_teacher_seed42 | 运行到第1轮 | — | — |
-| M0_student_seed42 | NOT_RUN | — | — |
+| M0_teacher_seed42 | 100 | 95 | 92.624% |
+| M0_student_seed42 | 运行到第1轮 | — | — |
 | M1_sar_seed42 | NOT_RUN | — | — |
 | M1_teacher_seed42 | NOT_RUN | — | — |
 | M1_student_seed42 | NOT_RUN | — | — |
