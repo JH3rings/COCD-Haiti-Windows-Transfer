@@ -1,0 +1,18 @@
+{
+  "epochs": 100,
+  "batch": 16,
+  "val_every": 5,
+  "seed": 42,
+  "optimizer": "AdamW1e-4 wd.01 clip1, norm/bias excluded",
+  "schedule": "50constant50cosine1percent",
+  "base_loss": "BCE+Dice1:1",
+  "dual_seg": "0.5*(student_seg+teacher_seg)",
+  "KD_weights": [
+    0.05,
+    0.05
+  ],
+  "KD_gate": "previous scheduled validation teacher IoU - student IoU >=.002; gated each next5 epochs",
+  "advantage_gate": "noKD teacher > capacity matched SARdual teacher by .002, and > own student by .002",
+  "test": "NOT_ACCESSED",
+  "split_sha256": "7800c2801daed6000906a6fd0d445dec0d1240fb976cef9cd78cf14d8165f4dc"
+}

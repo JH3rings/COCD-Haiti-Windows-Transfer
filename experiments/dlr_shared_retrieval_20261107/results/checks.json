@@ -1,0 +1,56 @@
+{
+  "V0": {
+    "shared_memory_decoder": true,
+    "kd_teacher_encoder_direct_gradient_zero": true,
+    "seg_encoder_gradient": 0.06767038255929947,
+    "shape": [
+      [
+        2,
+        128,
+        32,
+        32
+      ],
+      [
+        2,
+        128,
+        16,
+        16
+      ],
+      [
+        2,
+        128,
+        8,
+        8
+      ]
+    ],
+    "parameters": 31760477,
+    "deploy_parameters": 31434463
+  },
+  "V2": {
+    "shared_memory_decoder": true,
+    "kd_teacher_encoder_direct_gradient_zero": true,
+    "seg_encoder_gradient": 0.06767038255929947,
+    "shape": [
+      [
+        2,
+        128,
+        32,
+        32
+      ],
+      [
+        2,
+        128,
+        16,
+        16
+      ],
+      [
+        2,
+        128,
+        8,
+        8
+      ]
+    ],
+    "parameters": 31802013,
+    "deploy_parameters": 31434463
+  }
+}
