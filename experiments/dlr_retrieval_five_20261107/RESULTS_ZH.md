@@ -38,7 +38,7 @@
 | M3_teacher_seed42 | 100 | 100 | 91.818% |
 | M3_student_seed42 | 100 | 100 | 87.234% |
 | M4_sar_seed42 | 100 | 100 | 87.545% |
-| M4_teacher_seed42 | 运行到第1轮 | — | — |
-| M4_student_seed42 | NOT_RUN | — | — |
+| M4_teacher_seed42 | 100 | 95 | 92.434% |
+| M4_student_seed42 | 运行到第1轮 | — | — |
 
 最终机制判断仍待教师检索验证和后续实际训练结果。
