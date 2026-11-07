@@ -59,6 +59,21 @@ def main():
                       "当前证据不足以将光学引导检索作为已验证贡献。该状态不是学生训练失败。"
                       "后续需要先解决教师规则在固定SAR证据和解码器条件下的功能价值，才能判断蒸馏目标。"])
     elif status["state"]=="COMPLETE":
+        lines.extend(["", "## 同结构蒸馏增益", "",
+                      "| 方案 | SAR对照全部120 IoU | Student全部120 IoU | 增益（百分点） | 独立44增益（百分点） |",
+                      "|---|---:|---:|---:|---:|"])
+        for method in ("M0","M1","M2","M3","M4"):
+            arch="M0" if method=="M2" else method
+            a=rows[f"{arch}_sar_seed42"]; b=rows[f"{method}_student_seed42"]
+            delta=(b['IoU']-a['IoU'])*100
+            independent=(b['per_official_subset']['testind']['IoU']-a['per_official_subset']['testind']['IoU'])*100
+            lines.append(f"| {method} | {a['IoU']*100:.3f}% | {b['IoU']*100:.3f}% | {delta:+.3f} | {independent:+.3f} |")
+        lines.extend(["", "M0和M2相对同结构对照有小幅整体增益，M1、M3、M4没有整体增益。"
+                      "五种Student的全部120 IoU均低于原纯SAR B1的60.234%，未达到整体提高2个百分点的目标。"
+                      "独立44是全部120的子集，两者不能视为独立重复验证。",
+                      "固定宿主规则替换存在明显的宿主依赖：例如M0教师规则在SAR宿主上并未改善验证IoU，"
+                      "而在教师宿主上优势很大。因此教师原生精度及原门槛通过不足以单独证明规则可迁移；"
+                      "当前结果不支持声称光学检索优势已充分转化为Student收益。"])
         lines.extend(["","## 研究判断","",
                       "独立模块的收益须相对各自的同结构无蒸馏对照计算。"
                       "Teacher精度、JS或余弦改善单独不构成学生有效性的证明。"
