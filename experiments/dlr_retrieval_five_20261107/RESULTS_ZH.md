@@ -13,7 +13,7 @@
 
 | 模型 | 完成轮数 | 选中轮次 | 验证 IoU |
 |---|---:|---:|---:|
-| M0_sar_seed42 | 运行到第25轮 | — | — |
+| M0_sar_seed42 | 运行到第27轮 | — | — |
 | M0_teacher_seed42 | NOT_RUN | — | — |
 | M0_student_seed42 | NOT_RUN | — | — |
 | M1_sar_seed42 | NOT_RUN | — | — |
