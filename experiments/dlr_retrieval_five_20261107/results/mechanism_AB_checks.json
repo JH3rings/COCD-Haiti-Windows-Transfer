@@ -1,0 +1,106 @@
+{
+  "M0": {
+    "fixed_policy_optical_invariance": true,
+    "dynamic_sampling_change": 0.0037379111163318157,
+    "optical_changes_policy": 0.0003483965992927551,
+    "memory_shapes_64": [
+      [
+        2,
+        128,
+        16,
+        16
+      ],
+      [
+        2,
+        128,
+        8,
+        8
+      ],
+      [
+        2,
+        128,
+        4,
+        4
+      ]
+    ]
+  },
+  "M1": {
+    "fixed_policy_optical_invariance": true,
+    "dynamic_sampling_change": 0.059829652309417725,
+    "optical_changes_policy": 0.00036194175481796265,
+    "memory_shapes_64": [
+      [
+        2,
+        128,
+        16,
+        16
+      ],
+      [
+        2,
+        128,
+        8,
+        8
+      ],
+      [
+        2,
+        128,
+        4,
+        4
+      ]
+    ]
+  },
+  "M3": {
+    "fixed_policy_optical_invariance": true,
+    "dynamic_sampling_change": 0.0037229100707918406,
+    "optical_changes_policy": 0.00043551623821258545,
+    "memory_shapes_64": [
+      [
+        2,
+        128,
+        16,
+        16
+      ],
+      [
+        2,
+        128,
+        8,
+        8
+      ],
+      [
+        2,
+        128,
+        4,
+        4
+      ]
+    ]
+  },
+  "M4": {
+    "fixed_policy_optical_invariance": true,
+    "dynamic_sampling_change": 0.0037397618871182203,
+    "optical_changes_policy": 0.0003417283296585083,
+    "memory_shapes_64": [
+      [
+        2,
+        128,
+        16,
+        16
+      ],
+      [
+        2,
+        128,
+        8,
+        8
+      ],
+      [
+        2,
+        128,
+        4,
+        4
+      ]
+    ]
+  },
+  "policy_representation": {
+    "dense_canonical_JS_equivalent": true,
+    "M2_retains_scale_mass": 0.31825703382492065
+  }
+}

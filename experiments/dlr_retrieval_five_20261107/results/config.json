@@ -1,0 +1,25 @@
+{
+  "epochs": 100,
+  "val_every": 5,
+  "batch": 16,
+  "seeds": [
+    42
+  ],
+  "train_val_test": [
+    355,
+    88,
+    120
+  ],
+  "threshold": 0.5,
+  "loss": "BCE + per-image foreground Dice (1:1)",
+  "policy_weight": 0.05,
+  "evidence_weight": 0.05,
+  "KD_start_epoch": 6,
+  "optimizer": "AdamW1e-4,wd.01 exclude bias/norm,clip1,50constant50cosine",
+  "B1_checkpoint_sha256": "b2cdaf61e9f9d94d2479d5cfecae7347bbb3e89afe8d9439022d9492b5938dd3",
+  "split_sha256": "7800c2801daed6000906a6fd0d445dec0d1240fb976cef9cd78cf14d8165f4dc",
+  "matched_model_initialization": "seed42 random common parameters; all stages trainable",
+  "teacher_gate": "native val gain >0; average two fixed-host rule gains >0; at least one host >=0.2pp",
+  "repeat_rule": "seed43 for validation gains >=0.2pp over same-architecture seed42 control",
+  "test_gate": "finish/freeze all eligible arms and repeats before reading test images"
+}

@@ -1,0 +1,42 @@
+{
+  "M0": {
+    "policy": 0.0010783392935991287,
+    "evidence": 2.4580258468631655e-06,
+    "policy_gradient_norm": 6.527700901031494,
+    "evidence_gradient_norm": 0.0011538909748196602,
+    "encoder_receives_seg_gradient": true,
+    "teacher_frozen": true
+  },
+  "M1": {
+    "policy": 0.004805947653949261,
+    "evidence": 2.1851166820852086e-05,
+    "policy_gradient_norm": 6.912729740142822,
+    "evidence_gradient_norm": 0.002319052116945386,
+    "encoder_receives_seg_gradient": true,
+    "teacher_frozen": true
+  },
+  "M2": {
+    "policy": 0.0015649148263037205,
+    "evidence": 2.4580258468631655e-06,
+    "policy_gradient_norm": 7.061888217926025,
+    "evidence_gradient_norm": 0.0011538909748196602,
+    "encoder_receives_seg_gradient": true,
+    "teacher_frozen": true
+  },
+  "M3": {
+    "policy": 0.00985658448189497,
+    "evidence": 0.0001589254679856822,
+    "policy_gradient_norm": 9.108903884887695,
+    "evidence_gradient_norm": 0.006684727501124144,
+    "encoder_receives_seg_gradient": true,
+    "teacher_frozen": true
+  },
+  "M4": {
+    "policy": 0.0015240891370922327,
+    "evidence": 3.2621701393509284e-05,
+    "policy_gradient_norm": 7.5749616622924805,
+    "evidence_gradient_norm": 0.0012310842284932733,
+    "encoder_receives_seg_gradient": true,
+    "teacher_frozen": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "experiments\\dlr_retrieval_five_20261107\\model.py": "fe7a6cb45fa5586d538bfd72ff2b2c326db28e8f83ce6416560cb6f224fb4c38",
+  "experiments\\dlr_retrieval_five_20261107\\run.py": "245296dd1154d758d22d8e60f8585fb38a108e4aa2e7d69a3b38cd5bc95f17b3",
+  "experiments\\dlr_retrieval_five_20261107\\final_evaluation.py": "e51f6509f396517dd96d3b31fb4705f4272d5c82275f3fb1722c5b6d0090161e",
+  "experiments\\dlr_retrieval_five_20261107\\AUDIT_AND_PROTOCOL.md": "986f2bbdac6d075d43f1ec933b47a55c248c5b43648e1f78fcc19f1c701e4540",
+  "experiments\\dlr_unet_study_20261104\\unet.py": "104611a30a923d1e392c705d391d4ccc50dce7a48780a1b99f36a0ad86cef7c3",
+  "experiments\\dlr_unet_study_20261104\\dataset.py": "cfa01aa09bd140a23acf893b7701198abd1e6669a70e65b21582507a3b1bc3e8",
+  "experiments\\dlr_unet_study_20261104\\evaluate.py": "b4c29d87eef035ee586564d4f253b2df80189e20b2d2cf0b53eec2b56c8f03ca",
+  "experiments\\dlr_unet_study_20261104\\train_baseline.py": "73e37c8ecaa635ed8317edad24413dd036fe0971a9fe590414c825322b6adca9",
+  "experiments\\dlr_unet_study_20261104\\train_distillation.py": "caed2c60e1eca323dba17be12f7473d9996decb129322093a44031363b8567fa",
+  "experiments\\dlr_unet_study_20261104\\train_multiscale_3plus1.py": "4cdb77e7cdd60f97c953fb51864c9703d2cc337b6ba5dc512b43e8ef2c6ae85c"
+}
