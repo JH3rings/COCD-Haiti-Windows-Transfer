@@ -40,12 +40,15 @@ LEVELS = {"F_MS": (1, 2), "F_EA": (1,), "F_MSEA": (1, 2), "F_SS1": (1,), "F_MS1"
 # and event-shared prototypes"); L_CEW only at the semantic stage 2 (32 px).
 LEVELS["F_SSP"] = (1, 2, 3)
 LOSS_LEVELS = {"F_SSP": (1,)}
-SHARED = ("F_SSP",)
+SHARED = ("F_SSP", "F_SSP0")
+# F_SSP0: the same structure without optical / L_CEW (structure-only ablation)
+LEVELS["F_SSP0"] = (1, 2, 3)
+NO_LOSS = ("F_SSP0",)
 # *1 arms: lambda set automatically so that the distillation gradient equals the
 # segmentation gradient at initialisation (8 training batches, no augmentation)
 BALANCED = ("F_SS1", "F_MS1")
 GRID = {1: 4, 2: 8}                 # regions per patch side at each decoder stage
-ADV = {"F_MS": False, "F_EA": True, "F_MSEA": True, "F_SS1": False, "F_MS1": False, "F_SSP": False}
+ADV = {"F_MS": False, "F_EA": True, "F_MSEA": True, "F_SS1": False, "F_MS1": False, "F_SSP": False, "F_SSP0": False}
 LAMBDA_W = 30.                      # pr.EPRM_W value; multi-scale averages the levels
 LAMBDA_ADV = 5.                     # adversarial gradient ~= segmentation gradient at init (0.21x at 1)
 SEED_NEW = 20261113
@@ -193,6 +196,12 @@ def build(arm, event_index):
     s = initial(arm)
     T = R.teacher_fusion()
     lam_w = calibrate(s, T, arm, event_index) if arm in BALANCED else LAMBDA_W
+
+    if arm in NO_LOSS:
+        def seg_only(b, epoch):
+            seg = C.segmentation(s(b["x"]), b)
+            return seg, {"seg": seg.detach()}
+        return s, (), seg_only, (lambda b: s(b["x"]).sigmoid()), {}
     extra = ()
     clf = None
     if ADV[arm]:

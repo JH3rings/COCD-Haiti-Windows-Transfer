@@ -19,22 +19,28 @@ OUT.mkdir(exist_ok=True)
 import re
 
 
+def _head(x1, y1, x2, y2):
+    dx, dy = x2 - x1, y2 - y1
+    n = (dx * dx + dy * dy) ** .5 or 1
+    ux, uy = dx / n, dy / n
+    bx, by = x2 - 6 * ux, y2 - 6 * uy
+    return (f'<polygon points="{x2:.1f},{y2:.1f} {bx - 3 * uy:.1f},{by + 3 * ux:.1f} '
+            f'{bx + 3 * uy:.1f},{by - 3 * ux:.1f}" fill="#444"/>')
+
+
 def with_arrowheads(text):
-    heads = []
-    for m in re.finditer(r'<line x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"[^>]*marker-end', text):
-        heads.append(tuple(map(float, m.groups())))
-    for m in re.finditer(r'<path d="([^"]+)"[^>]*marker-end', text):
+    """Insert an arrowhead polygon right after every element with marker-end,
+    so it inherits any enclosing group transform."""
+    def line(m):
+        x1, y1, x2, y2 = map(float, m.group(1, 2, 3, 4))
+        return m.group(0) + _head(x1, y1, x2, y2)
+
+    def path(m):
         pts = [tuple(map(float, q)) for q in re.findall(r"([\d.]+) ([\d.]+)", m.group(1))]
-        heads.append(pts[-2] + pts[-1])
-    polys = []
-    for x1, y1, x2, y2 in heads:
-        dx, dy = x2 - x1, y2 - y1
-        n = (dx * dx + dy * dy) ** .5 or 1
-        ux, uy = dx / n, dy / n
-        bx, by = x2 - 6 * ux, y2 - 6 * uy
-        polys.append(f'<polygon points="{x2:.1f},{y2:.1f} {bx - 3 * uy:.1f},{by + 3 * ux:.1f} {bx + 3 * uy:.1f},{by - 3 * ux:.1f}" fill="#444"/>')
-    text = text.replace('width="100%" viewBox="0 0 680 540"', 'width="680" height="540" viewBox="0 0 680 540"')
-    return text.replace("</svg>", "\n".join(polys) + "\n</svg>")
+        return m.group(0) + _head(*pts[-2], *pts[-1])
+    text = re.sub(r'<line x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"[^>]*marker-end[^>]*/>', line, text)
+    text = re.sub(r'<path d="([^"]+)"[^>]*marker-end[^>]*/>', path, text)
+    return text.replace('width="100%" viewBox="0 0 680 570"', 'width="680" height="570" viewBox="0 0 680 570"')
 
 
 src = (Path(__file__).parent / "method.svg").read_text(encoding="utf-8")

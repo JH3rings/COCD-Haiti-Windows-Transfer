@@ -26,7 +26,7 @@ def macs(model, x):
     for h in hs:
         h.remove()
     for mod in model.modules():
-        if isinstance(mod, P.EPRM):
+        if isinstance(mod, P.EPRM) and mod.assign is not None:
             b, k, h, w = mod.assign.shape
             total[0] += 2 * h * w * k * mod.q.out_channels      # cos(q,P) and a@V(P) per pixel
     return total[0]
@@ -37,6 +37,7 @@ x6, x18 = torch.zeros(1, 6, 128, 128), torch.zeros(1, 18, 128, 128)
 for name, m, x in (("U-Net (B0, KD, AT, DIS2, ACAM, M2U, PKDOT)", C.UNet(6), x6),
                    ("Ours, single-scale", FM.FinalNet((1,)), x6),
                    ("Ours, multi-scale", FM.FinalNet((1, 2)), x6),
+                   ("Ours, scale-shared prototypes (F_SSP)", FM.FinalNet((1, 2, 3), True), x6),
                    ("Optical teacher (training only)", C.UNet(18), x18)):
     m.eval()
     rows[name] = {"params_M": round(sum(p.numel() for p in m.parameters()) / 1e6, 2), "MACs_G": round(macs(m, x) / 1e9, 2)}

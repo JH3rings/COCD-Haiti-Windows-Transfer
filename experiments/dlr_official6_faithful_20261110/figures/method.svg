@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 540" role="img" font-family="Arial, Helvetica, sans-serif">
-<title>Event-shared prototypes with cross-event Wasserstein relation distillation</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 570" role="img" font-family="Arial, Helvetica, sans-serif">
+<title>Scale- and event-shared prototypes with cross-event Wasserstein relation distillation</title>
 <desc>(a) A frozen optical-SAR teacher is used only in training; the SAR student U-Net has an event-shared prototype module after decoder stage 2, trained with segmentation loss and a cross-event Wasserstein relation loss. (b) The prototype module. (c) The loss compares the sorted similarities of a region to regions of other events.</desc>
 <defs>
 <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
 </defs>
-<rect x="0" y="0" width="680" height="540" fill="#ffffff"/>
+<rect x="0" y="0" width="680" height="570" fill="#ffffff"/>
 
 <text x="20" y="22" font-size="13" font-weight="bold" fill="#222">(a) Training and deployment</text>
 <rect x="20" y="32" width="640" height="128" rx="8" fill="#f6faf3" stroke="#7aa35a" stroke-width="1" stroke-dasharray="5 4"/>
@@ -22,39 +22,49 @@
 <line x1="156" y1="78" x2="184" y2="78" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
 <line x1="336" y1="78" x2="364" y2="78" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
 
-<rect x="526" y="104" width="120" height="44" rx="6" fill="#fde7e4" stroke="#c8553d"/>
-<text x="586" y="122" font-size="12" font-weight="bold" fill="#8a2e1d" text-anchor="middle">L_CEW</text>
-<text x="586" y="138" font-size="11" fill="#a3402b" text-anchor="middle">cross-event relation</text>
-<path d="M496 78 L586 78 L586 102" fill="none" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<rect x="500" y="106" width="140" height="44" rx="6" fill="#fde7e4" stroke="#c8553d"/>
+<text x="570" y="124" font-size="12" font-weight="bold" fill="#8a2e1d" text-anchor="middle">L_CEW</text>
+<text x="570" y="140" font-size="11" fill="#a3402b" text-anchor="middle">cross-event relation</text>
+<path d="M496 78 L570 78 L570 104" fill="none" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
 
-<rect x="36" y="178" width="120" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
-<text x="96" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">S1 + DEM</text>
-<text x="96" y="212" font-size="11" fill="#33598a" text-anchor="middle">6 channels</text>
-<rect x="176" y="178" width="96" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
-<text x="224" y="204" font-size="12" fill="#1d3f66" text-anchor="middle">Encoder</text>
-<rect x="290" y="178" width="96" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
-<text x="338" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">Decoder</text>
-<text x="338" y="212" font-size="11" fill="#33598a" text-anchor="middle">stages 1–2</text>
-<rect x="404" y="178" width="104" height="44" rx="6" fill="#fff1d6" stroke="#d08a1e" stroke-width="1.5"/>
-<text x="456" y="196" font-size="12" font-weight="bold" fill="#7a4a06" text-anchor="middle">EPM</text>
-<text x="456" y="212" font-size="11" fill="#9a5f0a" text-anchor="middle">shared prototypes</text>
-<rect x="526" y="178" width="120" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
-<text x="586" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">Decoder 3–4</text>
-<text x="586" y="212" font-size="11" fill="#33598a" text-anchor="middle">+ head</text>
-<line x1="156" y1="200" x2="174" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
-<line x1="272" y1="200" x2="288" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
-<line x1="386" y1="200" x2="402" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
-<line x1="508" y1="200" x2="524" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
-<path d="M456 178 L456 126 L524 126" fill="none" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
-<line x1="586" y1="222" x2="586" y2="240" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
-<rect x="516" y="242" width="140" height="30" rx="6" fill="#ffffff" stroke="#4a78b0"/>
-<text x="586" y="261" font-size="12" fill="#1d3f66" text-anchor="middle">Landslide map, L_seg</text>
-<text x="36" y="252" font-size="11" fill="#33598a">Deployed: blue + orange only (SAR and DEM in, no optical)</text>
-<text x="36" y="268" font-size="11" fill="#555">L = L_seg + λ·L_CEW,  λ set by initial gradient balance</text>
+<rect x="24" y="178" width="100" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
+<text x="74" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">S1 + DEM</text>
+<text x="74" y="212" font-size="11" fill="#33598a" text-anchor="middle">6 channels</text>
+<rect x="138" y="178" width="80" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
+<text x="178" y="204" font-size="12" fill="#1d3f66" text-anchor="middle">Encoder</text>
+<rect x="232" y="178" width="96" height="44" rx="6" fill="#e3edf8" stroke="#d08a1e" stroke-width="1.5"/>
+<text x="280" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">Decoder 1</text>
+<text x="280" y="212" font-size="11" font-weight="bold" fill="#9a5f0a" text-anchor="middle">+ EPM, 16 px</text>
+<rect x="342" y="178" width="96" height="44" rx="6" fill="#e3edf8" stroke="#d08a1e" stroke-width="1.5"/>
+<text x="390" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">Decoder 2</text>
+<text x="390" y="212" font-size="11" font-weight="bold" fill="#9a5f0a" text-anchor="middle">+ EPM, 32 px</text>
+<rect x="452" y="178" width="96" height="44" rx="6" fill="#e3edf8" stroke="#d08a1e" stroke-width="1.5"/>
+<text x="500" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">Decoder 3</text>
+<text x="500" y="212" font-size="11" font-weight="bold" fill="#9a5f0a" text-anchor="middle">+ EPM, 64 px</text>
+<rect x="562" y="178" width="94" height="44" rx="6" fill="#e3edf8" stroke="#4a78b0"/>
+<text x="609" y="196" font-size="12" fill="#1d3f66" text-anchor="middle">Decoder 4</text>
+<text x="609" y="212" font-size="11" fill="#33598a" text-anchor="middle">+ head</text>
+<line x1="124" y1="200" x2="136" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<line x1="218" y1="200" x2="230" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<line x1="328" y1="200" x2="340" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<line x1="438" y1="200" x2="450" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<line x1="548" y1="200" x2="560" y2="200" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<path d="M390 178 L390 128 L498 128" fill="none" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
 
+<rect x="232" y="240" width="316" height="30" rx="6" fill="#fff1d6" stroke="#d08a1e" stroke-width="1.5"/>
+<text x="390" y="259" font-size="11.5" font-weight="bold" fill="#7a4a06" text-anchor="middle">one prototype bank P_1…P_K, shared by events and scales</text>
+<g stroke="#d08a1e" stroke-width="1" stroke-dasharray="3 2"><line x1="280" y1="222" x2="280" y2="240"/><line x1="390" y1="222" x2="390" y2="240"/><line x1="500" y1="222" x2="500" y2="240"/></g>
+<line x1="609" y1="222" x2="609" y2="238" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
+<rect x="562" y="240" width="94" height="30" rx="6" fill="#ffffff" stroke="#4a78b0"/>
+<text x="609" y="254" font-size="11" fill="#1d3f66" text-anchor="middle">Landslide map</text>
+<text x="609" y="266" font-size="10.5" fill="#33598a" text-anchor="middle">L_seg</text>
+<text x="24" y="292" font-size="11" fill="#33598a">Deployed: blue + orange only (SAR and DEM in, no optical)</text>
+<text x="24" y="308" font-size="11" fill="#555">L = L_seg + λ·L_CEW (L_CEW at decoder stage 2 only)</text>
+
+<g transform="translate(0,30)">
 <line x1="20" y1="290" x2="660" y2="290" stroke="#dddddd" stroke-width="1"/>
 
-<text x="20" y="312" font-size="13" font-weight="bold" fill="#222">(b) Event-shared prototype module</text>
+<text x="20" y="312" font-size="13" font-weight="bold" fill="#222">(b) Prototype module (EPM), one stage</text>
 <rect x="30" y="328" width="56" height="34" rx="5" fill="#e3edf8" stroke="#4a78b0"/>
 <text x="58" y="350" font-size="12" fill="#1d3f66" text-anchor="middle">f</text>
 <rect x="104" y="328" width="78" height="34" rx="5" fill="#fff1d6" stroke="#d08a1e"/>
@@ -68,7 +78,7 @@
 <rect x="208" y="392" width="12" height="12"/><rect x="224" y="392" width="12" height="12"/><rect x="240" y="392" width="12" height="12"/><rect x="256" y="392" width="12" height="12"/><rect x="272" y="392" width="12" height="12"/><rect x="288" y="392" width="12" height="12"/>
 </g>
 <text x="259" y="418" font-size="11" fill="#7a4a06" text-anchor="middle">prototypes P_1…P_K</text>
-<text x="259" y="431" font-size="11" fill="#7a4a06" text-anchor="middle">shared by all events</text>
+<text x="259" y="431" font-size="11" fill="#7a4a06" text-anchor="middle">shared bank (events, scales)</text>
 <line x1="259" y1="390" x2="259" y2="370" stroke="#444" stroke-width="1" marker-end="url(#ah)"/>
 <rect x="200" y="442" width="118" height="32" rx="5" fill="#fff1d6" stroke="#d08a1e"/>
 <text x="259" y="461" font-size="11" fill="#7a4a06" text-anchor="middle">Σ_k a_k · V(P_k)</text>
@@ -118,4 +128,5 @@
 <text x="530" y="484" font-size="11" fill="#a3402b">area = W₂ distance</text>
 <text x="530" y="502" font-size="11" fill="#555">no pair matching,</text>
 <text x="530" y="516" font-size="11" fill="#555">shape only</text>
+</g>
 </svg>
