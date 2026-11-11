@@ -53,6 +53,8 @@ import run as R
 
 PROTOS, PDIM, TAU = 16, 64, .1
 TAU_T, TAU_S, LAMBDA_CC = .1, .1, 2.5   # 2.5: same initial gradient budget as EPRM_CEraw (~30x seg)
+LAMBDA_SEP = 3.2                         # same initial gradient budget as EPRM_CEraw (34x vs 10.6x seg at lambda 1)
+FG_TOKEN = .05
 LEVEL = 1
 LAMBDA = .6
 SEED_NEW = 20261112
@@ -139,6 +141,85 @@ def correspondence_loss(ts, tt, ev):
     return kl.mean()
 
 
+def separation_loss(ts, tt, ev, fg, balance=True):
+    """Cross-event separation distillation (landslide-specific redesign).
+
+    For every region, the optical Teacher's soft "who am I most UNLIKE in other
+    disasters" distribution  q_T(j) = softmax_j(-cos_T(i,j)/tau) over ALL
+    regions of other events; the SAR student gives q_S from its concept-bank
+    refined regions; loss = KL(q_T || q_S).
+      - repulsion end (what transfers: cross-event landslide-vs-background
+        separation), soft weights, no hard top-K, no optimal transport;
+      - softmax is shift-invariant per row, so Teacher/Student similarity
+        scales need not match (SAR is not asked to copy optical values);
+      - class-balanced rows: landslide regions are rare (~1 in 5 tokens), so
+        landslide rows and background rows each carry half of the loss.
+    """
+    cross = ev[:, None] != ev[None, :]
+    rows = cross.any(1)
+    if rows.sum() < 2:
+        return ts.sum() * 0
+    neg = torch.finfo(ts.dtype).min
+    lt = (-(tt @ tt.T) / TAU_T).masked_fill(~cross, neg)[rows]
+    ls = (-(ts @ ts.T) / TAU_S).masked_fill(~cross, neg)[rows]
+    pt = lt.softmax(1)
+    kl = (pt * (pt.clamp_min(1e-12).log() - ls.log_softmax(1))).masked_fill(~cross[rows], 0).sum(1)
+    if not balance:
+        return kl.mean()
+    pos = (fg >= FG_TOKEN)[rows]
+    parts = [kl[m].mean() for m in (pos, ~pos) if m.any()]
+    return sum(parts) / len(parts)
+
+
+STRATA = 32
+LAMBDA_STR = 2.3   # same initial gradient budget as EPRM_CEraw (34x; STR gives ~9x at .6)
+
+
+def stratified_cross_event_ot(ts, tt, ev, sinkhorn):
+    """Full-spectrum cross-event relation alignment.  For each region, its
+    other-event partners are ordered by the optical Teacher's similarity and
+    STRATA partners are taken at evenly spaced ranks (most unlike ... most
+    alike), so the whole cross-event relation spectrum is covered instead of a
+    hard top-K.  Teacher and Student (concept-bank refined) values at those
+    partners form one profile per region; the two profile sets are aligned
+    with entropic OT (Sinkhorn, a generic distribution distance)."""
+    cross = ev[:, None] != ev[None, :]
+    n = cross.sum(1)
+    rows = n >= STRATA
+    if rows.sum() < 3:
+        return ts.sum() * 0
+    st, ss = tt @ tt.T, ts @ ts.T
+    big = torch.finfo(st.dtype).max
+    order = st.masked_fill(~cross, big).argsort(1)[rows]
+    pos = (torch.linspace(0, 1, STRATA, device=st.device)[None] * (n[rows, None] - 1).float()).round().long()
+    idx = order.gather(1, pos)
+    st_min, ss_min = st[cross].min(), ss[cross].min()
+    return sinkhorn((st - st_min)[rows].gather(1, idx), (ss - ss_min)[rows].gather(1, idx))
+
+
+LC_K = 16
+LAMBDA_LC = 1.1   # same initial gradient budget as EPRM_CEraw (34x; LC gives ~18x at .6)
+
+
+def landslide_contrast_ot(ts, tt, ev, fg, sinkhorn):
+    """Cross-event landslide-background relation distillation.
+    Partners of a landslide region: BACKGROUND regions of OTHER events; partners
+    of a background region: LANDSLIDE regions of OTHER events (event x class
+    defined, landslide-specific).  Among them the optical Teacher picks the
+    LC_K it finds most different; the Teacher/Student similarity profiles on
+    those partners are aligned with entropic OT."""
+    pos = fg >= FG_TOKEN
+    cand = (ev[:, None] != ev[None, :]) & (pos[:, None] != pos[None, :])
+    rows = cand.sum(1) >= LC_K
+    if rows.sum() < 3:
+        return ts.sum() * 0
+    st, ss = tt @ tt.T, ts @ ts.T
+    big = torch.finfo(st.dtype).max
+    idx = st.masked_fill(~cand, big).topk(LC_K, largest=False).indices[rows]
+    st_min, ss_min = st[cand].min(), ss[cand].min()
+    return sinkhorn((st - st_min)[rows].gather(1, idx), (ss - ss_min)[rows].gather(1, idx))
+
+
 def assignment_tokens(a, valid):
     """Region tokens of the prototype-assignment map (unit-normalised)."""
     return O.tokens(a, valid)
@@ -162,7 +243,16 @@ def build(arm):
             ts, _ = assignment_tokens(s.eprm.assign, b["valid"])
         else:
             ts, _ = O.tokens(s.dec[LEVEL], b["valid"])
-        _, _, ev = O.token_meta(b, sup)
+        fg, _, ev = O.token_meta(b, sup)
+        if arm == "EPRM_LC":
+            r = landslide_contrast_ot(ts, tt, ev, fg, sinkhorn)
+            return seg + LAMBDA_LC * r, {"seg": seg.detach(), "lc": r.detach()}
+        if arm == "EPRM_STR":
+            r = stratified_cross_event_ot(ts, tt, ev, sinkhorn)
+            return seg + LAMBDA_STR * r, {"seg": seg.detach(), "str": r.detach()}
+        if arm in ("EPRM_SEP", "EPRM_SEPnb"):
+            sep = separation_loss(ts, tt, ev, fg, balance=arm == "EPRM_SEP")
+            return seg + LAMBDA_SEP * sep, {"seg": seg.detach(), "sep": sep.detach()}
         if arm == "EPRM_CC":
             cc = correspondence_loss(ts, tt, ev)
             return seg + LAMBDA_CC * cc, {"seg": seg.detach(), "cc": cc.detach()}
@@ -186,7 +276,7 @@ def check():
     with torch.no_grad():
         print("identity at init:", float((m(batches[0]["x"]) - base(batches[0]["x"])).abs().max()),
               "extra params:", sum(p.numel() for n, p in m.named_parameters() if n.startswith("eprm.")))
-    for arm in ("EPRM_CEraw", "EPRM_CC"):
+    for arm in ("EPRM_CEraw", "EPRM_LC"):
         s, _, objective, _, _ = build(arm)
         params = list(s.parameters())
         flat = lambda gs: torch.cat([(g if g is not None else torch.zeros_like(p)).flatten() for g, p in zip(gs, params)])
@@ -238,7 +328,7 @@ def main():
     R.TRAIN, R.VAL = C.Inputs(f["train"], augment=True), C.Inputs(f["val"])
     for arm in a.arms:
         C.write(C.RESULTS / arm / "config.json", {"arm": arm, "prototypes": PROTOS, "proto_dim": PDIM, "tau": TAU,
-                                                  "level": LEVEL, "lambda": LAMBDA, "tau_t": TAU_T, "tau_s": TAU_S, "lambda_cc": LAMBDA_CC, "K": O.K, "seed": C.SEED,
+                                                  "level": LEVEL, "lambda": LAMBDA, "tau_t": TAU_T, "tau_s": TAU_S, "lambda_cc": LAMBDA_CC, "lambda_sep": LAMBDA_SEP, "fg_token": FG_TOKEN, "strata": STRATA, "lambda_str": LAMBDA_STR, "lc_k": LC_K, "lambda_lc": LAMBDA_LC, "K": O.K, "seed": C.SEED,
                                                   "doc": __doc__})
         model, extra, objective, predict, kw = build(arm)
         C.fit(arm, model, R.TRAIN, R.VAL, objective, predict, extra_params=extra, **kw)

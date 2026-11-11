@@ -74,6 +74,9 @@ Teacher: 70.38. Three-seed means: B0 54.60 ± 2.10, PKDOT 56.19 ± 0.47.
 | Concept bank only (no optical) | 54.78 | 64.61 | 49.21 | 74.94 |
 | Concept bank + cross-event OT relations (`EPRM_CEraw`) | 56.68 | 69.01 | 50.14 | 76.83 |
 | Concept bank + cross-event correspondence KL (`EPRM_CC`) | 52.48 | 65.66 | 45.22 | 72.43 |
+| Concept bank + cross-event separation KL (`EPRM_SEP` / `EPRM_SEPnb`) | 52.15 / 54.80 | 61.26 / 65.68 | 47.15 / 49.13 | 72.70 / 73.04 |
+| Concept bank + full-spectrum cross-event OT (`EPRM_STR`) | 52.43 | 66.83 | 44.78 | 72.55 |
+| Concept bank + landslide-vs-other-event-background OT (`EPRM_LC`) | 53.69 | 67.72 | 46.27 | 73.54 |
 
 The results are from one seed. Because the B0 seed spread is 2.1 points,
 differences smaller than that are not yet conclusive.
