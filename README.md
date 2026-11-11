@@ -35,9 +35,15 @@ events**.
 
 Implementation: [`pr.py`](experiments/dlr_official6_faithful_20261110/pr.py)
 
-- arm `EPRM_CC`: the method;
+- arm `EPRM_CC`: the correspondence loss described above;
 - arm `EPRM`: structure-only ablation;
 - arm `EPRM_CEraw`: the earlier variant that uses an optimal-transport relation term.
+
+Status (2026-11-11): the correspondence form (`EPRM_CC`) did **not** work,
+scoring 52.48. A soft attraction to the teacher's most similar cross-event
+regions mostly re-states the labels. The working ingredient is cross-event
+landslide-vs-background **separation**, so the loss is being redesigned
+around it. See section 16 of the log.
 
 The experiment log and every diagnostic (in Chinese) are in
 [`ANALYSIS_ZH.md`](experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md).
@@ -67,7 +73,7 @@ Teacher: 70.38. Three-seed means: B0 54.60 ± 2.10, PKDOT 56.19 ± 0.47.
 | Cross-event relations only | 56.27 | 71.29 | 48.19 | 77.24 |
 | Concept bank only (no optical) | 54.78 | 64.61 | 49.21 | 74.94 |
 | Concept bank + cross-event OT relations (`EPRM_CEraw`) | 56.68 | 69.01 | 50.14 | 76.83 |
-| **Concept bank + cross-event correspondence (`EPRM_CC`)** | *training* | | | |
+| Concept bank + cross-event correspondence KL (`EPRM_CC`) | 52.48 | 65.66 | 45.22 | 72.43 |
 
 The results are from one seed. Because the B0 seed spread is 2.1 points,
 differences smaller than that are not yet conclusive.

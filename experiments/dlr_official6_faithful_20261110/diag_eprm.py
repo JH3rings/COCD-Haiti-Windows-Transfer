@@ -12,7 +12,7 @@ C.setup(); O.prepare()
 f = C.frames()
 for split in ("val", "test"):
     ds = C.Inputs(f[split], optical=False)
-    for arm in ("EPRM", "EPRM_CEraw", "EPRM_CE"):
+    for arm in ("EPRM", "EPRM_CEraw", "EPRM_CE", "EPRM_CC"):
         m = P.frozen(arm)
         ratio, ent, dom = [], [], {}
         with torch.no_grad():
