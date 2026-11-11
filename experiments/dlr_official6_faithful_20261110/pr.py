@@ -220,6 +220,36 @@ def landslide_contrast_ot(ts, tt, ev, fg, sinkhorn):
     return sinkhorn((st - st_min)[rows].gather(1, idx), (ss - ss_min)[rows].gather(1, idx))
 
 
+QUANTILES = 32
+LAMBDA_RD = 1.5   # same initial gradient budget as EPRM_CEraw (~29x; RD gives ~11.5x at .6)
+
+
+def relation_distribution_ot(ts, tt, ev, sinkhorn):
+    """Cross-event relation-DISTRIBUTION distillation (no pair correspondence).
+
+    diag_learned.py: the better a student copies the Teacher's specific
+    pairwise relations, the WORSE it tests (corr -0.63); the best students
+    match them less than B0.  The Teacher's pairwise relations are tied to
+    its memorised training events/labels; what transfers is their SHAPE.
+    So for every region we take the distribution of its similarities to all
+    regions of OTHER events, summarised by QUANTILES evenly spaced quantiles,
+    separately for Teacher and Student, each in its OWN order -- the Student
+    decides which regions are near or far, optical only says how the
+    cross-event relation spectrum should look.  Teacher and Student
+    quantile-profile sets are compared with entropic OT (Sinkhorn)."""
+    cross = ev[:, None] != ev[None, :]
+    n = cross.sum(1)
+    rows = n >= QUANTILES
+    if rows.sum() < 3:
+        return ts.sum() * 0
+    st, ss = tt @ tt.T, ts @ ts.T
+    big = torch.finfo(st.dtype).max
+    pos = (torch.linspace(0, 1, QUANTILES, device=st.device)[None] * (n[rows, None] - 1).float()).round().long()
+    qt = st.masked_fill(~cross, big)[rows].sort(1).values.gather(1, pos)
+    qs = ss.masked_fill(~cross, big)[rows].sort(1).values.gather(1, pos)
+    return sinkhorn(qt - st[cross].min(), qs - ss[cross].min())
+
+
 def assignment_tokens(a, valid):
     """Region tokens of the prototype-assignment map (unit-normalised)."""
     return O.tokens(a, valid)
@@ -244,6 +274,9 @@ def build(arm):
         else:
             ts, _ = O.tokens(s.dec[LEVEL], b["valid"])
         fg, _, ev = O.token_meta(b, sup)
+        if arm == "EPRM_RD":
+            r = relation_distribution_ot(ts, tt, ev, sinkhorn)
+            return seg + LAMBDA_RD * r, {"seg": seg.detach(), "rd": r.detach()}
         if arm == "EPRM_LC":
             r = landslide_contrast_ot(ts, tt, ev, fg, sinkhorn)
             return seg + LAMBDA_LC * r, {"seg": seg.detach(), "lc": r.detach()}
@@ -276,7 +309,7 @@ def check():
     with torch.no_grad():
         print("identity at init:", float((m(batches[0]["x"]) - base(batches[0]["x"])).abs().max()),
               "extra params:", sum(p.numel() for n, p in m.named_parameters() if n.startswith("eprm.")))
-    for arm in ("EPRM_CEraw", "EPRM_LC"):
+    for arm in ("EPRM_CEraw", "EPRM_RD"):
         s, _, objective, _, _ = build(arm)
         params = list(s.parameters())
         flat = lambda gs: torch.cat([(g if g is not None else torch.zeros_like(p)).flatten() for g, p in zip(gs, params)])
@@ -328,7 +361,7 @@ def main():
     R.TRAIN, R.VAL = C.Inputs(f["train"], augment=True), C.Inputs(f["val"])
     for arm in a.arms:
         C.write(C.RESULTS / arm / "config.json", {"arm": arm, "prototypes": PROTOS, "proto_dim": PDIM, "tau": TAU,
-                                                  "level": LEVEL, "lambda": LAMBDA, "tau_t": TAU_T, "tau_s": TAU_S, "lambda_cc": LAMBDA_CC, "lambda_sep": LAMBDA_SEP, "fg_token": FG_TOKEN, "strata": STRATA, "lambda_str": LAMBDA_STR, "lc_k": LC_K, "lambda_lc": LAMBDA_LC, "K": O.K, "seed": C.SEED,
+                                                  "level": LEVEL, "lambda": LAMBDA, "tau_t": TAU_T, "tau_s": TAU_S, "lambda_cc": LAMBDA_CC, "lambda_sep": LAMBDA_SEP, "fg_token": FG_TOKEN, "strata": STRATA, "lambda_str": LAMBDA_STR, "lc_k": LC_K, "lambda_lc": LAMBDA_LC, "quantiles": QUANTILES, "lambda_rd": LAMBDA_RD, "K": O.K, "seed": C.SEED,
                                                   "doc": __doc__})
         model, extra, objective, predict, kw = build(arm)
         C.fit(arm, model, R.TRAIN, R.VAL, objective, predict, extra_params=extra, **kw)

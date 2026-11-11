@@ -39,11 +39,21 @@ Implementation: [`pr.py`](experiments/dlr_official6_faithful_20261110/pr.py)
 - arm `EPRM`: structure-only ablation;
 - arm `EPRM_CEraw`: the earlier variant that uses an optimal-transport relation term.
 
-Status (2026-11-11): the correspondence form (`EPRM_CC`) did **not** work,
-scoring 52.48. A soft attraction to the teacher's most similar cross-event
-regions mostly re-states the labels. The working ingredient is cross-event
-landslide-vs-background **separation**, so the loss is being redesigned
-around it. See section 16 of the log.
+Status (2026-11-11), from section 18 of the log:
+
+- **Finding:** the more closely a student copies the teacher's specific
+  pairwise relations, the worse it tests (correlation −0.70). Those relations
+  carry the teacher's memorised training events.
+- **Current loss (`EPRM_RD`):** match only the **distribution** of each
+  region's cross-event similarities. Each side sorts its own similarities and
+  takes 32 quantiles; the teacher and student quantile-profile sets are
+  compared with Sinkhorn OT. There are no teacher pair indices and no hard
+  top-K, so the student decides which regions are near and which are far.
+- **Result:** IoU is on par with the earlier OT variant, and AUPRC is the
+  highest of every arm.
+- **Noise:** an exact rerun of `EPRM_CEraw` with the same seed gives 56.03
+  instead of 56.68, so single-run differences below about 1 point are not
+  resolvable.
 
 The experiment log and every diagnostic (in Chinese) are in
 [`ANALYSIS_ZH.md`](experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md).
@@ -77,6 +87,8 @@ Teacher: 70.38. Three-seed means: B0 54.60 ± 2.10, PKDOT 56.19 ± 0.47.
 | Concept bank + cross-event separation KL (`EPRM_SEP` / `EPRM_SEPnb`) | 52.15 / 54.80 | 61.26 / 65.68 | 47.15 / 49.13 | 72.70 / 73.04 |
 | Concept bank + full-spectrum cross-event OT (`EPRM_STR`) | 52.43 | 66.83 | 44.78 | 72.55 |
 | Concept bank + landslide-vs-other-event-background OT (`EPRM_LC`) | 53.69 | 67.72 | 46.27 | 73.54 |
+| `EPRM_CEraw`, exact rerun (same seed; GPU nondeterminism) | 56.03 | 72.38 | 47.31 | 75.02 |
+| **Concept bank + cross-event relation-distribution distillation (`EPRM_RD`)** | **56.55** | 68.77 | **50.18** | **78.59** |
 
 The results are from one seed. Because the B0 seed spread is 2.1 points,
 differences smaller than that are not yet conclusive.
