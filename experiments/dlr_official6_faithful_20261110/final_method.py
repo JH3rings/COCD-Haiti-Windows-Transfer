@@ -35,9 +35,17 @@ import ours_rel as O
 import pr as P
 import run as R
 
-LEVELS = {"F_MS": (1, 2), "F_EA": (1,), "F_MSEA": (1, 2)}
+LEVELS = {"F_MS": (1, 2), "F_EA": (1,), "F_MSEA": (1, 2), "F_SS1": (1,), "F_MS1": (1, 2)}
+# F_SSP: ONE prototype set shared by decoder stages 1-3 (16/32/64 px, "scale-
+# and event-shared prototypes"); L_CEW only at the semantic stage 2 (32 px).
+LEVELS["F_SSP"] = (1, 2, 3)
+LOSS_LEVELS = {"F_SSP": (1,)}
+SHARED = ("F_SSP",)
+# *1 arms: lambda set automatically so that the distillation gradient equals the
+# segmentation gradient at initialisation (8 training batches, no augmentation)
+BALANCED = ("F_SS1", "F_MS1")
 GRID = {1: 4, 2: 8}                 # regions per patch side at each decoder stage
-ADV = {"F_MS": False, "F_EA": True, "F_MSEA": True}
+ADV = {"F_MS": False, "F_EA": True, "F_MSEA": True, "F_SS1": False, "F_MS1": False, "F_SSP": False}
 LAMBDA_W = 30.                      # pr.EPRM_W value; multi-scale averages the levels
 LAMBDA_ADV = 5.                     # adversarial gradient ~= segmentation gradient at init (0.21x at 1)
 SEED_NEW = 20261113
@@ -62,12 +70,33 @@ class EventClassifier(nn.Module):
         return self.net(GradReverse.apply(tokens))
 
 
+class SharedEPM(P.EPRM):
+    """EPM whose prototype bank is owned by the network and shared by all
+    decoder stages; each stage keeps its own query / value / output projection."""
+
+    def __init__(self, c):
+        super().__init__(c)
+        del self.protos
+
+    def forward(self, f, protos):
+        q = F.normalize(self.q(f), dim=1)
+        p = F.normalize(protos, dim=1)
+        a = torch.einsum("bdhw,md->bmhw", q, p).div(P.TAU).softmax(1)
+        self.assign = a
+        return f + self.out(torch.einsum("bmhw,mc->bchw", a, self.v(p)))
+
+
 class FinalNet(C.UNet):
-    def __init__(self, levels):
+    def __init__(self, levels, shared=False):
         super().__init__(6, 1)
         self.levels = levels
+        self.shared = shared
         widths = self.widths[-2::-1]
-        self.epm = nn.ModuleDict({str(l): P.EPRM(widths[l]) for l in levels})
+        if shared:
+            self.protos = nn.Parameter(torch.randn(P.PROTOS, P.PDIM))
+            self.epm = nn.ModuleDict({str(l): SharedEPM(widths[l]) for l in levels})
+        else:
+            self.epm = nn.ModuleDict({str(l): P.EPRM(widths[l]) for l in levels})
 
     def features(self, x):
         enc = []
@@ -78,7 +107,7 @@ class FinalNet(C.UNet):
         for i, (up, block, skip) in enumerate(zip(self.up, self.dec_blocks, enc[-2::-1])):
             x = block(torch.cat((skip, up(x)), 1))
             if str(i) in self.epm:
-                x = self.epm[str(i)](x)
+                x = self.epm[str(i)](x, self.protos) if self.shared else self.epm[str(i)](x)
             dec.append(x)
         self.enc, self.dec = enc, dec
         return x
@@ -87,7 +116,7 @@ class FinalNet(C.UNet):
 def make(arm):
     with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
         torch.manual_seed(SEED_NEW)
-        m = FinalNet(LEVELS[arm])
+        m = FinalNet(LEVELS[arm], arm in SHARED)
     return m
 
 
@@ -95,7 +124,7 @@ def initial(arm):
     m = make(arm)
     state = torch.load(C.RESULTS / "initial_student.pt", map_location="cpu", weights_only=True)
     missing, unexpected = m.load_state_dict(state, strict=False)
-    assert not unexpected and all(k.startswith("epm.") for k in missing), (missing, unexpected)
+    assert not unexpected and all(k.startswith(("epm.", "protos")) for k in missing), (missing, unexpected)
     return m.cuda()
 
 
@@ -120,9 +149,50 @@ def event_codes(b, support, g, index):
     return ev.repeat_interleave(g * g)[support]
 
 
+def cew_terms(s, T, b, arm, event_index):
+    with torch.no_grad():
+        T(M.fusion_input(b))
+    out = {}
+    for l in LOSS_LEVELS.get(arm, LEVELS[arm]):
+        g = GRID[l]
+        tt, sup = tokens(T.dec[l], b["valid"], g)
+        ts, _ = tokens(s.dec[l], b["valid"], g)
+        out[l] = P.cross_event_wasserstein(ts, tt, event_codes(b, sup, g, event_index))
+    return out
+
+
+def calibrate(s, T, arm, event_index, n=8):
+    """lambda = mean ||grad L_seg|| / ||grad L_CEW|| over n training batches at
+    the initial weights (BN statistics restored afterwards; no global RNG use)."""
+    state = {k: v.clone() for k, v in s.state_dict().items()}
+    aug = R.TRAIN.augment
+    R.TRAIN.augment = False
+    params = [p for p in s.parameters()]
+    ratios = []
+    try:
+        for i, b in enumerate(C.loader(R.TRAIN, True, torch.Generator().manual_seed(C.SEED + 7))):
+            if i == n:
+                break
+            b = C.cuda(b)
+            z = s(b["x"])
+            gs = torch.autograd.grad(C.segmentation(z, b), params, allow_unused=True, retain_graph=True)
+            w = sum(cew_terms(s, T, b, arm, event_index).values()) / len(LOSS_LEVELS.get(arm, LEVELS[arm]))
+            gw = torch.autograd.grad(w, params, allow_unused=True)
+            norm = lambda gg: torch.sqrt(sum((g.float() ** 2).sum() for g in gg if g is not None))
+            ratios.append(float(norm(gs) / norm(gw).clamp_min(1e-12)))
+    finally:
+        R.TRAIN.augment = aug
+        s.load_state_dict(state)
+    lam = float(np.mean(ratios))
+    C.write(C.RESULTS / arm / "lambda_calibration.json", {"lambda": lam, "ratios": ratios,
+                                                          "rule": "||grad seg|| / ||grad L_CEW|| at init, mean of 8 batches"})
+    return lam
+
+
 def build(arm, event_index):
     s = initial(arm)
     T = R.teacher_fusion()
+    lam_w = calibrate(s, T, arm, event_index) if arm in BALANCED else LAMBDA_W
     extra = ()
     clf = None
     if ADV[arm]:
@@ -138,7 +208,7 @@ def build(arm, event_index):
             T(M.fusion_input(b))
         logs = {"seg": seg.detach()}
         w_terms = []
-        for l in LEVELS[arm]:
+        for l in LOSS_LEVELS.get(arm, LEVELS[arm]):
             g = GRID[l]
             tt, sup = tokens(T.dec[l], b["valid"], g)
             ts, _ = tokens(s.dec[l], b["valid"], g)
@@ -146,7 +216,7 @@ def build(arm, event_index):
             w = P.cross_event_wasserstein(ts, tt, ev)
             logs[f"w{l}"] = w.detach()
             w_terms.append(w)
-        loss = seg + LAMBDA_W * sum(w_terms) / len(w_terms)
+        loss = seg + lam_w * sum(w_terms) / len(w_terms)
         if clf is not None:
             g = GRID[1]
             ts, sup = tokens(s.dec[1], b["valid"], g)
@@ -164,6 +234,9 @@ def event_index_of(frame):
     return {e: i for i, e in enumerate(sorted(frame.event_id.unique()))}
 
 
+CHECK_ARMS = ("F_SSP",)
+
+
 def check():
     C.setup()
     O.prepare()
@@ -172,11 +245,11 @@ def check():
     R.TRAIN = C.Inputs(f["train"].iloc[::4], augment=True)
     batches = [C.cuda(b) for _, b in zip(range(3), C.loader(R.TRAIN, True, torch.Generator().manual_seed(0)))]
     base = R.initial_student().eval()
-    for arm in LEVELS:
+    for arm in (CHECK_ARMS or LEVELS):
         s, extra, objective, _, _ = build(arm, idx)
         with torch.no_grad():
             print(arm, "identity at init:", float((s.eval()(batches[0]["x"]) - base(batches[0]["x"])).abs().max()),
-                  "extra deployed params:", sum(p.numel() for n, p in s.named_parameters() if n.startswith("epm.")))
+                  "extra deployed params:", sum(p.numel() for n, p in s.named_parameters() if n.startswith(("epm.", "protos"))))
         s.train()
         params = list(s.parameters())
         flat = lambda gs: torch.cat([(g if g is not None else torch.zeros_like(p)).flatten() for g, p in zip(gs, params)])
@@ -237,7 +310,8 @@ def main():
     idx = event_index_of(f["train"])
     R.TRAIN, R.VAL = C.Inputs(f["train"], augment=True), C.Inputs(f["val"])
     for arm in a.arms:
-        C.write(C.RESULTS / arm / "config.json", {"arm": arm, "levels": LEVELS[arm], "grid": GRID, "adversarial": ADV[arm],
+        C.write(C.RESULTS / arm / "config.json", {"arm": arm, "levels": LEVELS[arm], "loss_levels": LOSS_LEVELS.get(arm, LEVELS[arm]),
+                                                  "shared_prototypes": arm in SHARED, "grid": GRID, "adversarial": ADV[arm],
                                                   "lambda_w": LAMBDA_W, "lambda_adv": LAMBDA_ADV, "prototypes": P.PROTOS,
                                                   "events": idx, "seed": C.SEED, "doc": __doc__})
         model, extra, objective, predict, kw = build(arm, idx)
