@@ -58,6 +58,23 @@ Status (2026-11-11), from section 18 of the log:
 The experiment log and every diagnostic (in Chinese) are in
 [`ANALYSIS_ZH.md`](experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md).
 
+## Final method (figure: [`figures/method.svg`](experiments/dlr_official6_faithful_20261110/figures/method.svg))
+
+- **Event-shared prototype module (EPM, structure):** after decoder stage 2, each
+  pixel is refined by soft assignment to K = 16 prototypes shared by all
+  events. The output projection is zero-initialised.
+- **Cross-event Wasserstein relation distillation (L_CEW, loss):**
+  1. For every region, both the teacher and the student compute its
+     similarities to all regions of other events.
+  2. Each side sorts its own similarities.
+  3. The loss is the squared 1-D Wasserstein distance between the two sorted
+     distributions (closed form).
+
+  There is no pair matching, no top-K and no OT solver. λ is set by balancing
+  the initial gradient norms.
+- **Deployment:** only SAR and DEM are input; there is no teacher and no optical
+  data.
+
 ## Setting
 
 - **Data:** the official DLR split, 355 / 88 / 120 patches.
@@ -88,7 +105,10 @@ Teacher: 70.38. Three-seed means: B0 54.60 ± 2.10, PKDOT 56.19 ± 0.47.
 | Concept bank + full-spectrum cross-event OT (`EPRM_STR`) | 52.43 | 66.83 | 44.78 | 72.55 |
 | Concept bank + landslide-vs-other-event-background OT (`EPRM_LC`) | 53.69 | 67.72 | 46.27 | 73.54 |
 | `EPRM_CEraw`, exact rerun (same seed; GPU nondeterminism) | 56.03 | 72.38 | 47.31 | 75.02 |
-| **Concept bank + cross-event relation-distribution distillation (`EPRM_RD`)** | **56.55** | 68.77 | **50.18** | **78.59** |
+| Concept bank + cross-event relation-distribution distillation, 32 quantiles + OT (`EPRM_RD`) | 56.55 | 68.77 | 50.18 | 78.59 |
+| **Final: prototypes + cross-event Wasserstein relation distillation (`EPRM_W`)** | **56.10** | **70.84** | 48.47 | 77.58 |
+| Event-style normalisation + Wasserstein (`ESN_W`) | 55.03 | 68.34 | 48.27 | 75.62 |
+| Plain U-Net + Wasserstein (`UNET_W`) | 55.57 | 68.85 | 48.69 | 76.41 |
 
 The results are from one seed. Because the B0 seed spread is 2.1 points,
 differences smaller than that are not yet conclusive.

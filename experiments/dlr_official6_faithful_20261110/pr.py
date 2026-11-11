@@ -80,10 +80,37 @@ class EPRM(nn.Module):
         return f + self.out(ctx)
 
 
+class EventStyleNorm(nn.Module):
+    """Learnable event-style normalisation (no size hyper-parameter).
+    Per channel, mixes the batch-normalised feature with its per-image
+    (instance) normalised version: f <- f + rho * (IN(f) - f), rho =
+    sigmoid(a) learned per channel, a = -4 at the start (rho ~ 0.018: almost
+    the plain U-Net, but rho still receives a useful gradient).  Instance normalisation removes each
+    image's own channel mean/scale -- the acquisition "style" that differs
+    between disaster events (orbit, season, incidence, speckle level); the
+    network decides per channel how much of it to remove, so absolute change
+    strength is kept where it is useful."""
+
+    def __init__(self, c):
+        super().__init__()
+        self.a = nn.Parameter(torch.full((c,), -4. / self.GAIN))
+
+    GAIN = 25.     # AdamW moves a by ~lr per step; the gain lets rho span (0, 1) within training
+
+    def forward(self, f):
+        rho = torch.sigmoid(self.GAIN * self.a)[None, :, None, None]
+        return f + rho * (F.instance_norm(f, eps=1e-5) - f)
+
+
 class EPRMNet(C.UNet):
-    def __init__(self):
+    def __init__(self, kind="eprm"):
         super().__init__(6, 1)
-        self.eprm = EPRM(self.widths[-2 - LEVEL])
+        self.kind = kind
+        c = self.widths[-2 - LEVEL]
+        if kind == "eprm":
+            self.eprm = EPRM(c)
+        elif kind == "esn":
+            self.esn = EventStyleNorm(c)
 
     def features(self, x):
         enc = []
@@ -93,30 +120,36 @@ class EPRMNet(C.UNet):
         dec = []
         for i, (up, block, skip) in enumerate(zip(self.up, self.dec_blocks, enc[-2::-1])):
             x = block(torch.cat((skip, up(x)), 1))
-            if i == LEVEL:
+            if i == LEVEL and self.kind == "eprm":
                 x = self.eprm(x)
+            elif i == LEVEL and self.kind == "esn":
+                x = self.esn(x)
             dec.append(x)
         self.enc, self.dec = enc, dec
         return x
 
 
-def make():
+def kind_of(arm):
+    return "esn" if arm.startswith("ESN") else "none" if arm.startswith("UNET") else "eprm"
+
+
+def make(arm="EPRM"):
     with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
         torch.manual_seed(SEED_NEW)
-        m = EPRMNet()
+        m = EPRMNet(kind_of(arm))
     return m
 
 
-def initial():
-    m = make()
+def initial(arm="EPRM"):
+    m = make(arm)
     state = torch.load(C.RESULTS / "initial_student.pt", map_location="cpu", weights_only=True)
     missing, unexpected = m.load_state_dict(state, strict=False)
-    assert not unexpected and all(k.startswith("eprm.") for k in missing), (missing, unexpected)
+    assert not unexpected and all(k.startswith(("eprm.", "esn.")) for k in missing), (missing, unexpected)
     return m.cuda()
 
 
 def frozen(arm):
-    m = make()
+    m = make(arm)
     sel = C.read(C.RESULTS / arm / "selection.json")
     assert C.sha(C.RESULTS / arm / "best.pt") == sel["checkpoint_sha256"]
     m.load_state_dict(torch.load(C.RESULTS / arm / "best.pt", map_location="cpu", weights_only=True))
@@ -250,6 +283,31 @@ def relation_distribution_ot(ts, tt, ev, sinkhorn):
     return sinkhorn(qt - st[cross].min(), qs - ss[cross].min())
 
 
+LAMBDA_W = 30.   # same initial gradient budget as EPRM_RD (~23x seg; W gives ~15x at 20)
+
+
+def cross_event_wasserstein(ts, tt, ev):
+    """Cross-event relation-distribution distillation, closed form.
+    For every region, Teacher and Student compare it with the SAME set of
+    regions of other events; each sorts its own similarities, and the squared
+    1-D Wasserstein distance between the two distributions is the mean squared
+    difference of the sorted values (exact, no quantile count, no OT solver).
+    Similarities are shifted by each model's minimum over cross-event pairs."""
+    cross = ev[:, None] != ev[None, :]
+    n = cross.sum(1)
+    rows = n >= 2
+    if rows.sum() < 2:
+        return ts.sum() * 0
+    st, ss = tt @ tt.T, ts @ ts.T
+    st, ss = st - st[cross].min(), ss - ss[cross].min()
+    big = 1e4
+    qt = st.masked_fill(~cross, big)[rows].sort(1).values
+    qs = ss.masked_fill(~cross, big)[rows].sort(1).values
+    keep = torch.arange(qt.shape[1], device=qt.device)[None] < n[rows, None]
+    d = ((qt - qs).square() * keep).sum(1) / n[rows]
+    return d.mean()
+
+
 def assignment_tokens(a, valid):
     """Region tokens of the prototype-assignment map (unit-normalised)."""
     return O.tokens(a, valid)
@@ -258,7 +316,7 @@ def assignment_tokens(a, valid):
 def build(arm):
     from geomloss import SamplesLoss
     sinkhorn = SamplesLoss("sinkhorn", p=2, blur=.1, backend="tensorized")
-    s = initial()
+    s = initial(arm)
     T = R.teacher_fusion() if arm != "EPRM" else None
 
     def objective(b, epoch):
@@ -274,6 +332,9 @@ def build(arm):
         else:
             ts, _ = O.tokens(s.dec[LEVEL], b["valid"])
         fg, _, ev = O.token_meta(b, sup)
+        if arm.endswith("_W"):
+            w = cross_event_wasserstein(ts, tt, ev)
+            return seg + LAMBDA_W * w, {"seg": seg.detach(), "w": w.detach()}
         if arm == "EPRM_RD":
             r = relation_distribution_ot(ts, tt, ev, sinkhorn)
             return seg + LAMBDA_RD * r, {"seg": seg.detach(), "rd": r.detach()}
@@ -309,8 +370,11 @@ def check():
     with torch.no_grad():
         print("identity at init:", float((m(batches[0]["x"]) - base(batches[0]["x"])).abs().max()),
               "extra params:", sum(p.numel() for n, p in m.named_parameters() if n.startswith("eprm.")))
-    for arm in ("EPRM_CEraw", "EPRM_RD"):
+    for arm in ("EPRM_RD", "EPRM_W", "ESN_W", "UNET_W"):
         s, _, objective, _, _ = build(arm)
+        if arm == "ESN_W":
+            with torch.no_grad():
+                print("ESN identity at init:", float((s(batches[0]["x"]) - base(batches[0]["x"])).abs().max()))
         params = list(s.parameters())
         flat = lambda gs: torch.cat([(g if g is not None else torch.zeros_like(p)).flatten() for g, p in zip(gs, params)])
         for b in batches:
@@ -361,7 +425,7 @@ def main():
     R.TRAIN, R.VAL = C.Inputs(f["train"], augment=True), C.Inputs(f["val"])
     for arm in a.arms:
         C.write(C.RESULTS / arm / "config.json", {"arm": arm, "prototypes": PROTOS, "proto_dim": PDIM, "tau": TAU,
-                                                  "level": LEVEL, "lambda": LAMBDA, "tau_t": TAU_T, "tau_s": TAU_S, "lambda_cc": LAMBDA_CC, "lambda_sep": LAMBDA_SEP, "fg_token": FG_TOKEN, "strata": STRATA, "lambda_str": LAMBDA_STR, "lc_k": LC_K, "lambda_lc": LAMBDA_LC, "quantiles": QUANTILES, "lambda_rd": LAMBDA_RD, "K": O.K, "seed": C.SEED,
+                                                  "level": LEVEL, "lambda": LAMBDA, "tau_t": TAU_T, "tau_s": TAU_S, "lambda_cc": LAMBDA_CC, "lambda_sep": LAMBDA_SEP, "fg_token": FG_TOKEN, "strata": STRATA, "lambda_str": LAMBDA_STR, "lc_k": LC_K, "lambda_lc": LAMBDA_LC, "quantiles": QUANTILES, "lambda_rd": LAMBDA_RD, "lambda_w": LAMBDA_W, "structure": kind_of(arm), "K": O.K, "seed": C.SEED,
                                                   "doc": __doc__})
         model, extra, objective, predict, kw = build(arm)
         C.fit(arm, model, R.TRAIN, R.VAL, objective, predict, extra_params=extra, **kw)
