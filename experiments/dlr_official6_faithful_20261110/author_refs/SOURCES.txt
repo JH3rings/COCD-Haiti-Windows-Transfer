@@ -1,0 +1,3 @@
+ProtoKD  https://github.com/SakurajimaMaiii/ProtoKD  commit fa961626814003f6d03d3234265e0d21d54b890e (code/loss.py, trainer.py, config.py)
+PKDOT    https://github.com/haseebaslam95/PKDOT  commit 4f1b6d4936c07c9216e7c1bfcfc00e589f24919b (pkdot_utils.py, PKDOT_kfold.py)
+DIS2     comparisons/dis2/source/models_bank/DLKD_ver4.py (repo copy of nhikieu/DIS2)
