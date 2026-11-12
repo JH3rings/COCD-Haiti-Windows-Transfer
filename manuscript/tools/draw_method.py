@@ -233,7 +233,6 @@ txt(1072,518,'(per anchor, squared)',13)
 txt(687,536,'4×4 pooled regions, valid≥75%; gray = same-event pairs excluded.',12,anchor='start')
 
 txt(34,342,'Actual DLR test patch CN0001: S2/S1 views and GT/prediction overlays; TP green, FP red, FN blue.',11,anchor='start')
-txt(700,346,'Example (CN0001): green TP / red FP / blue FN; GT shown at right.',10,anchor='start')
 svg.append('</svg>')
 path=ROOT/'source/method.svg';path.write_text('\n'.join(svg))
 document=fitz.open(path);pdf=fitz.open('pdf',document.convert_to_pdf())
