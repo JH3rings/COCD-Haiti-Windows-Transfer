@@ -51,8 +51,8 @@ Let $X_s$ denote the student input: pre- and post-event Sentinel-1 $\gamma^0$ VV
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figures_dlr/method.pdf}
-\caption{(a) Training and deployment. The optical--SAR teacher (green) and $L_{\mathrm{CEW}}$ are used only during training; the deployed student (blue and orange) receives SAR and terrain. (b) Prototype module (EPM) at one decoder stage. (c) Cross-event Wasserstein relation loss: each region is compared only with regions of other events; teacher and student similarities are sorted separately and compared as distributions.}
+\includegraphics[width=0.98\textwidth]{figures_dlr/method.pdf}
+\caption{(a) Frozen optical--SAR teacher and SAR--terrain student with U-Net skip connections. EPMs refine three decoder scales; relation supervision uses only the 32-pixel stage. (b) Shared-prototype refinement with stage-specific projections and residual addition. (c) Per-anchor matching of independently sorted cross-event similarities. Gray blocks exclude same-event pairs; matrix entries and bars are schematic.}
 \label{fig:method}
 \end{figure*}
 

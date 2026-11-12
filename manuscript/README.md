@@ -19,4 +19,8 @@ Preserved Haiti paper: https://github.com/JH3rings/cocd-haiti-grsl-paper
 
 ## Figure style
 
-Times-family serif text, white background, dark-gray arrows, muted blue (`#DAE2F5`) for the student, green (`#E1EFD9`) for the teacher, peach (`#FAE4D5`) for prototype operations, and rose (`#ECC1C0`) for the training loss. Colors identify information paths and operations; they do not encode measured performance.
+The network figure follows the archived paper's Times-family serif typography and restrained, solid-color feature prisms. Each prism has a lighter top and a darker side; the depth is illustrative, while the spatial sizes beneath stages follow the code. Lavender (`#B1AFD4`) identifies the frozen teacher, blue (`#8EB9DD`) the student, peach (`#E9BE99`) the shared-prototype modules, green (`#B8CDA7`) the segmentation outputs/supervision, and rose (`#B36876`) the training-only relation path. Colors do not encode measured performance.
+
+The final F_SSP code has five encoder resolutions (128, 64, 32, 16, 8), four skip-connected decoder stages (16, 32, 64, 128), EPMs after the last three stages, and relation supervision only after the 32-pixel EPM. The teacher is frozen. All three EPMs share one prototype bank but have separate projections. These are the paths illustrated in the diagram; no model module was added by the drawing revision.
+
+Input thumbnails reuse the first published qualitative example. Similarity matrices and sorted bars in the architecture inset are schematic and are identified as such in the caption. The diagram is an editable SVG, with a vector PDF for LaTeX and a PNG preview.
