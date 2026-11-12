@@ -9,6 +9,8 @@ import base64
 import html
 import math
 import pymupdf as fitz
+# Palette locked to the ten colors supplied by the author (2026-11-12).
+# Real input/GT/prediction thumbnails are extracted from qualitative.pdf.
 
 ROOT = Path(__file__).resolve().parents[1]
 W, H = 1200, 556
@@ -166,7 +168,7 @@ txt(425,165,'Encoder: 2×(3×3 Conv) + 2×2 MaxPool',12)
 txt(777,165,'Decoder: 2×2 UpConv + skip concat + 2 Conv',12)
 txt(414,325,'32 / 64 / 128-pixel EPMs; scale-specific projections, shared K=16',12)
 label_box(1117,151,64,61,['L_CEW','(c)'], '#F5B7BE',INK,16)
-txt(1108,143,'Training only',13,color=ROSE)
+txt(1108,143,'Training only · λ = 30',11,color=ROSE)
 # Shared bank feeds all three EPMs; it is a parameter bank, not teacher features.
 label_box(675,314,238,18,['Shared prototype bank  K = 16'], '#FAE4D5','#ECC1C0',13)
 for x,cy in [(695,264),(772,254),(855,244)]:
@@ -231,6 +233,7 @@ txt(1072,518,'(per anchor, squared)',13)
 txt(687,536,'4×4 pooled regions, valid≥75%; gray = same-event pairs excluded.',12,anchor='start')
 
 txt(34,342,'Actual DLR test patch CN0001: S2/S1 views and GT/prediction overlays; TP green, FP red, FN blue.',11,anchor='start')
+txt(700,346,'Example (CN0001): green TP / red FP / blue FN; GT shown at right.',10,anchor='start')
 svg.append('</svg>')
 path=ROOT/'source/method.svg';path.write_text('\n'.join(svg))
 document=fitz.open(path);pdf=fitz.open('pdf',document.convert_to_pdf())
