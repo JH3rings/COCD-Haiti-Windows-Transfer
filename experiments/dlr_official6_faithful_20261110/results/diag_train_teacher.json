@@ -1,0 +1,54 @@
+{
+  "train": {
+    "B0": {
+      "IoU": 0.9406767566755548,
+      "disagree": 0.006916738858340494,
+      "mean_abs_err": 0.008421099744737148,
+      "mean_entropy_bits": 0.017051830887794495,
+      "pixels_entropy_gt_0.5": 0.010040743778000181
+    },
+    "T_fusion": {
+      "IoU": 0.9613385394053298,
+      "disagree": 0.004460587199426624,
+      "mean_abs_err": 0.005483610555529594,
+      "mean_entropy_bits": 0.011368994601070881,
+      "pixels_entropy_gt_0.5": 0.007624876999750234
+    },
+    "T_optical": {
+      "IoU": 0.953126391230138,
+      "disagree": 0.005440210406180191,
+      "mean_abs_err": 0.006613156758248806,
+      "mean_entropy_bits": 0.013418009504675865,
+      "pixels_entropy_gt_0.5": 0.009001744160181093
+    },
+    "T_fixes_B0_misses_share_of_GT": 0.01972043097384347,
+    "T_breaks_B0_hits_share_of_GT": 0.00877255501052025,
+    "T_removes_B0_FP_share_of_neg": 0.002513864763949481
+  },
+  "val": {
+    "B0": {
+      "IoU": 0.9093140185386789,
+      "disagree": 0.010247596319654464,
+      "mean_abs_err": 0.011580060236155987,
+      "mean_entropy_bits": 0.017650511115789413,
+      "pixels_entropy_gt_0.5": 0.010681364535252912
+    },
+    "T_fusion": {
+      "IoU": 0.9496513384106173,
+      "disagree": 0.0055707216409807145,
+      "mean_abs_err": 0.006486541125923395,
+      "mean_entropy_bits": 0.011009205132722855,
+      "pixels_entropy_gt_0.5": 0.0074117477232501896
+    },
+    "T_optical": {
+      "IoU": 0.9401293568550833,
+      "disagree": 0.0066679418978141634,
+      "mean_abs_err": 0.0076700299978256226,
+      "mean_entropy_bits": 0.012919425033032894,
+      "pixels_entropy_gt_0.5": 0.008629854204102878
+    },
+    "T_fixes_B0_misses_share_of_GT": 0.03283022590510013,
+    "T_breaks_B0_hits_share_of_GT": 0.011384038670218014,
+    "T_removes_B0_FP_share_of_neg": 0.003980143929403473
+  }
+}

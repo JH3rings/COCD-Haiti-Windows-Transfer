@@ -1,0 +1,33 @@
+{
+  "arm": "KD",
+  "fidelity": "Hinton et al. 2015 soft-target KD per pixel; binary logits as [0,z]; T=4, lambda=1 (local choice)",
+  "seed": 42,
+  "epochs": 200,
+  "validation_every": 20,
+  "batch": 16,
+  "drop_last": true,
+  "deterministic": true,
+  "student_input": [
+    "PRE1_gVV",
+    "PRE1_gVH",
+    "POST1_gVV",
+    "POST1_gVH",
+    "None_DEM",
+    "None_SLOPE"
+  ],
+  "privileged_input": [
+    "PRE1_B02",
+    "PRE1_B03",
+    "PRE1_B04",
+    "PRE1_B08",
+    "PRE1_B11",
+    "PRE1_B12",
+    "POST1_B02",
+    "POST1_B03",
+    "POST1_B04",
+    "POST1_B08",
+    "POST1_B11",
+    "POST1_B12"
+  ],
+  "split_sha256": "7800c2801daed6000906a6fd0d445dec0d1240fb976cef9cd78cf14d8165f4dc"
+}

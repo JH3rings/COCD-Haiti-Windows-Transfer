@@ -5,6 +5,7 @@ import torch
 from torch import nn
 
 import common as C
+import direct as D
 import final_method as FM
 import pr as P
 
@@ -38,6 +39,8 @@ for name, m, x in (("U-Net (B0, KD, AT, DIS2, ACAM, M2U, PKDOT)", C.UNet(6), x6)
                    ("Ours, single-scale", FM.FinalNet((1,)), x6),
                    ("Ours, multi-scale", FM.FinalNet((1, 2)), x6),
                    ("Ours, scale-shared prototypes (F_SSP)", FM.FinalNet((1, 2, 3), True), x6),
+                   ("UNet++ (ResNet-34)", D.make("UNETPP"), x6),
+                   ("DeepLabv3 (ResNet-34)", D.make("DLV3"), x6),
                    ("Optical teacher (training only)", C.UNet(18), x18)):
     m.eval()
     rows[name] = {"params_M": round(sum(p.numel() for p in m.parameters()) / 1e6, 2), "MACs_G": round(macs(m, x) / 1e9, 2)}

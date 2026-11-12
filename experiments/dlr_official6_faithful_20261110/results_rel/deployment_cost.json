@@ -1,0 +1,30 @@
+{
+  "U-Net (B0, KD, AT, DIS2, ACAM, M2U, PKDOT)": {
+    "params_M": 31.05,
+    "MACs_G": 12.07
+  },
+  "Ours, single-scale": {
+    "params_M": 31.15,
+    "MACs_G": 12.16
+  },
+  "Ours, multi-scale": {
+    "params_M": 31.18,
+    "MACs_G": 12.27
+  },
+  "Ours, scale-shared prototypes (F_SSP)": {
+    "params_M": 31.19,
+    "MACs_G": 12.43
+  },
+  "UNet++ (ResNet-34)": {
+    "params_M": 26.09,
+    "MACs_G": 4.63
+  },
+  "DeepLabv3 (ResNet-34)": {
+    "params_M": 26.02,
+    "MACs_G": 6.86
+  },
+  "Optical teacher (training only)": {
+    "params_M": 31.05,
+    "MACs_G": 12.18
+  }
+}

@@ -26,6 +26,21 @@
 !/experiments/dlr_official6_faithful_20261110/figures/
 !/experiments/dlr_official6_faithful_20261110/final_method.py
 !/experiments/dlr_official6_faithful_20261110/cost.py
+!/experiments/dlr_official6_faithful_20261110/direct.py
+!/experiments/dlr_official6_faithful_20261110/queue_sens.sh
+# result records: metrics, selection, config, training history (no weights)
+!/experiments/dlr_official6_faithful_20261110/results/
+!/experiments/dlr_official6_faithful_20261110/results_rel/
+!/experiments/dlr_official6_faithful_20261110/results_direct/
+/experiments/dlr_official6_faithful_20261110/results*/**/*.pt
+/experiments/dlr_official6_faithful_20261110/results*/**/*.tmp
+/experiments/dlr_official6_faithful_20261110/results*/**/*.npz
+# saved test probabilities of the five models shown in the qualitative figure
+!/experiments/dlr_official6_faithful_20261110/results/B0/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results/PKDOT/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results/DIS2/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results/T_fusion/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results_rel/F_SSP/test_predictions.npz
 !/experiments/dlr_official6_faithful_20261110/author_refs/
 /experiments/dlr_official6_faithful_20261110/author_refs/*
 !/experiments/dlr_official6_faithful_20261110/author_refs/SOURCES.txt
@@ -55,4 +70,6 @@ __pycache__/
 !/manuscript/main_dlr.pdf
 !/manuscript/references_dlr.bib
 !/manuscript/figures_dlr/
+!/manuscript/tables_dlr/
+!/manuscript/PAPER_CHECKLIST_DLR.md
 !/manuscript/template/

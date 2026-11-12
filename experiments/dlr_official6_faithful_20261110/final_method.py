@@ -36,19 +36,39 @@ import pr as P
 import run as R
 
 LEVELS = {"F_MS": (1, 2), "F_EA": (1,), "F_MSEA": (1, 2), "F_SS1": (1,), "F_MS1": (1, 2)}
-# F_SSP: ONE prototype set shared by decoder stages 1-3 (16/32/64 px, "scale-
-# and event-shared prototypes"); L_CEW only at the semantic stage 2 (32 px).
+# F_SSP: ONE prototype set shared by decoder indices 1-3 (32/64/128 px, "scale-
+# and event-shared prototypes"); L_CEW only at decoder index 1 (32 px).
 LEVELS["F_SSP"] = (1, 2, 3)
 LOSS_LEVELS = {"F_SSP": (1,)}
 SHARED = ("F_SSP", "F_SSP0")
 # F_SSP0: the same structure without optical / L_CEW (structure-only ablation)
 LEVELS["F_SSP0"] = (1, 2, 3)
 NO_LOSS = ("F_SSP0",)
+# sensitivity of the final structure (paper figure; reported, not used for selection):
+# lambda in {10, 100} around the fixed 30, and K in {8, 32} prototypes around 16
+LAMBDA_ARM = {"F_SSP_L10": 10., "F_SSP_L100": 100.}
+K_ARM = {"F_SSP_K8": 8, "F_SSP_K32": 32}
+for _a in (*LAMBDA_ARM, *K_ARM):
+    LEVELS[_a], LOSS_LEVELS[_a] = (1, 2, 3), (1,)
+# where L_CEW acts (same shared structure; 4x4 regions per patch, i.e. the same
+# 320 m regions, at every stage, so only the feature depth changes).  Decoder
+# index -> resolution: 0 = 16 px, 1 = 32 px, 2 = 64 px, 3 = 128 px; the shared
+# prototypes sit at 1-3.  F_SSP uses 1.  S2 = 64 px only, S3 = 128 px only,
+# SALL = all three prototype stages averaged.
+STAGE_ARM = {"F_SSP_S0": (0,), "F_SSP_S2": (2,), "F_SSP_S3": (3,), "F_SSP_SALL": (1, 2, 3)}   # S0 = 16 px, before the prototype stages
+for _a, _l in STAGE_ARM.items():
+    LEVELS[_a], LOSS_LEVELS[_a] = (1, 2, 3), _l
+SHARED = SHARED + tuple(LAMBDA_ARM) + tuple(K_ARM) + tuple(STAGE_ARM)
 # *1 arms: lambda set automatically so that the distillation gradient equals the
 # segmentation gradient at initialisation (8 training batches, no augmentation)
 BALANCED = ("F_SS1", "F_MS1")
 GRID = {1: 4, 2: 8}                 # regions per patch side at each decoder stage
-ADV = {"F_MS": False, "F_EA": True, "F_MSEA": True, "F_SS1": False, "F_MS1": False, "F_SSP": False, "F_SSP0": False}
+ADV = {"F_MS": False, "F_EA": True, "F_MSEA": True, "F_SS1": False, "F_MS1": False, "F_SSP": False, "F_SSP0": False,
+       **{a: False for a in (*LAMBDA_ARM, *K_ARM, *STAGE_ARM)}}
+
+
+def grid(arm, level):
+    return 4 if arm in STAGE_ARM else GRID[level]
 LAMBDA_W = 30.                      # pr.EPRM_W value; multi-scale averages the levels
 LAMBDA_ADV = 5.                     # adversarial gradient ~= segmentation gradient at init (0.21x at 1)
 SEED_NEW = 20261113
@@ -90,13 +110,13 @@ class SharedEPM(P.EPRM):
 
 
 class FinalNet(C.UNet):
-    def __init__(self, levels, shared=False):
+    def __init__(self, levels, shared=False, k=P.PROTOS):
         super().__init__(6, 1)
         self.levels = levels
         self.shared = shared
         widths = self.widths[-2::-1]
         if shared:
-            self.protos = nn.Parameter(torch.randn(P.PROTOS, P.PDIM))
+            self.protos = nn.Parameter(torch.randn(k, P.PDIM))
             self.epm = nn.ModuleDict({str(l): SharedEPM(widths[l]) for l in levels})
         else:
             self.epm = nn.ModuleDict({str(l): P.EPRM(widths[l]) for l in levels})
@@ -119,7 +139,7 @@ class FinalNet(C.UNet):
 def make(arm):
     with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
         torch.manual_seed(SEED_NEW)
-        m = FinalNet(LEVELS[arm], arm in SHARED)
+        m = FinalNet(LEVELS[arm], arm in SHARED, K_ARM.get(arm, P.PROTOS))
     return m
 
 
@@ -157,7 +177,7 @@ def cew_terms(s, T, b, arm, event_index):
         T(M.fusion_input(b))
     out = {}
     for l in LOSS_LEVELS.get(arm, LEVELS[arm]):
-        g = GRID[l]
+        g = grid(arm, l)
         tt, sup = tokens(T.dec[l], b["valid"], g)
         ts, _ = tokens(s.dec[l], b["valid"], g)
         out[l] = P.cross_event_wasserstein(ts, tt, event_codes(b, sup, g, event_index))
@@ -195,7 +215,7 @@ def calibrate(s, T, arm, event_index, n=8):
 def build(arm, event_index):
     s = initial(arm)
     T = R.teacher_fusion()
-    lam_w = calibrate(s, T, arm, event_index) if arm in BALANCED else LAMBDA_W
+    lam_w = calibrate(s, T, arm, event_index) if arm in BALANCED else LAMBDA_ARM.get(arm, LAMBDA_W)
 
     if arm in NO_LOSS:
         def seg_only(b, epoch):
@@ -218,7 +238,7 @@ def build(arm, event_index):
         logs = {"seg": seg.detach()}
         w_terms = []
         for l in LOSS_LEVELS.get(arm, LEVELS[arm]):
-            g = GRID[l]
+            g = grid(arm, l)
             tt, sup = tokens(T.dec[l], b["valid"], g)
             ts, _ = tokens(s.dec[l], b["valid"], g)
             ev = event_codes(b, sup, g, event_index)
@@ -320,8 +340,10 @@ def main():
     R.TRAIN, R.VAL = C.Inputs(f["train"], augment=True), C.Inputs(f["val"])
     for arm in a.arms:
         C.write(C.RESULTS / arm / "config.json", {"arm": arm, "levels": LEVELS[arm], "loss_levels": LOSS_LEVELS.get(arm, LEVELS[arm]),
-                                                  "shared_prototypes": arm in SHARED, "grid": GRID, "adversarial": ADV[arm],
-                                                  "lambda_w": LAMBDA_W, "lambda_adv": LAMBDA_ADV, "prototypes": P.PROTOS,
+                                                  "shared_prototypes": arm in SHARED,
+                                                  "grid": {l: grid(arm, l) for l in LOSS_LEVELS.get(arm, LEVELS[arm])}, "adversarial": ADV[arm],
+                                                  "lambda_w": LAMBDA_ARM.get(arm, LAMBDA_W), "lambda_adv": LAMBDA_ADV,
+                                                  "prototypes": K_ARM.get(arm, P.PROTOS),
                                                   "events": idx, "seed": C.SEED, "doc": __doc__})
         model, extra, objective, predict, kw = build(arm, idx)
         C.fit(arm, model, R.TRAIN, R.VAL, objective, predict, extra_params=extra, **kw)

@@ -1,0 +1,40 @@
+{
+  "queue": [
+    "B0",
+    "T_fusion",
+    "T_optical",
+    "T_MEF",
+    "KD",
+    "AT",
+    "WKD",
+    "DIS2",
+    "ACAM",
+    "MFSAD",
+    "M2U",
+    "Nair",
+    "PKDOT",
+    "ProtoKD",
+    "OursS",
+    "OursS_SAR",
+    "OursR"
+  ],
+  "fidelity": {
+    "B0": "DLR U-Net (Orynbaikyzy et al. 2025, Fig. 7) on Table-1 input; shared recipe",
+    "T_fusion": "privileged Teacher: same U-Net, input SAR+terrain+optical (18 ch)",
+    "T_optical": "optical-only Teacher (12 ch) required by Nair & Hansch 2024",
+    "T_MEF": "Multi-to-Uni teacher: two U-Net streams with MEF gates (RECONSTRUCTION, paper paywalled)",
+    "KD": "Hinton et al. 2015 soft-target KD per pixel; binary logits as [0,z]; T=4, lambda=1 (local choice)",
+    "AT": "Zagoruyko & Komodakis ICLR17, official at()/at_loss(), beta=1000, encoder stages 2-5",
+    "WKD": "Zhang et al. CVPR22 wavelet KD: L1 on Haar high-frequency bands of the OUTPUT map (probability map replaces generated image), lambda=1 (local choice)",
+    "DIS2": "Kieu et al. WACV26-W author code DLKD_ver4 (comparisons/dis2/source): l2_kd_loss on pooled features x4 + spatial penultimate + logit KL, T=2, weight 5 after epoch 5. Frozen teacher -> global-average pooling and identity-initialised 1x1 student projections; diversity term omitted (needs a modality-specific branch the U-Net student does not have)",
+    "ACAM": "Lan & Tian ICCV25 eq.2-9 on the predicted segmentation maps (paper: segmentation distils segmentation maps), M = number of classes = 2, alpha = lambda = 1, f_align identity 1x1",
+    "MFSAD": "Tong et al. Remote Sens. 18(17):3008: bk + Gaussian-FFT + JSCAD + output KL(T=10) with the paper weights 100:80:10:0.12 recorded in train_kd_baselines.py (paper page 403 today, weights not re-verified)",
+    "M2U": "Multi-to-Uni (Inf. Fusion 138:104696) FAD + CAD from the MEF teacher; lambda 1/1; CAD uses raw cosine affinity MSE (RECONSTRUCTION, paper paywalled)",
+    "Nair": "Nair & Hansch CVPRW24 Int+Ft-A: optical teacher weights, label-free cosine feature reconstruction pretext (3 enc + 3 dec layers, 100 epochs, local choice), then full supervised fine-tuning",
+    "PKDOT": "Aslam et al. author code PKDOT_kfold.py@4f1b6d4: cosine similarity matrix, 30 lowest teacher similarities, min-shift, geomloss Sinkhorn p=2 blur=.1, lambda=0.6; samples = 4x4 region tokens of the stride-4 decoder map",
+    "ProtoKD": "Wang et al. ICASSP23 author code ProtoKD@fa96162: prototype_loss (2-D port) weight 0.1 + softmax_kl_loss(T=10).mean() weight 10 on last decoder feature",
+    "OursS": "Ours: optical-defined sub-type labels (3 landslide + 2 background types) as a training-only multi-class target; deployment collapses to the binary logit",
+    "OursS_SAR": "control for OursS: identical procedure, sub-types defined from SAR change instead of optical",
+    "OursR": "Ours: training-only heteroscedastic regression of optical change maps from the last decoder feature"
+  }
+}

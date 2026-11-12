@@ -1,0 +1,426 @@
+{
+  "pos_sar_change": [
+    {
+      "sar_change": "Q1 low",
+      "n": "161361",
+      "SAR": "0.382",
+      "FUSION": "0.529",
+      "optical_helps": "0.228"
+    },
+    {
+      "sar_change": "Q2",
+      "n": "161353",
+      "SAR": "0.473",
+      "FUSION": "0.575",
+      "optical_helps": "0.192"
+    },
+    {
+      "sar_change": "Q3",
+      "n": "161353",
+      "SAR": "0.593",
+      "FUSION": "0.647",
+      "optical_helps": "0.147"
+    },
+    {
+      "sar_change": "Q4 high",
+      "n": "161355",
+      "SAR": "0.656",
+      "FUSION": "0.719",
+      "optical_helps": "0.128"
+    }
+  ],
+  "pos_slope": [
+    {
+      "slope": "Q1 low",
+      "n": "161383",
+      "SAR": "0.663",
+      "FUSION": "0.685",
+      "optical_helps": "0.092"
+    },
+    {
+      "slope": "Q2",
+      "n": "161329",
+      "SAR": "0.658",
+      "FUSION": "0.711",
+      "optical_helps": "0.145"
+    },
+    {
+      "slope": "Q3",
+      "n": "161365",
+      "SAR": "0.48",
+      "FUSION": "0.541",
+      "optical_helps": "0.153"
+    },
+    {
+      "slope": "Q4 high",
+      "n": "161345",
+      "SAR": "0.303",
+      "FUSION": "0.533",
+      "optical_helps": "0.306"
+    }
+  ],
+  "pos_ndvi_pre": [
+    {
+      "ndvi_pre": "Q1 low",
+      "n": "161356",
+      "SAR": "0.227",
+      "FUSION": "0.421",
+      "optical_helps": "0.264"
+    },
+    {
+      "ndvi_pre": "Q2",
+      "n": "161355",
+      "SAR": "0.423",
+      "FUSION": "0.487",
+      "optical_helps": "0.183"
+    },
+    {
+      "ndvi_pre": "Q3",
+      "n": "161356",
+      "SAR": "0.696",
+      "FUSION": "0.671",
+      "optical_helps": "0.083"
+    },
+    {
+      "ndvi_pre": "Q4 high",
+      "n": "161355",
+      "SAR": "0.757",
+      "FUSION": "0.892",
+      "optical_helps": "0.165"
+    }
+  ],
+  "pos_dndvi": [
+    {
+      "dndvi": "Q1 low",
+      "n": "161356",
+      "SAR": "0.816",
+      "FUSION": "0.914",
+      "optical_helps": "0.132"
+    },
+    {
+      "dndvi": "Q2",
+      "n": "161358",
+      "SAR": "0.66",
+      "FUSION": "0.702",
+      "optical_helps": "0.121"
+    },
+    {
+      "dndvi": "Q3",
+      "n": "161355",
+      "SAR": "0.391",
+      "FUSION": "0.467",
+      "optical_helps": "0.183"
+    },
+    {
+      "dndvi": "Q4 high",
+      "n": "161353",
+      "SAR": "0.237",
+      "FUSION": "0.387",
+      "optical_helps": "0.259"
+    }
+  ],
+  "pos_size": [
+    {
+      "size": "<50 px",
+      "n": "3530",
+      "SAR": "0.058",
+      "FUSION": "0.025",
+      "optical_helps": "0.025"
+    },
+    {
+      "size": "50-200",
+      "n": "12000",
+      "SAR": "0.07",
+      "FUSION": "0.188",
+      "optical_helps": "0.155"
+    },
+    {
+      "size": "200-1000",
+      "n": "73163",
+      "SAR": "0.367",
+      "FUSION": "0.498",
+      "optical_helps": "0.239"
+    },
+    {
+      "size": ">1000",
+      "n": "556729",
+      "SAR": "0.56",
+      "FUSION": "0.646",
+      "optical_helps": "0.167"
+    }
+  ],
+  "neg_sar_change": [
+    {
+      "sar_change": "Q1 low",
+      "n": "1265984",
+      "SAR_FP": "0.022",
+      "FUSION_FP": "0.029"
+    },
+    {
+      "sar_change": "Q2",
+      "n": "1265976",
+      "SAR_FP": "0.025",
+      "FUSION_FP": "0.027"
+    },
+    {
+      "sar_change": "Q3",
+      "n": "1265977",
+      "SAR_FP": "0.031",
+      "FUSION_FP": "0.025"
+    },
+    {
+      "sar_change": "Q4 high",
+      "n": "1265979",
+      "SAR_FP": "0.064",
+      "FUSION_FP": "0.031"
+    }
+  ],
+  "neg_ndvi_pre": [
+    {
+      "ndvi_pre": "Q1 low",
+      "n": "1265981",
+      "SAR_FP": "0.038",
+      "FUSION_FP": "0.047"
+    },
+    {
+      "ndvi_pre": "Q2",
+      "n": "1265984",
+      "SAR_FP": "0.028",
+      "FUSION_FP": "0.032"
+    },
+    {
+      "ndvi_pre": "Q3",
+      "n": "1265972",
+      "SAR_FP": "0.051",
+      "FUSION_FP": "0.023"
+    },
+    {
+      "ndvi_pre": "Q4 high",
+      "n": "1265979",
+      "SAR_FP": "0.025",
+      "FUSION_FP": "0.01"
+    }
+  ],
+  "neg_slope": [
+    {
+      "slope": "Q1 low",
+      "n": "1265984",
+      "SAR_FP": "0.055",
+      "FUSION_FP": "0.026"
+    },
+    {
+      "slope": "Q2",
+      "n": "1265984",
+      "SAR_FP": "0.028",
+      "FUSION_FP": "0.018"
+    },
+    {
+      "slope": "Q3",
+      "n": "1266004",
+      "SAR_FP": "0.032",
+      "FUSION_FP": "0.025"
+    },
+    {
+      "slope": "Q4 high",
+      "n": "1265944",
+      "SAR_FP": "0.026",
+      "FUSION_FP": "0.043"
+    }
+  ],
+  "summary": {
+    "recall_SAR": 0.5258822909662205,
+    "recall_FUSION": 0.6177028362838577,
+    "fp_SAR": 0.0353461629300328,
+    "fp_FUSION": 0.028117370035363937,
+    "optical_helps_share_of_pos": 0.17406131182389198,
+    "optical_hurts_share_of_pos": 0.08224076650625482,
+    "helps_with_strong_sar_change": 0.3018968694088639,
+    "bothright_with_strong_sar_change": 0.5089754693786321
+  },
+  "per_event": [
+    {
+      "event": "BR0001",
+      "pos": 66608.0,
+      "recall_SAR": 0.862,
+      "recall_FUS": 0.965,
+      "fp_SAR": 0.038,
+      "fp_FUS": 0.035
+    },
+    {
+      "event": "CA0001",
+      "pos": 55507.0,
+      "recall_SAR": 0.317,
+      "recall_FUS": 0.316,
+      "fp_SAR": 0.023,
+      "fp_FUS": 0.015
+    },
+    {
+      "event": "CA0002",
+      "pos": 24888.0,
+      "recall_SAR": 0.15,
+      "recall_FUS": 0.941,
+      "fp_SAR": 0.109,
+      "fp_FUS": 0.046
+    },
+    {
+      "event": "CL0001",
+      "pos": 159139.0,
+      "recall_SAR": 0.749,
+      "recall_FUS": 0.95,
+      "fp_SAR": 0.058,
+      "fp_FUS": 0.044
+    },
+    {
+      "event": "CL0002",
+      "pos": 11148.0,
+      "recall_SAR": 0.088,
+      "recall_FUS": 0.075,
+      "fp_SAR": 0.009,
+      "fp_FUS": 0.05
+    },
+    {
+      "event": "CN0002",
+      "pos": 12376.0,
+      "recall_SAR": 0.495,
+      "recall_FUS": 0.88,
+      "fp_SAR": 0.008,
+      "fp_FUS": 0.009
+    },
+    {
+      "event": "GT0001",
+      "pos": 3707.0,
+      "recall_SAR": 0.086,
+      "recall_FUS": 0.909,
+      "fp_SAR": 0.001,
+      "fp_FUS": 0.044
+    },
+    {
+      "event": "IN0001",
+      "pos": 1322.0,
+      "recall_SAR": 0.559,
+      "recall_FUS": 0.538,
+      "fp_SAR": 0.007,
+      "fp_FUS": 0.014
+    },
+    {
+      "event": "IN0002",
+      "pos": 4826.0,
+      "recall_SAR": 0.162,
+      "recall_FUS": 0.671,
+      "fp_SAR": 0.001,
+      "fp_FUS": 0.003
+    },
+    {
+      "event": "IN0003",
+      "pos": 2557.0,
+      "recall_SAR": 0.001,
+      "recall_FUS": 0.699,
+      "fp_SAR": 0.007,
+      "fp_FUS": 0.017
+    },
+    {
+      "event": "IR0001",
+      "pos": 7303.0,
+      "recall_SAR": 0.48,
+      "recall_FUS": 0.327,
+      "fp_SAR": 0.23,
+      "fp_FUS": 0.031
+    },
+    {
+      "event": "IR0002",
+      "pos": 3738.0,
+      "recall_SAR": 0.0,
+      "recall_FUS": 0.003,
+      "fp_SAR": 0.052,
+      "fp_FUS": 0.013
+    },
+    {
+      "event": "IS0001",
+      "pos": 68819.0,
+      "recall_SAR": 0.963,
+      "recall_FUS": 0.905,
+      "fp_SAR": 0.09,
+      "fp_FUS": 0.047
+    },
+    {
+      "event": "IT0001",
+      "pos": 1416.0,
+      "recall_SAR": 0.0,
+      "recall_FUS": 0.273,
+      "fp_SAR": 0.002,
+      "fp_FUS": 0.0
+    },
+    {
+      "event": "JP0001",
+      "pos": 2237.0,
+      "recall_SAR": 0.199,
+      "recall_FUS": 0.23,
+      "fp_SAR": 0.024,
+      "fp_FUS": 0.001
+    },
+    {
+      "event": "KG0001",
+      "pos": 12460.0,
+      "recall_SAR": 0.316,
+      "recall_FUS": 0.692,
+      "fp_SAR": 0.004,
+      "fp_FUS": 0.394
+    },
+    {
+      "event": "KG0002",
+      "pos": 115860.0,
+      "recall_SAR": 0.278,
+      "recall_FUS": 0.296,
+      "fp_SAR": 0.03,
+      "fp_FUS": 0.002
+    },
+    {
+      "event": "KR0001",
+      "pos": 989.0,
+      "recall_SAR": 0.0,
+      "recall_FUS": 0.356,
+      "fp_SAR": 0.017,
+      "fp_FUS": 0.002
+    },
+    {
+      "event": "NZ0001",
+      "pos": 9150.0,
+      "recall_SAR": 0.725,
+      "recall_FUS": 0.786,
+      "fp_SAR": 0.011,
+      "fp_FUS": 0.002
+    },
+    {
+      "event": "PH0001",
+      "pos": 31898.0,
+      "recall_SAR": 0.291,
+      "recall_FUS": 0.002,
+      "fp_SAR": 0.02,
+      "fp_FUS": 0.0
+    },
+    {
+      "event": "PH0004",
+      "pos": 1624.0,
+      "recall_SAR": 0.004,
+      "recall_FUS": 0.001,
+      "fp_SAR": 0.002,
+      "fp_FUS": 0.006
+    },
+    {
+      "event": "PK0001",
+      "pos": 41491.0,
+      "recall_SAR": 0.143,
+      "recall_FUS": 0.001,
+      "fp_SAR": 0.004,
+      "fp_FUS": 0.061
+    },
+    {
+      "event": "US0001",
+      "pos": 6359.0,
+      "recall_SAR": 0.664,
+      "recall_FUS": 0.839,
+      "fp_SAR": 0.008,
+      "fp_FUS": 0.105
+    }
+  ]
+}

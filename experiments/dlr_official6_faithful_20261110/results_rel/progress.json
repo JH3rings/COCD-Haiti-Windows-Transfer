@@ -1,0 +1,7 @@
+{
+  "arm": "F_SSP_L10",
+  "epoch": 37,
+  "epochs": 200,
+  "best_validation_IoU": 0.5669452981671671,
+  "loss": 0.8303401876579631
+}

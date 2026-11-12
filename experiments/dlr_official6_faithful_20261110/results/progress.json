@@ -1,0 +1,7 @@
+{
+  "arm": "OursR",
+  "epoch": 200,
+  "epochs": 200,
+  "best_validation_IoU": 0.8748731698018066,
+  "loss": -0.5961404828862711
+}
