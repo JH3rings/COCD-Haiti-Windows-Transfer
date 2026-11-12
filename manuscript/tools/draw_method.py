@@ -106,7 +106,7 @@ def tokens(x,y,palette):
 # (a) Two matched U-Nets with explicit resolution changes and skip connections.
 txt(15,21,'(a) Optical-guided training and SAR–terrain deployment',21,True,'start')
 rect(10,31,1180,145,'#F7EAE9','#ECC1C0',.8,4,False)
-rect(10,183,1180,153,'#DAE2F5','#B1AFD4',.8,4)
+rect(10,183,1180,153,'#E7E6E6','#B1AFD4',.8,4)
 txt(98,48,'Frozen teacher',17,True,'start',INK)
 txt(285,48,'S2 pre/post (12) + S1 VV/VH pre/post (4) + DEM/slope (2) = 18ch',12,anchor='start')
 txt(96,201,'Trainable student',17,True,'start',INK)
