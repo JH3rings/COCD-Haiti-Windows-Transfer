@@ -1,0 +1,17 @@
+\multicolumn{6}{@{}l}{\emph{Direct segmentation}} \\
+U-Net~\cite{Orynbaikyzy2025} & 72.91 & 52.20 & 68.59 & 63.24 & 46.03 \\
+UNet++~\cite{UNetPlus2018} & 65.96 & 38.69 & 55.79 & 39.61 & 38.16 \\
+DeepLabv3~\cite{DeepLab2017} & 71.13 & 44.20 & 61.30 & 54.76 & 38.30 \\
+\midrule
+\multicolumn{6}{@{}l}{\emph{Distillation from the optical--SAR teacher}} \\
+Vanilla KD~\cite{Hinton2015} & 70.89 & 53.45 & 69.66 & 68.52 & 44.97 \\
+AT~\cite{Zagoruyko2017} & 76.63 & 53.12 & 69.39 & 61.22 & 48.63 \\
+Multi-to-Uni~\cite{Sun2027} & 74.92 & 53.28 & 69.52 & 63.14 & 47.88 \\
+ACAM-KD~\cite{Lan2025ACAM} & 74.54 & 54.59 & 70.63 & 66.09 & 48.45 \\
+PKDOT~\cite{Aslam2024PKDOT} & 74.75 & 55.74 & 71.58 & \textbf{70.52} & 47.80 \\
+DIS2~\cite{Kieu2026DIS2} & 75.85 & 55.97 & 71.77 & 69.71 & 48.06 \\
+\textbf{Ours} & \textbf{77.59} & \textbf{56.45} & \textbf{72.17} & 69.46 & \textbf{49.88} \\
+\midrule
+\multicolumn{6}{@{}l}{\emph{Optical input at inference (reference only)}} \\
+Optical U-Net & 75.90 & 66.17 & 79.64 & 84.71 & 58.38 \\
+Optical--SAR U-Net (teacher) & 85.09 & 70.38 & 82.62 & 81.90 & 64.88 \\

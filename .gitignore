@@ -1,60 +1,79 @@
-# Research data and generated artifacts (never upload)
-data/
-experiments/
-checkpoints/
-legacy_checkpoints/
-results/
+/*
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/experiments/
+/experiments/*
 
-# Model weights and prediction payloads
-*.pt
-*.pth
-*.ckpt
-*.safetensors
-*.npz
-*.npy
-*.tif
-*.tiff
+# active method: optical-guided single-orbit SAR landslide mapping (DLR)
+!/experiments/dlr_official6_faithful_20261110/
+/experiments/dlr_official6_faithful_20261110/*
+!/experiments/dlr_official6_faithful_20261110/README.md
+!/experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md
+!/experiments/dlr_official6_faithful_20261110/common.py
+!/experiments/dlr_official6_faithful_20261110/methods.py
+!/experiments/dlr_official6_faithful_20261110/run.py
+!/experiments/dlr_official6_faithful_20261110/dev.py
+!/experiments/dlr_official6_faithful_20261110/final.py
+!/experiments/dlr_official6_faithful_20261110/ours_rel.py
+!/experiments/dlr_official6_faithful_20261110/pr.py
+!/experiments/dlr_official6_faithful_20261110/tests.py
+!/experiments/dlr_official6_faithful_20261110/diag_pairs.py
+!/experiments/dlr_official6_faithful_20261110/diag_regions.py
+!/experiments/dlr_official6_faithful_20261110/diag_repr.py
+!/experiments/dlr_official6_faithful_20261110/diag_eprm.py
+!/experiments/dlr_official6_faithful_20261110/diag_learned.py
+!/experiments/dlr_official6_faithful_20261110/figures/
+!/experiments/dlr_official6_faithful_20261110/final_method.py
+!/experiments/dlr_official6_faithful_20261110/cost.py
+!/experiments/dlr_official6_faithful_20261110/direct.py
+!/experiments/dlr_official6_faithful_20261110/queue_sens.sh
+# result records: metrics, selection, config, training history (no weights)
+!/experiments/dlr_official6_faithful_20261110/results/
+!/experiments/dlr_official6_faithful_20261110/results_rel/
+!/experiments/dlr_official6_faithful_20261110/results_direct/
+/experiments/dlr_official6_faithful_20261110/results*/**/*.pt
+/experiments/dlr_official6_faithful_20261110/results*/**/*.tmp
+/experiments/dlr_official6_faithful_20261110/results*/**/*.npz
+# saved test probabilities of the five models shown in the qualitative figure
+!/experiments/dlr_official6_faithful_20261110/results/B0/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results/PKDOT/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results/DIS2/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results/T_fusion/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/results_rel/F_SSP/test_predictions.npz
+!/experiments/dlr_official6_faithful_20261110/author_refs/
+/experiments/dlr_official6_faithful_20261110/author_refs/*
+!/experiments/dlr_official6_faithful_20261110/author_refs/SOURCES.txt
 
-# Runtime output and caches
-*.log
+# small fixed inputs the code reads (split, train-only normalisation)
+!/experiments/dlr_unet_study_20261104/
+/experiments/dlr_unet_study_20261104/*
+!/experiments/dlr_unet_study_20261104/split_manifest.csv
+!/experiments/dlr_unet_study_20261104/results/
+/experiments/dlr_unet_study_20261104/results/*
+!/experiments/dlr_unet_study_20261104/results/optical_normalization.json
+!/experiments/dlr_bce_dice_equal_20261103/
+/experiments/dlr_bce_dice_equal_20261103/*
+!/experiments/dlr_bce_dice_equal_20261103/results/
+/experiments/dlr_bce_dice_equal_20261103/results/*
+!/experiments/dlr_bce_dice_equal_20261103/results/unet/
+/experiments/dlr_bce_dice_equal_20261103/results/unet/*
+!/experiments/dlr_bce_dice_equal_20261103/results/unet/normalization.json
+
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.cache/
-.workbuddy/
 
-# Local environments and editor state
-.venv/
-venv/
-env/
-.idea/
-.vscode/
-.DS_Store
-Thumbs.db
-
-# Local secrets
-.env
-.env.*
-*.pem
-*.key
-credentials*.json
-secrets*.json
-
-# Curated, compact paper artefacts are versioned.  The rules above continue to
-# exclude all raw experiment payloads, checkpoints, logs and tensors.
-!experiments/
-!experiments/GRSL_complete_paper_package/
-!experiments/GRSL_complete_paper_package/**
-!results/
-!results/tables/
-!results/tables/*.csv
-!results/tables/*.json
-
-# Keep runtime payloads out even when located below the curated package.
-experiments/GRSL_complete_paper_package/**/*.log
-experiments/GRSL_complete_paper_package/**/*.npz
-experiments/GRSL_complete_paper_package/**/*.npy
-experiments/GRSL_complete_paper_package/**/*.pt
-experiments/GRSL_complete_paper_package/**/*.pth
+# Current DLR manuscript and reproducible vector figure
+!/manuscript/
+/manuscript/*
+!/manuscript/main.tex
+!/manuscript/GRSL_final.pdf
+!/manuscript/GRSL_final.bbl
+!/manuscript/IEEEtran.cls
+!/manuscript/README.md
+!/manuscript/references_dlr.bib
+!/manuscript/figures_dlr/
+!/manuscript/tables_dlr/
+!/manuscript/template/
+!/manuscript/source/
+!/manuscript/tools/

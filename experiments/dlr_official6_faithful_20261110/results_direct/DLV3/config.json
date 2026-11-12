@@ -1,0 +1,10 @@
+{
+  "arm": "DLV3",
+  "net": "DeepLabV3",
+  "encoder": "resnet34",
+  "weights": "C:\\Users\\Administrator\\.cache\\torch\\hub\\checkpoints\\resnet34-b627a593.pth",
+  "weights_sha256": "b627a593bcbe140c234610266fe4f8ae95ea42fc881d091c9b6052e6b1d0590f",
+  "params": 26016513,
+  "seed": 42,
+  "doc": "Direct segmentation baselines (no teacher, no optical), 2026-11-12.\n\nSame 6-channel student input (PRE1/POST1 gVV/gVH + DEM + slope), official\nsplit, recipe, seed 42, validation-IoU selection and one test as the U-Net B0\nin run.py.  Only the network changes:\n  UNETPP  UNet++ with an ImageNet ResNet-34 encoder (as in Boehm et al. SAR\n          adaptation; segmentation_models_pytorch 0.5.0)\n  DLV3    DeepLabv3 with an ImageNet ResNet-34 encoder\nImageNet weights: the locally cached torchvision resnet34-b627a593.pth; the\nfirst convolution is extended to 6 channels by cyclic repetition scaled by\n3/6 (the smp rule for in_channels > 3).\n    python direct.py --arms UNETPP DLV3\n    python direct.py --test UNETPP DLV3\n"
+}

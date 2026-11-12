@@ -1,0 +1,41 @@
+{
+  "arm": "F_EA",
+  "levels": [
+    1
+  ],
+  "grid": {
+    "1": 4,
+    "2": 8
+  },
+  "adversarial": true,
+  "lambda_w": 30.0,
+  "lambda_adv": 5.0,
+  "prototypes": 16,
+  "events": {
+    "BR0001": 0,
+    "CA0001": 1,
+    "CA0002": 2,
+    "CL0001": 3,
+    "CL0002": 4,
+    "CN0002": 5,
+    "GT0001": 6,
+    "IN0001": 7,
+    "IN0002": 8,
+    "IN0003": 9,
+    "IR0001": 10,
+    "IR0002": 11,
+    "IS0001": 12,
+    "IT0001": 13,
+    "JP0001": 14,
+    "KG0001": 15,
+    "KG0002": 16,
+    "KR0001": 17,
+    "NZ0001": 18,
+    "PH0001": 19,
+    "PH0004": 20,
+    "PK0001": 21,
+    "US0001": 22
+  },
+  "seed": 42,
+  "doc": "Final-method candidates (2026-11-12): structure additions around the\nevent-shared prototype module (EPM) + cross-event Wasserstein relation\ndistillation (L_CEW).  Official split, seed 42, one test after freezing.\n\nProblem being solved: the SAR U-Net memorises disaster EVENTS (same-event\nvalidation 0.91 vs new-event test 0.52); the optical Teacher's specific\npairwise relations are tied to the training events, only the SHAPE of its\ncross-event relation distribution transfers (pr.py, ANALYSIS_ZH.md s.18-19).\n\nStructures tested here (each serves \"do not memorise events\"):\n  MS  multi-scale EPM + L_CEW: decoder stage 2 (32 px, 4x4 regions per\n      patch) and stage 3 (64 px, 8x8 finer regions).  Landslide sizes span\n      orders of magnitude; SAR's weak spots are small objects and boundaries.\n  EA  event-adversarial separation branch (training only): a small event\n      classifier reads the student's stage-2 region features through a\n      gradient-reversal layer; the classifier learns to tell which disaster\n      event a region came from, the reversed gradient makes the student's\n      features event-indistinguishable.  Removed at deployment.\n\nArms:  F_MS, F_EA, F_MSEA   (single-scale reference = pr.py EPRM_W)\n    python final_method.py --check\n    python final_method.py --arms F_MS\n    python final_method.py --test F_MS F_EA F_MSEA\n"
+}

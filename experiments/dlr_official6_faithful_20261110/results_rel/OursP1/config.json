@@ -1,0 +1,10 @@
+{
+  "arm": "OursP1",
+  "K": 30,
+  "lambda_p1": 0.6,
+  "lambda_p2": 1.0,
+  "fg_token": 0.05,
+  "tokens": "dec[1] 4x4 per patch, batch-pooled",
+  "seed": 42,
+  "doc": "Our relational method (2026-11-11), official split, seed 42, internal comparison.\n\nGoal: make the SAR network organise ITS OWN features so that real landslides\nand landslide-like background are separated, using optical only to say what\nshould be separated, never what it looks like.\n\nEvidence it builds on (diag_pairs.py): PKDOT does not work by copying Teacher\nrelations (pairwise agreement with the Teacher drops 0.42 -> 0.28); 91.5% of\nits constrained pairs are cross-event and 75% landslide-vs-background, i.e. it\nacts as a cross-event separation constraint.  Half of the pairs SAR still\nconfuses are background-vs-background: which background is a confounder is\ninformation labels do not contain and optical does.\n\nTokens: decoder dec[1] (32 px), 4x4 region tokens per patch, pooled over the\nbatch (as PKDOT).\n\n  Point 1  cross-event relation structure: PKDOT's Sinkhorn on relation\n           profiles, but every token's partners are restricted to tokens of\n           OTHER events (30 the optical Teacher finds least similar).\n  Point 2  optical-defined confounder separation: background tokens with SAR\n           change above the batch median (SAR sees something) vs landslide\n           tokens of other events.  One-sided: penalise only where the SAR\n           student finds the pair MORE similar than the optical Teacher does\n           (similarities standardised per batch over cross-event pairs).\n\nArms\n  PKDOT_LBL  control: PKDOT unchanged except the Teacher relation is replaced\n             by label-only relations (no optical anywhere).\n  OursCE     Point 1 (lambda .6, PKDOT's) + Point 2 (lambda 1).\n  OursP1     Point 1 only (ablation, run only if requested).\n\n    python ours_rel.py --arms PKDOT_LBL\n    python ours_rel.py --arms OursCE\n    python ours_rel.py --test PKDOT_LBL OursCE\n    python ours_rel.py --check\n"
+}

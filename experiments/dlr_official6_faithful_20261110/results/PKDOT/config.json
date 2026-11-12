@@ -1,0 +1,33 @@
+{
+  "arm": "PKDOT",
+  "fidelity": "Aslam et al. author code PKDOT_kfold.py@4f1b6d4: cosine similarity matrix, 30 lowest teacher similarities, min-shift, geomloss Sinkhorn p=2 blur=.1, lambda=0.6; samples = 4x4 region tokens of the stride-4 decoder map",
+  "seed": 42,
+  "epochs": 200,
+  "validation_every": 20,
+  "batch": 16,
+  "drop_last": true,
+  "deterministic": true,
+  "student_input": [
+    "PRE1_gVV",
+    "PRE1_gVH",
+    "POST1_gVV",
+    "POST1_gVH",
+    "None_DEM",
+    "None_SLOPE"
+  ],
+  "privileged_input": [
+    "PRE1_B02",
+    "PRE1_B03",
+    "PRE1_B04",
+    "PRE1_B08",
+    "PRE1_B11",
+    "PRE1_B12",
+    "POST1_B02",
+    "POST1_B03",
+    "POST1_B04",
+    "POST1_B08",
+    "POST1_B11",
+    "POST1_B12"
+  ],
+  "split_sha256": "7800c2801daed6000906a6fd0d445dec0d1240fb976cef9cd78cf14d8165f4dc"
+}

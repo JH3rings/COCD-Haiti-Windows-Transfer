@@ -1,0 +1,26 @@
+\multicolumn{4}{@{}l}{\emph{Components}} \\
+U-Net & 72.91 & 52.20 & 63.24 \\
++ shared prototypes (no optical) & 77.99 & 52.07 & 64.54 \\
++ $L_{\mathrm{CEW}}$ (no prototypes) & 76.41 & 55.57 & 68.85 \\
++ prototypes at 32\,px + $L_{\mathrm{CEW}}$ & 77.58 & 56.10 & 70.84 \\
++ stage-wise prototypes, $L_{\mathrm{CEW}}$ at 32/64\,px & 75.51 & 55.22 & 64.85 \\
++ shared prototypes + $L_{\mathrm{CEW}}$ (Ours) & 77.59 & 56.45 & 69.46 \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Stage of $L_{\mathrm{CEW}}$ (shared prototypes)}} \\
+16\,px & 76.50 & 55.57 & 66.25 \\
+32\,px (Ours) & 77.59 & 56.45 & 69.46 \\
+64\,px & 75.52 & 55.18 & 64.52 \\
+128\,px & 71.08 & 52.44 & 58.32 \\
+32, 64, and 128\,px & 74.40 & 54.31 & 60.42 \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Relation target (prototypes at 32\,px)}} \\
+Pairs, rank-stratified partners & 72.55 & 52.43 & 66.83 \\
+Pairs, soft correspondence (KL) & 72.43 & 52.48 & 65.66 \\
+Pairs, 30 least similar, OT$^\dagger$ & 76.83 & 56.68 & 69.01 \\
+Distribution, 32 quantiles, OT & 78.59 & 56.55 & 68.77 \\
+Distribution, Wasserstein & 77.58 & 56.10 & 70.84 \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Relation source (PKDOT loss, no prototypes)}} \\
+Label-defined relations & 74.96 & 54.09 & 65.78 \\
+Optical-teacher relations & 74.75 & 55.74 & 70.52 \\
+Optical, cross-event pairs only & 77.24 & 56.27 & 71.29 \\

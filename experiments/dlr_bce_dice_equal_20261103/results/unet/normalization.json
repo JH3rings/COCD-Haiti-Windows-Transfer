@@ -1,0 +1,22 @@
+{
+  "sar_mean": [
+    -9.497804185649613,
+    -16.385141867740032
+  ],
+  "sar_std": [
+    3.4046934670798765,
+    3.5293240486087565
+  ],
+  "sar_unit": "10log10(linear Gamma0); zeros marked numerical-invalid, not physical radar shadow",
+  "training_ids_sha256": "31e6b13cebf0fa028039f3a63ac71e2e1d3bdbc4a9791cc0fc4ec39f74561bdf",
+  "terrain_mean": [
+    1196.8940836261365,
+    15.30350861047199
+  ],
+  "terrain_std": [
+    1003.7613756298454,
+    11.888678157428906
+  ],
+  "source": "same locked V2 train-only SAR stats; DEM/slope mean/std fitted only on train joint-positive SAR pixels",
+  "source_sar_normalization_sha256": "ba6545bba316f80e17d24082f9065c49271c0083c826c0867721befeb78062b8"
+}
