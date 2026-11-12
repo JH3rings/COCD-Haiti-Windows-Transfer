@@ -12,6 +12,7 @@ is no longer active on this branch. It remains in git history and on the
   (PDF: [`manuscript/main_dlr.pdf`](manuscript/main_dlr.pdf), 5 pages).
 - **Paper contents checklist** (old paper vs. new paper, metric definitions,
   data sources): [`manuscript/PAPER_CHECKLIST_DLR.md`](manuscript/PAPER_CHECKLIST_DLR.md).
+- **Method explanation (Chinese):** [`manuscript/METHOD_DLR_ZH.md`](manuscript/METHOD_DLR_ZH.md).
 - **Experiment log (Chinese):**
   [`ANALYSIS_ZH.md`](experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md).
 
