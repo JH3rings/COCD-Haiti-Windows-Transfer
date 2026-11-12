@@ -176,7 +176,7 @@ route([(1003,270),(1003,293),(1057,293)],'#303035',1.1)
 label_box(1057,279,124,29,['BCE + Dice'],'#E1EFD9','#E7E6E6',15)
 thumbnail(4,1081,308,25)  # Actual binary ground truth in first DLR test case.
 txt(1112,327,'GT (same case)',11,anchor='start')
-route([(1094,308),(1094,306)],INK,1.1)
+# GT thumbnail directly abuts segmentation supervision; no decorative connector.
 
 # (b) Expanded prototype module: cosine assignments, projected values, residual.
 rect(10,353,648,193,'#FAE4D5','#F8CDAC',1,6)
