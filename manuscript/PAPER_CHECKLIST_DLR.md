@@ -33,11 +33,11 @@ DLR 原始数据（Zenodo record 17007637，HDF5 格式）体积较大，不在�
 | 方法公式（问题定义、模块、蒸馏损失、总损失） | 公式 (1)(2) 原型分配与特征修正，(3)(4) L_CEW，(5) 总损失 | 完成 | `final_method.py`、`pr.py` |
 | 数据集与设置（数据、划分、训练配方、指标定义） | 官方划分 355/88/120；Ind.44 / Dep.76；6 通道学生、18 通道老师；AdamW 等训练配方；AP、IoU、F1 | 完成 | `common.py` |
 | 定性结果图（figure*） | Fig.2：4 个光学无云的测试 patch，列为 S2 前/后、S1 前/后 VV、GT、U-Net、PKDOT、DIS2、Ours、Teacher（TP 绿、FP 红、FN 蓝） | 完成 | `figures/make_qualitative.py` |
-| Table I 主对比（含直接分割基线 UNet++、DeepLabv3） | Table I：直接分割（U-Net、UNet++、DeepLabv3）、蒸馏方法（6 个 + Ours）、光学推理参考（2 个） | UNet++ 和 DeepLabv3 在训练中 | `tables_dlr/main_rows.tex` |
+| Table I 主对比（含直接分割基线 UNet++、DeepLabv3） | Table I：直接分割（U-Net、UNet++、DeepLabv3）、蒸馏方法（6 个 + Ours）、光学推理参考（2 个） | 完成 | `tables_dlr/main_rows.tex` |
 | Table II 蒸馏增益（分区域） | Table II：逐事件 F1（DLR 原论文用的就是逐事件 F1），并与原论文报告的依赖事件均值 0.68 比较 | 完成 | `tables_dlr/event_rows.tex` |
 | 局部放大的误差图 | 改为 Fig.3 分析图：与老师成对关系的一致度 vs 测试 IoU（r = −0.70） | 完成 | `figures/make_figures.py`、`results_rel/diag_learned.json` |
-| Table III 消融（各机制） | Table III：组件、L_CEW 放在哪一层（16/32/64/128 px、三层）、关系目标、关系来源 | 层位置的几组在训练中 | `tables_dlr/ablation_rows.tex` |
-| 损失权重敏感性图 | Fig.4：λ ∈ {10, 30, 100}，K ∈ {8, 16, 32} | 在训练中 | `figures_dlr/sensitivity.pdf` |
+| Table III 消融（各机制） | Table III：组件、L_CEW 放在哪一层（16/32/64/128 px、三层）、关系目标、关系来源 | 完成 | `tables_dlr/ablation_rows.tex` |
+| 损失权重敏感性图 | Fig.4：λ ∈ {10, 30, 100}，K ∈ {8, 16, 32} | 完成 | `figures_dlr/sensitivity.pdf` |
 | Table IV 部署代价 | Table IV：参数量与 MACs（U-Net、UNet++、DeepLabv3、Ours、Teacher） | 完成 | `cost.py` → `results_rel/deployment_cost.json` |
 | 结论 | 结论与局限：召回升、精度降；在逐事件平均上不领先；继承了老师在小滑坡上的盲区 | 完成 | — |
 

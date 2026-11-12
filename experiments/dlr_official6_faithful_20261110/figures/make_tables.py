@@ -156,6 +156,7 @@ def sensitivity():
         ax.set_xscale("log", base=2 if "K" in xlabel else 10)
         ax.set_xticks([x for x, _ in pts]); ax.set_xticklabels([str(x) for x, _ in pts])
         ax.minorticks_off()
+        ax.margins(x=.2)
         ax.set_xlabel(xlabel)
         ax.grid(alpha=.3, lw=.5)
     axes[0].set_ylabel("Test IoU (%)")

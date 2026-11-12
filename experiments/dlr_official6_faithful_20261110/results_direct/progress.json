@@ -1,7 +1,7 @@
 {
-  "arm": "UNETPP",
-  "epoch": 95,
+  "arm": "DLV3",
+  "epoch": 200,
   "epochs": 200,
-  "best_validation_IoU": 0.8392593135637746,
-  "loss": 0.16292890838601373
+  "best_validation_IoU": 0.8446726020411298,
+  "loss": 0.13304498554630714
 }

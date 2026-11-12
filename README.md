@@ -1,129 +1,119 @@
-# Optical-guided single-orbit SAR landslide mapping
+# Cross-event optical relation distillation for SAR landslide mapping
 
-Optical imagery is used **only during training** to help a single-orbit SAR
-U-Net organise its own features. The deployed model takes only SAR and terrain
-as input.
+Optical imagery is used **only during training** to improve a landslide mapper
+that receives SAR backscatter and terrain at inference (DLR Sentinel-1/2
+benchmark, official split).
 
-The earlier dual-orbit method ("counter-guided target evidence search",
-Haiti) is no longer the active method on this branch. Its code and paper
-remain in git history and on the `archive/*` and `paper/grsl-final-freeze`
-branches.
+The earlier dual-orbit method ("counter-guided target evidence search", Haiti)
+is no longer active on this branch. It remains in git history and on the
+`archive/*` and `paper/grsl-final-freeze` branches.
+
+- **Paper draft:** [`manuscript/main_dlr.tex`](manuscript/main_dlr.tex)
+  (PDF: [`manuscript/main_dlr.pdf`](manuscript/main_dlr.pdf), 5 pages).
+- **Paper contents checklist** (old paper vs. new paper, metric definitions,
+  data sources): [`manuscript/PAPER_CHECKLIST_DLR.md`](manuscript/PAPER_CHECKLIST_DLR.md).
+- **Experiment log (Chinese):**
+  [`ANALYSIS_ZH.md`](experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md).
 
 ## Problem
 
-Landslide inventories are grouped by disaster **event**, and a SAR network
-learns to recognise events instead of landslides. On the DLR benchmark the
-plain U-Net reaches 0.909 IoU on validation patches from the training events,
-but only 54.6 on new events.
+Landslide inventories are grouped by disaster **event**. A SAR U-Net learns the
+training events rather than landslides: 90.9% IoU on validation patches from
+the training events, 52.2% on new events.
 
-Standard distillation from an optical teacher does not fix this:
+An optical–SAR teacher memorises the training labels (96.1% training IoU), so:
 
-- **Output distillation** carries nothing beyond the labels, because the
-  teacher memorises them.
-- **Feature and frequency distillation** ask SAR to imitate optical content,
-  and most of that content is invisible to SAR.
+- **Output distillation** adds little beyond the labels.
+- **Feature distillation** asks SAR to imitate optical content it cannot
+  observe.
+- **Pairwise relation distillation** (PKDOT-style) also falls short. The more
+  closely a student copies the teacher's specific region pairs, the worse it
+  tests (r = −0.70 over 13 students).
 
-What does transfer is the teacher's **relations between regions of different
-events**.
-
-## Method
+## Method (`final_method.py`, arm `F_SSP`)
 
 | Part | Where | What it does |
 |---|---|---|
-| Event-shared concept bank (EPRM, structure) | After U-Net decoder stage 2 (32×32, 256 ch); kept at deployment | 16 learnable prototypes shared by all events. Each pixel compares itself with the prototypes and is refined, `f ← f + O(softmax(cos(q(f), P)/τ) · V(P))`. The output projection is zero-initialised, so training starts exactly at the plain U-Net. |
-| Cross-event correspondence distillation (loss) | Same stage, training only | Region tokens (4×4 per patch, pooled over the batch). For each region, the frozen optical+SAR teacher gives a soft distribution over **all regions of other events** ("which regions in other disasters are my kind"). The SAR student's concept-refined regions give the same distribution, and the two are aligned with a KL divergence. Regions of the same event are never compared. |
+| Scale- and event-shared prototypes (structure, deployed) | After U-Net decoder stages 2–4 (feature maps 32/64/128 px) | One bank of K = 16 learnable prototypes shared by all events and all three stages. Each pixel is refined by its soft assignment to the prototypes: `f ← f + W_o Σ_k softmax_k(cos(W_q f, P_k)/τ) W_v P_k`. `W_o` is zero-initialised, so training starts from the plain U-Net. |
+| Cross-event Wasserstein relation distillation, L_CEW (loss, training only) | Stage 2 (32×32 map); 4×4 regions of 320 m per patch | For each region, teacher and student each compute its similarities to all regions of **other** events. Each side sorts its own list, and the loss is the squared 1-D Wasserstein distance between the two sorted lists. There is no pair correspondence, no top-K and no solver. |
 
-Implementation: [`pr.py`](experiments/dlr_official6_faithful_20261110/pr.py)
+The total loss is `BCE + Dice + 30 · L_CEW`.
 
-- arm `EPRM_CC`: the correspondence loss described above;
-- arm `EPRM`: structure-only ablation;
-- arm `EPRM_CEraw`: the earlier variant that uses an optimal-transport relation term.
-
-Status (2026-11-11), from section 18 of the log:
-
-- **Finding:** the more closely a student copies the teacher's specific
-  pairwise relations, the worse it tests (correlation −0.70). Those relations
-  carry the teacher's memorised training events.
-- **Current loss (`EPRM_RD`):** match only the **distribution** of each
-  region's cross-event similarities. Each side sorts its own similarities and
-  takes 32 quantiles; the teacher and student quantile-profile sets are
-  compared with Sinkhorn OT. There are no teacher pair indices and no hard
-  top-K, so the student decides which regions are near and which are far.
-- **Result:** IoU is on par with the earlier OT variant, and AUPRC is the
-  highest of every arm.
-- **Noise:** an exact rerun of `EPRM_CEraw` with the same seed gives 56.03
-  instead of 56.68, so single-run differences below about 1 point are not
-  resolvable.
-
-The experiment log and every diagnostic (in Chinese) are in
-[`ANALYSIS_ZH.md`](experiments/dlr_official6_faithful_20261110/ANALYSIS_ZH.md).
-
-## Final method (figure: [`figures/method.svg`](experiments/dlr_official6_faithful_20261110/figures/method.svg))
-
-- **Event-shared prototype module (EPM, structure):** after decoder stage 2, each
-  pixel is refined by soft assignment to K = 16 prototypes shared by all
-  events. The output projection is zero-initialised.
-- **Cross-event Wasserstein relation distillation (L_CEW, loss):**
-  1. For every region, both the teacher and the student compute its
-     similarities to all regions of other events.
-  2. Each side sorts its own similarities.
-  3. The loss is the squared 1-D Wasserstein distance between the two sorted
-     distributions (closed form).
-
-  There is no pair matching, no top-K and no OT solver. λ is set by balancing
-  the initial gradient norms.
-- **Deployment:** only SAR and DEM are input; there is no teacher and no optical
-  data.
+Deployment uses SAR + DEM + slope only and costs +0.14 M parameters and
++0.36 GMACs (about 3%).
 
 ## Setting
 
-- **Data:** the official DLR split, 355 / 88 / 120 patches.
+- **Data:** the official DLR split, 355 / 88 / 120 patches of 128×128 pixels at
+  10 m. The 120 test patches are 44 independent-event patches (ind44) and 76
+  dependent-event patches (spt76).
 - **Inputs:**
-  - Student: PRE1/POST1 VV/VH, DEM and slope (6 channels).
-  - Teacher: the same 6 channels plus 12 Sentinel-2 bands.
-- **Model:** the DLR paper U-Net.
+  - Student: PRE1/POST1 γ⁰ VV/VH, DEM and slope (6 channels).
+  - Teacher: the same 6 channels plus Sentinel-2 PRE1/POST1 B2/B3/B4/B8/B11/B12 (18 channels).
 - **Training:**
-  - BCE + soft Dice (1:1), AdamW at 1e-4, 200 epochs, dihedral augmentation;
-  - validation every 20 epochs, and validation IoU selects the checkpoint;
-  - each arm is tested once, after it is frozen.
+  - BCE + soft Dice, AdamW at 1e-4 with weight decay 0.01, 200 epochs;
+  - validation IoU every 20 epochs selects the checkpoint;
+  - every model is tested once after it is frozen, with seed 42.
 
-## Results (test IoU %, seed 42)
+## Results (test, %, seed 42)
 
-Teacher: 70.38. Three-seed means: B0 54.60 ± 2.10, PKDOT 56.19 ± 0.47.
+| Model | AP | IoU | F1 | IoU ind44 | IoU spt76 |
+|---|---:|---:|---:|---:|---:|
+| U-Net (B0) | 72.91 | 52.20 | 68.59 | 63.24 | 46.03 |
+| UNet++ (ResNet-34) | 65.96 | 38.69 | 55.79 | 39.61 | 38.16 |
+| DeepLabv3 (ResNet-34) | 71.13 | 44.20 | 61.30 | 54.76 | 38.30 |
+| Vanilla KD / AT / Multi-to-Uni / ACAM-KD | | 53.45 / 53.12 / 53.28 / 54.59 | | | |
+| PKDOT | 74.75 | 55.74 | 71.58 | 70.52 | 47.80 |
+| DIS2 | 75.85 | 55.97 | 71.77 | 69.71 | 48.06 |
+| **Ours (F_SSP)** | **77.59** | **56.45** | **72.17** | 69.46 | **49.88** |
+| Optical–SAR teacher (optical at inference) | 85.09 | 70.38 | 82.62 | 81.90 | 64.88 |
 
-| Arm | all120 | ind44 | spt76 | AUPRC |
-|---|---:|---:|---:|---:|
-| B0 (SAR U-Net) | 52.20 | 63.24 | 46.03 | 72.91 |
-| KD / AT / DIS2 | 53.45 / 53.12 / 55.97 | | | |
-| PKDOT | 55.74 | 70.52 | 47.80 | 74.75 |
-| Label-only relations (no optical) | 54.09 | 65.78 | 47.62 | 74.96 |
-| Cross-event relations only | 56.27 | 71.29 | 48.19 | 77.24 |
-| Concept bank only (no optical) | 54.78 | 64.61 | 49.21 | 74.94 |
-| Concept bank + cross-event OT relations (`EPRM_CEraw`) | 56.68 | 69.01 | 50.14 | 76.83 |
-| Concept bank + cross-event correspondence KL (`EPRM_CC`) | 52.48 | 65.66 | 45.22 | 72.43 |
-| Concept bank + cross-event separation KL (`EPRM_SEP` / `EPRM_SEPnb`) | 52.15 / 54.80 | 61.26 / 65.68 | 47.15 / 49.13 | 72.70 / 73.04 |
-| Concept bank + full-spectrum cross-event OT (`EPRM_STR`) | 52.43 | 66.83 | 44.78 | 72.55 |
-| Concept bank + landslide-vs-other-event-background OT (`EPRM_LC`) | 53.69 | 67.72 | 46.27 | 73.54 |
-| `EPRM_CEraw`, exact rerun (same seed; GPU nondeterminism) | 56.03 | 72.38 | 47.31 | 75.02 |
-| Concept bank + cross-event relation-distribution distillation, 32 quantiles + OT (`EPRM_RD`) | 56.55 | 68.77 | 50.18 | 78.59 |
-| **Final: prototypes + cross-event Wasserstein relation distillation (`EPRM_W`)** | **56.10** | **70.84** | 48.47 | 77.58 |
-| Event-style normalisation + Wasserstein (`ESN_W`) | 55.03 | 68.34 | 48.27 | 75.62 |
-| Plain U-Net + Wasserstein (`UNET_W`) | 55.57 | 68.85 | 48.69 | 76.41 |
+Ablations and sensitivity (IoU):
 
-The results are from one seed. Because the B0 seed spread is 2.1 points,
-differences smaller than that are not yet conclusive.
+- **Components:**
+  - structure only: 52.07;
+  - L_CEW only: 55.57.
+- **Stage of L_CEW:**
+  - 16 px: 55.57;
+  - **32 px: 56.45**;
+  - 64 px: 55.18;
+  - 128 px: 52.44;
+  - all three: 54.31.
+- **λ:**
+  - 10: 54.06;
+  - **30: 56.45**;
+  - 100: 52.18.
+- **K:**
+  - 8: 54.91;
+  - **16: 56.45**;
+  - 32: 54.99.
+
+Event-averaged F1, as reported in the DLR paper: Ours 59.1, U-Net 58.8, DIS2
+62.8. Ours is weak on the small Irish peat slides, which the teacher also
+misses.
+
+All results are single runs. An exact rerun of one configuration changed IoU by
+0.65 points because of nondeterministic GPU kernels.
 
 ## Run
 
-The data are the DLR S1/S2 reference HDF5 files listed in
-`experiments/dlr_unet_study_20261104/split_manifest.csv` (`h5_path`). They are
-not included in this repository.
+The data are the DLR S1/S2 reference HDF5 files (Zenodo record 17007637),
+listed in `experiments/dlr_unet_study_20261104/split_manifest.csv`
+(`h5_path`). They are not included in this repository.
 
 ```powershell
 pip install -r requirements.txt
 cd experiments/dlr_official6_faithful_20261110
-python run.py --arms B0 T_fusion        # SAR baseline and the optical teacher
-python pr.py --check                    # identity-at-init and gradient checks
-python pr.py --arms EPRM_CC             # our method (needs the frozen T_fusion)
-python pr.py --test EPRM EPRM_CC        # one test after freezing
+python run.py --arms B0 T_fusion              # SAR U-Net baseline and the optical-SAR teacher
+python final_method.py --check                # identity at init, gradient ratio
+python final_method.py --arms F_SSP           # our method (needs the frozen T_fusion)
+python final_method.py --test F_SSP           # one test after freezing
+python direct.py --arms UNETPP DLV3           # direct segmentation baselines
+python figures/make_tables.py                 # paper tables + sensitivity figure
+python figures/make_figures.py                # method figure + analysis figure
+python figures/make_qualitative.py            # qualitative figure (needs the HDF5 data)
 ```
+
+Result records (`config.json`, `history.json`, `selection.json`,
+`test_metrics.json`) for every model are committed under `results/`,
+`results_rel/` and `results_direct/`. Model weights are not committed.

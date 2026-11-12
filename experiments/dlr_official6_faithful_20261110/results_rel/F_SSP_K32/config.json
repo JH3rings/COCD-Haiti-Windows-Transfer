@@ -10,8 +10,7 @@
   ],
   "shared_prototypes": true,
   "grid": {
-    "1": 4,
-    "2": 8
+    "1": 4
   },
   "adversarial": false,
   "lambda_w": 30.0,

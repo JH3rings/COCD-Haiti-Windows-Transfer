@@ -55,7 +55,7 @@ We therefore transfer the teacher's relational structure rather than its content
 
 \section{Method}
 \subsection{Problem Formulation}
-Let $X_s$ denote the student input: pre- and post-event Sentinel-1 $\gamma^0$ VV/VH backscatter, elevation, and slope (six channels). The teacher additionally receives pre- and post-event Sentinel-2 bands $X_o$ (twelve channels). Both networks follow the U-Net of~\cite{Orynbaikyzy2025,Ronneberger2015}, with four decoder stages at $16$, $32$, $64$, and $128$ pixels. The teacher is trained with the segmentation loss and then frozen; the student is trained with the teacher and deployed on $X_s$ only. Fig.~\ref{fig:method} summarizes the method.
+Let $X_s$ denote the student input: pre- and post-event Sentinel-1 $\gamma^0$ VV/VH backscatter, elevation, and slope (six channels). The teacher additionally receives pre- and post-event Sentinel-2 bands $X_o$ (twelve channels). Both networks follow the U-Net of~\cite{Orynbaikyzy2025,Ronneberger2015}, with four decoder stages whose feature maps measure $16\times16$, $32\times32$, $64\times64$, and $128\times128$ for a $128\times128$ input, so that one feature cell spans 80, 40, 20, and 10~m. The teacher is trained with the segmentation loss and then frozen; the student is trained with the teacher and deployed on $X_s$ only. Fig.~\ref{fig:method} summarizes the method.
 
 \begin{figure*}[!t]
 \centering
@@ -65,7 +65,7 @@ Let $X_s$ denote the student input: pre- and post-event Sentinel-1 $\gamma^0$ VV
 \end{figure*}
 
 \subsection{Scale- and Event-Shared Prototypes}
-After decoder stage $l\in\{2,3,4\}$ ($32$, $64$, and $128$ pixels), the student feature $f_l\in\mathbb{R}^{C_l\times H_l\times W_l}$ is compared with one bank of $K$ learnable prototypes $\{P_k\}$ shared by all events and stages:
+After decoder stage $l\in\{2,3,4\}$ (feature maps of $32$, $64$, and $128$ pixels per side), the student feature $f_l\in\mathbb{R}^{C_l\times H_l\times W_l}$ is compared with one bank of $K$ learnable prototypes $\{P_k\}$ shared by all events and stages:
 \begin{equation}
 a_{lk}(p)=\mathrm{softmax}_k\!\left(\cos\bigl(W_q^l f_l(p),P_k\bigr)/\tau\right),
 \label{eq:assign}
@@ -77,7 +77,7 @@ f_l'(p)=f_l(p)+W_o^l\sum_k a_{lk}(p)\,W_v^lP_k ,
 where $p$ is a pixel, $W_q^l$, $W_v^l$, and $W_o^l$ are stage-specific $1\times1$ projections, $\tau=0.1$, and $K=16$. $W_o^l$ is zero-initialized, so training starts from the plain U-Net. Every pixel of every event reads the same prototypes at every scale; a concept that the relation loss organizes at one scale is therefore available to large landslide bodies, boundaries, and small slides at the others. The prototypes remain in the deployed network.
 
 \subsection{Cross-Event Wasserstein Relation Distillation}
-The relation loss acts at stage 2 ($32\times32$ pixels). Teacher and refined student features there are average-pooled over valid pixels into $4\times4$ regions per patch, each covering $320\times320$~m, and normalized to unit length, giving $t_i$ (teacher) and $s_i$ (student, from $f_2'$). For region $i$ from event $e_i$, let $\mathcal{N}_i=\{j: e_j\neq e_i\}$ be the regions of other events in the mini-batch. The teacher and student similarity sets are
+The relation loss acts at stage 2 ($32\times32$ feature map). Teacher and refined student features there are average-pooled over valid pixels into $4\times4$ regions per patch, each covering $320\times320$~m, and normalized to unit length, giving $t_i$ (teacher) and $s_i$ (student, from $f_2'$). For region $i$ from event $e_i$, let $\mathcal{N}_i=\{j: e_j\neq e_i\}$ be the regions of other events in the mini-batch. The teacher and student similarity sets are
 \begin{equation}
 \mathcal{T}_i=\{t_i^\top t_j\}_{j\in\mathcal{N}_i},\qquad \mathcal{S}_i=\{s_i^\top s_j\}_{j\in\mathcal{N}_i},
 \end{equation}
@@ -126,7 +126,7 @@ Method & AP & IoU & F1 & IoU Ind. & IoU Dep. \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:main} compares direct segmentation networks trained on the same input and recipe---the U-Net of~\cite{Orynbaikyzy2025} and UNet++ and DeepLabv3 with ImageNet ResNet-34 encoders~\cite{He2016ResNet}---with distillation methods that transfer outputs (Vanilla KD), attention or features (AT, Multi-to-Uni, ACAM-KD, DIS2), and pairwise relations (PKDOT). All distillation methods use our U-Net student and teacher. Ours improves IoU by 4.25 points and AP by 4.68 points over the U-Net, and gives the highest pooled AP, IoU, and F1 among all SAR-input models, 0.48 IoU points above DIS2 and 0.96 AP points above the best competing AP. The gain comes mainly from recall (\oursR\% versus 58.4\%), at lower precision (\oursP\% versus 83.1\%). On the independent events, PKDOT and DIS2 remain 1.06 and 0.25 points higher; Ours is highest on the dependent events. Vanilla KD gives the lowest AP, consistent with a teacher that reproduces the training labels. Optical inputs at inference remain far more accurate, which bounds what training-only optical data can contribute.
+Table~\ref{tab:main} compares direct segmentation networks trained on the same input and recipe---the U-Net of~\cite{Orynbaikyzy2025} and UNet++ and DeepLabv3 with ImageNet ResNet-34 encoders~\cite{He2016ResNet}---with distillation methods that transfer outputs (Vanilla KD), attention or features (AT, Multi-to-Uni, ACAM-KD, DIS2), and pairwise relations (PKDOT). All distillation methods use our U-Net student and teacher. The ImageNet-initialized UNet++ and DeepLabv3 reach only 38.69\% and 44.20\% IoU despite 89.7\% and 84.5\% validation IoU, which shows the same fit to the training events in larger encoders. Ours improves IoU by 4.25 points and AP by 4.68 points over the U-Net, and gives the highest pooled AP, IoU, and F1 among all SAR-input models, 0.48 IoU points above DIS2 and 0.96 AP points above the best competing AP. The gain comes mainly from recall (\oursR\% versus 58.4\%), at lower precision (\oursP\% versus 83.1\%). On the independent events, PKDOT and DIS2 remain 1.06 and 0.25 points higher; Ours is highest on the dependent events. Vanilla KD gives the lowest AP, consistent with a teacher that reproduces the training labels. Optical inputs at inference remain far more accurate, which bounds what training-only optical data can contribute.
 
 Fig.~\ref{fig:qualitative} shows test patches with cloud-free optical scenes. On the rockslide in (a), Ours and PKDOT recover the margins that the U-Net misses. On the loess slides in (b), Ours recovers slopes that all other students miss, at the cost of additional false positives, similar to the teacher. In (c) all students produce similar maps. In (d), small peat slides are largely missed by all models, including the teacher.
 
@@ -159,7 +159,7 @@ For every training and validation region we take the 30 regions of other events 
 
 \subsection{Ablation Study}
 \begin{table}[!t]
-\caption{Ablation (\%). All rows use the same U-Net, initialization, teacher, and recipe. $^\dagger$Repeating this run with identical settings gave 56.03\% IoU.}
+\caption{Ablation (\%). All rows use the same U-Net, initialization, teacher, and recipe. Stages are named by feature-map size. $^\dagger$Repeating this run with identical settings gave 56.03\% IoU.}
 \label{tab:ablation}
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -172,7 +172,7 @@ Configuration & AP & IoU & IoU Ind. \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:ablation} isolates each component. $L_{\mathrm{CEW}}$ alone raises IoU from 52.20\% to 55.57\%. The shared prototypes alone leave IoU unchanged (52.07\%) but raise AP to 77.99\%: they improve the ranking of landslide pixels without changing decisions at threshold 0.5. Combined with $L_{\mathrm{CEW}}$, this ranking turns into detections, mainly through recall. Separate prototypes at 32 and 64 pixels with the loss at both stages lower IoU to 55.22\% and independent-event IoU to 64.85\%, whereas one bank shared by three stages and constrained only at 32 pixels gives the best result. [STAGE RESULT TO BE INSERTED.]
+Table~\ref{tab:ablation} isolates each component. $L_{\mathrm{CEW}}$ alone raises IoU from 52.20\% to 55.57\%. The shared prototypes alone leave IoU unchanged (52.07\%) but raise AP to 77.99\%: they improve the ranking of landslide pixels without changing decisions at threshold 0.5. Combined with $L_{\mathrm{CEW}}$, this ranking turns into detections, mainly through recall. Separate prototypes at 32 and 64 pixels with the loss at both stages lower IoU to 55.22\% and independent-event IoU to 64.85\%, whereas one bank shared by three stages and constrained only at 32 pixels gives the best result. With the shared prototypes and the same $320$-m regions, moving $L_{\mathrm{CEW}}$ from the 32-pixel stage to the 16-, 64-, or 128-pixel stage lowers IoU to 55.57\%, 55.18\%, and 52.44\%, and applying it at all three prototype stages gives 54.31\%. Independent-event IoU falls from \oursInd\% at 32 pixels to 58.32\% at 128 pixels. Constraining finer stages imposes teacher relations that reflect optical texture, which the SAR student cannot reproduce.
 
 Losses that impose pair correspondence fall to 52.4--52.5\% IoU. Pairing each region with the teacher's 30 least similar partners and matching them by optimal transport (OT), as in PKDOT, and summarizing the distribution by 32 quantiles matched by OT reach scores similar to the Wasserstein distance (56.68\% and 56.55\%); the former repeated at 56.03\%. The Wasserstein form needs no partner count, quantile number, or iterative solver. Label-defined relations trail optical-teacher relations by 1.65 points, so the optical teacher contributes beyond the labels.
 
@@ -183,7 +183,7 @@ Losses that impose pair correspondence fall to 52.4--52.5\% IoU. Pairing each re
 \label{fig:sensitivity}
 \end{figure}
 
-[SENSITIVITY TEXT TO BE INSERTED.]
+Fig.~\ref{fig:sensitivity} varies one setting at a time. With $\lambda=10$, AP remains high (78.52\%) but IoU drops to 54.06\%; with $\lambda=100$, the relation loss dominates, validation IoU falls to 63.1\%, and test IoU (52.18\%) returns to the U-Net level. Eight and 32 prototypes give 54.91\% and 54.99\%. Except for $\lambda=100$, every tested setting stays at least 1.8 points above the U-Net.
 
 \subsection{Deployment Cost}
 \begin{table}[!t]

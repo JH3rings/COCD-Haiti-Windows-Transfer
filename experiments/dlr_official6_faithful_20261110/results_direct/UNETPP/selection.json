@@ -1,0 +1,8 @@
+{
+  "state": "FROZEN",
+  "epochs_completed": 200,
+  "steps": 4400,
+  "selected_epoch": 180,
+  "validation_IoU": 0.8974425970417482,
+  "checkpoint_sha256": "973d1dca871da5317e97a22d53bb933ce0d4680d85f2f4b0914a171a03a888b1"
+}
