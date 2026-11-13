@@ -32,3 +32,13 @@ The original reference screenshots and full PDFs were uploaded in the ChatGPT co
 - `NEW_CHAT_START.md` — short prompt to start a fresh assistant/agent on this repository.
 
 Do not ingest old V1–V5 visual concepts as scientific ground truth; some image-generated diagrams mislabeled EPM/CEW and fabricated direct teacher-to-student skip connections.
+
+## Reference assets now included in this directory
+
+- [Screenshot inspiration R1](assets/R1_video_text_reference_preview.jpg) (cropped preview)
+- [Screenshot inspiration R2](assets/R2_rs_kvcache_reference_preview.jpg) (cropped preview)
+- [Single palette](assets/R2_palette.svg)
+- [Information Fusion annotated figure-study extract](assets/R3_InformationFusion_figure_study_excerpt.pdf) (**not** the copyrighted full publisher PDF)
+- [Jiang IJGI 2026 CC BY article, compressed full PDF](assets/R4_Jiang_IJGI_CC_BY_compact.pdf)
+
+The original unmodified user uploads are packaged privately for local agents. If a new agent needs small text in the screenshots, follow the verified paper DOI links and inspect the publisher PDF rather than relying on reduced screenshot pixels.
