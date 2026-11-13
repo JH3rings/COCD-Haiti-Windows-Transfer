@@ -1,0 +1,7 @@
+# Copy this prompt into a new ChatGPT/AI coding conversation
+
+Read the GitHub repository `JH3rings/COCD-Haiti-Windows-Transfer` **main**, starting with `manuscript/figure_design/README.md`, then `REFERENCES.md`, `STYLE_CONTRACT.md`, `WORKFLOW.md`, and `COCD_SCIENCE_AUDIT.md`. Check all actual F_SSP model/loss code and the paper against the audit; do not assume any old V1–V5 or image-generated labels are correct.
+
+Run the **visual-first, science-gated workflow**: inspect the two screenshot references and the two paper figure sources listed in REFERENCES; use the **single R2 pastel palette**; keep the original method's correct topology. First create and select the best **ImageGen concept** (aesthetic ~6/10 or better) with useful backdrops, compact scientifically meaningful insets and 2.5D feature maps. Then correct the design's labels and exact connections against code **without destroying the image concept's layout**, convert to a genuinely editable PPTX with exact ports, arrows and typography, render, compare to visual master, fix downgrade locally, and export PPTX + SVG + PDF + PNG and QA.
+
+Pay special attention to scientific edge correctness and visual preservation when moving from image concept to editable PPT—the previous conversion was rated only 4–4.5/10. **Do not overwrite** the main manuscript figure or claim visual success before review. Start working immediately; do not merely write another planning document.
