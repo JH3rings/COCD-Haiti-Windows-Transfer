@@ -1,5 +1,15 @@
 # Visual Reference Register (four source groups)
 
+## Actual repo assets (verified)
+
+- [R1 — video/text collage cropped preview](assets/R1_video_text_reference_preview.jpg)
+- [R2 — RS segmentation & FlashCache cropped preview](assets/R2_rs_kvcache_reference_preview.jpg)
+- [R2 — single unified 10-color palette](assets/R2_palette.svg)
+- [R3 — annotated 2-page figure-study excerpt, not full copyrighted Information Fusion PDF](assets/R3_InformationFusion_figure_study_excerpt.pdf)
+- [R4 — compact complete 17-page CC BY IJGI PDF](assets/R4_Jiang_IJGI_CC_BY_compact.pdf)
+
+Full-resolution user-uploaded originals are retained in the separately supplied local private asset bundle. The two screenshot previews are reduced-resolution study copies, not original vector graphics. The article PDFs' official DOI pages remain authoritative.
+
 The user selected **two screenshot collages** and **two PDF articles**. The screenshots each contain **two distinct diagrams**, so there are six major figure patterns to analyze, not six different mandatory color palettes. For every source: borrow **visual grammar**, never transplant research-specific modules into another model.
 
 ## R1 — user screenshot collage: video–text research, two diagrams
