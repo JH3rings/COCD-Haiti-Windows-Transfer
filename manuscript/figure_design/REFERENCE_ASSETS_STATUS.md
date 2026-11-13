@@ -1,16 +1,15 @@
-# Reference asset delivery status
+# Public GitHub reference asset inventory — verified 2026-11-13
 
-- R1 screenshot: **low-resolution cited preview present in public GitHub** at `assets/R1_video_text_reference_preview.jpg`; full original included in the local user-delivery bundle.
-- R2 screenshot: metadata and exact palette in `REFERENCES.md` and `assets/R2_palette.svg`; the full original is included in the local user-delivery bundle. A low-resolution preview can be added via `sync_local_assets.py --public`.
-- R3 (Elsevier Information Fusion, 2025): **official DOI link only**, because public full-PDF redistribution is not automatically permitted. Local user-provided original remains in the delivery bundle.
-- R4 (MDPI/IJGI 2026, CC BY): complete original in local delivery bundle with author/DOI attribution; optional repository copy can be added subject to GitHub binary upload and license attribution.
+| Group | Public GitHub artifact | Status |
+|---|---|---|
+| R1 video/text screenshot | [R1 cropped preview](assets/R1_video_text_reference_preview.jpg) | Present (29,584 bytes) |
+| R2 TGRS/FlashCache screenshot | [R2 cropped preview](assets/R2_rs_kvcache_reference_preview.jpg) | Present (32,356 bytes) |
+| R2 color palette | [R2 palette SVG](assets/R2_palette.svg) | Present |
+| R3 Information Fusion 2025 | [Annotated two-page figure study PDF](assets/R3_InformationFusion_figure_study_excerpt.pdf) | Present (171,827 bytes); NOT the full publisher PDF |
+| R4 Jiang IJGI 2026 | [Complete CC BY compressed PDF](assets/R4_Jiang_IJGI_CC_BY_compact.pdf) | Present (485,017 bytes, 17 pages) |
 
-The scientific and visual **documentation is already committed** in this directory. This manifest distinguishes what is actually hosted from what is available via the local bundle or official journal links. Do not claim all four binaries are stored in GitHub unless verified.
+Source links, exact paper titles, DOI and figure page numbers are in [REFERENCES.md](REFERENCES.md). **Do not describe R3 as a complete PDF**; it is a documented scholarly figure excerpt, because the full Elsevier article is not authorized for republication in this public repo.
 
-## Public source links
-- R1/TIP: https://doi.org/10.1109/TIP.2025.3630883
-- R1/TMM: https://doi.org/10.1109/TMM.2025.3565981
-- R2/TGRS: https://doi.org/10.1109/TGRS.2026.3651598
-- R2/CVPR: https://openaccess.thecvf.com/content/CVPR2026/html/Yang_Revisiting_Multimodal_KV_Cache_Compression_A_Frequency-Domain-Guided_Outlier-KV-Aware_Approach_CVPR_2026_paper.html
-- R3/Information Fusion: https://doi.org/10.1016/j.inffus.2024.102649
-- R4/IJGI: https://doi.org/10.3390/ijgi15040160
+User-uploaded original screenshots and unmodified PDFs are available in the private local transfer ZIP accompanying this session. [sync_local_assets.py](sync_local_assets.py) can stage the originals safely in an ignored local folder; it can also add public previews after an attribution review. No existing manuscript figure or results were changed by this addition.
+
+The visual system requires a scientific code audit, ImageGen concept selection, an approved visual master, editable PPT reconstruction and a parity test. An image-generated draft is NOT authoritative for scientific labels or links.
