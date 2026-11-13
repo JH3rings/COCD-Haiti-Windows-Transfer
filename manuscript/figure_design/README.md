@@ -30,6 +30,7 @@ The original reference screenshots and full PDFs were uploaded in the ChatGPT co
 - `WORKFLOW.md` — two-engine workflow + hard gates + automatic/manual checks.
 - `COCD_SCIENCE_AUDIT.md` — project-specific F_SSP diagram invariants.
 - `NEW_CHAT_START.md` — short prompt to start a fresh assistant/agent on this repository.
+- `ORIGINAL_SOURCE_CHECKSUMS.md` — exact hash/size inventory for four user-uploaded originals and the private local transfer ZIP.
 
 Do not ingest old V1–V5 visual concepts as scientific ground truth; some image-generated diagrams mislabeled EPM/CEW and fabricated direct teacher-to-student skip connections.
 
