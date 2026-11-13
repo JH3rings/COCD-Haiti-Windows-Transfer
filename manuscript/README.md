@@ -24,3 +24,7 @@ The network figure follows the archived paper's Times-family serif typography an
 The final F_SSP code has five encoder resolutions (128, 64, 32, 16, 8), four skip-connected decoder stages (16, 32, 64, 128), EPMs after the last three stages, and relation supervision only after the 32-pixel EPM. The teacher is frozen. All three EPMs share one prototype bank but have separate projections. These are the paths illustrated in the diagram; no model module was added by the drawing revision.
 
 Input thumbnails reuse the first published qualitative example. Similarity matrices and sorted bars in the architecture inset are schematic and are identified as such in the caption. The diagram is an editable SVG, with a vector PDF for LaTeX and a PNG preview.
+
+## Reusable figure-design workflow
+
+See [figure_design/README.md](figure_design/README.md) for four academic visual references, one color palette, science-first audit, ImageGen-to-editable-PPT workflow, and a short new-chat startup prompt. This is **separate** from the accepted manuscript figure; all existing build paths remain unchanged.
