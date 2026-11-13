@@ -9,15 +9,17 @@ import base64
 import html
 import math
 import pymupdf as fitz
+from PIL import Image
+import io
 
 ROOT = Path(__file__).resolve().parents[1]
 W, H = 1200, 556
 INK = '#303035'
-BLUE = ('#8EB9DD', '#D9E7F3', '#5F87AC')
-LILAC = ('#B1AFD4', '#E0DFF0', '#827EA9')
-PEACH = ('#E9BE99', '#FAE4D5', '#B48C66')
-GREEN = ('#B8CDA7', '#E1EFD9', '#82996F')
-ROSE = '#B36876'
+BLUE = ('#DAE2F5', '#E7E6E6', '#B1AFD4')
+LILAC = ('#B1AFD4', '#F7EAE9', '#ECC1C0')
+PEACH = ('#F8CDAC', '#FAE4D5', '#ECC1C0')
+GREEN = ('#E1EFD9', '#F7EAE9', '#E7E6E6')
+ROSE = '#F5B7BE'
 svg = [f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
        '<rect width="1200" height="556" fill="white"/>']
 
@@ -75,6 +77,21 @@ doc=fitz.open(ROOT/'figures_dlr/qualitative.pdf')
 images=sorted(doc[0].get_image_info(xrefs=True), key=lambda q:(round(q['bbox'][1]),q['bbox'][0]))
 
 
+def actual_case(kind,x,y,size=34):
+    """Embed the actual first published DLR qualitative test case (CN0001)."""
+    p = ROOT/'figures_dlr/qualitative.png'
+    if not p.exists():
+        raise FileNotFoundError('Required real qualitative test image: '+str(p))
+    # Crop columns from the first test-set case; verified against qualitative.png.
+    crops = {'gt':(765,40,925,200),'student':(1448,40,1609,200),'teacher':(1621,40,1781,200)}
+    im = Image.open(p).convert('RGB')
+    crop = im.crop(crops[kind]).resize((64,64),Image.Resampling.NEAREST)
+    stream = io.BytesIO(); crop.save(stream,format='PNG')
+    uri = 'data:image/png;base64,'+base64.b64encode(stream.getvalue()).decode()
+    svg.append(f'<image x="{x}" y="{y}" width="{size}" height="{size}" xlink:href="{uri}"/>')
+    rect(x,y,size,size,'none',INK,.7)
+
+
 def thumbnail(index,x,y,size=30):
     data=doc.extract_image(images[index]['xref'])
     uri='data:image/'+data['ext']+';base64,'+base64.b64encode(data['image']).decode()
@@ -105,12 +122,14 @@ def tokens(x,y,palette):
 
 # (a) Two matched U-Nets with explicit resolution changes and skip connections.
 txt(15,21,'(a) Optical-guided training and SAR–terrain deployment',21,True,'start')
-rect(10,31,1180,145,'#FFFEFF','#B7A1B4',1.1,7,True)
-rect(10,183,1180,153,'#FEFFFF','#7999B5',1.1,7)
-txt(98,48,'Frozen teacher',17,True,'start',LILAC[2])
-txt(96,201,'Trainable student',17,True,'start',BLUE[2])
+rect(10,31,1180,145,'#F7EAE9','#ECC1C0',1.1,5,False)
+rect(10,183,1180,153,'white','#B1AFD4',1.1,5)
+txt(98,48,'Frozen teacher',17,True,'start',INK)
+label_box(1069,35,100,23,['Stage I'], '#FDE694',INK,12)
+txt(96,201,'Trainable student',17,True,'start',INK)
+label_box(1069,186,100,23,['Stage II'], '#FDE694',INK,12)
 input_stack(67,True); input_stack(220,False)
-xs=[139+83*i for i in range(9)]
+xs=[139,202,265,328,391,492,593,694,795]  # compact encoder / spaced decoder
 hs=[44,34,25,18,13,18,25,34,44]
 ws=[23,27,31,35,40,35,31,27,23]
 offset=[0,10,20,30,40,30,20,10,0]
@@ -129,7 +148,7 @@ for teacher,base,palette in [(True,92,LILAC),(False,244,BLUE)]:
         route([(83,base+5),(111,base+5),(111,base),(139,base)])
     for i,(x,cy,w,h) in enumerate(zip(xs,centers,ws,hs)):
         prism(x,cy,w,h,palette)
-        txt(x+w/2+3,cy+h/2+17,str(res[i])+'²',14)
+        txt(x+w/2+3,cy+h/2+17,str(res[i])+'²',13)
         if i<8:
             start=x+w+7;dest=xs[i+1];nextcy=centers[i+1]
             if not teacher and i in (6,7):
@@ -145,68 +164,70 @@ for teacher,base,palette in [(True,92,LILAC),(False,244,BLUE)]:
     route([(last,base),(900,base)])
     label_box(900,base-18,65,36,['1×1 head'],'#F3F2F5','#99949F',14)
     route([(965,base),(987,base)])
-    prism(988,base,22,36,GREEN,5)
-    txt(1003,base+36,'Mask',14)
+    actual_case('teacher' if teacher else 'student',988,base-18,36)
+    txt(1003,base+36,'Prediction',12)
     if teacher:
-        txt(935,55,'Teacher output (not distilled)',14)
+        txt(935,55,'Teacher head',12)
     # Relation features are tapped after the stage-2 refinement in the student.
     tapx=xs[6]+ws[6]+(7 if teacher else 42)
     tapy=centers[6]
     lane=base+63
     route([(tapx,tapy),(tapx,lane),(1047,lane),(1047,base+18)],ROSE,1.3,True)
     tokens(1030,base-17,LILAC if teacher else BLUE)
-    txt(1050,base-28,'Pool to 4×4',13)
+    txt(1050,base-28,'4×4 pooling',12)
     route([(1072,base),(1100,base),(1100,166 if teacher else 197),(1117,166 if teacher else 197)],ROSE,1.3,True)
 
-txt(425,165,'Encoder / bottleneck',14)
-txt(777,165,'Decoder: 16 → 32 → 64 → 128',14)
-txt(414,324,'Spatial resolutions; skip links concatenate encoder features',14)
-label_box(1117,151,64,61,['L_CEW','(c)'], '#F3DADD',ROSE,17)
-txt(1108,143,'Training only',13,color=ROSE)
+txt(425,165,'Encoder  |  Conv ×2 + Pool',12)
+txt(777,165,'Decoder  |  UpConv + skip',12)
+txt(414,324,'EPM ×3   |   32² · 64² · 128²',12)
+label_box(1117,151,64,61,['L_CEW','(c)'], '#F5B7BE',INK,16)
+txt(1108,143,'Training only',12,color=INK)
 # Shared bank feeds all three EPMs; it is a parameter bank, not teacher features.
-label_box(675,314,238,18,['Shared prototype bank  K = 16'], '#F7E5D4','#B48C66',13)
+label_box(675,314,238,18,['Shared prototypes  K=16'], '#FAE4D5','#ECC1C0',13)
 for x,cy in [(695,264),(772,254),(855,244)]:
     route([(x,314),(x,cy+16)],'#B48C66',1.05)
 # Segmentation supervision is separate from the relation loss.
 route([(1003,270),(1003,293),(1057,293)],'#687B5D',1.1)
 label_box(1057,279,124,29,['BCE + Dice'],'#E1EFD9','#82996F',15)
-txt(1118,327,'Reference mask',14)
-route([(1118,315),(1118,308)],'#687B5D',1.1)
+actual_case('gt',1132,303,26)
+txt(1145,340,'GT',11)
 
 # (b) Expanded prototype module: cosine assignments, projected values, residual.
-rect(10,353,648,193,'#FFFEFC','#CDB89C',1,6)
+rect(10,353,648,193,'white','#ECC1C0',1,6)
 txt(23,376,'(b) Shared-prototype refinement (EPM)',20,True,'start')
+label_box(572,358,72,22,['Stage III'], '#FAE4D5','#ECC1C0',11)
 prism(31,443,25,43,BLUE,7);txt(47,486,'f',18)
 route([(63,443),(92,443)])
-label_box(92,420,82,46,['Query','projection'],'#E2EBF4','#7999B5',15)
+label_box(92,420,82,46,['Affinity'],'#DAE2F5','#B1AFD4',15)
 route([(174,443),(210,443)])
-txt(194,414,'cos / τ',14)
+txt(194,414,'cos / τ',12)
 # Shared prototypes (K rows schematically represented by a small tiled bank).
 for row in range(2):
     for col in range(8):rect(218+col*9,390+row*7,8,6,PEACH[0],PEACH[2],.4)
-txt(304,387,'Shared normalized prototypes',14,anchor='start')
+txt(304,387,'Prototype bank  K=16',13,anchor='start')
 route([(249,406),(249,420)],PEACH[2],1.1)
 for row in range(4):
     for col in range(4):
-        rect(214+col*11,423+row*10,10,9,['#F5E9D8','#DAB98E','#ECDBBF','#CBA77D'][(row+col)%4],PEACH[2],.35)
-txt(237,482,'Softmax assignments',14)
+        rect(214+col*11,423+row*10,10,9,['#FAE4D5','#F8CDAC','#FDE694','#ECC1C0'][(row+col)%4],PEACH[2],.35)
+txt(237,482,'Assignment',12)
 route([(290,398),(353,398),(353,419)],PEACH[2],1.1)
-label_box(309,419,88,31,['Value proj.'],'#F7E5D4',PEACH[2],15)
+label_box(309,419,88,31,['Aggregation'],'#FAE4D5',PEACH[2],14)
 circle(373,474,11,'×',PEACH[2]);route([(258,443),(280,443),(280,474),(362,474)],PEACH[2],1.1)
 route([(353,450),(353,461),(373,461),(373,463)],PEACH[2],1.1)
 route([(384,474),(417,474)])
-label_box(417,451,82,46,['Output','projection'],'#F7E5D4',PEACH[2],15)
-txt(458,442,'Zero initialized',14)
+label_box(417,451,82,46,['Refinement'],'#FAE4D5',PEACH[2],14)
+txt(458,442,'Zero-init',12)
 route([(499,474),(528,474)])
 circle(539,474,11,'+')
 route([(45,465),(45,509),(539,509),(539,485)],BLUE[2],1.2)
 route([(550,474),(582,474)])
 prism(582,474,25,43,BLUE,7);txt(598,516,'f′',18)
-txt(24,536,'One bank across decoder stages; stage-specific query, value and output projections.',13,anchor='start')
+txt(24,536,'Shared bank  |  Stage-specific projections  |  Residual',12,anchor='start')
 
 # (c) Exact computation of the cross-event relation loss, with schematic values.
-rect(674,353,516,193,'#FFFDFE','#C8AEB9',1,6)
+rect(674,353,516,193,'white','#B1AFD4',1,6)
 txt(688,376,'(c) Cross-event relation distillation',20,True,'start')
+label_box(1100,358,78,22,['Stage IV'], '#FDE694','#B1AFD4',11)
 for row,y,palette,name in [(0,396,LILAC,'Teacher'),(1,465,BLUE,'Student')]:
     # Gray diagonal event blocks are excluded; off-diagonal entries are valid.
     for i in range(6):
@@ -215,15 +236,15 @@ for row,y,palette,name in [(0,396,LILAC,'Teacher'),(1,465,BLUE,'Student')]:
             rect(690+j*7,y+i*7,6.8,6.8,fill,'white',.25)
     txt(711,y+58,name,14)
     route([(738,y+21),(822,y+21)],ROSE,1.1)
-    txt(780,y+9,'Shift + sort',14)
+    txt(780,y+9,'Min-shift · sort',12)
     # Independently sorted similarities (one anchor), not paired partner values.
     vals=[6,10,13,18,22,27,30,34] if row==0 else [7,9,15,17,24,26,29,35]
     for j,h in enumerate(vals):rect(830+j*9,y+40-h,6,h,palette[0],palette[2],.5)
     route([(907,y+22),(952,y+22),(952,450),(970,450)],ROSE,1.2)
-label_box(970,421,204,58,['Squared 1-D Wasserstein','L_CEW'], '#F3DADD',ROSE,16)
-txt(1072,500,'Mean squared difference',14)
-txt(1072,518,'of sorted similarities',14)
-txt(687,536,'Gray: same event excluded; independent sorting for each anchor.',13,anchor='start')
+label_box(970,421,204,58,['Wasserstein  W₂²','L_CEW'], '#F5B7BE',INK,16)
+txt(1072,500,'Sorted similarities',13)
+txt(1072,518,'Squared W₂',13)
+txt(687,536,'Cross-event only  |  4×4 regions  |  valid ≥75%',12,anchor='start')
 
 svg.append('</svg>')
 path=ROOT/'source/method.svg';path.write_text('\n'.join(svg))
