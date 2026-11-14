@@ -1,5 +1,7 @@
 # Visual-first + Scientific-Truth Figure Workflow — v2.1
 
+> **Historical workflow (V2.1).** The current executable brief is [MASTER_FIGURE_PROMPT_V3.md](MASTER_FIGURE_PROMPT_V3.md): it adds explicit content storyboard/wireframe before ImageGen and requires a local high-fidelity PPT component trial before full reconstruction. Follow V3 when steps differ.
+
 ## Why the previous V4/V5 failed
 
 The GPT image design concept was judged visually better (~6/10) than the later editable rendering (~4–4.5/10). The step `image → scientific correction → editable PPT` lost subtle layering, group backdrops, compact composition, typography and rhythm. **Never treat object count, no-overflow or PPT export success as a substitute for visual quality.** Worse, the image model hallucinated labels (e.g. interpreting EPM as "Event Prototype Mining" or CEW as "Cross-Event Weighting") and fabricated some cross-network connections. The transformation must preserve visual intent while replacing scientifically invalid content and edges.
