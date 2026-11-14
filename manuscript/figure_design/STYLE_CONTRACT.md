@@ -1,83 +1,40 @@
-# Universal Academic Figure Style Contract — v2.1
+# Academic figure visual contract — v3.0
 
-This contract applies to **any** scientific neural-network figure. It fixes a *visual language*, **not** a teacher–student, U-Net, transformer or diffusion-model layout. Derive geometry anew from the directed computation graph.
+Status: 2026-11-14. Universal rules plus a COCD-specific locked reference. Figure style may be learned from reference papers; scientific components and arrows MUST come from code.
 
-## One palette — no hybrid schemes
+## 1. Only the selected R2 palette
+Teacher #B1AFD4; Student #DAE2F5; EPM #F8CDAC; CEW/training #F5B7BE; operations #FDE694; output #E1EFD9; secondary #ECC1C0; backdrops #FAE4D5/#F7EAE9; neutral #E7E6E6. Ink #27232B (or similar near-black). Permitted: tints of these fills for true 2.5D facets, authentic SAR/optical data color. Prohibited: extra decorative palettes, washed-out gray explanatory text, strong glossy effects.
 
-Use the ten colors extracted from R2; select 4–7 role colors per figure, not all ten mechanically:
+## 2. The lower GPT A/B/C master controls layout
+For COCD, preserve the user's approved LOWER image: A left (~58% canvas width), B upper right (~40%), C lower right (~40%). A should show two horizontal U-Net streams with compact training relation and prototype bank; B compact EPM micro-mechanism; C balanced Teacher/Student similarity distribution computation. At normalized image coordinates, measure every region and glyph against the actual master. The former 2400×560 scene's approximate starts are A x=14, B/C x=1422; use measurements rather than hardcoded magic numbers after cropping the approved image.
+Preserve panel hierarchy, overall negative space and short labels. Never use the upper full-width figure instead of the selected lower figure.
 
-| semantic role | fill |
-|---|---|
-| primary track / teacher or first modality | `#B1AFD4` |
-| secondary track / student or second modality | `#DAE2F5` |
-| main proposed module | `#F8CDAC` |
-| relation / training-only mechanism | `#F5B7BE` |
-| emphasized operation | `#FDE694` |
-| output / result / segmentation | `#E1EFD9` |
-| secondary mechanism | `#ECC1C0` |
-| pale functional backdrop | `#FAE4D5`, `#F7EAE9` |
-| neutral utilities | `#E7E6E6` |
+## 3. Feature-map prism grammar
+All feature maps are repeatable 2.5D stacks built as editable FRONT plane, TOP plane, RIGHT side plane and 1–2 restrained back slices. Fronts are solid role fills, not white; no artificial **white strip at left**. All depths share one perspective direction. Don't enlarge the entire face merely to suggest 3D. Keep width/height/depth separately parameterized; current user-approved trajectory is narrow fronts with clearer depth (historical reductions are not hardcoded global rules). Center every prism on its forward-flow baseline and recompute named ports after any size change.
+Space and arrows may not invade the next prism. Feature resolution text appears below each block, not overlapping top facets or skip wires. Decoder has extra room for 32/64/128 EPM; encoder remains comparatively compact.
 
-White negative space; near-black text and connector ink. To correct a washed-out result, first **reduce background area**, improve border/text contrast and differentiate neighboring roles—do **not** introduce a second color palette. Genuine RGB images and scientific heatmaps retain their data colors. Consistent 2.5D prisms may use lighter/darker shades derived from role fill; this is not a new functional palette.
+## 4. Port-true arrows, not pictorial guesses
+Each block exposes named ports left_mid/right_mid/top/bottom. Primary U-Net flow is a STRAIGHT horizontal solid line between same-y ports, arrowhead centered and ending immediately before next element. If blocks are at different levels, change the layout before drawing. Four genuine skip concatenations use thin orthogonal lanes overhead; shared prototypes have independent links to the three actual EPM inputs. Distinguish residual from shared parameters and training loss by color/legend. CEW originates from 32px stage Teacher and **post-EPM Student** feature, never from Teacher mask. Avoid diagonal arrows, long dotted captions, stray arrowheads, arrows through text and spurious Teacher–Student connections.
+The line/symbol check treats arrows and +/× tokens as objects; each needs a logical port and z-order, including the final arrow into a + circle.
 
-## Layout is a constraint problem, not prose
+## 5. COCD A/B/C data fidelity
+A: Teacher 18 channels (12 optical S2 plus 6 SAR/terrain), Student 6 SAR/terrain only, both five encoder levels and four decoder levels. EPM on Student decoder 32px/64px/128px only; GT to BCE+Dice, relation loss training-only. Real sample input, GT and output crops can be embedded as pictures, but do not add giant rectangular white INPUT cards.
+B: Q 1×1 -> cosine similarity to K=16 normalized 64-d prototypes -> tau=0.1 softmax -> stage-specific V projection / weighted sum -> zero-init output 1×1 -> residual addition f'=f+correction. Shared prototype bank, but separate Q/V/O per stage. Prototype rows must not overlap text or Value Projection.
+C: Teacher and Student 32px outputs -> valid-masked 4×4 regional pooling -> their own normalized tokens -> separate within-model cross-event cosine similarity -> same-event pair masking -> minimum shift separately -> per-anchor independent sort -> squared 1-D Wasserstein. A SINGLE DRAWN matrix must not falsely suggest a shared computed matrix; distinguish T/S paths and label a common central matrix explicitly 'schematic comparison only' if visually required. Real similarity matrix dimension depends on number of valid tokens in the batch, not always 32×32. Min shift + Sort boxes compact; sorting bars labeled illustrative and clearly connected to the appropriate side. Same-event excluded mark must be visible, dark and away from bars.
 
-Prepare a coordinate-based `layout.json` with all modules: id, normalized bounding box [x,y,w,h], class, containing region, label, text box, visual priority, z-order and ports: left/right/top/bottom or named explicit ports. Every edge: source port, target port, scientific meaning, route waypoints, line style, head/tail, z-order and whether it is train-only. Do not choose arrow endpoints by visual guessing.
+## 6. Typography: readable and contained
+Use a serif compatible with manuscript; Times New Roman when present, with measured font metrics for both SVG and PPT. Three levels: A/B/C title; module/operator label; small tensor/scale/formula. Prefer one to three short words in operation boxes and remove repetitive gray micro-paragraphs. Avoid light-gray text; text should remain high contrast against pastel regions and legible at final journal two-column width (minimum text usually >=6.5pt physical). Give each text glyph a visible internal safe area, not just a non-overflowing text frame. Check four distinct failures: text-text, text-border, text-image, line-text. “Zero shapes outside slide” does NOT mean “no overlap”.
+Greek/italic/special math characters must have confirmed installed font coverage in both PPT and SVG. Don't render Unicode blackboard characters as empty squares.
 
-Select topology-driven grammar:
-- Chain / sequence: primary left-to-right or top-to-bottom spine.
-- Parallel branches: aligned lanes, shared stages, controlled merge.
-- Encoder–decoder: compression/extraction arc with corresponding skip alignment.
-- Recurrence / diffusion: cycle or time axis where needed.
-- Multiscale pyramid: rank/scale hierarchy.
-- Teacher–student: two truthful paths + explicitly routed supervision, NOT arbitrary matching arrows.
-- Multi-method figure: main pipeline plus one or two detail insets.
-Do not force the layout used by one reference paper onto a different method.
+## 7. Precise visual parity validation
+Record for each A/B/C region a normalized rectangle, text frames and artwork masks from the chosen GPT image. Generate PPTX and SVG from the SAME scene graph and type data. Render **actual PPTX** and **actual SVG** separately, crop aligned A/B/C, and compare directly to the fixed master:
+- A/B/C panel bounds and visual area, negative space, tinted backgrounds;
+- perspective, facet width and depth, front area and repetition;
+- operation-box width, text occupancy and nearby gutters;
+- true line ports, arrowhead centers, crossings and marker shape;
+- font weight/contrast and local legibility;
+- C panel’s two model-specific token/similarity/sort paths.
+Use optional metrics (normalized boundary error, overlap count, font safety, line slope, image difference) only as diagnostics. Report qualitative deviations and repair affected modules in place. Do not replace the style with a new design.
 
-## Spatial quality and alignment
-
-- Group elements in real semantic regions. A colored backdrop is useful only for a meaningful group; never remove all backdrops and never fill every gap with tint.
-- Use grid, common baselines, edge alignment, equal-size rules for equal-stage boxes and consistent gutters; region bounds fit contents closely with controlled inner padding.
-- Give the main flow a clear first reading; reserve side lanes for skip, shared weights or losses.
-- Avoid unexplained wide gaps and useless sprawling horizontal arrows; compress standard repeated operations, *not* the method's novel mechanism.
-- Long arrows are permitted when they express a genuine cross-area link; do not use line thickness simply because an arrow is long.
-- For a large method, show main structure at L1, core mechanisms at L2 and a few indispensable parameters at L3. Do not repeat all low-level projections in L1 and L2.
-
-## Lines, frames, arrows — semantic syntax
-
-| relation | default display |
-|---|---|
-| primary feature/data flow | dark solid directional arrow, slightly stronger line |
-| short internal operation | thin solid directional arrow |
-| skip/identity | fine orthogonal solid route, clean elbows |
-| cross-branch training supervision | colored supervised route, named, never fake a forward feature-transfer arrow |
-| shared parameter bank | a shared source with independent connectors to actual consumers |
-| group outline | fine solid border or light tint |
-| training-only area / optional subgraph | dashed *boundary* only if semantics and legend support it |
-| a scientific comparison/association | distinguish from data flow, with label or legend |
-
-Never insert decorative dashed arrows. For every connector verify: exact origin/destination ports, direction, no line through unrelated shapes, no ambiguous crossings, visible arrowhead. Use explicit waypoints, edge/lane reservation and rerouting—not hand-drawn random polyline guessing.
-
-## Shapes and typography
-
-- Feature maps: repeatable 2.5D stacked prisms with consistent top/side angles, solid front, modest depth and no strong shadow or glossy effects.
-- Weights, tokens, affinity: meaningful grids, matrices, slices or compact columns; schematic numbers must be labeled as schematic.
-- Operation blocks: compact rectangle, limited rounding; not all elements need their own box.
-- Equation symbols: +, ×, ⊙, cat, pool and normalized arrows only if actual model supports them.
-- Real input/output figures: same sample, verified label and sensible crops, no synthetic result disguised as experiment.
-- Text: Times-family serif if compatible with target journal; headings 9–11 pt, modules 7.5–9 pt, secondary >=6.5 pt **at final paper physical size** (recommended ranges, not source-paper measurements).
-- Standard label 1–3 technical words; no long sentence inside a box; novel modules can have a concise abbreviation and a small meaningful caption. Prefer mathematically faithful arrows/symbols to explanatory prose.
-- Distinguish module title, operator name, tensor scale with three coherent type levels.
-
-## Hard gates (fail regardless of aesthetic grade)
-1. Every module and edge matches the actual code/paper; teacher freeze and inference-only paths are accurate.
-2. Real inputs, GT and prediction labels agree with the actual stored sample.
-3. Text is correct and legible at journal column width; no misspelled ImageGen words transferred blindly.
-4. Editable PPT objects exist for labels, blocks, arrows and matrices; image files may be embedded for real remote-sensing data.
-5. Text does not collide, connectors do not pass through unrelated modules, all objects stay on slide.
-
-## Preferred measurable soft checks
-Object overlap, crossings, edge length, region compactness, alignment gaps, lower-priority label count, color consistency, rendered size and parity to a chosen image-generated art-direction master. Numerical thresholds are **checks**, not guarantees of beauty.
-
-## Quality bar
-The end-user target is **6–7/10** for publishable usefulness. Earlier code-generated V4/V5 ~4–4.5/10; image concept ~6/10. No one may self-certify a target subjective grade. Favor restoring the image master’s background, massing, spatial rhythm and feature-prism depth when the PPT reconstruction looks more mechanical. 
+## 8. Release contract
+Deliver editable PPTX and corresponding SVG, not a flattened GPT screenshot. Show a screenshot **rendered from the saved PPTX**, not merely the SVG. Keep source script, SHA-256 manifest, master image, audit logs and old approved copies in a backup folder; on Mac Desktop there should be one visible final PPTX/SVG pair. Verify file content after atomic replacement and ask the user to reopen exact path. User alone scores visual quality. Any failure in science, typography, ports, PPT rendering, or provenance blocks the release.
