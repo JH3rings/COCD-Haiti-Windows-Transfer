@@ -1,54 +1,52 @@
-# Visual-first + Scientific-Truth Figure Workflow — v2.1
+# Visual-first, science-locked academic figure workflow — v3.0
 
-## Why the previous V4/V5 failed
+Status: 2026-11-14. This is the operative workflow. The approved COCD visual target is the **LOWER** three-panel GPT image (A left, B upper right, C lower right). Executable code and main.tex control the model truth; an image model controls appearance only.
 
-The GPT image design concept was judged visually better (~6/10) than the later editable rendering (~4–4.5/10). The step `image → scientific correction → editable PPT` lost subtle layering, group backdrops, compact composition, typography and rhythm. **Never treat object count, no-overflow or PPT export success as a substitute for visual quality.** Worse, the image model hallucinated labels (e.g. interpreting EPM as "Event Prototype Mining" or CEW as "Cross-Event Weighting") and fabricated some cross-network connections. The transformation must preserve visual intent while replacing scientifically invalid content and edges.
+## Why v2.1 failed
+Previous runs converted a good generated image into a mechanical PPT, enlarged front faces, created tilted feature arrows, lost background and label hierarchy, then claimed success because object count and zero-overflow tests passed. The Mac desktop's same-named PPT and SVG could also be regenerated independently, making file identity ambiguous. These are process failures, not prompts to produce a new decorative concept.
 
-## Required artifacts and gates
+## Source-of-truth order
+1. Scientific evidence: pinned GitHub commit, final_method.py, common.py, pr.py, methods.py, run.py, main.tex; record every model node and typed edge.
+2. Accepted visual master: the lower A/B/C user-approved GPT composition, plus inspected R1/R2 screenshot figures and actual R3/R4 PDF figure pages.
+3. Frozen geometry: one method_graph.json and one layout.json. Stable IDs, named ports, bounding boxes, text boxes, z-order, edge waypoints.
+4. Final reality: **native PPTX as actually rendered**, plus SVG built from the same scene.
+5. Release evidence: hashes of the exact Mac files, rendered screenshots, source commit and saved accepted backup.
 
-### 0. Protect source of truth
-Save pristine `main.tex`, original diagram and generator. Start in a new directory/branch; do not overwrite `manuscript/source/method.svg` until accepted.
+## Step 0 — protect and pin
+Read originals; record SHA of main.tex and original method.svg/draw_method.py; never overwrite them. Work on a branch and in a staging folder. Preserve the user's approved master and previous accepted revision as immutable files.
 
-### 1. Scientific topology compilation (science-first; no styling)
-Read actual code, paper and model configurations. Produce `method_graph.json` with stable node IDs, ports, typed edges (data/skip/shared-weights/supervision/loss), train/inference flags, input/GT/output provenance and optional decompositions. Check against source lines. If ambiguous, record unresolved and **do not invent**. Freeze this graph.
+## Step 1 — science graph (hard Gate S)
+Compile method_graph.json from *forward* implementations and loss, not guessed module titles. For each node record id, tensors, stage, train/infer status, source lines. For each edge record source/target ports and one of: feature, skip_concat, residual, shared_parameter, segmentation_supervision, relation_supervision. Freeze the graph before visual work. No invented teacher-to-student feature arrows; teacher only provides 32px relation supervision. Input provenance, GT and predictions must agree.
 
-**Gate S:** no invented module, no wrong student/teacher flow, no conflation of GT and model predictions, no CEW direct teacher mask transfer.
+## Step 2 — source-pixel inspection (hard Gate R)
+Open both R1 and R2 **actual figure screenshots** and R3/R4 **actual PDF diagram pages**. Log normalized rectangles and meaning of background tint, feature prisms, symbols and reference labels. R2 supplies the only color palette; R1 dense multilevel organization; R3 honest feature and dual-stream proportions; R4 main/inset/legend hierarchy. Reference algorithms are NOT imported. Measure the user-selected lower A/B/C image, not merely the written descriptions.
 
-### 2. Reference-style calibration (visual grammar, not copied algorithm)
-Look at screenshots R1–R2 and paper figure pages R3–R4, not only paragraphs. Create `style_tokens.json` and visual analysis: figure size, normalized region rectangles, fonts (measured or estimated), color roles, prisms, arrows, grouping, label density, visual hierarchy. Use only the R2 ten-color palette. Do not borrow specific video, Mamba, KV-cache or cloud-removal operators unless the actual target method uses them.
+## Step 3 — GPT image master (Gate V)
+If no approved master exists, generate exactly two strong compositions from the frozen graph and references, compare, and let the user select. Generated text/arrows are **untrusted**. If the user has already selected a master, DO NOT regenerate or replace its style without authorization. Record visual_master.png and its immutable identifier.
 
-### 3. Generate image concepts — visual engine
-Supply *all four* sources, a simplified **locked model graph** and concise list of scientific invariants to ImageGen. Produce **two alternative composed image drafts**, not V1/V5 as a visual template. Favor pastel functional backgrounds, expressive 2.5D feature stacks, well-defined inset mechanisms, dense structured grids and real data panels. Ask explicitly for short labels rather than long paragraphs.
+## Step 4 — correct science without redesign
+Mark every invalid ImageGen node, label and arrow. Correct the smallest affected area of the master; preserve layout masses, negative space, 2.5D style, palette and short text density. Output annotated_visual_master.json and one corrected image. Any geometry change must be traceable to a graph correction.
 
-Treat generated text and arrows as unverified. The goal is visual composition, not final science. Do not claim ImageGen output is vector or editable.
+## Step 5 — geometry/ports (hard Gate G)
+Build layout.json with every A/B/C region; each box has its own content bbox and text bbox, named ports, z-order, 2.5D prism width/height/depth. The main U-Net feature-flow ports MUST be at the same y position; fix module positions first, then draw an exactly horizontal straight arrow. Orthogonal skips are reserved in upper rails. Place CEW supervised links outside the ordinary data spine. A feature block size change automatically changes its arrow endpoint. No manually guessed endpoints.
 
-**Gate V:** human or vision-review chooses the strongest; assess relative to reference figures. If it is below ~6/10, iterate in image phase, not PPT phase.
+## Step 6 — single-scene editable reconstruction
+One renderer-independent scene generates native PPTX objects and matching SVG. Labels, boxes, prisms, matrices, symbols and arrows are editable; verified remote-sensing crops alone can be raster pictures. Do not paste a whole generated figure as a slide picture. Respect the lower master A-left/B-upper-right/C-lower-right composition, all color roles and text occupancy. Deliver ONLY PPTX and SVG (user preference); keep preview files internal.
 
-### 4. Correct the chosen concept without destroying its look
-Overlay the locked `method_graph.json` and annotate the image concept: valid modules, invalid labels/edges, each group bounding box, region backdrops, connection lanes, text zones, line weights, prism perspective. Make a corrected **visual master**. If a science correction changes geometry, reflow the smallest affected subgraph; keep unaffected colors, spacing, backgrounds and grouping.
+## Step 7 — ACTUAL dual-format rendering (hard Gate P)
+Render PPTX using PowerPoint/Keynote/LibreOffice or a real slide thumbnail renderer; separately render SVG. Test full figure and high-resolution crops A, B, C. Compare side-by-side to the accepted master, not just PPT to SVG. Check panel sizes, massing, cubic depth, font substitution, label:box ratios, 1px white slivers, centered arrowheads, input/output identity and collision. Object count/no overflow is necessary but not sufficient. When editable PPT loses visual quality, STOP and fix reconstruction locally; do NOT start a new image concept.
 
-Deliver `visual_master.png` plus `visual_master_annotations.json`, not just a prose description.
+## Step 8 — anti-regression and Mac release (hard Gate D)
+Run scientific graph diff, text-text and text-border tests, line-text/line-shape tests, endpoint checks, out-of-slide checks and physical journal-scale readability. Render from the FINAL saved PPTX again, not a stale memory preview.
+Build in staging, backup accepted prior files in hidden/.work folder; save new PPTX/SVG atomically to Desktop. Compute SHA-256 and size from the exact saved bytes; verify the reopened presentation's properties and shape graph. A cloud backup and a locally regenerated file are NOT byte-identical by assumption. If a PowerPoint window remained open, close it fully and reopen the exact Desktop path; a recent-files entry may point elsewhere. Report which renderer was used and what cannot be confirmed.
 
-### 5. Geometry specification
-Create `layout.json`: canvas, relative region boxes, node bounding rectangles, exact named ports, connector polylines/waypoints, z-order, text boxes, font metrics. This is the contract for actual PPT generation. Route each edge to a scientific port. Optimize crossings, collisions, region compactness and label wrapping before drawing.
+## Gate summary
+- S: science graph matches code and manuscript, correct 18/6 channels, 5+4 U-Net, EPM 32/64/128, CEW 32 only, GT separate.
+- R: real R1–R4 pixels inspected; chosen master identified, not replaced.
+- G: no sloping main spine, centered ports, no collisions, no clipping, text safety margins.
+- P: rendered PPT and SVG checked independently and visually close to the locked master at A/B/C detail scale.
+- D: exact Mac paths, checksums, backup, user-confirmed visual quality.
 
-### 6. Editable PowerPoint reconstruction
-Use native PPT shapes for rectangles, prisms, matrices, arrows and text; real image crops stay pictures. Group by semantics. Do **not** place a flat concept image as the final single slide picture, or replace the approved art direction with an unrelated geometric drawing. Build SVG/PDF/PNG previews from the exact same PPT master. Keep generator code and assets.
+Stop only when gates pass **AND** the user accepts the image. Never self-award 6/7/8 points.
 
-### 7. Two-sided QA and regression
-**Science audit:** compare each rendered node/edge label and direction with `method_graph.json`. Verify train-only vs inference; sample image provenance; no hallucination.
-
-**Geometry QA:** check text box overlap, object overflow, line crossing module interiors, port endpoint correctness, type sizes at target journal width and missing fonts.
-
-**Visual parity QA:** render the PPT and compare side by side / semi-transparent overlay against `visual_master.png`, at equal aspect and dimensions. Inspect region colors/area, alignment, prism depth, negative space, typography and visual weight. Do not use per-pixel comparison blindly (AI render and native type differ). Document every qualitative loss and fix **locally**. The subjective goal is no dramatic design downgrade relative to accepted image concept.
-
-**Stop condition:** science and geometry gates pass and the user accepts visual quality (target 6–7/10). Do not self-assign a subjective pass.
-
-### 8. Publication hand-off
-Provide `.pptx` (primary, editable), `.svg`, `.pdf`, `.png`, generator source, input provenance, science audit and before/after comparison. No hidden unverified data. Do not alter main manuscript figure without explicit instruction.
-
-## Short operational order
-
-`inspect → freeze graph → analyze references → ImageGen concepts → select → correct concept visually → layout/route → editable PPT → render → compare → local fix → accept`
-
-If ImageGen concept beats PPT by >=1 point according to the user, **stop and fix the reconstruction stage**. Do not iterate an unrelated new design or add more textual Prompt instructions.
+Concise flow: source pin -> typed graph -> reference measurement -> image master -> minimal science correction -> layout/ports -> editable PPT + same-scene SVG -> real render -> comparison -> local repair -> hash/backup/reopen -> user score.
