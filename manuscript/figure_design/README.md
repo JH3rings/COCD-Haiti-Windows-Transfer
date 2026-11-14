@@ -1,5 +1,8 @@
 # Figure Design System — COCD / DLR GRSL
 
+> **v3.0 workflow (2026-11-14):** For the current COCD/F_SSP diagram, the user-selected **lower A-left/B-upper-right/C-lower-right GPT image** is the *locked visual master*. The Python implementation and main.tex remain scientific authority. Read [WORKFLOW.md](WORKFLOW.md) and [STYLE_CONTRACT.md](STYLE_CONTRACT.md) (both v3.0), then [COCD_NETWORK_EXPLAINED_ZH.md](COCD_NETWORK_EXPLAINED_ZH.md) and [MAC_PPT_SVG_SYNC_QA_ZH.md](MAC_PPT_SVG_SYNC_QA_ZH.md). The final visible deliverables are **editable PPTX + SVG only**; native PPT must be actually rendered and checked against the master. This working branch does **not** replace manuscript/source/method.svg or the publication figure. Do not treat a cloud backup and a locally regenerated PPT as byte-identical without SHA verification.
+
+
 **Status (2026-11-13): documentation and reference-source index. This folder does not replace the validated manuscript figure.** The accepted scientific truth remains `manuscript/main.tex` and the F_SSP implementation, not any generated image or earlier V1–V5 render.
 
 ## Start here (for a new AI session)
