@@ -4,7 +4,9 @@
 
 ## Start here (for a new AI session)
 
-1. Read [WORKFLOW.md](WORKFLOW.md) in full. This is a **general-purpose** method: styles are reusable; geometry is derived anew from each model's topology.
+**Current main execution contract: [MASTER_FIGURE_PROMPT_V3.md](MASTER_FIGURE_PROMPT_V3.md).** Its storyboard/wireframe gate and local high-fidelity PPT component test supersede the older V2.1 execution order. Use this universal contract for *any new network or paper*; topology is never copied from COCD.
+
+1. Read [MASTER_FIGURE_PROMPT_V3.md](MASTER_FIGURE_PROMPT_V3.md) first, then [WORKFLOW.md](WORKFLOW.md) for legacy background. This is a **general-purpose** method: styles are reusable; geometry is derived anew from each model's topology.
 2. Read [REFERENCES.md](REFERENCES.md) for the four supplied reference sources (two screenshot collages containing four figures, two scientific PDF papers), the authoritative paper links, and what to borrow from each.
 3. Read [STYLE_CONTRACT.md](STYLE_CONTRACT.md) for the **one selected palette**, spatial composition, typography, border, line, arrow, and evaluation rules.
 4. For this specific DLR landslide paper, read [COCD_SCIENCE_AUDIT.md](COCD_SCIENCE_AUDIT.md), then inspect the actual source files linked there.
@@ -25,6 +27,7 @@ The user rated the editable V4/V5 results about **4–4.5/10**, while judging th
 The original reference screenshots and full PDFs were uploaded in the ChatGPT conversation. The source register in REFERENCES.md provides verifiable paper URLs and page/figure coordinates. **A public GitHub repository must not redistribute publisher-controlled full PDFs without permission.** In particular, the Elsevier Information Fusion paper is publisher-copyrighted. Keep the originals in a local/private asset folder when licensed; refer to the official DOI in public documentation. A separate asset transfer package may accompany this directory when the conversation's uploaded files are available.
 
 ## File roles
+- `MASTER_FIGURE_PROMPT_V3.md` — **current general-purpose figure creation contract**: science graph, storyboard, wireframe, references, image design, component-level PPT fidelity test, full reconstruction and QA.
 - `REFERENCES.md` — four source groups, paper DOI and exact style usage.
 - `STYLE_CONTRACT.md` — reusable, topology-independent visual grammar.
 - `WORKFLOW.md` — two-engine workflow + hard gates + automatic/manual checks.
